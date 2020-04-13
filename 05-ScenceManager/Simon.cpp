@@ -91,10 +91,11 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		attackSubStart = 0;
 	}
 
-
 	// update jump state
-	if (GetTickCount() - jumpStart > SIMON_JUMP_TIME)
-		jumpStart = 0;
+	if (isOnGround == true) {
+		//if (GetTickCount() - jumpStart > SIMON_JUMP_TIME)
+			jumpStart = 0;
+	}
 
 	// reset untouchable timer if untouchable time has passed
 	if (GetTickCount() - untouchableStart > SIMON_UNTOUCHABLE_TIME)
@@ -105,8 +106,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	// update attack state and whip
 	UpdateWhip(dt, coObjects);
-	
-	
 }
 
 void CSimon::Render()
@@ -167,8 +166,6 @@ void CSimon::Render()
 				ani = SIMON_ANI_WALKING_LEFT;
 		}
 	}
-
-
 	int alpha = 255;
 	if (untouchableStart>0)
 		alpha = 128;
@@ -195,7 +192,7 @@ void CSimon::SetState(int state)
 	//if (state != SIMON_STATE_JUMP)
 	//	vx = 0;
 
-	if (jumpStart > 0 && state != SIMON_STATE_ATTACK && state != SIMON_STATE_ATTACK_SUBWEAPON)
+	if (jumpStart > 0 && state != SIMON_STATE_ATTACK)
 		return;
 
 	CGameObject::SetState(state);

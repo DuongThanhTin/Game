@@ -50,10 +50,6 @@ void CWhip::Render()
 	RenderBoundingBox();
 }
 
-void CWhip::Render(int frame) {
-	animations[GetAnimation()]->Render(x, y, frame, 255);
-}
-
 void CWhip::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects, D3DXVECTOR2 playerPosition, int playerNx) {
 	CWeapon::Update(dt, coObjects);
 

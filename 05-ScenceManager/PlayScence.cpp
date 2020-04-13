@@ -10,12 +10,11 @@
 
 using namespace std;
 
-CPlayScene::CPlayScene(int id, LPCWSTR filePath):
+CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 	CScene(id, filePath)
 {
 	key_handler = new CPlayScenceKeyHandler(this);
 }
-
 /*
 	Load scene resources from scene file (textures, sprites, animations and objects)
 	See scene1.txt, scene2.txt for detail format specification
@@ -35,6 +34,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 #define OBJECT_TYPE_WHIP	4
 #define OBJECT_TYPE_ZOMBIE	5
 #define OBJECT_TYPE_TORCH	6
+#define OBJECT_TYPE_HEART	7
 
 
 #define OBJECT_TYPE_PORTAL	50
@@ -183,11 +183,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	{
 			DebugOut(L"[TORCH]!\n");
 			int itemid = atof(tokens[4].c_str());
-			DebugOut(L"[ITEMID] ani %d %d!\n", ani_set_id,itemid);
+			DebugOut(L"[ANI_ID ITEMID] %d %d \n", ani_set_id, itemid);
 			obj = new CTorch({x, y}, itemid);
 			DebugOut(L"[NICE]!\n");
 			break;
-		}
+	}
+	case OBJECT_TYPE_HEART: obj = new CHeart({x,y}); DebugOut(L"[NICE Heart]!\n");break;
 	case OBJECT_TYPE_PORTAL:
 		{	
 			float r = atof(tokens[4].c_str());
@@ -204,10 +205,10 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	// General object setup
 	obj->SetPosition(x, y);
-
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 	obj->SetAnimationSet(ani_set);
 	objects.push_back(obj);
+	
 
 }
 
@@ -272,8 +273,20 @@ void CPlayScene::Update(DWORD dt)
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{
+		//DebugOut(L"SIZE UPDATE: %d ", objects.size());
 		objects[i]->Update(dt, &coObjects);
 	}
+	
+	for (int i = 1; i < objects.size(); i++)
+	{
+		if (objects[i]->GetState() == STATE_DESTROYED)
+		{
+			objects.erase(objects.begin() + i);
+			i--;
+			
+		}
+	}
+	
 
 
 	// Update camera to follow mario
@@ -290,8 +303,12 @@ void CPlayScene::Update(DWORD dt)
 
 void CPlayScene::Render()
 {
-	for (int i = 0; i < objects.size(); i++)
+	for (int i = 0; i < objects.size(); i++) {
+		//DebugOut(L"SIZE: %d ", objects.size());
+		objects[i]->RenderBoundingBox(100);
 		objects[i]->Render();
+	}
+	
 }
 
 /*
