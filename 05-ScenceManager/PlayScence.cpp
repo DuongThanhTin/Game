@@ -26,6 +26,8 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_ANIMATIONS 4
 #define SCENE_SECTION_ANIMATION_SETS	5
 #define SCENE_SECTION_OBJECTS	6
+#define SCENE_SECTION_MAP_URL	7
+
 
 #define OBJECT_TYPE_SIMON	0
 #define OBJECT_TYPE_BRICK	1
@@ -41,7 +43,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 
 #define MAX_SCENE_LINE 1024
 
-
+//TEXTURES
 void CPlayScene::_ParseSection_TEXTURES(string line)
 {
 	vector<string> tokens = split(line);
@@ -57,6 +59,7 @@ void CPlayScene::_ParseSection_TEXTURES(string line)
 	CTextures::GetInstance()->Add(texID, path.c_str(), D3DCOLOR_XRGB(R, G, B));
 }
 
+//SPRITES
 void CPlayScene::_ParseSection_SPRITES(string line)
 {
 	vector<string> tokens = split(line);
@@ -70,7 +73,7 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 	int b = atoi(tokens[4].c_str());
 	int texID = atoi(tokens[5].c_str());*/
 
-	if (tokens.size() < 12) return; // skip invalid lines
+	if (tokens.size() < 10) return; // skip invalid lines
 
 	int ID = atoi(tokens[0].c_str());
 	int l = atoi(tokens[1].c_str());
@@ -95,6 +98,7 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 	CSprites::GetInstance()->Add(ID, l, t, r, b, tex,flipimage, { x,y });
 }
 
+//ANIMATIONS
 void CPlayScene::_ParseSection_ANIMATIONS(string line)
 {
 	vector<string> tokens = split(line);
@@ -116,6 +120,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 	CAnimations::GetInstance()->Add(ani_id, ani);
 }
 
+//ANIMATIONS_SETS
 void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
 {
 
@@ -160,7 +165,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	
 	CAnimationSets * animation_sets = CAnimationSets::GetInstance();
 
-	CGameObject *obj = NULL;
+	
 
 	switch (object_type)
 	{
@@ -185,7 +190,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			int itemid = atof(tokens[4].c_str());
 			DebugOut(L"[ANI_ID ITEMID] %d %d \n", ani_set_id, itemid);
 			obj = new CTorch({x, y}, itemid);
-			DebugOut(L"[NICE]!\n");
+			DebugOut(L"[NICE] %d %d!\n",x,y);
 			break;
 	}
 	case OBJECT_TYPE_HEART: obj = new CHeart({x,y}); DebugOut(L"[NICE Heart]!\n");break;
@@ -208,17 +213,33 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 	obj->SetAnimationSet(ani_set);
 	objects.push_back(obj);
-	
-
 }
 
+//MAP
+void CPlayScene::_ParseSection_MAP_SCENE(string line)
+{
+	DebugOut(L"[MAP]");
+	vector<string> tokens = split(line);
+	if (tokens.size() < 1) return;
+	int texID = atoi(tokens[0].c_str());
+	wstring path = ToWSTR(tokens[1]);
+	DebugOut(L"[INFO] Done loading scene resources %s\n", path.c_str());
+	tileSet->LoadFromFile(path.c_str());
+	tileMap->LoadFromFile(path.c_str());
+}
+
+
+//LOAD
 void CPlayScene::Load()
 {
 	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
+	viewport = CViewPort::GetInstance();
 
+	tileMap = new CTileMap();
+	tileSet = new CTileSet();
 	ifstream f;
 	f.open(sceneFilePath);
-
+	
 	// current resource section flag
 	int section = SCENE_SECTION_UNKNOWN;					
 
@@ -238,23 +259,30 @@ void CPlayScene::Load()
 			section = SCENE_SECTION_ANIMATION_SETS; continue; }
 		if (line == "[OBJECTS]") { 
 			section = SCENE_SECTION_OBJECTS; continue; }
+		if (line == "[MAP]") {
+			section = SCENE_SECTION_MAP_URL; continue;
+		}
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
 
 		//
 		// data section
 		//
 		switch (section)
-		{ 
+		{
 			case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
 			case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
 			case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
 			case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
 			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+			case SCENE_SECTION_MAP_URL: {
+				DebugOut(L"SCENE_MAP\n");
+				_ParseSection_MAP_SCENE(line); break;
+			}
 		}
 	}
 
 	f.close();
-
+	
 	CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
@@ -264,16 +292,17 @@ void CPlayScene::Update(DWORD dt)
 {
 	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
-
+	D3DXVECTOR2 playerPosition;
 	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 1; i < objects.size(); i++)
+
+	for (size_t i = 0; i < objects.size(); i++)
 	{
 		coObjects.push_back(objects[i]);
 	}
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{
-		//DebugOut(L"SIZE UPDATE: %d ", objects.size());
+
 		objects[i]->Update(dt, &coObjects);
 	}
 	
@@ -283,14 +312,12 @@ void CPlayScene::Update(DWORD dt)
 		{
 			objects.erase(objects.begin() + i);
 			i--;
-			
 		}
 	}
 	
-
-
 	// Update camera to follow mario
-	float cx, cy;
+
+	/*float cx, cy;
 	player->GetPosition(cx, cy);
 
 
@@ -298,11 +325,20 @@ void CPlayScene::Update(DWORD dt)
 	cx -= game->GetScreenWidth() / 2;
 	cy -= game->GetScreenHeight() / 2;
 
-	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
+	CGame::GetInstance()->SetCamPos(cx, 0.0f); //cy);*/
+
+	player->GetPosition(playerPosition.x, playerPosition.y);
+	if (playerPosition.x < 0) {
+		player->SetPosition(0.0f, playerPosition.y);
+	}
+	viewport->Update(playerPosition, tileMap->GetWidthStart(playerPosition.y), tileMap->GetWidthEnd(playerPosition.y));
+
+
 }
 
 void CPlayScene::Render()
 {
+	tileMap->Render({ 0,0 });
 	for (int i = 0; i < objects.size(); i++) {
 		//DebugOut(L"SIZE: %d ", objects.size());
 		objects[i]->RenderBoundingBox(100);

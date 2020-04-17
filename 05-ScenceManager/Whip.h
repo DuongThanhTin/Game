@@ -5,6 +5,7 @@
 #include"Textures.h"
 #include"Weapon.h"
 
+
 #define WHIP_BBOX_WIDTH_01		25
 #define WHIP_BBOX_HEIGHT_01		8
 #define WHIP_BBOX_WIDTH_02		25

@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Sprites.h"
+#include "ViewPort.h"
 
 CGameObject::CGameObject()
 {
@@ -141,7 +142,9 @@ void CGameObject::RenderBoundingBox(int alpha)
 	rect.right = (int)r - (int)l;
 	rect.bottom = (int)b - (int)t;
 
-	CGame::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
+	//CGame::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
+	D3DXVECTOR2 viewPortPosition = CViewPort::GetInstance()->ConvertWorldToViewPort({ l, t });
+	CGame::GetInstance()->Draw(viewPortPosition.x, viewPortPosition.y, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
 }
 
 int CGameObject::GetNx() {

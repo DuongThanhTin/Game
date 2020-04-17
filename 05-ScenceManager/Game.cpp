@@ -410,11 +410,12 @@ void CGame::SwitchScene(int scene_id)
 	// IMPORTANT: has to implement "unload" previous scene assets to avoid duplicate resources
 	LPSCENE s = scenes[current_scene];
 	s->Unload();
-
+	
 	CTextures::GetInstance()->Clear();
 	CSprites::GetInstance()->Clear();
 	CAnimations::GetInstance()->Clear();
 	current_scene = scene_id;
 	CGame::GetInstance()->SetKeyHandler(s->GetKeyEventHandler());
 	s->Load();
+	DebugOut(L"NEXT SCENE: %d\n",scene_id);
 }

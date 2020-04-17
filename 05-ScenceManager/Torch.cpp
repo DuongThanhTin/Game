@@ -4,8 +4,6 @@
 
 CTorch::CTorch()
 {
-	x = y = 0;
-	id = ID_TORCH;
 }
 
 
@@ -28,8 +26,31 @@ void CTorch::GetBoundingBox(float &l, float &t, float &r, float &b) {
 	b = y ;
 }
 
+void CTorch::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
+	CGameObject::Update(dt);
+	if (state == STATE_DESTROYED) {
+		CGameObject* nextItem;
+		switch (GetNextItemID())
+		{
+		case ID_HEART:
+			nextItem = new CHeart({ x,y  });
+			nextItem->Render();
+			objectsItem.push_back(nextItem);
+			break;
+		default:
+			nextItem = NULL;
+			break;
+		}
+		if (nextItem) {
+			coObjects->push_back(nextItem);
+			objectsItem.push_back(nextItem);
+		//	RenderItem();
+		}
+	}
+}
+
 void CTorch::Render()
 {
 	animation_set->at(0)->Render(x, y);
-	RenderBoundingBox();
 }
+

@@ -12,14 +12,6 @@ CItem::~CItem()
 {
 }
 
-void CItem::StartTimeDisappear() {
-	timeDisappear = GetTickCount();
-}
-
-void CItem::Render() {
-	animations[0]->Render(x, y);
-}
-
 void CItem::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CGameObject::Update(dt);
 
@@ -67,4 +59,12 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 
 	if (GetTickCount() - timeDisappear > ITEM_DISAPPEAR_TIME && timeDisappear > 0)
 		SetState(STATE_DESTROYED);
+}
+
+void CItem::StartTimeDisappear() {
+	timeDisappear = GetTickCount();
+}
+
+void CItem::Render() {
+	animations[0]->Render(x, y);
 }

@@ -24,7 +24,6 @@ int CWhip::GetAnimation() {
 	return ani;
 }
 
-
 void CWhip::GetBoundingBox(float &l, float &t, float &r, float &b) {
 	if (animations[GetAnimation()]->GetCurrentFrame() == 2) {
 		int width, height;

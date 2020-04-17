@@ -1,8 +1,8 @@
 #include "Portal.h"
 
-
 CPortal::CPortal(float l, float t, float r, float b, int scene_id )
 {
+	id = ID_PORTAL;
 	this->scene_id = scene_id;
 	x = l; 
 	y = t;

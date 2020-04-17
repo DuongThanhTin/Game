@@ -7,7 +7,6 @@ CZombie::CZombie()
 	SetState(ZOMBIE_STATE_WALKING);
 }
 
-
 CZombie::~CZombie()
 {
 }

@@ -1,5 +1,6 @@
 #include "Animations.h"
 #include "Utils.h"
+#include "ViewPort.h"
 
 CAnimationSets * CAnimationSets::__instance = NULL;
 
@@ -22,6 +23,9 @@ void CAnimation::Add(int spriteId, DWORD time)
 // NOTE: sometimes Animation object is NULL ??? HOW ??? 
 void CAnimation::Render(float x, float y, int alpha)
 {
+	CViewPort* viewport = CViewPort::GetInstance();
+	x = viewport->ConvertWorldToViewPort({ x,y }).x;
+	y = viewport->ConvertWorldToViewPort({ x,y }).y;
 	DWORD now = GetTickCount();
 	if (currentFrame == -1)
 	{

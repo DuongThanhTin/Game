@@ -25,15 +25,13 @@
 #include "Goomba.h"
 
 #include "PlayScence.h"
+#include "define.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"SAMPLE 05 - SCENCE MANAGER"
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(255, 255, 200)
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
 
-#define MAX_FRAME_RATE 120
 
 CGame *game;
 
@@ -49,8 +47,6 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	return 0;
 }
-
-
 
 /*
 	Update world status for this frame
