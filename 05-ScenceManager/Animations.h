@@ -8,6 +8,9 @@
 /*
 Sprite animation
 */
+
+
+
 class CAnimationFrame
 {
 	LPSPRITE sprite;
