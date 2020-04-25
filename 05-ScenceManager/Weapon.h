@@ -3,10 +3,11 @@
 #include "Game.h"
 #include "define.h"
 #include "Heart.h"
-
+#include "ListItem.h"
+ 
 class CWeapon : public CGameObject
 {
-
+	DWORD timeFire;
 public:
 	vector<LPGAMEOBJECT> objectsItem;
 	CWeapon();

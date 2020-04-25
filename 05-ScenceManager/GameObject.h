@@ -82,7 +82,7 @@ public:
 	void RenderBoundingBox(int alpha = 255);
 
 	void SetAnimationSet(LPANIMATION_SET ani_set) { animation_set = ani_set; }
-
+	 
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT> *coObjects, vector<LPCOLLISIONEVENT> &coEvents);
 	void FilterCollision(
@@ -102,6 +102,7 @@ public:
 	virtual void Render() = 0;
 	virtual void SetState(int state) { this->state = state; }
 	virtual void ResetAnimation();
+	virtual void TimeFireDestroy();
 	int GetNx();
 	int GetNy();
 	int GetNextItemID();

@@ -19,22 +19,15 @@ void CTileSet::LoadFromFile(LPCWSTR filePath)
 	columnNumber = j["tilesets"][0]["columns"].get<int>();
 	int tileCount = j["tilesets"][0]["tilecount"].get<int>();
 
-	string tmpPath = "textures\\" + j["/tilesets/0/image"_json_pointer].get<string>();
+	string tmpPath = "textures\\" + j["tilesets"][0]["image"].get<string>();
 	rowNumber = (tileCount - 1) / columnNumber + 1;
 	DebugOut(L"[INFO] rowNumber OK: %d\n", rowNumber);
-
+	DebugOut(L"[INFO] tileWidth OK: %d\n", tileWidth);
 	wstring sTmp;
 	sTmp = s2ws(tmpPath);
 	LPCWSTR imagePath = sTmp.c_str();
 
 	//DebugOut(L"[INFO] imagePath OK: %d\n", imagePath);
-	/*int tileWidth = 16;
-	int tileHeight = 16;
-	int columnNumber = 11;
-	int tileCount = 165;
-	int rowNumber = 15;
-	LPCWSTR imagePath = L"textures\\mapFile_bank.png";*/
-
 	// Add list tiles
 	for (int i = 0; i < rowNumber; i++)
 		for (int j = 0; j < columnNumber; j++)
@@ -90,6 +83,8 @@ std::wstring s2ws(const std::string& s)
 CTileMap::CTileMap()
 {
 	tileSet = new CTileSet();
+	wStart = 0;
+	wEnd = 49 * 16;
 }
 
 void CTileMap::LoadFromFile(LPCWSTR filePath)
@@ -105,12 +100,9 @@ void CTileMap::LoadFromFile(LPCWSTR filePath)
 	vector<int> data = j["layers"][0]["data"].get<vector<int>>();
 	rowMapNumber = j["layers"][0]["height"].get<int>();
 	columnMapNumber = j["layers"][0]["width"].get<int>();
-	widthEdge = j["layers"][0]["edge"].get<vector<vector<int>>>();
-	//idground = j["layers"][0]["ground"].get<int>();
 	//DebugOut
 	DebugOut(L"rowNumber: %d\n ", rowNumber);
 	DebugOut(L"columnMapNumber: %d\n ", columnMapNumber);
-	DebugOut(L"widthEdge: %d\n ", widthEdge);
 
 	// Map data from vector to matrix	
 	mapData = new int*[rowMapNumber];
@@ -131,6 +123,7 @@ void CTileMap::LoadFromFile(LPCWSTR filePath)
 	for (int i = 0; i < rowMapNumber; i++)
 		for (int j = 0; j < columnMapNumber; j++)
 			DebugOut(L"%d, ", mapData[i][j]);
+	DebugOut(L"\n");
 }
 
 void CTileMap::Render(D3DXVECTOR2 position)
@@ -151,20 +144,21 @@ void CTileMap::Render(D3DXVECTOR2 position)
 	}*/
 
 	//Vẽ map khi camera di chuyển
-
-	/* SCENE_1
-	int hStart = 0;
-	int wStart = 0;
-	int hEnd = 10;
-	int wEnd = 49;*/
-	int wLeft = viewport->GetPosition().x / tileSet->GetTileWidth();
-	int hLeft = viewport->GetPosition().y / tileSet->GetTileHeight();
-	int wRight = wLeft + viewport->GetWidth() / tileSet->GetTileWidth();
-	int hRight = hLeft + viewport->GetHeight() / tileSet->GetTileHeight();
-
-	for (int i = hLeft; i < hRight; i++)
+	//DebugOut(L"ASD %d\n", viewport->GetPosition().x);
+	//DebugOut(L"TILE test\n");
+	int wStart = viewport->GetPosition().x / tileSet->GetTileWidth();
+	int hStart = viewport->GetPosition().y / tileSet->GetTileHeight();
+	int wEnd = wStart + viewport->GetWidth() / tileSet->GetTileWidth();
+	if (wEnd > columnMapNumber) {
+		wEnd = columnMapNumber;
+	}
+	int hEnd = hStart + viewport->GetHeight() / tileSet->GetTileHeight();
+	if (hEnd > rowMapNumber) {
+		hEnd = rowMapNumber;
+	}
+	for (int i = hStart; i < hEnd; i++)
 	{
-		for (int j = wLeft; j < wRight; j++)
+		for (int j = wStart; j < wEnd; j++)
 		{
 			D3DXVECTOR2 pos;
 			pos.x = position.x + j * tileSet->GetTileWidth();
@@ -174,21 +168,6 @@ void CTileMap::Render(D3DXVECTOR2 position)
 			tileSet->DrawTile(mapData[i][j], pos);
 		}
 	}
-	
-	
 }
 
-int CTileMap::GetIdGround()
-{
-	return 0;
-}
-
-int CTileMap::GetWidthStart(int playerPosX)
-{
-	return widthEdge[(playerPosX - 45) / 176][0] * tileSet->GetTileWidth();
-}
-
-int CTileMap::GetWidthEnd(int playerPosX)
-{
-	return widthEdge[(playerPosX - 40) / 176][1] * tileSet->GetTileWidth();
-}
+ 

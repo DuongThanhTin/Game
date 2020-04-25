@@ -14,17 +14,21 @@
 #include "Heart.h"
 #include "Weapon.h"
 #include "TileMap.h"
-
+#include "ObjectNoMove.h"
+#include "ListItem.h"
+ 
 class CPlayScene: public CScene
 {
 protected: 
 	//CMario *player;					// A play scene has to have player, right? 
 	CSimon *player;
-	vector<LPGAMEOBJECT> objects;
+
 	CGameObject *obj = NULL;
 	CTileSet *tileSet;
 	CTileMap *tileMap;
 	CViewPort *viewport;
+
+	CListItem *listItem;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
@@ -33,6 +37,7 @@ protected:
 	void _ParseSection_OBJECTS(string line);
 	void _ParseSection_MAP_SCENE(string line);
 public:
+	vector<LPGAMEOBJECT> objects;
 	CPlayScene();
 	CPlayScene(int id, LPCWSTR filePath);
 
@@ -40,6 +45,9 @@ public:
 	virtual void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
+
+
+	CSimon * GetPlayer() { return player; }
 
 	friend class CPlayScenceKeyHandler;
 };
@@ -50,6 +58,7 @@ public:
 	virtual void KeyState(BYTE *states);
 	virtual void OnKeyDown(int KeyCode);
 	virtual void OnKeyUp(int KeyCode);
+	virtual void OnKeySwitchScene(int scene_id, float view_x, float view_y);
 	CPlayScenceKeyHandler(CScene *s) :CScenceKeyHandler(s) {};
 };
 

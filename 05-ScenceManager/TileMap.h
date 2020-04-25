@@ -40,6 +40,10 @@ private:
 
 	int rowMapNumber;
 	int columnMapNumber;
+
+	int wStart;
+	int wEnd;
+	 
 	LPTILESET tileSet;
 	vector<vector<int>> widthEdge;
 	int** mapData;
@@ -49,9 +53,6 @@ public:
 	CTileMap();
 	void LoadFromFile(LPCWSTR filePath);
 	void Render(D3DXVECTOR2 position);
-	int GetWidthStart(int playerPosition);
-	int GetWidthEnd(int playerPosition);
-	int GetIdGround();
 	~CTileMap();
 };
 

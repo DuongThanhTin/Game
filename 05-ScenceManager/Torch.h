@@ -4,20 +4,24 @@
 #include "Item.h"
 #include "Heart.h"
 #include "Utils.h"
+#include "ObjectNoMove.h"
 
 #define TORCH_BBOX_WIDTH 18
 #define TORCH_BBOX_HEIGHT 30
+ 
 
-class CTorch : public CGameObject
+class CTorch : public CObjectNoMove
 {
 	vector<LPGAMEOBJECT> objectsItem;
+	DWORD timeFire;
 public:
 	CTorch();
 	CTorch(D3DXVECTOR2 position, int nextItemID);
 	~CTorch();
 	virtual void GetBoundingBox(float &l, float &t, float &r, float &b);
-	virtual void Render();
-	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
+	//virtual void Render();
+	//virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
+	//void TimeFireDestroy();
 };
 
 typedef CTorch* LPTORCH;

@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 
 #include "PlayScence.h"
@@ -6,9 +6,11 @@
 #include "Textures.h"
 #include "Sprites.h"
 #include "Portal.h"
-
+ 
 
 using namespace std;
+
+
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 	CScene(id, filePath)
@@ -177,23 +179,23 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		}
 		obj = new CSimon();
 		player = (CSimon*)obj;
-
+		player->SetState(SIMON_STATE_IDLE);
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); DebugOut(L"[NICE]!\n");break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); DebugOut(L"[NICE]!\n");break;
 	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); DebugOut(L"[NICE]!\n");break;
 	case OBJECT_TYPE_ZOMBIE: obj = new CZombie(); DebugOut(L"[NICE ZOMBIE]!\n");break;
-	case OBJECT_TYPE_TORCH:	
+	case OBJECT_TYPE_HEART:	 DebugOut(L"[NICE Heart]!\n");break; //obj = new CHeart({ x,y });
+	case OBJECT_TYPE_TORCH:
 	{
-			DebugOut(L"[TORCH]!\n");
-			int itemid = atof(tokens[4].c_str());
-			DebugOut(L"[ANI_ID ITEMID] %d %d \n", ani_set_id, itemid);
-			obj = new CTorch({x, y}, itemid);
-			DebugOut(L"[NICE] %d %d!\n",x,y);
-			break;
+		DebugOut(L"[TORCH]!\n");
+		int itemid = atof(tokens[4].c_str());
+		DebugOut(L"[ANI_ID ITEMID] %d %d \n", ani_set_id, itemid);
+		obj = new CTorch({ x, y }, itemid);
+		DebugOut(L"[NICE] %d %d!\n", x, y);
+		break;
 	}
-	case OBJECT_TYPE_HEART: obj = new CHeart({x,y}); DebugOut(L"[NICE Heart]!\n");break;
 	case OBJECT_TYPE_PORTAL:
 		{	
 			float r = atof(tokens[4].c_str());
@@ -225,7 +227,9 @@ void CPlayScene::_ParseSection_MAP_SCENE(string line)
 	wstring path = ToWSTR(tokens[1]);
 	DebugOut(L"[INFO] Done loading scene resources %s\n", path.c_str());
 	tileSet->LoadFromFile(path.c_str());
+	DebugOut(L"[DONE1]\n");
 	tileMap->LoadFromFile(path.c_str());
+	DebugOut(L"[DONE2]\n");
 }
 
 
@@ -234,6 +238,7 @@ void CPlayScene::Load()
 {
 	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
 	viewport = CViewPort::GetInstance();
+	listItem = CListItem::GetInstance();
 
 	tileMap = new CTileMap();
 	tileSet = new CTileSet();
@@ -282,18 +287,19 @@ void CPlayScene::Load()
 	}
 
 	f.close();
-	
+	listItem->ListItem.clear();
 	CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 
-	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
+	DebugOut(L"[INFO_DONE_LOAD] Done loading scene resources  %s\n", sceneFilePath);
 }
 
 void CPlayScene::Update(DWORD dt)
 {
 	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
-	// TO-DO: This is a "dirty" way, need a more organized way 
+	// TO-DO: This is a "dirty" way, need a more organized way
 	D3DXVECTOR2 playerPosition;
 	vector<LPGAMEOBJECT> coObjects;
+	
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{
@@ -302,10 +308,16 @@ void CPlayScene::Update(DWORD dt)
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{
-
 		objects[i]->Update(dt, &coObjects);
 	}
-	
+
+	for (int i = 0; i < listItem->ListItem.size(); i++) // update các Item
+	{
+		listItem->ListItem[i]->Update(dt, &coObjects);
+		
+	}
+
+
 	for (int i = 1; i < objects.size(); i++)
 	{
 		if (objects[i]->GetState() == STATE_DESTROYED)
@@ -314,6 +326,16 @@ void CPlayScene::Update(DWORD dt)
 			i--;
 		}
 	}
+
+	for (size_t i = 0; i < listItem->ListItem.size(); i++)
+	{
+		if (listItem->ListItem[i]->GetState() == STATE_DESTROYED)
+		{
+			listItem->ListItem.erase(listItem->ListItem.begin() + i);
+			i--;
+		}
+	}
+
 	
 	// Update camera to follow mario
 
@@ -325,14 +347,15 @@ void CPlayScene::Update(DWORD dt)
 	cx -= game->GetScreenWidth() / 2;
 	cy -= game->GetScreenHeight() / 2;
 
-	CGame::GetInstance()->SetCamPos(cx, 0.0f); //cy);*/
+	CGame::GetInstance()->SetCamPos(playerPosition.x- game->GetScreenWidth() / 2, 0.0f);*/
 
 	player->GetPosition(playerPosition.x, playerPosition.y);
 	if (playerPosition.x < 0) {
 		player->SetPosition(0.0f, playerPosition.y);
 	}
-	viewport->Update(playerPosition, tileMap->GetWidthStart(playerPosition.y), tileMap->GetWidthEnd(playerPosition.y));
 
+	//Giới hạn Camera
+	viewport->Update(playerPosition, 0, TILESET_WIDTH*49); // MAP_WIDTH = 49
 
 }
 
@@ -340,10 +363,12 @@ void CPlayScene::Render()
 {
 	tileMap->Render({ 0,0 });
 	for (int i = 0; i < objects.size(); i++) {
-		//DebugOut(L"SIZE: %d ", objects.size());
 		objects[i]->RenderBoundingBox(100);
 		objects[i]->Render();
 	}
+	for (int i = 0; i < listItem->ListItem.size(); i++) // Draw các item
+		listItem->ListItem[i]->Render();
+
 	
 }
 
@@ -357,6 +382,8 @@ void CPlayScene::Unload()
 
 	objects.clear();
 	player = NULL;
+
+	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
 }
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
@@ -379,7 +406,9 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	}*/
 
 	//SIMON
-	CSimon *simon = ((CPlayScene*)scence)->player;
+	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
+	CViewPort * viewport = CViewPort::GetInstance();
+	CGame *game = CGame::GetInstance();
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
@@ -391,10 +420,18 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		break;
 
 	case DIK_A: // reset
-		simon->SetState(SIMON_STATE_IDLE);
+		simon->Reset();
+		viewport->SetPosition({ 0,0 });
+		break;
 
-		simon->SetPosition(50.0f, 0.0f);
-		simon->SetSpeed(0, 0);
+	case DIK_1:
+		DebugOut(L"SCENE 1\n");
+		OnKeySwitchScene(1, 0, 0);
+		break;
+
+	case DIK_2:
+		DebugOut(L"SCENE 2\n");
+		OnKeySwitchScene(2, 0, 20);
 		break;
 	}
 }
@@ -405,19 +442,8 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
 	CGame *game = CGame::GetInstance();
-	//CMario *mario = ((CPlayScene*)scence)->player;
 
-
-	// simon control key when Mario die 
-	/*if (mario->GetState() == MARIO_STATE_DIE) return;
-	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(MARIO_STATE_WALKING_RIGHT);
-	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(MARIO_STATE_WALKING_LEFT);
-	else
-		mario->SetState(MARIO_STATE_IDLE);*/
-
-	CSimon *simon = ((CPlayScene*)scence)->player;
+	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
 		// disable control key when Mario die 
 	if (simon->GetState() == SIMON_STATE_DIE)
 		return;
@@ -432,4 +458,15 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 		simon->SetState(SIMON_STATE_SIT);
 	else
 		simon->SetState(SIMON_STATE_IDLE);
+}
+
+
+void CPlayScenceKeyHandler::OnKeySwitchScene(int scene_id,float view_x, float view_y)
+{
+	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
+	CViewPort * viewport = CViewPort::GetInstance();
+	CGame *game = CGame::GetInstance();
+	game->SwitchScene(scene_id);
+	simon->Reset();
+	viewport->SetPosition({ view_x,view_y });
 }

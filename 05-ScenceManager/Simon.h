@@ -3,6 +3,7 @@
 #include "define.h"
 #include "Weapon.h"
 #include "Whip.h"
+#include "ViewPort.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
@@ -37,7 +38,7 @@
 
 #define SIMON_BBOX_WIDTH  15
 #define SIMON_BBOX_HEIGHT 30
-
+ 
 
 #define SIMON_UNTOUCHABLE_TIME 5000
 
@@ -51,6 +52,8 @@ class CSimon : public CGameObject
 	int untouchable;
 	bool isOnGround;
 
+	float start_x, start_y;
+
 	DWORD untouchableStart;
 	DWORD attackStart;
 	DWORD attackSubStart;
@@ -59,6 +62,8 @@ class CSimon : public CGameObject
 	LPWHIP whip;
 	vector<CWeapon*> Weapon;
 	int weaponID;
+
+	int wMapStart, wMapEnd;
 public:
 	CSimon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -74,8 +79,14 @@ public:
 	void StartAttack();
 	void StartJump();
 
+	int GetWidthMapStart(int wMapStart) { return (wMapStart); }
+	int GetWidthMapEnd( int wMapEnd) { return (wMapEnd); }
+
 	DWORD GetAttackStart() { return attackStart; }
 	DWORD GetJumpStart() { return jumpStart; }
+
+	void Reset();
+	void CollisionPortal(int scene_id,D3DXVECTOR2 postion);
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

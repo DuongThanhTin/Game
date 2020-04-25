@@ -1,7 +1,7 @@
 #include "Heart.h"
 
 
-
+ 
 CHeart::CHeart(D3DXVECTOR2 position)
 {
 	this->x = position.x;
@@ -29,7 +29,8 @@ void CHeart::Render() {
 void CHeart::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CItem::Update(dt, coObjects);
 
-	if (!isOnGround)
+	if (!isOnGround) {
 		vy += HEART_GRAVITY * dt;
-
+	}
+		
 }

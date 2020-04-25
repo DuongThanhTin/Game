@@ -34,7 +34,7 @@ class CGame
 	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
 
 	LPKEYEVENTHANDLER keyHandler;
-
+	 
 	float cam_x = 0.0f;
 	float cam_y = 0.0f;
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
-
-#define ITEM_DISAPPEAR_TIME 5000
+ 
+#define ITEM_DISAPPEAR_TIME 2000
 
 class CItem : public CGameObject
 {

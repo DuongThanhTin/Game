@@ -1,6 +1,6 @@
 #include "Portal.h"
 
-CPortal::CPortal(float l, float t, float r, float b, int scene_id )
+CPortal::CPortal(float l, float t, float r, float b, int scene_id)
 {
 	id = ID_PORTAL;
 	this->scene_id = scene_id;
@@ -8,6 +8,7 @@ CPortal::CPortal(float l, float t, float r, float b, int scene_id )
 	y = t;
 	width = r - l + 1;
 	height = b - t + 1;
+	
 }
 
 void CPortal::Render()
@@ -22,3 +23,4 @@ void CPortal::GetBoundingBox(float &l, float &t, float &r, float &b)
 	r = x + width;
 	b = y + height;
 }
+ 

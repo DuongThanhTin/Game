@@ -1,7 +1,7 @@
 #include "Item.h"
 
 
-
+ 
 CItem::CItem()
 {
 	timeDisappear = 0;
@@ -22,11 +22,15 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 
 	vector<LPGAMEOBJECT> wallObjects;
 	for (int i = 1; i < coObjects->size(); i++)
-		if (coObjects->at(i)->GetID() == ID_GROUND)
+	{
+		if (coObjects->at(i)->GetID() == ID_GROUND) {
 			wallObjects.push_back(coObjects->at(i));
+		}
+	}
 
 	CalcPotentialCollisions(&wallObjects, coEvents);
 
+	
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
@@ -35,6 +39,7 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	}
 	else
 	{
+
 		float min_tx, min_ty, nx = 0, ny;
 		float rdx = 0;
 		float rdy = 0;
@@ -49,6 +54,7 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 			vx = 0;
 			vy = 0;
 			isOnGround = true;
+			DebugOut(L"Disappear");
 			StartTimeDisappear();
 		}
 	}
@@ -58,7 +64,9 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	coEvents.clear();
 
 	if (GetTickCount() - timeDisappear > ITEM_DISAPPEAR_TIME && timeDisappear > 0)
+	{
 		SetState(STATE_DESTROYED);
+	}
 }
 
 void CItem::StartTimeDisappear() {

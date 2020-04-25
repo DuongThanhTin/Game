@@ -23,7 +23,7 @@ public:
 	LPSPRITE GetSprite() { return sprite; }
 	D3DXVECTOR2 GetPosition() { return this->position; }
 };
-
+ 
 typedef CAnimationFrame *LPANIMATION_FRAME;
 
 class CAnimation

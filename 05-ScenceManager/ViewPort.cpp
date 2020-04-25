@@ -1,12 +1,12 @@
 ﻿#include "ViewPort.h"
 
 CViewPort* CViewPort::__instance = NULL;
-
+ 
 CViewPort::CViewPort()
 {
 	position = { 0, 0 };
-	height = 176;
-	width = 320;
+	height = 176; //11*16
+	width = 320; 
 }
 
 CViewPort::CViewPort(D3DXVECTOR2 position, int width, int height)
@@ -24,10 +24,6 @@ D3DXVECTOR2 CViewPort::GetPosition() {
 	return position;
 }
 
-/*Viewport và World có tọa độ ngược nhau
-- World hướng lên
-- Viewport hướng xuống
-*/
 
 D3DXVECTOR2 CViewPort::ConvertWorldToViewPort(D3DXVECTOR2 worldPosition) {
 	return{ worldPosition.x - position.x, worldPosition.y - position.y };
@@ -41,17 +37,15 @@ void CViewPort::Update(D3DXVECTOR2 playerPosition, int startPosition, int endPos
 
 	//Cho Simon ở giữa camera (Vị trí simon trong camera)
 	position.x = playerPosition.x - SCREEN_WIDTH/2;
-
 	//Kiểm tra viewport ra ngoài world
 	if (position.x < startPosition)
 		position.x = startPosition;
-	if (position.x > endPosition - width)
-		position.x = endPosition - width;
-
-	position.y = int((playerPosition.y - 50) / 176) * 176;
-	if (position.y > 176 * 3 - height)
-		position.y = 176 * 3 - height;
-	//DebugOut(L"Position: %d\n", position.x);
+	if (position.x > endPosition - SCREEN_WIDTH)
+		position.x = endPosition - SCREEN_WIDTH;
+	if (position.y > 176) {
+		position.x = 50;
+		position.y = 30;
+	}
 }
 
 CViewPort::~CViewPort()

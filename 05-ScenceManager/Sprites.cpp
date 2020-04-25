@@ -13,7 +13,7 @@ CSprite::CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEX
 	this->isFlipImage = isFlipImage;
 	this->position = position;
 }
-
+ 
 CSprites * CSprites::__instance = NULL;
 
 CSprites *CSprites::GetInstance()

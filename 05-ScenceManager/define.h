@@ -1,7 +1,7 @@
 #pragma once
 
-
-#define SCREEN_WIDTH 320
+ 
+#define SCREEN_WIDTH 304
 #define SCREEN_HEIGHT 240
 
 #define MAX_FRAME_RATE 120
@@ -19,3 +19,9 @@
 #define ID_GROUND_SCENE_1 50
 
 #define STATE_DESTROYED 99
+
+#define STATE_PP	100
+
+#define TILESET_WIDTH 16
+
+#define TIME_FIRE	500
