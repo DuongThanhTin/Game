@@ -43,7 +43,6 @@ void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 			objectsItem[i]->Update(dt, coObjects);
 			
 		}
-		
 	}*/
 
 

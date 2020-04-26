@@ -2,5 +2,5 @@
 start	1
 #scene list
 [SCENES]
-1	scenesimon.txt
+1	simon_scene1.txt
 2	simon_scene2.txt

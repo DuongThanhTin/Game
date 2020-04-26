@@ -130,22 +130,8 @@ void CTileMap::Render(D3DXVECTOR2 position)
 {
 	CViewPort * viewport = CViewPort::GetInstance();
 
-	/*for (int i = 0; i < 11; i++) // rowNumber
-	{
-		for (int j = 0; j < 49; j++) // ColumnNumber
-		{
-		D3DXVECTOR2 pos;
-		pos.x = int (position.x + j * tileSet->GetTileWidth());
-		pos.y = int (position.y + i * tileSet->GetTileHeight());
-		pos = CViewPort::GetInstance()->ConvertWorldToViewPort(pos);
-		//DebugOut(L" DRAW %d %d \n", i, j);
-		tileSet->DrawTile(mapData[i][j], pos);
-		}
-	}*/
-
 	//Vẽ map khi camera di chuyển
-	//DebugOut(L"ASD %d\n", viewport->GetPosition().x);
-	//DebugOut(L"TILE test\n");
+
 	int wStart = viewport->GetPosition().x / tileSet->GetTileWidth();
 	int hStart = viewport->GetPosition().y / tileSet->GetTileHeight();
 	int wEnd = wStart + viewport->GetWidth() / tileSet->GetTileWidth();

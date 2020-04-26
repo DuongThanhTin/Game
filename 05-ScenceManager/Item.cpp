@@ -54,7 +54,6 @@ void CItem::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 			vx = 0;
 			vy = 0;
 			isOnGround = true;
-			DebugOut(L"Disappear");
 			StartTimeDisappear();
 		}
 	}

@@ -224,4 +224,4 @@
 
 [MAP]
 #tileset 		tilemap
-textures\testscene1.json	textures\testscene1.json
+textures\scene1.json	textures\scene1.json
