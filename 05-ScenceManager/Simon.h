@@ -79,14 +79,10 @@ public:
 	void StartAttack();
 	void StartJump();
 
-	int GetWidthMapStart(int wMapStart) { return (wMapStart); }
-	int GetWidthMapEnd( int wMapEnd) { return (wMapEnd); }
-
 	DWORD GetAttackStart() { return attackStart; }
 	DWORD GetJumpStart() { return jumpStart; }
 
 	void Reset();
-	void CollisionPortal(int scene_id,D3DXVECTOR2 postion);
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

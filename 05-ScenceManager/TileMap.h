@@ -41,6 +41,8 @@ private:
 	int rowMapNumber;
 	int columnMapNumber;
 
+	int limitedViewPort;
+
 	int wStart;
 	int wEnd;
 	 
@@ -52,7 +54,8 @@ private:
 public:
 	CTileMap();
 	void LoadFromFile(LPCWSTR filePath);
-	void Render(D3DXVECTOR2 position);
+	void DrawMap(D3DXVECTOR2 position);
+	int GetLimitedViewPort() { return limitedViewPort; };
 	~CTileMap();
 };
 

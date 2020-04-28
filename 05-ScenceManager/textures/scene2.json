@@ -18,6 +18,7 @@
          "type":"tilelayer",
          "visible":true,
          "width":17,
+		 "limitedViewPort":19,
          "x":0,
          "y":0
         }],

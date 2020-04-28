@@ -5,7 +5,7 @@ CViewPort* CViewPort::__instance = NULL;
 CViewPort::CViewPort()
 {
 	position = { 0, 0 };
-	height = 176; //11*16
+	height = 176;
 	width = 320; 
 }
 
@@ -42,10 +42,6 @@ void CViewPort::Update(D3DXVECTOR2 playerPosition, int startPosition, int endPos
 		position.x = startPosition;
 	if (position.x > endPosition - SCREEN_WIDTH)
 		position.x = endPosition - SCREEN_WIDTH;
-	if (position.y > 176) {
-		position.x = 50;
-		position.y = 30;
-	}
 }
 
 CViewPort::~CViewPort()

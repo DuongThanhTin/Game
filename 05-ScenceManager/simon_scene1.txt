@@ -145,7 +145,7 @@
 # Objecttype	x	y	ani_set_id	extra_settings per object type
 # Object type in Visual: 0 = Mario , 1 = Brick, 2 = Goomba, 5 = Zombie, 6 = Torch
 # SIMON
-0	50	50	1
+0	50	150	1
 
 # BRICK 
 # --- platform (hint: I created the list using Excel!) ----
@@ -194,32 +194,19 @@
 1	668	190	2
 1	684	190	2
 1	700	190	2
-# ---- brick group 1 ----
-1	100	84	2
-1	100	100	22
-1	84	100	22
-
-# ---- brick group 2 ----
-1	160	74	2
-1	160	90	22
-1	144	90	22
-
-# ---- brick group 3 ----
-1	220	74	2
-1	220	90	22
-1	204	90	22
-
 
 # ZOMBIE
 5	0.0	0	4
 
 # TORCH				itemid
 6	150.0	190	5	21
+6	250.0	190	5	21
+6	350.0	190	5	21
 
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
-50	500	98	0	600	150	2	
+50	690	150	0	705	200	2	
 
 
 [MAP]

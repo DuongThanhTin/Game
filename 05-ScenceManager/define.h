@@ -20,8 +20,6 @@
 
 #define STATE_DESTROYED 99
 
-#define STATE_PP	100
-
 #define TILESET_WIDTH 16
 
 #define TIME_FIRE	500

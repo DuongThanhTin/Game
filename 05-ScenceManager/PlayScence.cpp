@@ -338,38 +338,69 @@ void CPlayScene::Update(DWORD dt)
 
 	
 	// Update camera to follow mario
-
-	/*float cx, cy;
-	player->GetPosition(cx, cy);
-
-
-	CGame *game = CGame::GetInstance();
-	cx -= game->GetScreenWidth() / 2;
-	cy -= game->GetScreenHeight() / 2;
-
-	CGame::GetInstance()->SetCamPos(playerPosition.x- game->GetScreenWidth() / 2, 0.0f);*/
-
 	player->GetPosition(playerPosition.x, playerPosition.y);
 	if (playerPosition.x < 0) {
 		player->SetPosition(0.0f, playerPosition.y);
 	}
 
 	//Giới hạn Camera
-	viewport->Update(playerPosition, 0, TILESET_WIDTH*49); // MAP_WIDTH = 49
+	viewport->Update(playerPosition, 0, TILESET_WIDTH*tileMap->GetLimitedViewPort());
 
+
+	//SIMON Collision with portal
+	vector<LPGAMEOBJECT> portalObjects;
+	for (int i = 0;i < objects.size();i++) 
+	{
+		if (objects[i]->GetID() == ID_PORTAL)
+			portalObjects.push_back(objects[i]);
+	}
+
+	//Collisions Portal
+	for (auto iter : portalObjects) {
+		{
+			float pl, pt, pr, pb;		// portal bbox
+			float sl, st, sr , sb;		// simon bbox
+			iter->GetBoundingBox(pl, pt, pr, pb);
+			player->GetBoundingBox(sl, st, sr, sb);
+			if (CGame::GetInstance()->IsIntersect({ long(pl),long(pt), long(pr), long(pb) }, { long(sl), long(st), long(sr), long(sb) })) {
+				float a, b;
+				if (iter->GetID() == ID_PORTAL) {
+					CPortal* portal = dynamic_cast<CPortal *>(iter);
+					DebugOut(L"TEST SWITCH SCENE %d\n", portal->GetSceneId());
+					switch (portal->GetSceneId())
+					{
+					case 1:
+						DebugOut(L"TEST 1!\n");
+						ScenePortal(1, 0, 0);
+						break;
+					case 2:
+						DebugOut(L"TEST 2!!\n");
+						ScenePortal(2, 0, 20);
+						break;
+					default:
+						break;
+					}
+				}
+			}
+		}
+	}
 }
 
 void CPlayScene::Render()
 {
-	tileMap->Render({ 0,0 });
+	//Draw Map
+	tileMap->DrawMap({ 0,0 });
+		
 	for (int i = 0; i < objects.size(); i++) {
 		objects[i]->RenderBoundingBox(100);
 		objects[i]->Render();
 	}
-	for (int i = 0; i < listItem->ListItem.size(); i++) // Draw các item
-		listItem->ListItem[i]->Render();
 
-	
+	//Draw Items
+	for (int i = 0; i < listItem->ListItem.size(); i++)
+	{
+		listItem->ListItem[i]->Render();
+	}
 }
 
 /*
@@ -384,6 +415,17 @@ void CPlayScene::Unload()
 	player = NULL;
 
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
+}
+
+void CPlayScene::ScenePortal(int scene_id, float view_x, float view_y)
+{
+	CSimon *simon = new CSimon();
+	CViewPort * viewport = CViewPort::GetInstance();
+	CGame *game = CGame::GetInstance();
+
+	game->SwitchScene(scene_id);
+	simon->Reset();
+	viewport->SetPosition({ view_x,view_y });
 }
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)

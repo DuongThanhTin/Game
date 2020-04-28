@@ -45,7 +45,7 @@ public:
 	virtual void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
-
+	virtual void ScenePortal(int scene_id, float view_x, float view_y);
 
 	CSimon * GetPlayer() { return player; }
 

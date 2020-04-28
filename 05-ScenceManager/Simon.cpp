@@ -43,13 +43,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			wallObjects.push_back(coObjects->at(i));
 	}
 
-	//Collision with portal
-	vector<LPGAMEOBJECT> portalObjects;
-	for (int i = 0;i < coObjects->size();i++) {
-		if (coObjects->at(i)->GetID() == ID_PORTAL)
-			portalObjects.push_back(coObjects->at(i));
-	}
-
 	//Collision with items
 	vector<LPGAMEOBJECT> itemObjects;
 	for (int i = 0;i < listItem->ListItem.size();i++) {
@@ -60,32 +53,9 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// turn off collision when die 
 	if (state != SIMON_STATE_DIE) {
 		//CalcPotentialCollisions(coObjects, coEvents); //Collision Objects
-		//Collision Objects
+
+		//Collision Brick
 		CalcPotentialCollisions(&wallObjects, coEvents);
-
-		//Portal
-		CalcPotentialCollisions(&portalObjects, coEvents);
-
-
-		//Collisions Portal
-		for (auto iter : portalObjects) {
-		{
-				float pl, pt, pr, pb;		// object bbox
-				float ol, ot, or , ob;		// object bbox
-				GetBoundingBox(pl, pt, pr, pb);
-				iter->GetBoundingBox(ol, ot, or , ob);
-				if (CGame::GetInstance()->IsIntersect({ long(pl),long(pt), long(pr), long(pb) }, { long(ol), long(ot), long(or ), long(ob) })) {
-					float a, b;	
-					if (iter->GetID() == ID_PORTAL) {
-						CPortal* portal = dynamic_cast<CPortal *>(iter);
-						DebugOut(L"[INFO] Switching to scene %d\n", portal->GetSceneId());
-						CollisionPortal(portal->GetSceneId(),position);
-						
-					}
-				}
-			}
-		}
-
 
 		//Collision Item
 		for (auto iter : itemObjects) {
@@ -150,8 +120,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	// update jump state
 	if (isOnGround == true) {
-		//if (GetTickCount() - jumpStart > SIMON_JUMP_TIME)
-			jumpStart = 0;
+		jumpStart = 0;
 	}
 
 	// reset untouchable timer if untouchable time has passed
@@ -167,8 +136,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void CSimon::Render()
 {
-	//http://gameprogrammingpatterns.com/state.html
-
+	//State http://gameprogrammingpatterns.com/state.html
 	int ani;
 
 	if (state == SIMON_STATE_DIE)
@@ -244,10 +212,6 @@ void CSimon::SetState(int state)
 	if (attackStart > 0)
 		return;
 	
-
-	//if (state != SIMON_STATE_JUMP)
-	//	vx = 0;
-
 	if (jumpStart > 0 && state != SIMON_STATE_ATTACK)
 		return;
 
@@ -285,7 +249,8 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	if (GetTickCount() - attackStart <= SIMON_ATTACK_TIME)
 	{
 		float playerX, playerY;
-		if (state == SIMON_STATE_SIT_ATTACK) {
+		if (state == SIMON_STATE_SIT_ATTACK) 
+		{
 			playerY = y + 7;
 		}
 		else
@@ -296,7 +261,8 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	else if (attackStart > 0)
 	{
 		attackStart = 0;
-		if (state == SIMON_STATE_SIT_ATTACK) {
+		if (state == SIMON_STATE_SIT_ATTACK) 
+		{
 			state = SIMON_STATE_SIT;
 		}
 		else
@@ -327,6 +293,9 @@ void CSimon::StartAttack() {
 		vx = 0;
 	
 	ResetAnimation();
+	
+	//Reset Animation Whip
+	whip->ResetAnimation();
 
 	if (state == SIMON_STATE_SIT)
 		SetState(SIMON_STATE_SIT_ATTACK);
@@ -334,8 +303,6 @@ void CSimon::StartAttack() {
 		SetState(SIMON_STATE_ATTACK);
 	attackStart = GetTickCount();
 }
-
-
 
 void CSimon::StartJump()
 {
@@ -346,19 +313,7 @@ void CSimon::StartJump()
 
 void CSimon::Reset()
 {
-	SetPosition(start_x + 50, start_y);
+	SetPosition(start_x + 50, start_y+100);
 	SetSpeed(0, 0);
 	DebugOut(L"[DONE] RESET\n");
-}
-
-void CSimon::CollisionPortal(int scene_id, D3DXVECTOR2 position)
-{
-	//GetPosition(position.x, position.y);
-	CViewPort * viewport = CViewPort::GetInstance();
-	CGame::GetInstance()->SwitchScene(scene_id);
-	viewport->SetPosition({ 0,0 });
-	
-	SetPosition(0.0f, 0);
-	
-	DebugOut(L"[INFO] COLLISION PORTAL\n");
 }

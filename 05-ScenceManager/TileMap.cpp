@@ -2,7 +2,6 @@
 
 std::wstring s2ws(const std::string& s);
 #define ID_TEX_TILESET_01 -10
-#define HUD_HEIGHT			50
 
 CTileSet::CTileSet()
 {
@@ -20,14 +19,18 @@ void CTileSet::LoadFromFile(LPCWSTR filePath)
 	int tileCount = j["tilesets"][0]["tilecount"].get<int>();
 
 	string tmpPath = "textures\\" + j["tilesets"][0]["image"].get<string>();
+
 	rowNumber = (tileCount - 1) / columnNumber + 1;
 	DebugOut(L"[INFO] rowNumber OK: %d\n", rowNumber);
 	DebugOut(L"[INFO] tileWidth OK: %d\n", tileWidth);
+
 	wstring sTmp;
 	sTmp = s2ws(tmpPath);
+
 	LPCWSTR imagePath = sTmp.c_str();
 
 	//DebugOut(L"[INFO] imagePath OK: %d\n", imagePath);
+
 	// Add list tiles
 	for (int i = 0; i < rowNumber; i++)
 		for (int j = 0; j < columnNumber; j++)
@@ -36,8 +39,6 @@ void CTileSet::LoadFromFile(LPCWSTR filePath)
 			int tmpID = i * columnNumber + j + 1;
 			listTile.insert(pair<int, RECT>(tmpID, tmpRect));
 
-			//Debug
-			//DebugOut(L"[INFO] tmpID OK: %d\n", tmpRect);
 		}
 
 	// Add texture
@@ -89,17 +90,18 @@ CTileMap::CTileMap()
 
 void CTileMap::LoadFromFile(LPCWSTR filePath)
 {
+	// Load tileset
+	tileSet->LoadFromFile(filePath);
+
 	// Load info
 	ifstream file(filePath);
 	json j = json::parse(file);
 
 
-	//rowNumber = j["layers"][0]["height"].get<int>();
-	//columnNumber = j["layers"][0]["width"].get<int>();
-
 	vector<int> data = j["layers"][0]["data"].get<vector<int>>();
 	rowMapNumber = j["layers"][0]["height"].get<int>();
 	columnMapNumber = j["layers"][0]["width"].get<int>();
+	limitedViewPort = j["layers"][0]["limitedViewPort"].get<int>();
 	//DebugOut
 	DebugOut(L"rowNumber: %d\n ", rowNumber);
 	DebugOut(L"columnMapNumber: %d\n ", columnMapNumber);
@@ -117,16 +119,13 @@ void CTileMap::LoadFromFile(LPCWSTR filePath)
 		}
 	}
 
-	// Load tileset
-	tileSet->LoadFromFile(filePath);
-
 	for (int i = 0; i < rowMapNumber; i++)
 		for (int j = 0; j < columnMapNumber; j++)
 			DebugOut(L"%d, ", mapData[i][j]);
 	DebugOut(L"\n");
 }
 
-void CTileMap::Render(D3DXVECTOR2 position)
+void CTileMap::DrawMap(D3DXVECTOR2 position)
 {
 	CViewPort * viewport = CViewPort::GetInstance();
 
@@ -150,7 +149,6 @@ void CTileMap::Render(D3DXVECTOR2 position)
 			pos.x = position.x + j * tileSet->GetTileWidth();
 			pos.y = position.y + i * tileSet->GetTileHeight() + 45;
 			pos = CViewPort::GetInstance()->ConvertWorldToViewPort(pos);
-		//	DebugOut(L" DRAW %d %d \n",i,j);
 			tileSet->DrawTile(mapData[i][j], pos);
 		}
 	}
