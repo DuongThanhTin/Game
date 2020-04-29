@@ -84,8 +84,6 @@ std::wstring s2ws(const std::string& s)
 CTileMap::CTileMap()
 {
 	tileSet = new CTileSet();
-	wStart = 0;
-	wEnd = 49 * 16;
 }
 
 void CTileMap::LoadFromFile(LPCWSTR filePath)
@@ -103,7 +101,7 @@ void CTileMap::LoadFromFile(LPCWSTR filePath)
 	columnMapNumber = j["layers"][0]["width"].get<int>();
 	limitedViewPort = j["layers"][0]["limitedViewPort"].get<int>();
 	//DebugOut
-	DebugOut(L"rowNumber: %d\n ", rowNumber);
+	DebugOut(L"rowMapNumber: %d\n ", rowMapNumber);
 	DebugOut(L"columnMapNumber: %d\n ", columnMapNumber);
 
 	// Map data from vector to matrix	

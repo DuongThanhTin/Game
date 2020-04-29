@@ -15,7 +15,8 @@ CSimon::CSimon() {
 	jumpStart = 0;
 	attackStart = 0;
 	untouchableStart = 0;
-
+	start_x = 0;
+	start_y = 180;
 	isOnGround = false;
 	whip = new CWhip();
 }
@@ -55,7 +56,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (state != SIMON_STATE_DIE) {
 		//CalcPotentialCollisions(coObjects, coEvents); //Collision Objects
 
-		//Collision Brick
+		//Collision wall
 		CalcPotentialCollisions(&wallObjects, coEvents);
 
 		//Collision Item
@@ -317,7 +318,7 @@ void CSimon::StartJump()
 
 void CSimon::Reset()
 {
-	SetPosition(start_x + 50, start_y+100);
+	SetPosition(start_x , start_y);
 	SetSpeed(0, 0);
 	DebugOut(L"[DONE] RESET\n");
 }

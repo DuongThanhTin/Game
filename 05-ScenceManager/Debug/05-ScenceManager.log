@@ -18,12 +18,43 @@ d:\game2020\game\05-scencemanager\playscence.cpp(400): warning C4018: '<': signe
 d:\game2020\game\05-scencemanager\playscence.cpp(411): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   Compiling...
+  main.cpp
+  Zombie.cpp
+d:\game2020\game\05-scencemanager\zombie.cpp(36): warning C4018: '<': signed/unsigned mismatch
+  WhipUpgrade.cpp
+  Whip.cpp
+  Weapon.cpp
+d:\game2020\game\05-scencemanager\weapon.cpp(17): warning C4018: '<': signed/unsigned mismatch
+  ViewPort.cpp
+d:\game2020\game\05-scencemanager\viewport.cpp(42): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
+d:\game2020\game\05-scencemanager\viewport.cpp(44): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
+  Torch.cpp
+  TileMap.cpp
+d:\game2020\game\05-scencemanager\tilemap.cpp(56): warning C4244: 'argument': conversion from 'FLOAT' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\tilemap.cpp(132): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\tilemap.cpp(133): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
+  Simon.cpp
+d:\game2020\game\05-scencemanager\simon.cpp(42): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(49): warning C4018: '<': signed/unsigned mismatch
+  Portal.cpp
+d:\game2020\game\05-scencemanager\portal.cpp(9): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\portal.cpp(10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  ObjectNoMove.cpp
+  Mario.cpp
+  ListItem.cpp
+  Koopas.cpp
+  Item.cpp
+d:\game2020\game\05-scencemanager\item.cpp(24): warning C4018: '<': signed/unsigned mismatch
+  Heart.cpp
+  Goomba.cpp
+  GameObject.cpp
+d:\game2020\game\05-scencemanager\gameobject.cpp(147): warning C4244: 'argument': conversion from 'FLOAT' to 'int', possible loss of data
   Game.cpp
 d:\game2020\game\05-scencemanager\game.cpp(68): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  Brick.cpp
   Generating Code...
-  Skipping... (no relevant changes detected)
-  Torch.cpp
-  ObjectNoMove.cpp
-  main.cpp
+  Compiling...
+  Animations.cpp
+  Generating Code...
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

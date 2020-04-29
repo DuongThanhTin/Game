@@ -25,3 +25,8 @@
 #define TILESET_WIDTH 16
 
 #define TIME_FIRE	500
+
+#define SCENE_1 1
+#define SCENE_2 2
+#define SCENE_3 3
+#define SCENE_4 4

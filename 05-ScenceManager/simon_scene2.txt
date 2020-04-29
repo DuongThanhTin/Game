@@ -171,7 +171,7 @@
 # Objecttype	x	y	ani_set_id	extra_settings per object type
 # Object type in Visual: 0 = Mario , 1 = Brick, 2 = Goomba, 5 = Zombie, 6 = Torch
 # SIMON
-0	50	50	1
+0	0	190	1
 
 # BRICK 
 # --- platform (hint: I created the list using Excel!) ----

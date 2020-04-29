@@ -337,7 +337,7 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 	
-	// Update camera to follow mario
+	// Update camera to follow simon
 	player->GetPosition(playerPosition.x, playerPosition.y);
 	if (playerPosition.x < 0) {
 		player->SetPosition(0.0f, playerPosition.y);
@@ -371,11 +371,11 @@ void CPlayScene::Update(DWORD dt)
 					{
 					case 1:
 						DebugOut(L"TEST 1!\n");
-						ScenePortal(1, 0, 0);
+						ScenePortal(SCENE_1, 0, 0);
 						break;
 					case 2:
 						DebugOut(L"TEST 2!!\n");
-						ScenePortal(2, 0, 20);
+						ScenePortal(SCENE_2, 0, 20);
 						break;
 					default:
 						break;
@@ -449,8 +449,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 
 	//SIMON
 	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
-	CViewPort * viewport = CViewPort::GetInstance();
-	CGame *game = CGame::GetInstance();
+
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
@@ -463,9 +462,9 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 
 	case DIK_A: // reset
 		simon->Reset();
-		viewport->SetPosition({ 0,0 });
 		break;
 
+	//Switch scene with key
 	case DIK_1:
 		DebugOut(L"SCENE 1\n");
 		OnKeySwitchScene(1, 0, 0);

@@ -48,7 +48,7 @@
 
 class CSimon : public CGameObject
 {
-	int level;
+	
 	int untouchable;
 	bool isOnGround;
 
@@ -56,14 +56,12 @@ class CSimon : public CGameObject
 
 	DWORD untouchableStart;
 	DWORD attackStart;
-	DWORD attackSubStart;
 	DWORD jumpStart;
 
 	LPWHIP whip;
 	vector<CWeapon*> Weapon;
 	int weaponID;
 
-	int wMapStart, wMapEnd;
 public:
 	CSimon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -71,7 +69,6 @@ public:
 	virtual void RenderBoundingBox(int alpha = 255);
 	bool isOnGroundFloor() { return isOnGround; };
 	void SetState(int state);
-	void SetLevel(int l) { level = l; }
 	void SetWeapon(int weaponID);
 	void UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects);
 
