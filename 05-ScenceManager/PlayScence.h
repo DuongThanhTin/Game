@@ -16,7 +16,8 @@
 #include "TileMap.h"
 #include "ObjectNoMove.h"
 #include "ListItem.h"
- 
+#include "Whip.h" 
+
 class CPlayScene: public CScene
 {
 protected: 
@@ -27,8 +28,8 @@ protected:
 	CTileSet *tileSet;
 	CTileMap *tileMap;
 	CViewPort *viewport;
-
 	CListItem *listItem;
+
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);

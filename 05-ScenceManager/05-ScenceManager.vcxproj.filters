@@ -90,6 +90,9 @@
     <ClCompile Include="ListItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WhipUpgrade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -168,6 +171,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ListItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WhipUpgrade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

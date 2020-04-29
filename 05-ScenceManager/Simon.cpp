@@ -46,7 +46,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	//Collision with items
 	vector<LPGAMEOBJECT> itemObjects;
 	for (int i = 0;i < listItem->ListItem.size();i++) {
-		if (listItem->ListItem[i]->GetID() == ID_HEART)
+		if (listItem->ListItem[i]->GetID() == ID_HEART||
+			listItem->ListItem[i]->GetID() == ID_WHIPUPGRADE)
 			itemObjects.push_back(listItem->ListItem[i]);
 	}
 
@@ -69,6 +70,10 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				switch (iter->GetID()) {
 					case ID_HEART:
 						DebugOut(L"Collsion Heart\n");
+						break;
+					case ID_WHIPUPGRADE:
+						UpgradeWhip();
+						DebugOut(L"Collsion Whip Upgrade\n");
 						break;
 					default:
 						break;
@@ -209,13 +214,12 @@ void CSimon::RenderBoundingBox(int alpha)
 
 void CSimon::SetState(int state)
 {
+	CGameObject::SetState(state);
 	if (attackStart > 0)
 		return;
 	
 	if (jumpStart > 0 && state != SIMON_STATE_ATTACK)
 		return;
-
-	CGameObject::SetState(state);
 
 	switch (state)
 	{
@@ -316,4 +320,10 @@ void CSimon::Reset()
 	SetPosition(start_x + 50, start_y+100);
 	SetSpeed(0, 0);
 	DebugOut(L"[DONE] RESET\n");
+}
+
+void CSimon::UpgradeWhip()
+{
+	whip->Upgrade();
+	DebugOut(L"[DONE] Upgrade\n");
 }

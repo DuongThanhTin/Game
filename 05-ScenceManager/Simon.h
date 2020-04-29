@@ -83,6 +83,7 @@ public:
 	DWORD GetJumpStart() { return jumpStart; }
 
 	void Reset();
+	void UpgradeWhip();
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

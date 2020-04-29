@@ -2,7 +2,7 @@
 
   
 #define SCREEN_WIDTH 304
-#define SCREEN_HEIGHT 240
+#define SCREEN_HEIGHT 256
 
 #define MAX_FRAME_RATE 120
 
@@ -13,8 +13,10 @@
 #define ID_PORTAL 12
 
 #define ID_HEART 21
+#define ID_WHIPUPGRADE	22
 
 #define ID_WHIP	30
+
 
 #define ID_GROUND_SCENE_1 50
 

@@ -4,7 +4,8 @@
 #include "define.h"
 #include "Heart.h"
 #include "ListItem.h"
- 
+#include "WhipUpgrade.h" 
+
 class CWeapon : public CGameObject
 {
 	DWORD timeFire;

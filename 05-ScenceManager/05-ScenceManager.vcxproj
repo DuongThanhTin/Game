@@ -148,6 +148,7 @@
     <ClCompile Include="ViewPort.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="Whip.cpp" />
+    <ClCompile Include="WhipUpgrade.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +177,7 @@
     <ClInclude Include="ViewPort.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Whip.h" />
+    <ClInclude Include="WhipUpgrade.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
