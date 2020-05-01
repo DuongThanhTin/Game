@@ -4,7 +4,7 @@
 
 CWeapon::CWeapon()
 {
-	timeFire = 0;
+	timeAppearItem = 0;
 }
 
 
@@ -21,22 +21,13 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			GetBoundingBox(wl, wt, wr, wb);
 			coObjects->at(i)->GetBoundingBox(ol, ot, or , ob);
 			if (CGame::GetInstance()->IsIntersect({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
-				//coObjects->at(i)->TimeFireDestroy();
-				float x, y;
-				coObjects->at(i)->GetPosition(x, y);
-				switch (coObjects->at(i)->GetNextItemID())
-				{
-				case ID_HEART:
-					CListItem::GetInstance()->ListItem.push_back(new CHeart({ x,y - 20 }));
-					break;
-				case ID_WHIPUPGRADE:
-					CListItem::GetInstance()->ListItem.push_back(new CWhipUpgrade({ x,y - 20 }));
-					break;
-				default:
-					break;
-				}
-				coObjects->at(i)->SetState(STATE_DESTROYED);
+				coObjects->at(i)->TimeFireDestroy();				
 			}
 		}
 	}
+}
+
+void CWeapon::DestroyObject()
+{
+	timeAppearItem = GetTickCount();
 }

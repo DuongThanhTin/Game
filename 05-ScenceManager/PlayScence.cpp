@@ -391,7 +391,7 @@ void CPlayScene::Render()
 	//Draw Map
 	tileMap->DrawMap({ 0,0 });
 		
-	for (int i = 0; i < objects.size(); i++) {
+	for (int i = 1; i < objects.size(); i++) {
 		objects[i]->RenderBoundingBox(100);
 		objects[i]->Render();
 	}
@@ -401,6 +401,9 @@ void CPlayScene::Render()
 	{
 		listItem->ListItem[i]->Render();
 	}
+
+	//Render Simon
+	objects[0]->Render();
 }
 
 /*
@@ -467,12 +470,12 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	//Switch scene with key
 	case DIK_1:
 		DebugOut(L"SCENE 1\n");
-		OnKeySwitchScene(1, 0, 0);
+		OnKeySwitchScene(SCENE_1, 0, 0);
 		break;
 
 	case DIK_2:
 		DebugOut(L"SCENE 2\n");
-		OnKeySwitchScene(2, 0, 20);
+		OnKeySwitchScene(SCENE_2, 0, 20);
 		break;
 	}
 }

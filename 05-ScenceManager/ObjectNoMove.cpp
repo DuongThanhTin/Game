@@ -5,7 +5,8 @@
 CObjectNoMove::CObjectNoMove()
 {
 	timeFire = 0;
-	//state = OBJECTS_STATE_NORMAL;
+	state = OBJECTS_STATE_NORMAL;
+	AddAnimation(901);
 }
 
 
@@ -15,23 +16,52 @@ CObjectNoMove::~CObjectNoMove()
 
 void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CGameObject::Update(dt);
-	
-	if (GetTickCount() - timeFire > TIME_FIRE && timeFire > 0)
-	{
-		timeFire = 0;
+	for (int i = 0;i < coObjects->size();i++) {
+		float wl, wt, wr, wb;		// weapon object bbox
+		float ol, ot, or , ob;		// object bbox
+		GetBoundingBox(wl, wt, wr, wb);
+		coObjects->at(i)->GetBoundingBox(ol, ot, or , ob);
+		if (CGame::GetInstance()->IsIntersect({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+			if (GetTickCount() - timeFire > TIME_FIRE && timeFire > 0)
+			{
+				timeFire = 0;
+				float x, y;
+				coObjects->at(i)->GetPosition(x, y);
+				switch (coObjects->at(i)->GetNextItemID())
+				{
+				case ID_HEART:
+					CListItem::GetInstance()->ListItem.push_back(new CHeart({ x,y - 20 }));
+					break;
+				case ID_WHIPUPGRADE:
+					CListItem::GetInstance()->ListItem.push_back(new CWhipUpgrade({ x,y - 20 }));
+					break;
+				default:
+					break;
+				}
+				state = STATE_DESTROYED;
+			}
+		}
 	}
+	
+
 
 }
 
 void CObjectNoMove::Render()
 {
-	animation_set->at(0)->Render(x, y);
+	if (state == OBJECTS_STATE_DESTROY)
+	{
+		animations[0]->Render(x, y);
+	}
+	else
+	{
+		animation_set->at(OBJECTS_STATE_NORMAL)->Render(x, y);
+	}
 
 }
 
 void CObjectNoMove::TimeFireDestroy()
 {
 	timeFire = GetTickCount();
-	state = STATE_DESTROYED;
-	//state = OBJECTS_STATE_DESTROY;
+	state = OBJECTS_STATE_DESTROY;
 }
