@@ -363,7 +363,6 @@ void CPlayScene::Update(DWORD dt)
 			iter->GetBoundingBox(pl, pt, pr, pb);
 			player->GetBoundingBox(sl, st, sr, sb);
 			if (CGame::GetInstance()->IsIntersect({ long(pl),long(pt), long(pr), long(pb) }, { long(sl), long(st), long(sr), long(sb) })) {
-				float a, b;
 				if (iter->GetID() == ID_PORTAL) {
 					CPortal* portal = dynamic_cast<CPortal *>(iter);
 					DebugOut(L"TEST SWITCH SCENE %d\n", portal->GetSceneId());

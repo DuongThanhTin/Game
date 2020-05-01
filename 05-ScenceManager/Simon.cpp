@@ -25,7 +25,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
-	CViewPort * viewport = CViewPort::GetInstance();
 	CListItem * listItem = CListItem::GetInstance();
 	
 	D3DXVECTOR2 position;
@@ -66,8 +65,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			GetBoundingBox(wl, wt, wr, wb);
 			iter->GetBoundingBox(ol, ot, or , ob);
 			if (CGame::GetInstance()->IsIntersect({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
-				float x, y;
-				iter->GetPosition(x, y);
 				switch (iter->GetID()) {
 					case ID_HEART:
 						DebugOut(L"Collsion Heart\n");

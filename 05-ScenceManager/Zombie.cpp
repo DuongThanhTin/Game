@@ -3,7 +3,8 @@
 
 
 CZombie::CZombie()
-{
+{ 
+	id = ID_ZOMBIE;
 	SetState(ZOMBIE_STATE_WALKING);
 }
 

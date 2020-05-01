@@ -6,7 +6,6 @@ CObjectNoMove::CObjectNoMove()
 {
 	timeFire = 0;
 	state = OBJECTS_STATE_NORMAL;
-	AddAnimation(901);
 }
 
 
@@ -51,7 +50,7 @@ void CObjectNoMove::Render()
 {
 	if (state == OBJECTS_STATE_DESTROY)
 	{
-		animations[0]->Render(x, y);
+		animation_set->at(OBJECTS_STATE_DESTROY)->Render(x, y);
 	}
 	else
 	{

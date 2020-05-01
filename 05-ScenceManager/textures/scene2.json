@@ -1,11 +1,4 @@
-{ "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "target":"."
-        }
-    },
+{
  "height":11,
  "infinite":false,
  "layers":[
@@ -31,6 +24,7 @@
  "tilesets":[
         {
          "columns":7,
+		 "rows":5,
          "firstgid":1,
          "image":"tilesheet2.png",
          "imageheight":68,

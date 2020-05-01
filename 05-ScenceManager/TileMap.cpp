@@ -16,12 +16,11 @@ void CTileSet::LoadFromFile(LPCWSTR filePath)
 	tileWidth = j["tilesets"][0]["tilewidth"].get<int>();
 	tileHeight = j["tilesets"][0]["tileheight"].get<int>();
 	columnNumber = j["tilesets"][0]["columns"].get<int>();
+	rowNumber = j["tilesets"][0]["rows"].get<int>();
 	int tileCount = j["tilesets"][0]["tilecount"].get<int>();
 
 	string tmpPath = "textures\\" + j["tilesets"][0]["image"].get<string>();
 
-	rowNumber = (tileCount - 1) / columnNumber + 1;
-	DebugOut(L"[INFO] rowNumber OK: %d\n", rowNumber);
 	DebugOut(L"[INFO] tileWidth OK: %d\n", tileWidth);
 
 	wstring sTmp;
@@ -128,7 +127,6 @@ void CTileMap::DrawMap(D3DXVECTOR2 position)
 	CViewPort * viewport = CViewPort::GetInstance();
 
 	//Vẽ map khi camera di chuyển
-
 	int wStart = viewport->GetPosition().x / tileSet->GetTileWidth();
 	int hStart = viewport->GetPosition().y / tileSet->GetTileHeight();
 	int wEnd = wStart + viewport->GetWidth() / tileSet->GetTileWidth();

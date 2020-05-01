@@ -7,6 +7,7 @@
 #define MAX_FRAME_RATE 120
 
 #define ID_SIMON 1
+#define ID_ZOMBIE 2
 
 #define ID_GROUND 10
 #define ID_TORCH 11

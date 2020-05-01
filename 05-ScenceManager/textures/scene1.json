@@ -24,6 +24,7 @@
  "tilesets":[
         {
          "columns":11,
+		 "rows":15,
          "firstgid":1,
          "image":"tilesetscene1.png",
          "imageheight":240,
