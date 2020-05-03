@@ -12,12 +12,14 @@ CSimon::CSimon() {
 	//id = ID_SIMON;
 
 	untouchable = 0;
+	transformtime = 0;
 	jumpStart = 0;
 	attackStart = 0;
 	untouchableStart = 0;
 	start_x = 0;
 	start_y = 180;
 	isOnGround = false;
+	eatitemStart = 0;
 	whip = new CWhip();
 }
 
@@ -67,10 +69,12 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (CGame::GetInstance()->IsIntersect({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 				switch (iter->GetID()) {
 					case ID_HEART:
+						StartEatItem();
 						DebugOut(L"Collsion Heart\n");
 						break;
 					case ID_WHIPUPGRADE:
 						UpgradeWhip();
+						StartEatItem();
 						DebugOut(L"Collsion Whip Upgrade\n");
 						break;
 					default:
@@ -132,7 +136,19 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		untouchableStart = 0;
 		untouchable = 0;
 	}
-	 
+	
+	// transform simon
+	if (GetTickCount() - eatitemStart > SIMON_EATITEM_TIME)
+	{
+		transformtime = 0;
+		eatitemStart = 0;
+	}
+	else if (transformtime > 0)
+	{
+		attackStart = 0;
+		vx = 0;
+	}
+
 	// update attack state and whip
 	UpdateWhip(dt, coObjects);
 }
@@ -165,7 +181,6 @@ void CSimon::Render()
 				ani = SIMON_ANI_IDLE_LEFT;
 		}
 	}
-
 	else if (state == SIMON_STATE_SIT) {
 		if (nx > 0)
 			ani = SIMON_ANI_SIT_RIGHT;
@@ -178,22 +193,27 @@ void CSimon::Render()
 		else
 			ani = SIMON_ANI_SIT_ATTACK_LEFT;
 	}
+	else if(state== SIMON_STATE_WALKING_RIGHT){
+		ani = SIMON_ANI_WALKING_RIGHT;
+	}
+	else if (state == SIMON_STATE_WALKING_LEFT) {
+		ani = SIMON_ANI_WALKING_LEFT;
+	}
 
 	else {
-		if (vx == 0) {
-			if (nx > 0)
-				ani = SIMON_ANI_IDLE_RIGHT;
-			else
-				ani = SIMON_ANI_IDLE_LEFT;
-		}
-		else {
-			if (vx > 0) {
-				ani = SIMON_ANI_WALKING_RIGHT;
-			}
-			else
-				ani = SIMON_ANI_WALKING_LEFT;
-		}
+		if (nx > 0)
+			ani = SIMON_ANI_IDLE_RIGHT;
+		else
+			ani = SIMON_ANI_IDLE_LEFT;
 	}
+
+	if (eatitemStart > 0) {
+		if (nx > 0)
+			ani = SIMON_ANI_EATITEM_RIGHT;
+		else
+			ani = SIMON_ANI_EATITEM_LEFT;
+	}
+
 	int alpha = 255;
 	if (untouchableStart>0)
 		alpha = 128;
@@ -212,12 +232,17 @@ void CSimon::RenderBoundingBox(int alpha)
 
 void CSimon::SetState(int state)
 {
-	CGameObject::SetState(state);
+
 	if (attackStart > 0)
 		return;
 	
 	if (jumpStart > 0 && state != SIMON_STATE_ATTACK)
 		return;
+
+	if (eatitemStart > 0)
+		return;
+
+	CGameObject::SetState(state);
 
 	switch (state)
 	{
@@ -236,6 +261,8 @@ void CSimon::SetState(int state)
 		vx = 0;
 		break;
 	case SIMON_STATE_ATTACK:
+		break;
+	case SIMON_STATE_EATITEM:
 		break;
 	case SIMON_STATE_SIT:
 		SetSpeed(0, vy);
@@ -293,6 +320,7 @@ void CSimon::StartAttack() {
 
 	if (state != SIMON_STATE_JUMP)
 		vx = 0;
+
 	
 	ResetAnimation();
 	
@@ -311,6 +339,14 @@ void CSimon::StartJump()
 	SetState(SIMON_STATE_JUMP);
 	isOnGround = false;
 	jumpStart = GetTickCount();
+}
+
+void CSimon::StartEatItem()
+{
+	SetState(SIMON_STATE_EATITEM);
+	transformtime = 1;
+	eatitemStart = GetTickCount();
+	
 }
 
 void CSimon::Reset()
