@@ -302,10 +302,20 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 
 void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
-	left = x;
-	top = y - SIMON_BBOX_HEIGHT;
-	right = x + SIMON_BBOX_WIDTH;
-	bottom = y;
+	if (state == SIMON_STATE_SIT)
+	{
+		left = x;
+		top = y - SIMON_BBOX_SIT_HEIGHT;
+		right = x + SIMON_BBOX_WIDTH;
+		bottom = y;
+	}
+	else
+	{
+		left = x;
+		top = y - SIMON_BBOX_HEIGHT;
+		right = x + SIMON_BBOX_WIDTH;
+		bottom = y;
+	}
 }
 
 void CSimon::StartUntouchable()
@@ -320,8 +330,6 @@ void CSimon::StartAttack() {
 
 	if (state != SIMON_STATE_JUMP)
 		vx = 0;
-
-	
 	ResetAnimation();
 	
 	//Reset Animation Whip
@@ -346,7 +354,6 @@ void CSimon::StartEatItem()
 	SetState(SIMON_STATE_EATITEM);
 	transformtime = 1;
 	eatitemStart = GetTickCount();
-	
 }
 
 void CSimon::Reset()

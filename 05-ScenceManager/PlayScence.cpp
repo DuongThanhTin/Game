@@ -23,6 +23,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 */
 
 #define SCENE_SECTION_UNKNOWN -1
+#define SCENE_SECTION_INFO_OBJECTS 1
 #define SCENE_SECTION_TEXTURES 2
 #define SCENE_SECTION_SPRITES 3
 #define SCENE_SECTION_ANIMATIONS 4
@@ -44,6 +45,58 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_PORTAL	50
 
 #define MAX_SCENE_LINE 1024
+
+void CPlayScene::Loadinfo_OBJECTS(LPCWSTR path)
+{
+	ifstream f;
+	f.open(path);
+
+	// current resource section flag
+	int section = SCENE_SECTION_UNKNOWN;
+
+	char str[MAX_SCENE_LINE];
+	while (f.getline(str, MAX_SCENE_LINE))
+	{
+		string line(str);
+
+		if (line[0] == '#') continue;	// skip comment lines	
+
+		if (line == "[TEXTURES]") { section = SCENE_SECTION_TEXTURES; continue; }
+		if (line == "[SPRITES]") {
+			section = SCENE_SECTION_SPRITES; continue;
+		}
+		if (line == "[ANIMATIONS]") {
+			section = SCENE_SECTION_ANIMATIONS; continue;
+		}
+		if (line == "[ANIMATION_SETS]") {
+			section = SCENE_SECTION_ANIMATION_SETS; continue;
+		}
+		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
+
+		//
+		// data section
+		//
+		switch (section)
+		{
+		case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
+		case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
+		case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
+		case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
+		}
+	}
+	f.close();
+}
+
+void CPlayScene::_ParseSection_INFO_OBJECTS(string line)
+{
+	DebugOut(L"[INFO_OBJECTS]");
+	vector<string> tokens = split(line);
+	if (tokens.size() < 1) return;
+	wstring path = ToWSTR(tokens[0]);
+
+	DebugOut(L"[INFO] INFO_OBJECTS path: %s\n", path.c_str());
+	Loadinfo_OBJECTS(path.c_str());
+}
 
 //TEXTURES
 void CPlayScene::_ParseSection_TEXTURES(string line)
@@ -242,6 +295,7 @@ void CPlayScene::Load()
 
 	tileMap = new CTileMap();
 	tileSet = new CTileSet();
+
 	ifstream f;
 	f.open(sceneFilePath);
 	
@@ -255,13 +309,10 @@ void CPlayScene::Load()
 
 		if (line[0] == '#') continue;	// skip comment lines	
 
-		if (line == "[TEXTURES]") { section = SCENE_SECTION_TEXTURES; continue; }
-		if (line == "[SPRITES]") { 
-			section = SCENE_SECTION_SPRITES; continue; }
-		if (line == "[ANIMATIONS]") { 
-			section = SCENE_SECTION_ANIMATIONS; continue; }
-		if (line == "[ANIMATION_SETS]") { 
-			section = SCENE_SECTION_ANIMATION_SETS; continue; }
+		if (line == "[INFOOBJECTS]")
+		{
+			section = SCENE_SECTION_INFO_OBJECTS; continue;
+		}
 		if (line == "[OBJECTS]") { 
 			section = SCENE_SECTION_OBJECTS; continue; }
 		if (line == "[MAP]") {
@@ -274,10 +325,7 @@ void CPlayScene::Load()
 		//
 		switch (section)
 		{
-			case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
-			case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
-			case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
-			case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
+			case SCENE_SECTION_INFO_OBJECTS: _ParseSection_INFO_OBJECTS(line); break;
 			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 			case SCENE_SECTION_MAP_URL: {
 				DebugOut(L"SCENE_MAP\n");

@@ -13,15 +13,11 @@
 class CTorch : public CObjectNoMove
 {
 	vector<LPGAMEOBJECT> objectsItem;
-	DWORD timeFire;
 public:
 	CTorch();
 	CTorch(D3DXVECTOR2 position, int nextItemID);
 	~CTorch();
 	virtual void GetBoundingBox(float &l, float &t, float &r, float &b);
-	//virtual void Render();
-	//virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
-	//void TimeFireDestroy();
 };
 
 typedef CTorch* LPTORCH;

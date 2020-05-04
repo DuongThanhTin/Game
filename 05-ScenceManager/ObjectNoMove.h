@@ -22,6 +22,5 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* objects);
 	virtual void Render();
 	virtual void TimeFireDestroy();
-
 };
 
