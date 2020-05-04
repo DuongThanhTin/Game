@@ -7,6 +7,7 @@ d:\game2020\game\05-scencemanager\game.cpp(68): warning C4244: 'argument': conve
   Generating Code...
   Compiling...
   main.cpp
+  Whip.cpp
   Simon.cpp
 d:\game2020\game\05-scencemanager\simon.cpp(43): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\simon.cpp(50): warning C4018: '<': signed/unsigned mismatch

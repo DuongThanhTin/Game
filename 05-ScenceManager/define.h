@@ -15,6 +15,7 @@
 
 #define ID_HEART 21
 #define ID_WHIPUPGRADE	22
+#define ID_DAGGER 23
 
 #define ID_WHIP	30
 

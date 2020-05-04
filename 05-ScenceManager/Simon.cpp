@@ -49,7 +49,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	vector<LPGAMEOBJECT> itemObjects;
 	for (int i = 0;i < listItem->ListItem.size();i++) {
 		if (listItem->ListItem[i]->GetID() == ID_HEART||
-			listItem->ListItem[i]->GetID() == ID_WHIPUPGRADE)
+			listItem->ListItem[i]->GetID() == ID_WHIPUPGRADE ||
+			listItem->ListItem[i]->GetID() == ID_DAGGER)
 			itemObjects.push_back(listItem->ListItem[i]);
 	}
 
@@ -76,6 +77,10 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						UpgradeWhip();
 						StartEatItem();
 						DebugOut(L"Collsion Whip Upgrade\n");
+						break;
+					case ID_DAGGER:
+						StartEatItem();
+						DebugOut(L"Collsion Dagger\n");
 						break;
 					default:
 						break;

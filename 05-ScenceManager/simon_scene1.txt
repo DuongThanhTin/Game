@@ -63,7 +63,7 @@ info-objects.txt
 6	150.0	190	5	21
 6	250.0	190	5	22
 6	350.0	190	5	22
-
+6	450.0	190	5	23
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
