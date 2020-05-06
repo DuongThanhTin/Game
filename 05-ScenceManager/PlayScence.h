@@ -31,6 +31,7 @@ protected:
 	CListItem *listItem;
 
 	void Loadinfo_OBJECTS(LPCWSTR path);
+	void LoadMapSceneObjects(LPCWSTR path);
 	void _ParseSection_INFO_OBJECTS(string line);
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);

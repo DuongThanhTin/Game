@@ -19,6 +19,7 @@ private:
 	int rowNumber;
 	int columnNumber;
 	map<int, RECT> listTile; //chứa các danh sách TileSet
+
 	LPDIRECT3DTEXTURE9 texture;
 
 public:

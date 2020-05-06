@@ -220,8 +220,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	
 	CAnimationSets * animation_sets = CAnimationSets::GetInstance();
 
-	
-
 	switch (object_type)
 	{
 	case OBJECT_TYPE_SIMON:
@@ -232,23 +230,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		}
 		obj = new CSimon();
 		player = (CSimon*)obj;
-		player->SetState(SIMON_STATE_IDLE);
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
-	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); DebugOut(L"[NICE]!\n");break;
-	case OBJECT_TYPE_BRICK: obj = new CBrick(); DebugOut(L"[NICE]!\n");break;
-	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); DebugOut(L"[NICE]!\n");break;
-	case OBJECT_TYPE_ZOMBIE: obj = new CZombie(); DebugOut(L"[NICE ZOMBIE]!\n");break;
-	case OBJECT_TYPE_HEART:	 DebugOut(L"[NICE Heart]!\n");break; //obj = new CHeart({ x,y });
-	case OBJECT_TYPE_TORCH:
-	{
-		DebugOut(L"[TORCH]!\n");
-		int itemid = atof(tokens[4].c_str());
-		DebugOut(L"[ANI_ID ITEMID] %d %d \n", ani_set_id, itemid);
-		obj = new CTorch({ x, y }, itemid);
-		DebugOut(L"[NICE] %d %d!\n", x, y);
-		break;
-	}
 	case OBJECT_TYPE_PORTAL:
 		{	
 			float r = atof(tokens[4].c_str());
@@ -270,6 +253,44 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	objects.push_back(obj);
 }
 
+void CPlayScene::LoadMapSceneObjects(LPCWSTR path)
+{
+	ifstream file(path);
+	json j = json::parse(file);
+	LPANIMATION_SET ani_set;
+
+	for (auto i : j["layers"])
+	{
+		if (i["name"] == "brick") {	// brick objects
+			for (auto iter : i["objects"])
+			{
+				float x = iter["x"].get<float>();
+				float y = iter["y"].get<float>();
+				int width = iter["width"].get<int>();
+				int height = iter["height"].get<int>();
+
+				obj = new CBrick({ x,y + height + 45 }, width, height);
+				objects.push_back(obj);
+			}
+		}
+		else if (i["name"] == "torch") {	// torch objects
+			for (auto iter : i["objects"])
+			{
+				float x = float(iter["x"]);
+				float y = float(iter["y"]);
+				int ani = iter["properties"][1]["value"].get<int>();
+				int value = iter["properties"][0]["value"].get<int>();
+				CAnimationSets * animation_sets = CAnimationSets::GetInstance();
+				DebugOut(L"Torch %d %d\n", ani, value);
+				obj = new CTorch({ x, y + iter["height"] + 45 }, value);
+				ani_set = animation_sets->Get(ani);
+				obj->SetAnimationSet(ani_set);
+				objects.push_back(obj);
+			}
+		}
+	}
+}
+
 //MAP
 void CPlayScene::_ParseSection_MAP_SCENE(string line)
 {
@@ -283,6 +304,7 @@ void CPlayScene::_ParseSection_MAP_SCENE(string line)
 	DebugOut(L"[DONE1]\n");
 	tileMap->LoadFromFile(path.c_str());
 	DebugOut(L"[DONE2]\n");
+	LoadMapSceneObjects(path.c_str());
 }
 
 

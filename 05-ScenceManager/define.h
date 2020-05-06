@@ -1,7 +1,7 @@
 #pragma once
 
   
-#define SCREEN_WIDTH 304
+#define SCREEN_WIDTH 272
 #define SCREEN_HEIGHT 256
 
 #define MAX_FRAME_RATE 120

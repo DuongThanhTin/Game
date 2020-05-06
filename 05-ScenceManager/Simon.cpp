@@ -68,18 +68,16 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			GetBoundingBox(wl, wt, wr, wb);
 			iter->GetBoundingBox(ol, ot, or , ob);
 			if (CGame::GetInstance()->IsIntersect({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+				StartEatItem();
 				switch (iter->GetID()) {
 					case ID_HEART:
-						StartEatItem();
 						DebugOut(L"Collsion Heart\n");
 						break;
 					case ID_WHIPUPGRADE:
 						UpgradeWhip();
-						StartEatItem();
 						DebugOut(L"Collsion Whip Upgrade\n");
 						break;
 					case ID_DAGGER:
-						StartEatItem();
 						DebugOut(L"Collsion Dagger\n");
 						break;
 					default:
