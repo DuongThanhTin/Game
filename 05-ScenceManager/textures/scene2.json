@@ -18,7 +18,84 @@
          "type":"tilelayer",
          "visible":true,
          "width":17,
-		 "limitedViewPort":19,
+		 "limitedViewPort":17,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"candle",
+         "objects":[
+                {
+                 "height":12,
+                 "id":8,
+                 "name":"candle-01",
+                 "properties":[
+                        {
+                         "name":"ItemAppearID",
+                         "type":"int",
+                         "value":26
+                        }, 
+                        {
+                         "name":"ani",
+                         "type":"int",
+                         "value":8
+                        }],
+                 "rotation":0,
+                 "type":"candle",
+                 "visible":true,
+                 "width":12,
+                 "x":73,
+                 "y":97
+                }, 
+                {
+                 "height":12,
+                 "id":11,
+                 "name":"candle-02",
+                 "properties":[
+                        {
+                         "name":"ItemAppearID",
+                         "type":"int",
+                         "value":21
+                        }, 
+                        {
+                         "name":"ani",
+                         "type":"int",
+                         "value":8
+                        }],
+                 "rotation":0,
+                 "type":"candle",
+                 "visible":true,
+                 "width":12,
+                 "x":201,
+                 "y":100
+                }, 
+                {
+                 "height":12,
+                 "id":12,
+                 "name":"candle-03",
+                 "properties":[
+                        {
+                         "name":"ItemAppearID",
+                         "type":"int",
+                         "value":26
+                        }, 
+                        {
+                         "name":"ani",
+                         "type":"int",
+                         "value":8
+                        }],
+                 "rotation":0,
+                 "type":"candle",
+                 "visible":true,
+                 "width":12,
+                 "x":135,
+                 "y":4
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -99,8 +176,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":3,
- "nextobjectid":8,
+ "nextlayerid":4,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2020.02.12",

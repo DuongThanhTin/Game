@@ -137,13 +137,13 @@ void CTileMap::DrawMap(D3DXVECTOR2 position)
 	if (hEnd > rowMapNumber) {
 		hEnd = rowMapNumber;
 	}
-	for (int i = hStart; i < hEnd; i++)
+	for (int i = 0; i < hEnd; i++)
 	{
 		for (int j = wStart; j < wEnd; j++)
 		{
 			D3DXVECTOR2 pos;
 			pos.x = position.x + j * tileSet->GetTileWidth();
-			pos.y = position.y + i * tileSet->GetTileHeight() + 45;
+			pos.y = position.y + i * tileSet->GetTileHeight() + MAP_HUD;
 			pos = CViewPort::GetInstance()->ConvertWorldToViewPort(pos);
 			tileSet->DrawTile(mapData[i][j], pos);
 		}

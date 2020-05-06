@@ -269,7 +269,7 @@ void CPlayScene::LoadMapSceneObjects(LPCWSTR path)
 				int width = iter["width"].get<int>();
 				int height = iter["height"].get<int>();
 
-				obj = new CBrick({ x,y + height + 45 }, width, height);
+				obj = new CBrick({ x,y + height + MAP_HUD }, width, height);
 				objects.push_back(obj);
 			}
 		}
@@ -282,7 +282,22 @@ void CPlayScene::LoadMapSceneObjects(LPCWSTR path)
 				int value = iter["properties"][0]["value"].get<int>();
 				CAnimationSets * animation_sets = CAnimationSets::GetInstance();
 				DebugOut(L"Torch %d %d\n", ani, value);
-				obj = new CTorch({ x, y + iter["height"] + 45 }, value);
+				obj = new CTorch({ x, y + iter["height"] + MAP_HUD }, value);
+				ani_set = animation_sets->Get(ani);
+				obj->SetAnimationSet(ani_set);
+				objects.push_back(obj);
+			}
+		}
+		else if (i["name"] == "candle") {	// candle objects
+			for (auto iter : i["objects"])
+			{
+				float x = float(iter["x"]);
+				float y = float(iter["y"]);
+				int ani = iter["properties"][1]["value"].get<int>();
+				int value = iter["properties"][0]["value"].get<int>();
+				CAnimationSets * animation_sets = CAnimationSets::GetInstance();
+				DebugOut(L"Candle %d %d\n", ani, value);
+				obj = new CTorch({ x, y + iter["height"] + MAP_HUD }, value);
 				ani_set = animation_sets->Get(ani);
 				obj->SetAnimationSet(ani_set);
 				objects.push_back(obj);
@@ -444,7 +459,7 @@ void CPlayScene::Update(DWORD dt)
 						break;
 					case 2:
 						DebugOut(L"TEST 2!!\n");
-						ScenePortal(SCENE_2, 0, 20);
+						ScenePortal(SCENE_2, 0, 10);
 						break;
 					default:
 						break;
@@ -544,7 +559,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 
 	case DIK_2:
 		DebugOut(L"SCENE 2\n");
-		OnKeySwitchScene(SCENE_2, 0, 20);
+		OnKeySwitchScene(SCENE_2, 0, 10);
 		break;
 	}
 }

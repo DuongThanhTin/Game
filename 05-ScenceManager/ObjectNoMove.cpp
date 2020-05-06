@@ -29,13 +29,16 @@ void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 				switch (coObjects->at(i)->GetNextItemID())
 				{
 				case ID_HEART:
-					CListItem::GetInstance()->ListItem.push_back(new CHeart({ x,y - 20 }));
+					CListItem::GetInstance()->ListItem.push_back(new CHeart({ x,y -10  }));
 					break;
 				case ID_WHIPUPGRADE:
 					CListItem::GetInstance()->ListItem.push_back(new CWhipUpgrade({ x,y - 20 }));
 					break;
 				case ID_DAGGER:
 					CListItem::GetInstance()->ListItem.push_back(new CDagger({ x,y - 20 }));
+					break;
+				case ID_MONEYBAG:
+					CListItem::GetInstance()->ListItem.push_back(new CMoneyBag({ x,y }));
 					break;
 				default:
 					break;

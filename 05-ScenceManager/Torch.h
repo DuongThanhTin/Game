@@ -2,7 +2,6 @@
 #include"GameObject.h"
 #include"define.h"
 #include "Item.h"
-#include "Heart.h"
 #include "Utils.h"
 #include "ObjectNoMove.h"
 
