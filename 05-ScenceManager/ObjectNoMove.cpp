@@ -26,7 +26,7 @@ void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 				timeFire = 0;
 				float x, y;
 				coObjects->at(i)->GetPosition(x, y);
-				switch (coObjects->at(i)->GetNextItemID())
+				switch (GetNextItemID())
 				{
 				case ID_HEART:
 					CListItem::GetInstance()->ListItem.push_back(new CHeart({ x,y -10  }));
@@ -50,9 +50,6 @@ void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 			}
 		}
 	}
-	
-
-
 }
 
 void CObjectNoMove::Render()

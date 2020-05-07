@@ -1,4 +1,5 @@
-﻿  SpearKnight.cpp
-d:\game2020\game\05-scencemanager\spearknight.cpp(37): warning C4018: '<': signed/unsigned mismatch
+﻿  Enemy.cpp
+d:\game2020\game\05-scencemanager\enemy.cpp(26): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\enemy.cpp(71): warning C4018: '<': signed/unsigned mismatch
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

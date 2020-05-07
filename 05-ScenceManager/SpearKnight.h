@@ -1,6 +1,6 @@
 #pragma once
-#include "GameObject.h"
 #include "define.h"
+#include "Enemy.h"
 
 #define SPEARKNIGHT_WALKING_SPEED 0.02f
 #define SPEARKNIGHT_GRAVITY 0.002f
@@ -16,7 +16,7 @@
 #define SPEARKNIGHT_ANI_DIE 2
 
 
-class CSpearKnight : public CGameObject
+class CSpearKnight : public CEnemy
 {
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);

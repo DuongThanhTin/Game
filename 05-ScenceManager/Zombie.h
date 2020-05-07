@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "Enemy.h"
 #include "define.h"
 
 #define ZOMBIE_WALKING_SPEED 0.05f;
@@ -16,7 +16,7 @@
 #define ZOMBIE_ANI_DIE 2
 
 
-class CZombie : public CGameObject
+class CZombie : public CEnemy
 {
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);

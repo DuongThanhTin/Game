@@ -15,7 +15,9 @@ CWeapon::~CWeapon()
 void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	CGameObject::Update(dt);
 	for (int i = 0;i < coObjects->size();i++) {
-		if (coObjects->at(i)->GetID() == ID_TORCH) {
+		if (coObjects->at(i)->GetID() == ID_TORCH||
+			coObjects->at(i)->GetID() == ID_SPEARKNIGHT || 
+			coObjects->at(i)->GetID() == ID_ZOMBIE) {
 			float wl, wt, wr, wb;		// weapon object bbox
 			float ol, ot, or , ob;		// object bbox
 			GetBoundingBox(wl, wt, wr, wb);

@@ -157,6 +157,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		attackStart = 0;
 		vx = 0;
+		vy = 0;
 	}
 
 	// update attack state and whip

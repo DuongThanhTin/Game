@@ -21,7 +21,7 @@ class CObjectNoMove : public CGameObject
 public:
 	CObjectNoMove();
 	~CObjectNoMove();
-	vector<LPGAMEOBJECT> objectsItem;
+	
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* objects);
 	virtual void Render();
 	virtual void TimeFireDestroy();

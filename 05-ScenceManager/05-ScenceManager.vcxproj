@@ -129,6 +129,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="Dagger.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Heart.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Koopas.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Candle.h" />
     <ClInclude Include="Dagger.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Heart.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Koopas.h" />
