@@ -40,6 +40,9 @@ void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 				case ID_MONEYBAG:
 					CListItem::GetInstance()->ListItem.push_back(new CMoneyBag({ x,y }));
 					break;
+				case ID_BOOMERANGITEM:
+					CListItem::GetInstance()->ListItem.push_back(new CBoomerangItem({ x,y }));
+					break;
 				default:
 					break;
 				}

@@ -51,7 +51,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		if (listItem->ListItem[i]->GetID() == ID_HEART||
 			listItem->ListItem[i]->GetID() == ID_WHIPUPGRADE ||
 			listItem->ListItem[i]->GetID() == ID_DAGGER||
-			listItem->ListItem[i]->GetID() == ID_MONEYBAG)
+			listItem->ListItem[i]->GetID() == ID_MONEYBAG||
+			listItem->ListItem[i]->GetID() == ID_BOOMERANGITEM)
 			itemObjects.push_back(listItem->ListItem[i]);
 	}
 
@@ -84,6 +85,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					case ID_MONEYBAG:
 						DebugOut(L"Collsion Moneybag\n");
 						break;
+					case ID_BOOMERANGITEM:
+						DebugOut(L"Collsion BOOMERANGITEM\n");
 					default:
 						break;
 				}
@@ -129,7 +132,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 
 	// clean up collision events
-	//for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 
 
 	// update jump state

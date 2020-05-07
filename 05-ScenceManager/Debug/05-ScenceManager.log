@@ -1,6 +1,4 @@
-﻿  TileMap.cpp
-d:\game2020\game\05-scencemanager\tilemap.cpp(55): warning C4244: 'argument': conversion from 'FLOAT' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\tilemap.cpp(130): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\tilemap.cpp(131): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
+﻿  SpearKnight.cpp
+d:\game2020\game\05-scencemanager\spearknight.cpp(37): warning C4018: '<': signed/unsigned mismatch
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

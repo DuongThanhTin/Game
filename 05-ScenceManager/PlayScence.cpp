@@ -40,7 +40,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_ZOMBIE	5
 #define OBJECT_TYPE_TORCH	6
 #define OBJECT_TYPE_HEART	7
-
+#define OBJECT_TYPE_SPEARKNIGHT	40
 
 #define OBJECT_TYPE_PORTAL	50
 
@@ -232,6 +232,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		player = (CSimon*)obj;
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
+	case OBJECT_TYPE_SPEARKNIGHT:
+		obj = new CSpearKnight();
+		break;
 	case OBJECT_TYPE_PORTAL:
 		{	
 			float r = atof(tokens[4].c_str());
@@ -268,7 +271,6 @@ void CPlayScene::LoadMapSceneObjects(LPCWSTR path)
 				float y = iter["y"].get<float>();
 				int width = iter["width"].get<int>();
 				int height = iter["height"].get<int>();
-
 				obj = new CBrick({ x,y + height + MAP_HUD }, width, height);
 				objects.push_back(obj);
 			}
@@ -453,12 +455,12 @@ void CPlayScene::Update(DWORD dt)
 					DebugOut(L"TEST SWITCH SCENE %d\n", portal->GetSceneId());
 					switch (portal->GetSceneId())
 					{
-					case 1:
-						DebugOut(L"TEST 1!\n");
+					case KEY_1:
+						DebugOut(L"TEST SCENE 1!\n");
 						ScenePortal(SCENE_1, 0, 0);
 						break;
-					case 2:
-						DebugOut(L"TEST 2!!\n");
+					case KEY_2:
+						DebugOut(L"TEST SCENE 2!!\n");
 						ScenePortal(SCENE_2, 0, 10);
 						break;
 					default:

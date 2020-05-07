@@ -10,6 +10,7 @@
 
 #define ID_SIMON 1
 #define ID_ZOMBIE 2
+#define ID_SPEARKNIGHT 3
 
 #define ID_GROUND 10
 #define ID_TORCH 11
@@ -19,7 +20,9 @@
 #define ID_HEART 21
 #define ID_WHIPUPGRADE	22
 #define ID_DAGGER 23
+#define ID_BOOMERANGITEM 24
 #define ID_MONEYBAG 26
+
 
 #define ID_WHIP	30
 
@@ -36,3 +39,10 @@
 #define SCENE_2 2
 #define SCENE_3 3
 #define SCENE_4 4
+
+#define KEY_1 1
+#define KEY_2 2
+#define KEY_3 3
+#define KEY_4 4
+#define KEY_5 5
+

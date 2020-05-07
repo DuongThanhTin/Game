@@ -17,6 +17,7 @@
 #include "ObjectNoMove.h"
 #include "ListItem.h"
 #include "Whip.h" 
+#include "SpearKnight.h"
 
 class CPlayScene: public CScene
 {

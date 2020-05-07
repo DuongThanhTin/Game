@@ -79,7 +79,7 @@
                         {
                          "name":"ItemAppearID",
                          "type":"int",
-                         "value":26
+                         "value":24
                         }, 
                         {
                          "name":"ani",
