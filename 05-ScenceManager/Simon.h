@@ -43,7 +43,7 @@
 #define SIMON_BBOX_HEIGHT 30
 #define SIMON_BBOX_SIT_HEIGHT 23
 
-#define SIMON_UNTOUCHABLE_TIME 5000
+#define SIMON_UNTOUCHABLE_TIME 3000
 
 #define SIMON_ATTACK_TIME			350
 #define SIMON_JUMP_TIME				450
@@ -74,6 +74,7 @@ public:
 	virtual void Render();
 	virtual void RenderBoundingBox(int alpha = 255);
 	bool isOnGroundFloor() { return isOnGround; };
+	void CollideWithObjects(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
 	void SetState(int state);
 	void SetWeapon(int weaponID);
 	void UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects);

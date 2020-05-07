@@ -12,7 +12,7 @@
 #define ID_ZOMBIE 2
 #define ID_SPEARKNIGHT 3
 
-#define ID_GROUND 10
+#define ID_GROUND -1
 #define ID_TORCH 11
 #define ID_PORTAL 12
 #define ID_CANDLE 13
@@ -25,9 +25,6 @@
 
 
 #define ID_WHIP	30
-
-
-#define ID_GROUND_SCENE_1 50
 
 #define STATE_DESTROYED 99
 

@@ -7,6 +7,7 @@ CSpearKnight::CSpearKnight()
 	id = ID_SPEARKNIGHT;
 	SetState(SPEARKNIGHT_STATE_WALKING);
 	AddAnimation(ANI_DESTROY);
+	nx = -1;
 }
 
 CSpearKnight::~CSpearKnight()

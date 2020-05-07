@@ -38,6 +38,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	coEvents.clear();
 
+	//Collide Object
 	//Collision with wall
 	vector<LPGAMEOBJECT> wallObjects;
 	for (int i = 0;i < coObjects->size();i++) {
@@ -48,12 +49,19 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	//Collision with items
 	vector<LPGAMEOBJECT> itemObjects;
 	for (int i = 0;i < listItem->ListItem.size();i++) {
-		if (listItem->ListItem[i]->GetID() == ID_HEART||
+		if (listItem->ListItem[i]->GetID() == ID_HEART ||
 			listItem->ListItem[i]->GetID() == ID_WHIPUPGRADE ||
-			listItem->ListItem[i]->GetID() == ID_DAGGER||
-			listItem->ListItem[i]->GetID() == ID_MONEYBAG||
+			listItem->ListItem[i]->GetID() == ID_DAGGER ||
+			listItem->ListItem[i]->GetID() == ID_MONEYBAG ||
 			listItem->ListItem[i]->GetID() == ID_BOOMERANGITEM)
 			itemObjects.push_back(listItem->ListItem[i]);
+	}
+
+	//Collision with Enemy
+	vector<LPGAMEOBJECT> enemyObjects;
+	for (int i = 0;i < coObjects->size();i++) {
+		if (coObjects->at(i)->GetID() == ID_SPEARKNIGHT)
+			enemyObjects.push_back(coObjects->at(i));
 	}
 
 	// turn off collision when die 
@@ -65,36 +73,48 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 		//Collision Item
 		for (auto iter : itemObjects) {
-			float wl, wt, wr, wb;		// weapon object bbox
+			float sl, st, sr, sb;		// simon object bbox
 			float ol, ot, or , ob;		// object bbox
-			GetBoundingBox(wl, wt, wr, wb);
+			GetBoundingBox(sl, st, sr, sb);
 			iter->GetBoundingBox(ol, ot, or , ob);
-			if (CGame::GetInstance()->IsIntersect({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+			if (CGame::GetInstance()->IsIntersect({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 				StartEatItem();
 				switch (iter->GetID()) {
-					case ID_HEART:
-						DebugOut(L"Collsion Heart\n");
-						break;
-					case ID_WHIPUPGRADE:
-						UpgradeWhip();
-						DebugOut(L"Collsion Whip Upgrade\n");
-						break;
-					case ID_DAGGER:
-						DebugOut(L"Collsion Dagger\n");
-						break;
-					case ID_MONEYBAG:
-						DebugOut(L"Collsion Moneybag\n");
-						break;
-					case ID_BOOMERANGITEM:
-						DebugOut(L"Collsion BOOMERANGITEM\n");
-					default:
-						break;
+				case ID_HEART:
+					DebugOut(L"Collsion Heart\n");
+					break;
+				case ID_WHIPUPGRADE:
+					UpgradeWhip();
+					DebugOut(L"Collsion Whip Upgrade\n");
+					break;
+				case ID_DAGGER:
+					DebugOut(L"Collsion Dagger\n");
+					break;
+				case ID_MONEYBAG:
+					DebugOut(L"Collsion Moneybag\n");
+					break;
+				case ID_BOOMERANGITEM:
+					DebugOut(L"Collsion BOOMERANGITEM\n");
+				default:
+					break;
 				}
 				iter->SetState(STATE_DESTROYED);
 			}
 		}
-	}
 
+		//Collision Enemy
+		for (auto iter : enemyObjects) {
+			float sl, st, sr, sb;		// simon object bbox
+			float ol, ot, or , ob;		// object bbox
+			GetBoundingBox(sl, st, sr, sb);
+			iter->GetBoundingBox(ol, ot, or , ob);
+			if (CGame::GetInstance()->IsIntersect({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+				StartUntouchable();
+				iter->TimeFireDestroy();
+			}
+		}
+
+	}
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
@@ -241,6 +261,12 @@ void CSimon::RenderBoundingBox(int alpha)
 	whip->RenderBoundingBox(alpha);
 }
 
+//Collide with objects
+void CSimon::CollideWithObjects(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+
+}
+
 void CSimon::SetState(int state)
 {
 
@@ -341,7 +367,6 @@ void CSimon::StartAttack() {
 
 	if (state != SIMON_STATE_JUMP)
 		vx = 0;
-	ResetAnimation();
 	
 	//Reset Animation Whip
 	whip->ResetAnimation();
