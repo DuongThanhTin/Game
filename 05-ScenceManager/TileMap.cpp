@@ -9,7 +9,7 @@ CTileSet::CTileSet()
 
 void CTileSet::LoadFromFile(LPCWSTR filePath)
 {
-	DebugOut(L"[INFO] HELLO %d: \n", filePath);
+	DebugOut(L"[INFO] TileSet %s: \n", filePath);
 	// Load info
 	ifstream file(filePath);
 	json j = json::parse(file);
@@ -34,10 +34,9 @@ void CTileSet::LoadFromFile(LPCWSTR filePath)
 	for (int i = 0; i < rowNumber; i++)
 		for (int j = 0; j < columnNumber; j++)
 		{
-			RECT tmpRect = { j * tileWidth, i * tileHeight, (j + 1) * tileWidth, (i + 1) * tileHeight };
-			int tmpID = i * columnNumber + j + 1;
-			listTile.insert(pair<int, RECT>(tmpID, tmpRect));
-
+			RECT tilesetRect = { j * tileWidth, i * tileHeight, (j + 1) * tileWidth, (i + 1) * tileHeight };
+			int tilesetID = i * columnNumber + j + 1;
+			listTile.insert(pair<int, RECT>(tilesetID, tilesetRect));
 		}
 
 	// Add texture

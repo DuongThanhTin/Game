@@ -36,7 +36,7 @@ D3DXVECTOR2 CViewPort::ConvertViewPortToWorld(D3DXVECTOR2 viewportPosition) {
 void CViewPort::Update(D3DXVECTOR2 playerPosition, int startPosition, int endPosition) {
 
 	//Cho Simon ở giữa camera (Vị trí simon trong camera)
-	position.x = playerPosition.x - SCREEN_WIDTH/2;
+	position.x = playerPosition.x - SCREEN_WIDTH / 2;
 	//Kiểm tra viewport ra ngoài world
 	if (position.x < startPosition)
 		position.x = startPosition;

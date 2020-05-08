@@ -50,6 +50,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	vector<LPGAMEOBJECT> itemObjects;
 	for (int i = 0;i < listItem->ListItem.size();i++) {
 		if (listItem->ListItem[i]->GetID() == ID_HEART ||
+			listItem->ListItem[i]->GetID() == ID_SMALLHEART ||
 			listItem->ListItem[i]->GetID() == ID_WHIPUPGRADE ||
 			listItem->ListItem[i]->GetID() == ID_DAGGER ||
 			listItem->ListItem[i]->GetID() == ID_MONEYBAG ||
@@ -95,6 +96,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					break;
 				case ID_BOOMERANGITEM:
 					DebugOut(L"Collsion BOOMERANGITEM\n");
+				case ID_SMALLHEART:
+					DebugOut(L"Collsion SmallHeart\n");
 				default:
 					break;
 				}
@@ -113,7 +116,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				iter->TimeFireDestroy();
 			}
 		}
-
 	}
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
@@ -317,7 +319,7 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 		float playerX, playerY;
 		if (state == SIMON_STATE_SIT_ATTACK) 
 		{
-			playerY = y + 7;
+			playerY = y + WHIP_SIMON_SIT_ATTACK;
 		}
 		else
 			playerY = y;

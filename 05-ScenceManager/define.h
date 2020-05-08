@@ -17,6 +17,7 @@
 #define ID_PORTAL 12
 #define ID_CANDLE 13
 
+#define ID_SMALLHEART 20
 #define ID_HEART 21
 #define ID_WHIPUPGRADE	22
 #define ID_DAGGER 23

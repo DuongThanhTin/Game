@@ -48,7 +48,6 @@ private:
 	int wEnd;
 	 
 	LPTILESET tileSet;
-	vector<vector<int>> widthEdge;
 	int** mapData;
 
 	int idground;

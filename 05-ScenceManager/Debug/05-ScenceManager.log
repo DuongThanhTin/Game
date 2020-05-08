@@ -1,2 +1,5 @@
-﻿  05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
+﻿  ViewPort.cpp
+d:\game2020\game\05-scencemanager\viewport.cpp(42): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
+d:\game2020\game\05-scencemanager\viewport.cpp(44): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
+  05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

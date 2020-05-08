@@ -138,6 +138,7 @@
     <ClCompile Include="ObjectNoMove.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="SmallHeart.cpp" />
     <ClCompile Include="SpearKnight.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Torch.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="ObjectNoMove.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Simon.h" />
+    <ClInclude Include="SmallHeart.h" />
     <ClInclude Include="SpearKnight.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Torch.h" />

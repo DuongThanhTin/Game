@@ -9,6 +9,7 @@
 #include "Dagger.h" 
 #include "MoneyBag.h"
 #include "BoomerangItem.h"
+#include "SmallHeart.h"
  
 #define OBJECTS_STATE_NORMAL 0
 #define OBJECTS_STATE_DESTROY 1
