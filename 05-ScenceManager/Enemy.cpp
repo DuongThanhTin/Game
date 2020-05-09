@@ -87,8 +87,8 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				case ID_WHIPUPGRADE:
 					CListItem::GetInstance()->ListItem.push_back(new CWhipUpgrade({ x,y - 20 }));
 					break;
-				case ID_DAGGER:
-					CListItem::GetInstance()->ListItem.push_back(new CDagger({ x,y - 20 }));
+				case ID_DAGGERITEM:
+					CListItem::GetInstance()->ListItem.push_back(new CDaggerItem({ x,y - 20 }));
 					break;
 				case ID_MONEYBAG:
 					CListItem::GetInstance()->ListItem.push_back(new CMoneyBag({ x,y }));

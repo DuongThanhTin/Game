@@ -375,6 +375,23 @@ void CSimon::StartAttack() {
 	attackStart = GetTickCount();
 }
 
+void CSimon::StartAttackSub() {
+	if (attackStart > 0)
+		return;
+	if (attackStartSub > 0) {
+		return;
+	}
+
+	if (state != SIMON_STATE_JUMP)
+		vx = 0;
+
+	attackStartSub = GetTickCount();
+	//Reset Animation Whip
+	whip->ResetAnimation();
+
+
+}
+
 void CSimon::StartJump()
 {
 	SetState(SIMON_STATE_JUMP);

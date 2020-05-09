@@ -21,7 +21,8 @@
 #define SIMON_STATE_ATTACK			500
 #define SIMON_STATE_SIT				600
 #define SIMON_STATE_SIT_ATTACK		700
-#define SIMON_STATE_EATITEM		    800
+#define SIMON_STATE_ATTACK_SUBWEAPON	800
+#define SIMON_STATE_EATITEM		    900
 
 #define SIMON_ANI_IDLE_RIGHT		0
 #define SIMON_ANI_IDLE_LEFT			1
@@ -46,6 +47,7 @@
 #define SIMON_UNTOUCHABLE_TIME 3000
 
 #define SIMON_ATTACK_TIME			350
+#define SIMON_ATTACK_SUB_TIME		350
 #define SIMON_JUMP_TIME				450
 #define SIMON_EATITEM_TIME			500
 
@@ -61,11 +63,12 @@ class CSimon : public CGameObject
 
 	DWORD untouchableStart;
 	DWORD attackStart;
+	DWORD attackStartSub;
 	DWORD jumpStart;
 	DWORD eatitemStart;
 
 	LPWHIP whip;
-	vector<CWeapon*> Weapon;
+	vector<CWeapon*> subWeapon;
 	int weaponID;
 
 public:
@@ -80,6 +83,7 @@ public:
 
 	void StartUntouchable();
 	void StartAttack();
+	void StartAttackSub();
 	void StartJump();
 	void StartEatItem();
 
