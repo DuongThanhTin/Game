@@ -455,11 +455,11 @@ void CPlayScene::Update(DWORD dt)
 					DebugOut(L"TEST SWITCH SCENE %d\n", portal->GetSceneId());
 					switch (portal->GetSceneId())
 					{
-					case KEY_1:
+					case SCENE_1:
 						DebugOut(L"TEST SCENE 1!\n");
 						ScenePortal(SCENE_1, 0, 0);
 						break;
-					case KEY_2:
+					case SCENE_2:
 						DebugOut(L"TEST SCENE 2!!\n");
 						ScenePortal(SCENE_2, 0, 10);
 						break;

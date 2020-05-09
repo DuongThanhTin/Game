@@ -74,7 +74,6 @@ public:
 	virtual void Render();
 	virtual void RenderBoundingBox(int alpha = 255);
 	bool isOnGroundFloor() { return isOnGround; };
-	void CollideWithObjects(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
 	void SetState(int state);
 	void SetWeapon(int weaponID);
 	void UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects);

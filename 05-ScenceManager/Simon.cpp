@@ -96,6 +96,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					break;
 				case ID_BOOMERANGITEM:
 					DebugOut(L"Collsion BOOMERANGITEM\n");
+					break;
 				case ID_SMALLHEART:
 					DebugOut(L"Collsion SmallHeart\n");
 				default:
@@ -261,12 +262,6 @@ void CSimon::RenderBoundingBox(int alpha)
 {
 	CGameObject::RenderBoundingBox(alpha);
 	whip->RenderBoundingBox(alpha);
-}
-
-//Collide with objects
-void CSimon::CollideWithObjects(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
-{
-
 }
 
 void CSimon::SetState(int state)
