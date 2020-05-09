@@ -1,15 +1,15 @@
 #pragma once
-#include"Item.h"
+#include"Weapon.h"
 #include"define.h"
 
-#define DAGGER_GRAVITY			0.0005f
+#define DAGGER_FLY_SPEED		0.05f
 #define DAGGER_BBOX_WIDTH		13
 #define DAGGER_BBOX_HEIGHT		10
 
-class CDagger : public CItem
+class CDagger : public CWeapon
 {
 public:
-	CDagger(D3DXVECTOR2 position);
+	CDagger(D3DXVECTOR2 position, int nx);
 	~CDagger();
 	virtual void GetBoundingBox(float &l, float &t, float &r, float &b);
 	void Render();

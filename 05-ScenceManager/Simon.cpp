@@ -52,7 +52,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		if (listItem->ListItem[i]->GetID() == ID_HEART ||
 			listItem->ListItem[i]->GetID() == ID_SMALLHEART ||
 			listItem->ListItem[i]->GetID() == ID_WHIPUPGRADE ||
-			listItem->ListItem[i]->GetID() == ID_DAGGER ||
+			listItem->ListItem[i]->GetID() == ID_DAGGERITEM ||
 			listItem->ListItem[i]->GetID() == ID_MONEYBAG ||
 			listItem->ListItem[i]->GetID() == ID_BOOMERANGITEM)
 			itemObjects.push_back(listItem->ListItem[i]);
@@ -88,7 +88,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					UpgradeWhip();
 					DebugOut(L"Collsion Whip Upgrade\n");
 					break;
-				case ID_DAGGER:
+				case ID_DAGGERITEM:
 					DebugOut(L"Collsion Dagger\n");
 					break;
 				case ID_MONEYBAG:

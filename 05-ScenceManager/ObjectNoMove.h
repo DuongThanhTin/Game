@@ -6,7 +6,7 @@
 #include "Utils.h"
 #include "ListItem.h"
 #include "WhipUpgrade.h" 
-#include "Dagger.h" 
+#include "DaggerItem.h" 
 #include "MoneyBag.h"
 #include "BoomerangItem.h"
 #include "SmallHeart.h"

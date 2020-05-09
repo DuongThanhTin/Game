@@ -20,12 +20,13 @@
 #define ID_SMALLHEART 20
 #define ID_HEART 21
 #define ID_WHIPUPGRADE	22
-#define ID_DAGGER 23
+#define ID_DAGGERITEM 23
 #define ID_BOOMERANGITEM 24
 #define ID_MONEYBAG 26
 
 
 #define ID_WHIP	30
+#define ID_DAGGER 31
 
 #define STATE_DESTROYED 99
 
