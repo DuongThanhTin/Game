@@ -33,6 +33,7 @@
 #define TILESET_WIDTH 16
 
 #define TIME_FIRE	350
+#define TIME_FIRE_ENEMY 250
 #define ANI_DESTROY 901
 
 #define SCENE_1 1

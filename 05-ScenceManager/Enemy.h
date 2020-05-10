@@ -11,6 +11,7 @@
 #include "MoneyBag.h"
 #include "BoomerangItem.h"
 #include "DaggerItem.h"
+#include "define.h"
 
 #define ENEMY_STATE_DESTROY	0
 #define ENEMY_STATE_IDLE	1

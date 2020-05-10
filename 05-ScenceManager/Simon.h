@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "Whip.h"
 #include "ViewPort.h"
+#include "Dagger.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
@@ -69,17 +70,19 @@ class CSimon : public CGameObject
 
 	LPWHIP whip;
 	vector<CWeapon*> subWeapon;
-	int weaponID;
+	int subWeaponID;
 
 public:
 	CSimon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	virtual void RenderBoundingBox(int alpha = 255);
+	int GetSubWeapon() { return subWeaponID; }
 	bool isOnGroundFloor() { return isOnGround; };
 	void SetState(int state);
-	void SetWeapon(int weaponID);
+	void SetSubWeapon(int subWeaponID);
 	void UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects);
+	void UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects);
 
 	void StartUntouchable();
 	void StartAttack();
@@ -89,6 +92,7 @@ public:
 
 	DWORD GetAttackStart() { return attackStart; }
 	DWORD GetJumpStart() { return jumpStart; }
+	DWORD GetAttackStartSub() { return attackStartSub; }
 
 	void Reset();
 	void UpgradeWhip();

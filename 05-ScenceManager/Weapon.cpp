@@ -23,10 +23,14 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			GetBoundingBox(wl, wt, wr, wb);
 			coObjects->at(i)->GetBoundingBox(ol, ot, or , ob);
 			if (CGame::GetInstance()->IsIntersect({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
-				coObjects->at(i)->TimeFireDestroy();				
+				coObjects->at(i)->TimeFireDestroy();
+				if (GetID() == ID_DAGGER) {
+					this->SetState(STATE_DESTROYED);
+				}
 			}
 		}
 	}
+	
 }
 
 void CWeapon::DestroyObject()

@@ -15,9 +15,11 @@ CSimon::CSimon() {
 	transformtime = 0;
 	jumpStart = 0;
 	attackStart = 0;
+	attackStartSub = 0;
 	untouchableStart = 0;
 	start_x = 0;
 	start_y = 180;
+	subWeaponID = 0;
 	isOnGround = false;
 	eatitemStart = 0;
 	whip = new CWhip();
@@ -89,6 +91,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					DebugOut(L"Collsion Whip Upgrade\n");
 					break;
 				case ID_DAGGERITEM:
+					SetSubWeapon(ID_DAGGER);
 					DebugOut(L"Collsion Dagger\n");
 					break;
 				case ID_MONEYBAG:
@@ -158,6 +161,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 
 
+
 	// update jump state
 	if (isOnGround == true) {
 		jumpStart = 0;
@@ -185,6 +189,9 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	// update attack state and whip
 	UpdateWhip(dt, coObjects);
+
+	//Update attack subweapon
+	UpdateSubWeapon(dt, coObjects);
 }
 
 void CSimon::Render()
@@ -195,6 +202,13 @@ void CSimon::Render()
 	if (state == SIMON_STATE_DIE)
 		ani = SIMON_ANI_DIE;
 	else if (state == SIMON_STATE_ATTACK) {
+		if (nx > 0)
+			ani = SIMON_ANI_ATTACK_RIGHT;
+		else
+			ani = SIMON_ANI_ATTACK_LEFT;
+	}
+
+	else if (state == SIMON_STATE_ATTACK_SUBWEAPON) {
 		if (nx > 0)
 			ani = SIMON_ANI_ATTACK_RIGHT;
 		else
@@ -256,6 +270,9 @@ void CSimon::Render()
 	RenderBoundingBox();
 	if (attackStart)
 		whip->Render();
+
+	for (auto iter : subWeapon)
+		iter->Render();
 }
 
 void CSimon::RenderBoundingBox(int alpha)
@@ -269,8 +286,11 @@ void CSimon::SetState(int state)
 
 	if (attackStart > 0)
 		return;
+
+	if (attackStartSub > 0)
+		return;
 	
-	if (jumpStart > 0 && state != SIMON_STATE_ATTACK)
+	if (jumpStart > 0 && state != SIMON_STATE_ATTACK && state != SIMON_STATE_ATTACK_SUBWEAPON)
 		return;
 
 	if (eatitemStart > 0)
@@ -296,6 +316,8 @@ void CSimon::SetState(int state)
 		break;
 	case SIMON_STATE_ATTACK:
 		break;
+	case SIMON_STATE_ATTACK_SUBWEAPON:
+		break;
 	case SIMON_STATE_EATITEM:
 		break;
 	case SIMON_STATE_SIT:
@@ -305,6 +327,12 @@ void CSimon::SetState(int state)
 		vy = -SIMON_DIE_DEFLECT_SPEED;
 		break;
 	}
+}
+
+void CSimon::SetSubWeapon(int subWeaponID)
+{
+	this->subWeaponID = subWeaponID;
+	DebugOut(L"SUB WEAPON %d", subWeaponID);
 }
 
 void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
@@ -333,6 +361,36 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	}
 }
 
+void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
+{
+	if (GetTickCount() - attackStartSub <= SIMON_ATTACK_TIME)
+	{
+		DebugOut(L"Attack SubWeapon");
+	}
+	else if (attackStartSub > 0)
+	{
+		attackStartSub = 0;
+		if (state == SIMON_STATE_SIT_ATTACK)
+		{
+			state = SIMON_STATE_SIT;
+		}
+		else
+			state = SIMON_STATE_IDLE;
+	}
+	//Update SubWeapon
+	for (auto iter : subWeapon) {
+		iter->Update(dt, objects);
+	}
+	for (size_t i = 0; i < subWeapon.size(); i++)
+	{
+		if (subWeapon[i]->GetState() == STATE_DESTROYED)
+		{
+			subWeapon.erase(subWeapon.begin() + i);
+			i--;
+		}
+	}
+
+}
 
 void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
@@ -362,9 +420,14 @@ void CSimon::StartAttack() {
 	if (attackStart > 0)
 		return;
 
+	if (attackStartSub > 0) {
+		return;
+	}
+
 	if (state != SIMON_STATE_JUMP)
 		vx = 0;
 	
+	ResetAnimation();
 	//Reset Animation Whip
 	whip->ResetAnimation();
 
@@ -381,15 +444,30 @@ void CSimon::StartAttackSub() {
 	if (attackStartSub > 0) {
 		return;
 	}
-
 	if (state != SIMON_STATE_JUMP)
 		vx = 0;
 
-	attackStartSub = GetTickCount();
+	if (subWeaponID == 0)
+		return;
+
 	//Reset Animation Whip
 	whip->ResetAnimation();
 
+	if (state == SIMON_STATE_SIT)
+		SetState(SIMON_STATE_SIT_ATTACK);
+	else
+		SetState(SIMON_STATE_ATTACK);
 
+	attackStartSub = GetTickCount();
+	
+	switch (subWeaponID)
+	{
+	case ID_DAGGER:
+		subWeapon.push_back(new CDagger({ x+7, y }, nx));
+		break;
+	default:
+		break;
+	}
 }
 
 void CSimon::StartJump()

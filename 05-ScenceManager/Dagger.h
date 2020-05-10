@@ -2,7 +2,7 @@
 #include"Weapon.h"
 #include"define.h"
 
-#define DAGGER_FLY_SPEED		0.05f
+#define DAGGER_FLY_SPEED		0.2f
 #define DAGGER_BBOX_WIDTH		13
 #define DAGGER_BBOX_HEIGHT		10
 

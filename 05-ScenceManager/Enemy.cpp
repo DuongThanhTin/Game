@@ -74,7 +74,7 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		GetBoundingBox(wl, wt, wr, wb);
 		coObjects->at(i)->GetBoundingBox(ol, ot, or , ob);
 		if (CGame::GetInstance()->IsIntersect({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
-			if (GetTickCount() - timeFire > TIME_FIRE && timeFire > 0)
+			if (GetTickCount() - timeFire > TIME_FIRE_ENEMY && timeFire > 0)
 			{
 				timeFire = 0;
 				float x, y;

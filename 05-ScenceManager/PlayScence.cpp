@@ -548,6 +548,9 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_X:
 		simon->StartAttack();
 		break;
+	case DIK_C:
+		simon->StartAttackSub();
+		break;
 
 	case DIK_A: // reset
 		simon->Reset();
@@ -577,7 +580,7 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 		// disable control key when Mario die 
 	if (simon->GetState() == SIMON_STATE_DIE)
 		return;
-	if (simon->GetAttackStart() > 0 || simon->GetJumpStart() > 0)
+	if (simon->GetAttackStart() > 0 || simon->GetJumpStart() > 0 || simon->GetAttackStartSub() > 0)
 		return;
 
 	if (game->IsKeyDown(DIK_RIGHT))
