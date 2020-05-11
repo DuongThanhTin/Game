@@ -19,7 +19,7 @@
 #define WHIP_ANI_RIGHT_02	131
 #define WHIP_ANI_LEFT_02	132
 
-#define WHIP_SIMON_SIT_ATTACK 7.0f
+
 
 class CWhip : public CWeapon
 {

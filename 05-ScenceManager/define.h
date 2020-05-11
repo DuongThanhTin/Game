@@ -36,6 +36,7 @@
 #define TIME_FIRE	350
 #define TIME_FIRE_ENEMY 250
 #define ANI_DESTROY 901
+#define WEAPON_SIMON_SIT_ATTACK 7.0f
 
 #define SCENE_1 1
 #define SCENE_2 2

@@ -56,7 +56,7 @@
 
 class CSimon : public CGameObject
 {
-	
+	static CSimon* __instance;
 	int untouchable;
 	int transformtime;
 	bool isOnGround;
@@ -76,6 +76,7 @@ class CSimon : public CGameObject
 
 public:
 	CSimon();
+	static CSimon* GetInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	virtual void RenderBoundingBox(int alpha = 255);

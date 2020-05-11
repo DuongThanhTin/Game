@@ -26,7 +26,6 @@ void CDagger::GetBoundingBox(float &l, float&t, float &r, float &b) {
 }
 
 void CDagger::Render() {
-	int ani;
 	if (nx > 0) {
 		animations[0]->Render(x, y);
 	}

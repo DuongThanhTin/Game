@@ -97,7 +97,8 @@ void CTileMap::LoadFromFile(LPCWSTR filePath)
 	vector<int> data = j["layers"][0]["data"].get<vector<int>>();
 	rowMapNumber = j["layers"][0]["height"].get<int>();
 	columnMapNumber = j["layers"][0]["width"].get<int>();
-	limitedViewPort = j["layers"][0]["limitedViewPort"].get<int>();
+	//limitedViewPort = j["layers"][0]["limitedViewPort"].get<int>();
+	
 	//DebugOut
 	DebugOut(L"rowMapNumber: %d\n ", rowMapNumber);
 	DebugOut(L"columnMapNumber: %d\n ", columnMapNumber);

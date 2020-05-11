@@ -1,2 +1,4 @@
-﻿  05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
+﻿  Boomerang.cpp
+d:\game2020\game\05-scencemanager\boomerang.cpp(64): warning C4101: 'player': unreferenced local variable
+  05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

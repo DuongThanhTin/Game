@@ -7,7 +7,7 @@
 #include "Portal.h"
 #include "ListItem.h"
 
-
+CSimon* CSimon::__instance;
 CSimon::CSimon() {
 	//id = ID_SIMON;
 
@@ -19,7 +19,7 @@ CSimon::CSimon() {
 	untouchableStart = 0;
 	start_x = 0;
 	start_y = 180;
-	subWeaponID = 0;
+	subWeaponID = ID_BOOMERANG;
 	isOnGround = false;
 	eatitemStart = 0;
 	whip = new CWhip();
@@ -343,7 +343,7 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 		float playerX, playerY;
 		if (state == SIMON_STATE_SIT_ATTACK) 
 		{
-			playerY = y + WHIP_SIMON_SIT_ATTACK;
+			playerY = y + WEAPON_SIMON_SIT_ATTACK;
 		}
 		else
 			playerY = y;
@@ -367,7 +367,7 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	CViewPort* viewport = CViewPort::GetInstance();
 	if (GetTickCount() - attackStartSub <= SIMON_ATTACK_TIME)
 	{
-		DebugOut(L"Attack SubWeapon");
+		
 	}
 	else if (attackStartSub > 0)
 	{
@@ -475,10 +475,10 @@ void CSimon::StartAttackSub() {
 		switch (subWeaponID)
 		{
 		case ID_DAGGER:
-			subWeapon.push_back(new CDagger({ x + 7, y+3 }, nx));
+			subWeapon.push_back(new CDagger({ x + 7, y+ WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		case ID_BOOMERANG:
-			subWeapon.push_back(new CBoomerang({ x + 7, y+3 }, nx));
+			subWeapon.push_back(new CBoomerang({ x + 7, y+ WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		default:
 			break;
@@ -489,7 +489,7 @@ void CSimon::StartAttackSub() {
 		switch (subWeaponID)
 		{
 		case ID_DAGGER:
-			subWeapon.push_back(new CDagger({ x + 7, y }, nx));
+			subWeapon.push_back(new CDagger({ x, y }, nx));
 			break;
 		case ID_BOOMERANG:
 			subWeapon.push_back(new CBoomerang({ x + 7, y }, nx));
@@ -525,4 +525,10 @@ void CSimon::UpgradeWhip()
 {
 	whip->Upgrade();
 	DebugOut(L"[DONE] Upgrade\n");
+}
+
+CSimon* CSimon::GetInstance()
+{
+	if (__instance == NULL) __instance = new CSimon();
+	return __instance;
 }

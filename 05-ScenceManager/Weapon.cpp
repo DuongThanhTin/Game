@@ -33,6 +33,11 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	
 }
 
+void CWeapon::Render()
+{
+	RenderBoundingBox();
+}
+
 void CWeapon::DestroyObject()
 {
 	timeAppearItem = GetTickCount();

@@ -431,7 +431,7 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 	//Giới hạn Camera
-	viewport->Update(playerPosition, 0, TILESET_WIDTH*tileMap->GetLimitedViewPort());
+	viewport->Update(playerPosition, 0, tileMap->GetLimitedViewPort());
 
 
 	//SIMON Collision with portal
