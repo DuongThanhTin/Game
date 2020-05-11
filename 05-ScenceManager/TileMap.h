@@ -50,7 +50,6 @@ private:
 	LPTILESET tileSet;
 	int** mapData;
 
-	int idground;
 public:
 	CTileMap();
 	void LoadFromFile(LPCWSTR filePath);

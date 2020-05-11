@@ -19,7 +19,7 @@ CSimon::CSimon() {
 	untouchableStart = 0;
 	start_x = 0;
 	start_y = 180;
-	subWeaponID = 0;
+	subWeaponID = ID_DAGGER;
 	isOnGround = false;
 	eatitemStart = 0;
 	whip = new CWhip();
@@ -363,6 +363,7 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 
 void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 {
+	CViewPort* viewport = CViewPort::GetInstance();
 	if (GetTickCount() - attackStartSub <= SIMON_ATTACK_TIME)
 	{
 		DebugOut(L"Attack SubWeapon");
@@ -381,13 +382,20 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	for (auto iter : subWeapon) {
 		iter->Update(dt, objects);
 	}
+	
 	for (size_t i = 0; i < subWeapon.size(); i++)
 	{
-		if (subWeapon[i]->GetState() == STATE_DESTROYED)
+		if (subWeapon[i]->x > (x + viewport->GetWidth())) // Dagger ngoài vùng camera sẽ bị destroy
 		{
 			subWeapon.erase(subWeapon.begin() + i);
 			i--;
 		}
+		else if (subWeapon[i]->GetState() == STATE_DESTROYED)
+		{
+			subWeapon.erase(subWeapon.begin() + i);
+			i--;
+		}
+
 	}
 
 }

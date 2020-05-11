@@ -71,6 +71,7 @@ class CSimon : public CGameObject
 	LPWHIP whip;
 	vector<CWeapon*> subWeapon;
 	int subWeaponID;
+	int whiplevel;
 
 public:
 	CSimon();
@@ -78,7 +79,7 @@ public:
 	virtual void Render();
 	virtual void RenderBoundingBox(int alpha = 255);
 	int GetSubWeapon() { return subWeaponID; }
-	bool isOnGroundFloor() { return isOnGround; };
+
 	void SetState(int state);
 	void SetSubWeapon(int subWeaponID);
 	void UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects);
