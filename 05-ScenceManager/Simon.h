@@ -5,6 +5,7 @@
 #include "Whip.h"
 #include "ViewPort.h"
 #include "Dagger.h"
+#include "Boomerang.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 

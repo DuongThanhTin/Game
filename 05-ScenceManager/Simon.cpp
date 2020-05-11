@@ -19,7 +19,7 @@ CSimon::CSimon() {
 	untouchableStart = 0;
 	start_x = 0;
 	start_y = 180;
-	subWeaponID = ID_DAGGER;
+	subWeaponID = 0;
 	isOnGround = false;
 	eatitemStart = 0;
 	whip = new CWhip();
@@ -98,6 +98,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					DebugOut(L"Collsion Moneybag\n");
 					break;
 				case ID_BOOMERANGITEM:
+					SetSubWeapon(ID_BOOMERANG);
 					DebugOut(L"Collsion BOOMERANGITEM\n");
 					break;
 				case ID_SMALLHEART:
@@ -435,8 +436,8 @@ void CSimon::StartAttack() {
 	if (state != SIMON_STATE_JUMP)
 		vx = 0;
 	
-	ResetAnimation();
 	//Reset Animation Whip
+	ResetAnimation();
 	whip->ResetAnimation();
 
 	if (state == SIMON_STATE_SIT)
@@ -459,6 +460,7 @@ void CSimon::StartAttackSub() {
 		return;
 
 	//Reset Animation Whip
+	ResetAnimation();
 	whip->ResetAnimation();
 
 	if (state == SIMON_STATE_SIT)
@@ -468,13 +470,33 @@ void CSimon::StartAttackSub() {
 
 	attackStartSub = GetTickCount();
 	
-	switch (subWeaponID)
+	if (state == SIMON_STATE_SIT_ATTACK)
 	{
-	case ID_DAGGER:
-		subWeapon.push_back(new CDagger({ x+7, y }, nx));
-		break;
-	default:
-		break;
+		switch (subWeaponID)
+		{
+		case ID_DAGGER:
+			subWeapon.push_back(new CDagger({ x + 7, y+3 }, nx));
+			break;
+		case ID_BOOMERANG:
+			subWeapon.push_back(new CBoomerang({ x + 7, y+3 }, nx));
+			break;
+		default:
+			break;
+		}
+	}
+	else
+	{
+		switch (subWeaponID)
+		{
+		case ID_DAGGER:
+			subWeapon.push_back(new CDagger({ x + 7, y }, nx));
+			break;
+		case ID_BOOMERANG:
+			subWeapon.push_back(new CBoomerang({ x + 7, y }, nx));
+			break;
+		default:
+			break;
+		}
 	}
 }
 

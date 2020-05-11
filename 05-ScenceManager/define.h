@@ -27,6 +27,7 @@
 
 #define ID_WHIP	30
 #define ID_DAGGER 31
+#define ID_BOOMERANG 32
 
 #define STATE_DESTROYED 99
 
