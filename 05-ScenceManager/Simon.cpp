@@ -19,7 +19,7 @@ CSimon::CSimon() {
 	untouchableStart = 0;
 	start_x = 0;
 	start_y = 180;
-	subWeaponID = ID_BOOMERANG;
+	subWeaponID = 0;
 	isOnGround = false;
 	eatitemStart = 0;
 	whip = new CWhip();
