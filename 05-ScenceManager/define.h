@@ -1,12 +1,13 @@
 #pragma once
 
- //MAIN
+//MAIN
 #define SCREEN_WIDTH 272
 #define SCREEN_HEIGHT 272
 #define HUD_HEIGHT 50
 #define MAP_HUD	61
-
 #define MAX_FRAME_RATE 120
+#define STATE_DESTROYED 99
+#define TILESET_WIDTH 16
 
 //OBJECTS
 #define ID_SIMON 1
@@ -32,13 +33,9 @@
 #define ID_DAGGER 31
 #define ID_BOOMERANG 32
 
-#define STATE_DESTROYED 99
-
-#define TILESET_WIDTH 16
-
 //EFFECT
 #define TIME_FIRE	350
-#define TIME_FIRE_ENEMY 250
+#define TIME_FIRE_ENEMY 150
 #define ANI_DESTROY 901
 #define WEAPON_SIMON_SIT_ATTACK 7.0f
 

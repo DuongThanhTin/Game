@@ -18,7 +18,98 @@
          "type":"tilelayer",
          "visible":true,
          "width":17,
-		 "limitedViewPort":17,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":4,
+         "name":"stair",
+         "objects":[
+                {
+                 "height":5,
+                 "id":13,
+                 "name":"up-01",
+                 "properties":[
+                        {
+                         "name":"height",
+                         "type":"int",
+                         "value":63
+                        }, 
+                        {
+                         "name":"nx",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"ny",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"stair",
+                 "visible":true,
+                 "width":18,
+                 "x":102,
+                 "y":155
+                }, 
+                {
+                 "height":5,
+                 "id":14,
+                 "name":"down-01",
+                 "properties":[
+                        {
+                         "name":"height",
+                         "type":"int",
+                         "value":63
+                        }, 
+                        {
+                         "name":"nx",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"ny",
+                         "type":"int",
+                         "value":-1
+                        }],
+                 "rotation":0,
+                 "type":"stair",
+                 "visible":true,
+                 "width":18,
+                 "x":168,
+                 "y":91
+                }, 
+                {
+                 "height":5,
+                 "id":15,
+                 "name":"down-02",
+                 "properties":[
+                        {
+                         "name":"height",
+                         "type":"int",
+                         "value":32
+                        }, 
+                        {
+                         "name":"nx",
+                         "type":"int",
+                         "value":-1
+                        }, 
+                        {
+                         "name":"ny",
+                         "type":"int",
+                         "value":-1
+                        }],
+                 "rotation":0,
+                 "type":"stair",
+                 "visible":true,
+                 "width":18,
+                 "x":440.75,
+                 "y":79
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -176,8 +267,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":13,
+ "nextlayerid":5,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2020.02.12",
@@ -185,7 +276,7 @@
  "tilesets":[
         {
          "columns":7,
-		 "rows":5,
+		 "rows": 5,
          "firstgid":1,
          "image":"tilesheet2.png",
          "imageheight":68,

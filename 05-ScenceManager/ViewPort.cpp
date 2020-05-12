@@ -24,6 +24,15 @@ D3DXVECTOR2 CViewPort::GetPosition() {
 	return position;
 }
 
+void CViewPort::GetBoundingBox(float & l, float & t, float & r, float & b)
+{
+	l = position.x;
+	t = position.y + MAP_HUD;
+	r = position.x + width;
+	b = position.y + height + MAP_HUD;
+}
+
+
 
 D3DXVECTOR2 CViewPort::ConvertWorldToViewPort(D3DXVECTOR2 worldPosition) {
 	return{ worldPosition.x - position.x, worldPosition.y - position.y };

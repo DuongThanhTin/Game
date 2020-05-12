@@ -20,6 +20,7 @@ public:
 	D3DXVECTOR2 ConvertWorldToViewPort(D3DXVECTOR2 worldPosition);
 	D3DXVECTOR2 ConvertViewPortToWorld(D3DXVECTOR2 viewportPosition);
 	void Update(D3DXVECTOR2 playerPosition, int startPosition, int endPosition);
+	void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	int GetWidth() { return width; }
 	int GetHeight() { return height; }
 	static CViewPort* GetInstance();

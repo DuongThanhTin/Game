@@ -365,9 +365,9 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 {
 	CViewPort* viewport = CViewPort::GetInstance();
-	if (GetTickCount() - attackStartSub <= SIMON_ATTACK_TIME)
+	if (GetTickCount() - attackStartSub <= SIMON_ATTACK_SUB_TIME)
 	{
-		
+		DebugOut(L"ATTACK SUB");
 	}
 	else if (attackStartSub > 0)
 	{
@@ -383,10 +383,14 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	for (auto iter : subWeapon) {
 		iter->Update(dt, objects);
 	}
-	
+
 	for (size_t i = 0; i < subWeapon.size(); i++)
 	{
-		if (subWeapon[i]->x > (x + viewport->GetWidth())) // Dagger ngoài vùng camera sẽ bị destroy
+		float swl, swt, swr, swb;
+		float vl, vt, vr, vb;
+		subWeapon[i]->GetBoundingBox(swl, swt, swr, swb);
+		viewport->GetBoundingBox(vl, vt, vr, vb);
+		if (!CGame::GetInstance()->IsIntersect({ long(swl), long(swt), long(swr), long(swb) }, { long(vl), long(vt), long(vr), long(vb) }))
 		{
 			subWeapon.erase(subWeapon.begin() + i);
 			i--;
@@ -398,7 +402,6 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 		}
 
 	}
-
 }
 
 void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom)
@@ -475,7 +478,7 @@ void CSimon::StartAttackSub() {
 		switch (subWeaponID)
 		{
 		case ID_DAGGER:
-			subWeapon.push_back(new CDagger({ x + 7, y+ WEAPON_SIMON_SIT_ATTACK }, nx));
+			subWeapon.push_back(new CDagger({ x, y+ WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		case ID_BOOMERANG:
 			subWeapon.push_back(new CBoomerang({ x + 7, y+ WEAPON_SIMON_SIT_ATTACK }, nx));

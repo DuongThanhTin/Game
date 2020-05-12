@@ -74,6 +74,7 @@
 #define SIMON_EATITEM_TIME			500
 
 
+
 class CSimon : public CGameObject
 {
 	static CSimon* __instance;
