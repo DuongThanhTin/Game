@@ -21,6 +21,7 @@ CSimon::CSimon() {
 	start_y = 180;
 	subWeaponID = 0;
 	isOnGround = false;
+	isOnStair = false;
 	eatitemStart = 0;
 	whip = new CWhip();
 }
@@ -367,7 +368,7 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	CViewPort* viewport = CViewPort::GetInstance();
 	if (GetTickCount() - attackStartSub <= SIMON_ATTACK_SUB_TIME)
 	{
-		DebugOut(L"ATTACK SUB");
+		DebugOut(L"ATTACK SUB WEAPON");
 	}
 	else if (attackStartSub > 0)
 	{
@@ -413,7 +414,14 @@ void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom
 		right = x + SIMON_BBOX_WIDTH;
 		bottom = y;
 	}
-	else
+	else if (state == SIMON_STATE_SIT_ATTACK)
+	{
+		left = x;
+		top = y - SIMON_BBOX_SIT_HEIGHT;
+		right = x + SIMON_BBOX_WIDTH;
+		bottom = y;
+	}
+	else 
 	{
 		left = x;
 		top = y - SIMON_BBOX_HEIGHT;

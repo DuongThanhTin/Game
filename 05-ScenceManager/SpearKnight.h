@@ -15,9 +15,11 @@
 #define SPEARKNIGHT_ANI_WALKING_RIGHT 1
 #define SPEARKNIGHT_ANI_DIE 2
 
+#define TIME_MOVE 1000
 
 class CSpearKnight : public CEnemy
 {
+	DWORD timeMove;
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
 	virtual void Render();

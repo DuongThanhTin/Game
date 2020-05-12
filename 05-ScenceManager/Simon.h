@@ -80,7 +80,9 @@ class CSimon : public CGameObject
 	static CSimon* __instance;
 	int untouchable;
 	int transformtime;
+
 	bool isOnGround;
+	bool isOnStair;
 
 	float start_x, start_y;
 
@@ -113,6 +115,8 @@ public:
 	void StartAttackSub();
 	void StartJump();
 	void StartEatItem();
+
+	bool IsOnStair() { return isOnStair; }
 
 	DWORD GetAttackStart() { return attackStart; }
 	DWORD GetJumpStart() { return jumpStart; }
