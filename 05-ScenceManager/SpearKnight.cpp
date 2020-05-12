@@ -27,7 +27,12 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	CEnemy::Update(dt, coObjects);
 
 	// Simple fall down
-	vy += SPEARKNIGHT_GRAVITY*dt;
+	if (state == ENEMY_STATE_DESTROY)
+	{
+		vy = 0;
+	}
+	else
+		vy += SPEARKNIGHT_GRAVITY*dt;
 
 	if (vx < 0 && x<33) {
 		vx = -vx;

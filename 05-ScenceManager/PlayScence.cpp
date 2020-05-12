@@ -299,7 +299,7 @@ void CPlayScene::LoadMapSceneObjects(LPCWSTR path)
 				int value = iter["properties"][0]["value"].get<int>();
 				CAnimationSets * animation_sets = CAnimationSets::GetInstance();
 				DebugOut(L"Candle %d %d\n", ani, value);
-				obj = new CTorch({ x, y + iter["height"] + MAP_HUD }, value);
+				obj = new CCandle({ x, y + iter["height"] + MAP_HUD }, value);
 				ani_set = animation_sets->Get(ani);
 				obj->SetAnimationSet(ani_set);
 				objects.push_back(obj);

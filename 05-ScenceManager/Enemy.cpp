@@ -111,3 +111,8 @@ void CEnemy::TimeFireDestroy()
 	state = ENEMY_STATE_DESTROY;
 	vx = 0;
 }
+
+void CEnemy::GetBoundingBox(float &l, float &t, float &r, float &b) {
+	if(state == ENEMY_STATE_DESTROY)
+		l = t = r = b = 0.0f;
+}

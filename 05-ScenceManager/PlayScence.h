@@ -18,6 +18,7 @@
 #include "ListItem.h"
 #include "Whip.h" 
 #include "SpearKnight.h"
+#include "Candle.h"
 
 class CPlayScene: public CScene
 {

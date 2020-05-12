@@ -250,6 +250,19 @@ void CSimon::Render()
 		ani = SIMON_ANI_WALKING_LEFT;
 	}
 
+	else if (state == SIMON_STATE_GOUP_STAIR) {
+		if (nx > 0)
+			ani = SIMON_ANI_STAIR_GOUP_RIGHT;
+		else
+			ani = SIMON_ANI_STAIR_GOUP_LEFT;
+	}
+	else if (state == SIMON_STATE_GODOWN_STAIR) {
+		if (nx > 0)
+			ani = SIMON_ANI_STAIR_GODOWN_RIGHT;
+		else
+			ani = SIMON_ANI_STAIR_GODOWN_LEFT;
+	}
+
 	else {
 		if (nx > 0)
 			ani = SIMON_ANI_IDLE_RIGHT;
@@ -265,8 +278,14 @@ void CSimon::Render()
 	}
 
 	int alpha = 255;
-	if (untouchableStart>0)
+	if (untouchableStart > 0)
+	{
 		alpha = 128;
+		if (nx > 0)
+			ani = SIMON_ANI_DEFLECT_RIGHT;
+		else
+			ani = SIMON_ANI_DEFLECT_LEFT;
+	}
 	animation_set->at(ani)->Render(x, y, alpha);
 
 	RenderBoundingBox();
@@ -285,6 +304,8 @@ void CSimon::RenderBoundingBox(int alpha)
 
 void CSimon::SetState(int state)
 {
+	if (untouchableStart > 0)
+		return;
 
 	if (attackStart > 0)
 		return;
@@ -321,6 +342,9 @@ void CSimon::SetState(int state)
 	case SIMON_STATE_ATTACK_SUBWEAPON:
 		break;
 	case SIMON_STATE_EATITEM:
+		break;
+	case SIMON_STATE_COLLISION_ENEMY:
+		SetSpeed(-nx*SIMON_JUMP_DEFLECT_SPEED_X,-SIMON_JUMP_SPEED_Y);
 		break;
 	case SIMON_STATE_SIT:
 		SetSpeed(0, vy);
@@ -432,6 +456,7 @@ void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom
 
 void CSimon::StartUntouchable()
 {
+	SetState(SIMON_STATE_COLLISION_ENEMY);
 	untouchable = 1;
 	untouchableStart = GetTickCount();
 }
