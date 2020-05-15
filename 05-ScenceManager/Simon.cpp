@@ -15,7 +15,7 @@ CSimon::CSimon() {
 	transformtime = 0;
 	jumpStart = 0;
 	attackStart = 0;
-	attackStartSub = 0;
+	attackSubStart = 0;
 	untouchableStart = 0;
 	start_x = 0;
 	start_y = 180;
@@ -23,7 +23,9 @@ CSimon::CSimon() {
 	isOnGround = false;
 	isOnStair = false;
 	eatitemStart = 0;
+	whipSwitchSceneLevel = CWhip::GetInstance();
 	whip = new CWhip();
+	whip->SetLevel(whipSwitchSceneLevel->GetLevel());
 }
 
 void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -70,8 +72,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	// turn off collision when die 
 	if (state != SIMON_STATE_DIE) {
-		//CalcPotentialCollisions(coObjects, coEvents); //Collision Objects
-
 		//Collision wall
 		CalcPotentialCollisions(&wallObjects, coEvents);
 
@@ -161,8 +161,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	// clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-
-
 
 	// update jump state
 	if (isOnGround == true) {
@@ -310,10 +308,10 @@ void CSimon::SetState(int state)
 	if (attackStart > 0)
 		return;
 
-	if (attackStartSub > 0)
+	if (attackSubStart > 0)
 		return;
 	
-	if (jumpStart > 0 && state != SIMON_STATE_ATTACK && state != SIMON_STATE_ATTACK_SUBWEAPON)
+	if (!isOnGround && state != SIMON_STATE_ATTACK && state != SIMON_STATE_ATTACK_SUBWEAPON)
 		return;
 
 	if (eatitemStart > 0)
@@ -344,7 +342,7 @@ void CSimon::SetState(int state)
 	case SIMON_STATE_EATITEM:
 		break;
 	case SIMON_STATE_COLLISION_ENEMY:
-		SetSpeed(-nx*SIMON_JUMP_DEFLECT_SPEED_X,-SIMON_JUMP_SPEED_Y);
+		SetSpeed(-nx*SIMON_JUMP_DEFLECT_SPEED_X,-SIMON_JUMP_DEFLECT_SPEED);
 		break;
 	case SIMON_STATE_SIT:
 		SetSpeed(0, vy);
@@ -358,7 +356,7 @@ void CSimon::SetState(int state)
 void CSimon::SetSubWeapon(int subWeaponID)
 {
 	this->subWeaponID = subWeaponID;
-	DebugOut(L"SUB WEAPON %d", subWeaponID);
+	DebugOut(L"SUB WEAPON : %d\n", subWeaponID);
 }
 
 void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
@@ -390,13 +388,13 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 {
 	CViewPort* viewport = CViewPort::GetInstance();
-	if (GetTickCount() - attackStartSub <= SIMON_ATTACK_SUB_TIME)
+	if (GetTickCount() - attackSubStart <= SIMON_ATTACK_SUB_TIME)
 	{
 		DebugOut(L"ATTACK SUB WEAPON");
 	}
-	else if (attackStartSub > 0)
+	else if (attackSubStart > 0)
 	{
-		attackStartSub = 0;
+		attackSubStart = 0;
 		if (state == SIMON_STATE_SIT_ATTACK)
 		{
 			state = SIMON_STATE_SIT;
@@ -431,14 +429,7 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 
 void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
-	if (state == SIMON_STATE_SIT)
-	{
-		left = x;
-		top = y - SIMON_BBOX_SIT_HEIGHT;
-		right = x + SIMON_BBOX_WIDTH;
-		bottom = y;
-	}
-	else if (state == SIMON_STATE_SIT_ATTACK)
+	if (state == SIMON_STATE_SIT || state == SIMON_STATE_SIT_ATTACK)
 	{
 		left = x;
 		top = y - SIMON_BBOX_SIT_HEIGHT;
@@ -465,7 +456,7 @@ void CSimon::StartAttack() {
 	if (attackStart > 0)
 		return;
 
-	if (attackStartSub > 0) {
+	if (attackSubStart > 0) {
 		return;
 	}
 
@@ -486,7 +477,7 @@ void CSimon::StartAttack() {
 void CSimon::StartAttackSub() {
 	if (attackStart > 0)
 		return;
-	if (attackStartSub > 0) {
+	if (attackSubStart > 0) {
 		return;
 	}
 	if (state != SIMON_STATE_JUMP)
@@ -504,7 +495,7 @@ void CSimon::StartAttackSub() {
 	else
 		SetState(SIMON_STATE_ATTACK);
 
-	attackStartSub = GetTickCount();
+	attackSubStart = GetTickCount();
 	
 	if (state == SIMON_STATE_SIT_ATTACK)
 	{
@@ -560,6 +551,7 @@ void CSimon::Reset()
 void CSimon::UpgradeWhip()
 {
 	whip->Upgrade();
+	whipSwitchSceneLevel->Upgrade();
 	DebugOut(L"[DONE] Upgrade\n");
 }
 

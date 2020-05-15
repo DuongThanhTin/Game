@@ -25,13 +25,16 @@ class CWhip : public CWeapon
 {
 private:
 	int level;
-
+	static CWhip* __instance;
 public:
 	CWhip();
 	~CWhip();
+	static CWhip* GetInstance();
 	virtual void GetBoundingBox(float &l, float &t, float &r, float &b);
 	virtual void Render();
 	int GetAnimation();
+	int GetLevel() { return level; }
+	void SetLevel(int level) { this->level = level; }
 	void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects, D3DXVECTOR2 position, int playerNx);
 	void Upgrade();
 };

@@ -92,11 +92,12 @@ class CSimon : public CGameObject
 
 	DWORD untouchableStart;
 	DWORD attackStart;
-	DWORD attackStartSub;
+	DWORD attackSubStart;
 	DWORD jumpStart;
 	DWORD eatitemStart;
 
 	LPWHIP whip;
+	LPWHIP whipSwitchSceneLevel;
 	vector<CWeapon*> subWeapon;
 	int subWeaponID;
 	int whiplevel;
@@ -107,10 +108,10 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	virtual void RenderBoundingBox(int alpha = 255);
-	int GetSubWeapon() { return subWeaponID; }
 
 	void SetState(int state);
 	void SetSubWeapon(int subWeaponID);
+	int GetSubWeapon() { return subWeaponID; }
 	void UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects);
 	void UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects);
 
@@ -124,7 +125,7 @@ public:
 
 	DWORD GetAttackStart() { return attackStart; }
 	DWORD GetJumpStart() { return jumpStart; }
-	DWORD GetAttackStartSub() { return attackStartSub; }
+	DWORD GetAttackStartSub() { return attackSubStart; }
 
 	void Reset();
 	void UpgradeWhip();

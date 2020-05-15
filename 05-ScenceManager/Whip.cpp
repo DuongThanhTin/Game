@@ -1,19 +1,22 @@
 #include "Whip.h"
 
+
 CWhip::CWhip()
 {
 	level = 0;
 	id = ID_WHIP;
 
-	//level 0
-	AddAnimation(WHIP_ANI_RIGHT_00);//0
-	AddAnimation(WHIP_ANI_LEFT_00);//1
-	//level 1
-	AddAnimation(WHIP_ANI_RIGHT_01);//2
-	AddAnimation(WHIP_ANI_LEFT_01);//3
-	//level 2
-	AddAnimation(WHIP_ANI_RIGHT_02);//4
-	AddAnimation(WHIP_ANI_LEFT_02);//5
+	//level 0 MAGIC WHIP
+	AddAnimation(WHIP_ANI_RIGHT_00);//0 
+	AddAnimation(WHIP_ANI_LEFT_00);//1 
+
+	//level 1 SHORT CHAIN
+	AddAnimation(WHIP_ANI_RIGHT_01);//2 
+	AddAnimation(WHIP_ANI_LEFT_01);//3 
+
+	//level 2 LONG CHAIN
+	AddAnimation(WHIP_ANI_RIGHT_02);//4 
+	AddAnimation(WHIP_ANI_LEFT_02);//5 
 }
 
 
@@ -43,15 +46,15 @@ void CWhip::GetBoundingBox(float &l, float &t, float &r, float &b) {
 		int width, height;
 		switch (level)
 		{
-		case 0:
+		case 0: 
 			width = WHIP_BBOX_WIDTH_00;
 			height = WHIP_BBOX_HEIGHT_00;
 			break;
-		case 1:
+		case 1:  //SHORT CHAIN
 			width = WHIP_BBOX_WIDTH_01;
 			height = WHIP_BBOX_HEIGHT_01;
 			break;
-		case 2:
+		case 2:	 //LONG CHAIN
 			width = WHIP_BBOX_WIDTH_02;
 			height = WHIP_BBOX_HEIGHT_02;
 			break;
@@ -82,4 +85,13 @@ void CWhip::Upgrade()
 {
 	if (level < 2)
 		level++;
+
+	DebugOut(L"LEVEL %d\n", GetLevel());
+}
+
+CWhip* CWhip::__instance;
+CWhip* CWhip::GetInstance()
+{
+	if (__instance == NULL) __instance = new CWhip();
+	return __instance;
 }

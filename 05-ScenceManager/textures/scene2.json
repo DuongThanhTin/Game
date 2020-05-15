@@ -34,7 +34,7 @@
                         {
                          "name":"height",
                          "type":"int",
-                         "value":63
+                         "value":64
                         }, 
                         {
                          "name":"nx",
@@ -61,7 +61,7 @@
                         {
                          "name":"height",
                          "type":"int",
-                         "value":63
+                         "value":64
                         }, 
                         {
                          "name":"nx",
@@ -126,7 +126,7 @@
                         {
                          "name":"ItemAppearID",
                          "type":"int",
-                         "value":26
+                         "value":24
                         }, 
                         {
                          "name":"ani",
@@ -170,7 +170,7 @@
                         {
                          "name":"ItemAppearID",
                          "type":"int",
-                         "value":24
+                         "value":26
                         }, 
                         {
                          "name":"ani",
@@ -276,7 +276,7 @@
  "tilesets":[
         {
          "columns":7,
-		 "rows": 5,
+		 "rows":5,
          "firstgid":1,
          "image":"tilesheet2.png",
          "imageheight":68,

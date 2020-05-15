@@ -14,5 +14,5 @@ info-objects.txt
 
 
 [MAP]
-#tileset 		tilemap		mapobjects
-textures\scene1.json	textures\scene1.json	textures\scene1.json
+#tileset + tilemap + mapobjects
+textures\scene1.json

@@ -314,14 +314,14 @@ void CPlayScene::_ParseSection_MAP_SCENE(string line)
 	DebugOut(L"[MAP]");
 	vector<string> tokens = split(line);
 	if (tokens.size() < 1) return;
-	int texID = atoi(tokens[0].c_str());
-	wstring path = ToWSTR(tokens[1]);
+	wstring path = ToWSTR(tokens[0]);
 	DebugOut(L"[INFO] Done loading scene resources %s\n", path.c_str());
 	tileSet->LoadFromFile(path.c_str());
-	DebugOut(L"[DONE1]\n");
+	DebugOut(L"[DONE1] Done loading tileSet\n");
 	tileMap->LoadFromFile(path.c_str());
-	DebugOut(L"[DONE2]\n");
+	DebugOut(L"[DONE2] Done loading tileMap\n");
 	LoadMapSceneObjects(path.c_str());
+	DebugOut(L"[DONE3] Done loading Load Object in json\n");
 }
 
 
@@ -511,9 +511,10 @@ void CPlayScene::ScenePortal(int scene_id, float view_x, float view_y)
 	CSimon *simon = new CSimon();
 	CViewPort * viewport = CViewPort::GetInstance();
 	CGame *game = CGame::GetInstance();
-
+	CWhip *whip = CWhip::GetInstance();
 	game->SwitchScene(scene_id);
 	simon->Reset();
+	DebugOut(L"LEVELLL %d\n", whip->GetLevel());
 	viewport->SetPosition({ view_x,view_y });
 }
 
