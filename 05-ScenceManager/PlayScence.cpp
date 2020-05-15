@@ -543,7 +543,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		if (simon->GetState() != SIMON_STATE_JUMP && simon->GetState() != SIMON_STATE_ATTACK)
+		if (simon->GetState() != SIMON_STATE_JUMP && simon->GetState() != SIMON_STATE_ATTACK && simon->GetState() != SIMON_STATE_ATTACK_SUBWEAPON)
 			simon->StartJump();
 		break;
 	case DIK_X:
@@ -578,7 +578,7 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	CGame *game = CGame::GetInstance();
 
 	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
-		// disable control key when Mario die 
+	// disable control key when Mario die 
 	if (simon->GetState() == SIMON_STATE_DIE)
 		return;
 	if (simon->GetAttackStart() > 0 || simon->GetJumpStart() > 0 || simon->GetAttackStartSub() > 0)

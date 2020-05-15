@@ -311,7 +311,7 @@ void CSimon::SetState(int state)
 	if (attackSubStart > 0)
 		return;
 	
-	if (!isOnGround && state != SIMON_STATE_ATTACK && state != SIMON_STATE_ATTACK_SUBWEAPON)
+	if (jumpStart > 0 && state != SIMON_STATE_ATTACK && state != SIMON_STATE_ATTACK_SUBWEAPON)
 		return;
 
 	if (eatitemStart > 0)
@@ -423,7 +423,6 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			subWeapon.erase(subWeapon.begin() + i);
 			i--;
 		}
-
 	}
 }
 

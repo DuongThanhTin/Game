@@ -1,4 +1,8 @@
-﻿  PlayScence.cpp
+﻿  Simon.cpp
+d:\game2020\game\05-scencemanager\simon.cpp(49): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(56): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(68): warning C4018: '<': signed/unsigned mismatch
+  PlayScence.cpp
 d:\game2020\game\05-scencemanager\playscence.cpp(140): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(141): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(168): warning C4018: '<': signed/unsigned mismatch
@@ -13,5 +17,6 @@ d:\game2020\game\05-scencemanager\playscence.cpp(439): warning C4018: '<': signe
 d:\game2020\game\05-scencemanager\playscence.cpp(480): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\playscence.cpp(486): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\playscence.cpp(500): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)
