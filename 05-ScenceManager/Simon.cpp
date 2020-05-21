@@ -71,7 +71,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	//Collision with Enemy
 	vector<LPGAMEOBJECT> enemyObjects;
 	for (int i = 0;i < coObjects->size();i++) {
-		if (coObjects->at(i)->GetID() == ID_SPEARKNIGHT)
+		if (coObjects->at(i)->GetID() == ID_SPEARKNIGHT||
+			coObjects->at(i)->GetID() == ID_BAT)
 			enemyObjects.push_back(coObjects->at(i));
 	}
 
@@ -100,6 +101,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				case ID_STAIR:
 					collidingStair = dynamic_cast<CStair*>(iter);
 					break;
+				case ID_AREAACTIVE:
+					for (auto iter2 : enemyObjects)
+					{
+						if (iter2->GetID() == ID_BAT)
+						{
+							iter2->isActive = true;
+						}
+					}
 				default:
 					break;
 				}	
@@ -145,7 +154,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		//Collision Enemy
 		for (auto iter : enemyObjects) {
 			float sl, st, sr, sb;		// simon object bbox
-			float ol, ot, or , ob;		// object bbox
+			float ol, ot, or , ob;		// enemy bbox
 			GetBoundingBox(sl, st, sr, sb);
 			iter->GetBoundingBox(ol, ot, or , ob);
 			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
@@ -154,6 +163,21 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 		}
 	}
+
+	CViewPort* viewport = CViewPort::GetInstance();
+	for (size_t i = 0; i < enemyObjects.size(); i++)
+	{
+		float ol, ot, or , ob;		// enemy bbox
+		float vl, vt, vr, vb;		// viewport bbox
+		enemyObjects[i]->GetBoundingBox(ol, ot, or , ob);
+		viewport->GetBoundingBox(vl, vt, vr, vb);
+		if (!CGame::GetInstance()->IsIntersectAABB({ long(ol),long(ot), long(or ), long(ob) }, { long(vl), long(vt), long(vr), long(vb) }))
+		{
+			enemyObjects.erase(enemyObjects.begin() + i);
+			i--;
+		}
+	}
+
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
@@ -527,6 +551,7 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			i--;
 		}
 	}
+
 }
 
 void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom)

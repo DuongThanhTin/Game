@@ -125,6 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp" />
+    <ClCompile Include="AreaActive.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="BoomerangItem.cpp" />
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h" />
+    <ClInclude Include="AreaActive.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="Boomerang.h" />
     <ClInclude Include="BoomerangItem.h" />

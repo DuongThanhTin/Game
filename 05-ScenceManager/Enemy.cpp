@@ -28,7 +28,10 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			wallObjects.push_back(coObjects->at(i));
 	}
 
-	CalcPotentialCollisions(&wallObjects, coEvents);
+	if (id != ID_BAT)
+	{
+		CalcPotentialCollisions(&wallObjects, coEvents);
+	}
 
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)

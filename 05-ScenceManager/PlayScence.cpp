@@ -336,6 +336,8 @@ void CPlayScene::LoadMapSceneObjects(LPCWSTR path)
 				float y = float(iter["y"]);
 				float width = float(iter["width"]);
 				float height = float(iter["height"]);
+				obj = new CAreaActive({ x, y + height + MAP_HUD }, width, height);
+				objects.push_back(obj);
 				
 			}
 		}
@@ -562,7 +564,6 @@ void CPlayScene::ScenePortal(int scene_id, float view_x, float view_y)
 		break;
 	}
 
-	//simon->SetSubWeapon(simonSubWeapon->GetSubWeapon());
 	viewport->SetPosition({ view_x,view_y });
 }
 

@@ -126,6 +126,9 @@
     <ClCompile Include="Bat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AreaActive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -240,6 +243,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaActive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

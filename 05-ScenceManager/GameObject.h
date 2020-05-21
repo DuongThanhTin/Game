@@ -63,6 +63,7 @@ public:
 	int nextItemID;
 
 	bool isOnGround;
+	bool isActive;
 
 	DWORD dt;
 

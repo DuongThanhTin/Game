@@ -1,4 +1,9 @@
-﻿  PlayScence.cpp
+﻿  Bat.cpp
+d:\game2020\game\05-scencemanager\bat.cpp(85): warning C4060: switch statement contains no 'case' or 'default' labels
+  Generating Code...
+  Compiling...
+  main.cpp
+  PlayScence.cpp
 d:\game2020\game\05-scencemanager\playscence.cpp(140): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(141): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(168): warning C4018: '<': signed/unsigned mismatch
@@ -8,11 +13,21 @@ d:\game2020\game\05-scencemanager\playscence.cpp(217): warning C4244: 'initializ
 d:\game2020\game\05-scencemanager\playscence.cpp(249): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(250): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(328): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(440): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(447): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(478): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(520): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(526): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(540): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(339): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(442): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(449): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(480): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(522): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(528): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(542): warning C4018: '<': signed/unsigned mismatch
+  Game.cpp
+d:\game2020\game\05-scencemanager\game.cpp(68): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  Generating Code...
+  Compiling...
+  SpearKnight.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Zombie.cpp
+  Enemy.cpp
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

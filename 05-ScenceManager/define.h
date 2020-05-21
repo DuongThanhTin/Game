@@ -18,9 +18,11 @@
 //OBJECTS NO MOVE
 #define ID_GROUND -1
 #define ID_STAIR -2
+#define ID_AREAACTIVE -3
 #define ID_TORCH 11
 #define ID_PORTAL 12
 #define ID_CANDLE 13
+
 
 //ITEMS
 #define ID_SMALLHEART 20
@@ -56,3 +58,6 @@
 //RESET
 #define START_X 0
 #define START_Y 180
+
+//MATH
+#define PI 3.14

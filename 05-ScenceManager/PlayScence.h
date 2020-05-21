@@ -20,6 +20,7 @@
 #include "SpearKnight.h"
 #include "Candle.h"
 #include "Bat.h"
+#include "AreaActive.h"
 
 class CPlayScene: public CScene
 {

@@ -1,13 +1,13 @@
 #include "Bat.h"
 
 
-
 CBat::CBat()
 {
 	id = ID_SPEARKNIGHT;
 	SetState(BAT_STATE_SLEEP);
 	AddAnimation(ANI_DESTROY);
 	nx = -1;
+	
 }
 
 CBat::~CBat()
@@ -19,10 +19,11 @@ CBat::CBat(D3DXVECTOR2 position,int nx, int nextItemID)
 	x = position.x;
 	y = position.y;
 	this->nx = nx;
+	isActive = false;
 	id = ID_BAT;
 	SetState(BAT_STATE_SLEEP);
 	AddAnimation(ANI_DESTROY);
-	nx = -1;
+	vx = 0;
 	this->nextItemID = nextItemID;
 }
 
@@ -37,11 +38,18 @@ void CBat::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CEnemy::Update(dt, coObjects);
-
-	// Simple fall down
 	if (state == ENEMY_STATE_DESTROY)
 	{
 		vy = 0;
+	}
+	else if (isActive)
+	{
+		vx += nx*BAT_FLYING_SPEED;
+		y += 1;
+		if (y >= 110)
+		{
+			y = 110;
+		}
 	}
 
 }
@@ -50,14 +58,12 @@ void CBat::Render()
 {
 	if (state != ENEMY_STATE_DESTROY)
 	{
-		/*int ani = SPEARKNIGHT_ANI_WALKING_LEFT;
-		if (vx > 0)
-			ani = SPEARKNIGHT_ANI_WALKING_RIGHT;
-		else
-			ani = SPEARKNIGHT_ANI_WALKING_LEFT;
-
-		animation_set->at(ani)->Render(x, y);*/
 		int ani = 0;
+		if (isActive)
+		{
+			ani = BAT_ANI_FLYING_RIGHT;
+		}
+		
 		animation_set->at(ani)->Render(x, y);
 	}
 	else
