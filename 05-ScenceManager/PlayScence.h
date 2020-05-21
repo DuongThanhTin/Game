@@ -31,6 +31,9 @@ protected:
 	CTileMap *tileMap;
 	CViewPort *viewport;
 	CListItem *listItem;
+	
+	int start_x = 0;
+	int start_y = 180;
 
 	void Loadinfo_OBJECTS(LPCWSTR path);
 	void LoadMapSceneObjects(LPCWSTR path);
@@ -51,15 +54,15 @@ public:
 	virtual void Render();
 	virtual void Unload();
 	virtual void ScenePortal(int scene_id, float view_x, float view_y);
-
 	CSimon * GetPlayer() { return player; }
 
 	friend class CPlayScenceKeyHandler;
 };
 
+
 class CPlayScenceKeyHandler : public CScenceKeyHandler
 {
-public: 
+public:
 	virtual void KeyState(BYTE *states);
 	virtual void OnKeyDown(int KeyCode);
 	virtual void OnKeyUp(int KeyCode);

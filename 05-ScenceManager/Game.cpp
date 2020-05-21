@@ -319,7 +319,7 @@ void CGame::SweptAABB(
 
 }
 
-bool CGame::IsIntersect(RECT rectA, RECT rectB)
+bool CGame::IsIntersectAABB(RECT rectA, RECT rectB)
 {
 	return rectA.left < rectB.right && rectA.right > rectB.left && rectA.top < rectB.bottom && rectA.bottom > rectB.top;
 }

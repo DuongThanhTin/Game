@@ -14,6 +14,17 @@ CSpearKnight::~CSpearKnight()
 {
 }
 
+CSpearKnight::CSpearKnight(D3DXVECTOR2 position, int nextItemID)
+{
+	x = position.x;
+	y = position.y;
+	id = ID_SPEARKNIGHT;
+	SetState(SPEARKNIGHT_STATE_WALKING);
+	AddAnimation(ANI_DESTROY);
+	nx = -1;
+	this->nextItemID = nextItemID;
+}
+
 void CSpearKnight::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
 	left = x;

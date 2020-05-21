@@ -83,7 +83,7 @@ public:
 	LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
 
 	void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
-	static bool IsIntersect(RECT rectA, RECT rectB);
+	static bool IsIntersectAABB(RECT rectA, RECT rectB);
 
 	static CGame * GetInstance();
 

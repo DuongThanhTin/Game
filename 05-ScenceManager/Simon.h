@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "GameObject.h"
 #include "define.h"
 #include "Weapon.h"
@@ -6,6 +6,7 @@
 #include "ViewPort.h"
 #include "Dagger.h"
 #include "Boomerang.h"
+#include "Stair.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
@@ -14,7 +15,7 @@
 #define SIMON_JUMP_DEFLECT_SPEED_X 0.05f
 #define SIMON_GRAVITY			0.002f
 #define SIMON_DIE_DEFLECT_SPEED	 0.5f
-
+#define SIMON_ON_STAIR_SPEED			0.02f
 
 #define SIMON_STATE_IDLE			0
 #define SIMON_STATE_WALKING_RIGHT	100
@@ -30,9 +31,9 @@
 #define SIMON_STATE_GODOWN_STAIR	1100
 #define SIMON_STATE_ATTACK_GOUP_STAIR	1200
 #define SIMON_STATE_ATTACK_GODOWN_STAIR	1300
-#define SIMON_STATE_IDLE_GOUP_STAIR	1400
-#define SIMON_STATE_IDLE_GODOWN_STAIR	1500
+#define SIMON_STATE_ATTACK_ON_STAIR 1400
 #define SIMON_STATE_COLLISION_ENEMY	1600
+#define SIMON_STATE_IDLE_STAIR 1700
 
 
 #define SIMON_ANI_IDLE_RIGHT		0
@@ -86,7 +87,8 @@ class CSimon : public CGameObject
 	int transformtime;
 
 	bool isOnGround;
-	bool isOnStair;
+	bool isOnStair;	
+	bool isLockUpdate;
 
 	float start_x, start_y;
 
@@ -94,10 +96,12 @@ class CSimon : public CGameObject
 	DWORD attackStart;
 	DWORD attackSubStart;
 	DWORD jumpStart;
-	DWORD eatitemStart;
+	DWORD eatItemStart;
 
 	LPWHIP whip;
-	LPWHIP whipSwitchSceneLevel;
+	LPWHIP whipSwitchSceneLevel; //Giữ level whip khi chuyển scene
+	LPSTAIR collidingStair; //Xét điểm đầu và điểm cuối của cầu thang
+
 	vector<CWeapon*> subWeapon;
 	int subWeaponID;
 	int whiplevel;
@@ -112,8 +116,10 @@ public:
 	void SetState(int state);
 	void SetSubWeapon(int subWeaponID);
 	int GetSubWeapon() { return subWeaponID; }
+
 	void UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects);
 	void UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects);
+	void UpdateOnStair();
 
 	void StartUntouchable();
 	void StartAttack();
@@ -122,13 +128,17 @@ public:
 	void StartEatItem();
 
 	bool IsOnStair() { return isOnStair; }
+	CStair* GetCollidingStair() { return collidingStair; }
 
 	DWORD GetAttackStart() { return attackStart; }
 	DWORD GetJumpStart() { return jumpStart; }
 	DWORD GetAttackStartSub() { return attackSubStart; }
 
-	void Reset();
+	void Reset(int x,int y);
 	void UpgradeWhip();
+	int GetLockUpdate() { return isLockUpdate; }
+	void LockUpdate() { isLockUpdate = true; }
+	void UnLockUpdate() { isLockUpdate = false; }
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

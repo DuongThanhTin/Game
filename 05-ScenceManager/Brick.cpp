@@ -20,7 +20,7 @@ CBrick::~CBrick() {
 }
 void CBrick::Render()
 {
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 void CBrick::GetBoundingBox(float &l, float &t, float &r, float &b)

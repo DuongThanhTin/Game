@@ -52,3 +52,6 @@
 #define KEY_4 4
 #define KEY_5 5
 
+//RESET
+#define START_X 0
+#define START_Y 180

@@ -23,6 +23,28 @@
         }, 
         {
          "draworder":"topdown",
+         "id":5,
+         "name":"areaactive",
+         "objects":[
+                {
+                 "height":45,
+                 "id":17,
+                 "name":"areaactive",
+                 "rotation":0,
+                 "type":"areaactive",
+                 "visible":true,
+                 "width":12,
+                 "x":129,
+                 "y":20
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":4,
          "name":"stair",
          "objects":[
@@ -106,6 +128,33 @@
                  "width":18,
                  "x":440.75,
                  "y":79
+                }, 
+                {
+                 "height":5,
+                 "id":16,
+                 "name":"up-02",
+                 "properties":[
+                        {
+                         "name":"height",
+                         "type":"int",
+                         "value":64
+                        }, 
+                        {
+                         "name":"nx",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"ny",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"stair",
+                 "visible":true,
+                 "width":18,
+                 "x":74,
+                 "y":59
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -267,8 +316,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":16,
+ "nextlayerid":6,
+ "nextobjectid":18,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2020.02.12",
@@ -276,7 +325,7 @@
  "tilesets":[
         {
          "columns":7,
-		 "rows":5,
+		 "rows": 5,
          "firstgid":1,
          "image":"tilesheet2.png",
          "imageheight":68,

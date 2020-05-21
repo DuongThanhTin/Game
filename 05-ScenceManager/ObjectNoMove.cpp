@@ -20,7 +20,7 @@ void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 		float ol, ot, or , ob;		// object bbox
 		GetBoundingBox(wl, wt, wr, wb);
 		coObjects->at(i)->GetBoundingBox(ol, ot, or , ob);
-		if (CGame::GetInstance()->IsIntersect({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {		
+		if (CGame::GetInstance()->IsIntersectAABB({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 			if (GetTickCount() - timeFire > TIME_FIRE && timeFire > 0)
 			{
 				timeFire = 0;

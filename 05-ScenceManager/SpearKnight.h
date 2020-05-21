@@ -25,6 +25,7 @@ class CSpearKnight : public CEnemy
 	virtual void Render();
 public:
 	CSpearKnight();
+	CSpearKnight(D3DXVECTOR2 position, int nextItemID);
 	~CSpearKnight();
 	virtual void SetState(int state);
 };

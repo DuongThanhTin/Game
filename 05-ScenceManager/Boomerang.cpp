@@ -65,7 +65,7 @@ void CBoomerang::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 		float bl, bt, br, bb;		// bomerang bbox
 		GetBoundingBox(bl, bt, br, bb);
 		CSimon::GetInstance()->GetBoundingBox(sl, st, sr, sb);
-		if (CGame::GetInstance()->IsIntersect({ long(bl),long(bt), long(br), long(bb) }, { long(sl), long(st), long(sr), long(sb) }))
+		if (CGame::GetInstance()->IsIntersectAABB({ long(bl),long(bt), long(br), long(bb) }, { long(sl), long(st), long(sr), long(sb) }))
 		{
 			DebugOut(L"SAD12");
 			state = STATE_DESTROYED;
