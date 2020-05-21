@@ -40,6 +40,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_TORCH	6
 #define OBJECT_TYPE_HEART	7
 #define OBJECT_TYPE_SPEARKNIGHT	40
+#define OBJECT_TYPE_BAT	41
 
 #define OBJECT_TYPE_PORTAL	50
 
@@ -235,6 +236,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	{
 		int itemId = atoi(tokens[4].c_str());
 		obj = new CSpearKnight({ x,y }, itemId);
+		break;
+	}
+	case OBJECT_TYPE_BAT:
+	{
+		int itemId = atoi(tokens[4].c_str());
+		obj = new CBat({ x,y },1, itemId);
 		break;
 	}
 	case OBJECT_TYPE_PORTAL:

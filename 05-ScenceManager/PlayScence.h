@@ -19,6 +19,7 @@
 #include "Whip.h" 
 #include "SpearKnight.h"
 #include "Candle.h"
+#include "Bat.h"
 
 class CPlayScene: public CScene
 {

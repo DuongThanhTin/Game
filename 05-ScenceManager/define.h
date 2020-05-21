@@ -13,6 +13,7 @@
 #define ID_SIMON 1
 #define ID_ZOMBIE 2
 #define ID_SPEARKNIGHT 3
+#define ID_BAT 4
 
 //OBJECTS NO MOVE
 #define ID_GROUND -1
