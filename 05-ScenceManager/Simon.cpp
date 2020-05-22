@@ -122,16 +122,17 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			GetBoundingBox(sl, st, sr, sb);
 			iter->GetBoundingBox(ol, ot, or , ob);
 			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
-				StartEatItem();
 				switch (iter->GetID()) {
 				case ID_HEART:
 					DebugOut(L"Collsion Heart\n");
 					break;
 				case ID_WHIPUPGRADE:
+					StartEatItem();
 					UpgradeWhip();
 					DebugOut(L"Collsion Whip Upgrade\n");
 					break;
 				case ID_DAGGERITEM:
+					StartEatItem();
 					SetSubWeapon(ID_DAGGER);
 					DebugOut(L"Collsion Dagger\n");
 					break;
@@ -139,6 +140,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					DebugOut(L"Collsion Moneybag\n");
 					break;
 				case ID_BOOMERANGITEM:
+					StartEatItem();
 					SetSubWeapon(ID_BOOMERANG);
 					DebugOut(L"Collsion BOOMERANGITEM\n");
 					break;
@@ -158,8 +160,11 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			GetBoundingBox(sl, st, sr, sb);
 			iter->GetBoundingBox(ol, ot, or , ob);
 			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
-				StartUntouchable();
-				iter->TimeFireDestroy();
+				if (iter->state != ENEMY_STATE_DESTROY)
+				{
+					StartUntouchable();
+					iter->TimeFireDestroy();
+				}
 			}
 		}
 	}
@@ -169,13 +174,23 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		float ol, ot, or , ob;		// enemy bbox
 		float vl, vt, vr, vb;		// viewport bbox
+		float sl, st, sr, sb;		//simon bbox
 		enemyObjects[i]->GetBoundingBox(ol, ot, or , ob);
 		viewport->GetBoundingBox(vl, vt, vr, vb);
+		GetBoundingBox(sl, st, sr, sb);
 		if (!CGame::GetInstance()->IsIntersectAABB({ long(ol),long(ot), long(or ), long(ob) }, { long(vl), long(vt), long(vr), long(vb) }))
 		{
 			enemyObjects.erase(enemyObjects.begin() + i);
 			i--;
 		}
+		else if (!CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(vl), long(vt), long(vr), long(vb) }))
+		{
+			if (y > vr)
+			{
+				Reset(460, 80);
+			}
+		}
+		
 	}
 
 	// No collision occured, proceed normally

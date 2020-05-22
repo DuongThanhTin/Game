@@ -235,13 +235,16 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_SPEARKNIGHT:
 	{
 		int itemId = atoi(tokens[4].c_str());
-		obj = new CSpearKnight({ x,y }, itemId);
+		float limitedLeft = atoi(tokens[5].c_str());
+		float limitedRight = atoi(tokens[6].c_str());
+		obj = new CSpearKnight({ x,y }, itemId, limitedLeft, limitedRight);
 		break;
 	}
 	case OBJECT_TYPE_BAT:
 	{
 		int itemId = atoi(tokens[4].c_str());
-		obj = new CBat({ x,y },1, itemId);
+		float falldown = atoi(tokens[5].c_str());
+		obj = new CBat({ x,y }, 1, itemId, falldown);
 		break;
 	}
 	case OBJECT_TYPE_PORTAL:
@@ -504,6 +507,10 @@ void CPlayScene::Update(DWORD dt)
 						DebugOut(L"TEST SCENE 2!!\n");
 						ScenePortal(SCENE_2, 0, 10);
 						break;
+					case SCENE_3:
+						DebugOut(L"TEST SCENE 3!!\n");
+						ScenePortal(SCENE_3, 0, 0);
+						break;
 					default:
 						break;
 					}
@@ -529,7 +536,7 @@ void CPlayScene::Render()
 	{
 		listItem->ListItem[i]->Render();
 	}
-
+	viewport->Render();
 	//Render Simon
 	objects[0]->Render();
 }
@@ -559,6 +566,9 @@ void CPlayScene::ScenePortal(int scene_id, float view_x, float view_y)
 	case SCENE_1:
 	case SCENE_2:
 		simon->Reset(START_X, START_Y);
+		break;
+	case SCENE_3:
+		simon->Reset(465, 65);
 		break;
 	default:
 		break;
@@ -623,6 +633,10 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_2:
 		DebugOut(L"SCENE 2\n");
 		OnKeySwitchScene(SCENE_2, 0, 10);
+		break;
+	case DIK_3:
+		DebugOut(L"SCENE 3\n");
+		OnKeySwitchScene(SCENE_3, 0, 0);
 		break;
 	}
 }
@@ -735,6 +749,10 @@ void CPlayScenceKeyHandler::OnKeySwitchScene(int scene_id, float view_x, float v
 	case SCENE_1:
 	case SCENE_2:
 		simon->Reset(START_X, START_Y);
+		break;
+	case SCENE_3:
+		//simon->Reset(START_X, START_Y);
+		simon->Reset(460, 65);
 		break;
 	default:
 		break;

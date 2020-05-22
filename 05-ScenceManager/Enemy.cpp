@@ -105,7 +105,7 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				default:
 					break;
 				}
-				state = STATE_DESTROYED;
+				this->state = STATE_DESTROYED;
 			}
 		}
 	}
@@ -119,6 +119,8 @@ void CEnemy::TimeFireDestroy()
 }
 
 void CEnemy::GetBoundingBox(float &l, float &t, float &r, float &b) {
-	if(state == ENEMY_STATE_DESTROY)
+	if (state == ENEMY_STATE_DESTROY)
+	{
 		l = t = r = b = 0.0f;
+	}
 }

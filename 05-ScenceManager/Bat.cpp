@@ -14,11 +14,12 @@ CBat::~CBat()
 {
 }
 
-CBat::CBat(D3DXVECTOR2 position,int nx, int nextItemID)
+CBat::CBat(D3DXVECTOR2 position,int nx, int nextItemID, float falldown)
 {
 	x = position.x;
 	y = position.y;
 	this->nx = nx;
+	this->falldown = falldown;
 	isActive = false;
 	id = ID_BAT;
 	SetState(BAT_STATE_SLEEP);
@@ -46,9 +47,9 @@ void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		vx += nx*BAT_FLYING_SPEED;
 		y += 1;
-		if (y >= 110)
+		if (y >= falldown)
 		{
-			y = 110;
+			y = falldown;
 		}
 	}
 

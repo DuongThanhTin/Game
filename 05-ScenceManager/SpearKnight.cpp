@@ -14,10 +14,12 @@ CSpearKnight::~CSpearKnight()
 {
 }
 
-CSpearKnight::CSpearKnight(D3DXVECTOR2 position, int nextItemID)
+CSpearKnight::CSpearKnight(D3DXVECTOR2 position, int nextItemID, float limitedLeft, float limitedRight)
 {
 	x = position.x;
 	y = position.y;
+	this->limitedLeft = limitedLeft;
+	this->limitedRight = limitedRight;
 	id = ID_SPEARKNIGHT;
 	SetState(SPEARKNIGHT_STATE_WALKING);
 	AddAnimation(ANI_DESTROY);
@@ -31,8 +33,8 @@ void CSpearKnight::GetBoundingBox(float &left, float &top, float &right, float &
 	top = y - SPEARKNIGHT_BBOX_HEIGHT;
 	right = x + SPEARKNIGHT_BBOX_WIDTH;
 	bottom = y;
-}
 
+}
 void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CEnemy::Update(dt, coObjects);
@@ -45,12 +47,12 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	else
 		vy += SPEARKNIGHT_GRAVITY*dt;
 
-	if (vx < 0 && x<33) {
+	if (x<=limitedLeft) {
 		vx = -vx;
 	}
 
-	if (vx > 0 && x > 135) {
-		x = 135; vx = -vx;
+	if (x >= limitedRight) {
+		vx = -vx;
 	}
 }
 

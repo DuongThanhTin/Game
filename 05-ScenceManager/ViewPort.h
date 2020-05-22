@@ -4,8 +4,9 @@
 #include "Utils.h"
 #include "Game.h"
 #include "define.h"
- 
-class CViewPort
+#include "GameObject.h" 
+
+class CViewPort : public CGameObject
 {
 private:
 	static CViewPort* __instance;
@@ -23,6 +24,7 @@ public:
 	void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	int GetWidth() { return width; }
 	int GetHeight() { return height; }
+	void Render();
 	static CViewPort* GetInstance();
 	~CViewPort();
 };

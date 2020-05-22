@@ -9,14 +9,14 @@ info-objects.txt
 0	0	190	1
 
 # SPEAR KNIGHT
-40	135	100	9	20
+40	135	100	9	20	33	135
 
 #BAT
-41	40	85	11	20
+41	40	85	11	20	110
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
-50	140	30	0	156	40	1	
+50	140	30	0	156	40	3	
 
 [MAP]
 #tileset + tilemap + mapobjects

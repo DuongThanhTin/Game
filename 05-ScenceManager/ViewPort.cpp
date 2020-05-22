@@ -5,7 +5,7 @@ CViewPort* CViewPort::__instance = NULL;
 CViewPort::CViewPort()
 {
 	position = { 0, 0 };
-	height = 256;
+	height = 300;
 	width = 272; 
 }
 
@@ -51,6 +51,11 @@ void CViewPort::Update(D3DXVECTOR2 playerPosition, int startPosition, int endPos
 		position.x = startPosition;
 	if (position.x > endPosition - SCREEN_WIDTH)
 		position.x = endPosition - SCREEN_WIDTH;
+}
+
+void CViewPort::Render()
+{
+	RenderBoundingBox();
 }
 
 CViewPort::~CViewPort()

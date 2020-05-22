@@ -18,12 +18,13 @@
 
 class CBat : public CEnemy
 {
+	float falldown;
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
 	virtual void Render();
 public:
 	CBat();
-	CBat(D3DXVECTOR2 position, int nx ,int nextItemID);
+	CBat(D3DXVECTOR2 position, int nx, int nextItemID, float falldown);
 	~CBat();
 	virtual void SetState(int state);
 };

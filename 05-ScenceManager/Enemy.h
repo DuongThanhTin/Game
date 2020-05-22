@@ -14,7 +14,7 @@
 #include "SmallHeart.h"
 #include "define.h"
 
-#define ENEMY_STATE_DESTROY	0
+
 #define ENEMY_STATE_IDLE	1
 
 class CEnemy : public CGameObject

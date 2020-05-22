@@ -1,0 +1,20 @@
+[INFOOBJECTS]
+#path
+info-objects.txt
+
+[OBJECTS]
+# Objecttype	x	y	ani_set_id	extra_settings per object type
+# Object type in Visual: 0 = Mario , 1 = Brick, 2 = Goomba, 5 = Zombie, 6 = Torch
+# SIMON
+0	460	65	1
+# SPEAR KNIGHT
+40	100	50	9	20	96	150
+#BAT
+41	296	82	11	20	110
+# --- SCENE PORTAL ----
+# type	l	t	ani_set_id	r	b	scene_id
+50	0	80	0	15	120	1	
+
+[MAP]
+#tileset + tilemap + mapobjects
+textures\scene3.json
