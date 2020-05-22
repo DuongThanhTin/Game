@@ -332,7 +332,7 @@ void CPlayScene::LoadMapSceneObjects(LPCWSTR path)
 				objects.push_back(obj);
 			}
 		}
-		else if (i["name"] == "areaactive") {	// stair objects
+		else if (i["name"] == "areaactive") {	// areaactive objects
 			for (auto iter : i["objects"])
 			{
 				float x = float(iter["x"]);
