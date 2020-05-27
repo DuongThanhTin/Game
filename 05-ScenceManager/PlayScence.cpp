@@ -6,7 +6,7 @@
 #include "Textures.h"
 #include "Sprites.h"
 #include "Portal.h"
- 
+
 
 using namespace std;
 
@@ -17,8 +17,8 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 	key_handler = new CPlayScenceKeyHandler(this);
 }
 /*
-	Load scene resources from scene file (textures, sprites, animations and objects)
-	See scene1.txt, scene2.txt for detail format specification
+Load scene resources from scene file (textures, sprites, animations and objects)
+See scene1.txt, scene2.txt for detail format specification
 */
 
 #define SCENE_SECTION_UNKNOWN -1
@@ -39,6 +39,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_ZOMBIE	5
 #define OBJECT_TYPE_TORCH	6
 #define OBJECT_TYPE_HEART	7
+#define OBJECT_TYPE_BRIDGE	8
 #define OBJECT_TYPE_SPEARKNIGHT	40
 #define OBJECT_TYPE_BAT	41
 
@@ -120,7 +121,6 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 	vector<string> tokens = split(line);
 
 	/*if (tokens.size() < 6) return; // skip invalid lines
-
 	int ID = atoi(tokens[0].c_str());
 	int l = atoi(tokens[1].c_str());
 	int t = atoi(tokens[2].c_str());
@@ -144,13 +144,13 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 	if (tex == NULL)
 	{
 		DebugOut(L"[ERROR] Texture ID %d not found!\n", texID, flipimage);
-		return; 
+		return;
 	}
 	else {
 		DebugOut(L"[OK] %d, %d \n", texID, flipimage);
 	}
 
-	CSprites::GetInstance()->Add(ID, l, t, r, b, tex,flipimage, { x,y });
+	CSprites::GetInstance()->Add(ID, l, t, r, b, tex, flipimage, { x,y });
 }
 
 //ANIMATIONS
@@ -160,7 +160,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 
 	if (tokens.size() < 3) return; // skip invalid lines - an animation must at least has 1 frame and 1 frame time
 
-	//DebugOut(L"--> %s\n",ToWSTR(line).c_str());
+								   //DebugOut(L"--> %s\n",ToWSTR(line).c_str());
 
 	LPANIMATION ani = new CAnimation();
 
@@ -168,7 +168,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 	for (int i = 1; i < tokens.size(); i += 2)	// why i+=2 ?  sprite_id | frame_time  
 	{
 		int sprite_id = atoi(tokens[i].c_str());
-		int frame_time = atoi(tokens[i+1].c_str());
+		int frame_time = atoi(tokens[i + 1].c_str());
 		ani->Add(sprite_id, frame_time);
 	}
 
@@ -192,7 +192,7 @@ void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
 	for (int i = 1; i < tokens.size(); i++)
 	{
 		int ani_id = atoi(tokens[i].c_str());
-		
+
 		LPANIMATION ani = animations->Get(ani_id);
 		s->push_back(ani);
 	}
@@ -201,7 +201,7 @@ void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
 }
 
 /*
-	Parse a line in section [OBJECTS] 
+Parse a line in section [OBJECTS]
 */
 void CPlayScene::_ParseSection_OBJECTS(string line)
 {
@@ -217,7 +217,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	float y = atof(tokens[2].c_str());
 
 	int ani_set_id = atoi(tokens[3].c_str());
-	
+
 	CAnimationSets * animation_sets = CAnimationSets::GetInstance();
 
 	switch (object_type)
@@ -247,15 +247,25 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new CBat({ x,y }, 1, itemId, falldown);
 		break;
 	}
-	case OBJECT_TYPE_PORTAL:
-		{	
-			float r = atof(tokens[4].c_str());
-			float b = atof(tokens[5].c_str());
-			int scene_id = atoi(tokens[6].c_str());
-			obj = new CPortal(x, y, r, b, scene_id);
-			DebugOut(L"[NICE]!\n");
-		}
+	case OBJECT_TYPE_BRIDGE:
+	{
+		float limitedLeft1 = atof(tokens[4].c_str());
+		float limitedRight1 = atof(tokens[5].c_str());
+		DebugOut(L"BRIDGE %d %d", limitedLeft1, limitedRight1);
+		obj = new CBridge({x, y}, limitedLeft1, limitedRight1);
 		break;
+	}
+
+	case OBJECT_TYPE_PORTAL:
+	{
+		float r = atof(tokens[4].c_str());
+		float b = atof(tokens[5].c_str());
+		int scene_id = atoi(tokens[6].c_str());
+		obj = new CPortal(x, y, r, b, scene_id);
+		DebugOut(L"[NICE PORTAL]!\n");
+	}
+
+	break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
@@ -341,7 +351,7 @@ void CPlayScene::LoadMapSceneObjects(LPCWSTR path)
 				float height = float(iter["height"]);
 				obj = new CAreaActive({ x, y + height + MAP_HUD }, width, height);
 				objects.push_back(obj);
-				
+
 			}
 		}
 	}
@@ -376,9 +386,9 @@ void CPlayScene::Load()
 
 	ifstream f;
 	f.open(sceneFilePath);
-	
+
 	// current resource section flag
-	int section = SCENE_SECTION_UNKNOWN;					
+	int section = SCENE_SECTION_UNKNOWN;
 
 	char str[MAX_SCENE_LINE];
 	while (f.getline(str, MAX_SCENE_LINE))
@@ -391,24 +401,25 @@ void CPlayScene::Load()
 		{
 			section = SCENE_SECTION_INFO_OBJECTS; continue;
 		}
-		if (line == "[OBJECTS]") { 
-			section = SCENE_SECTION_OBJECTS; continue; }
+		if (line == "[OBJECTS]") {
+			section = SCENE_SECTION_OBJECTS; continue;
+		}
 		if (line == "[MAP]") {
 			section = SCENE_SECTION_MAP_URL; continue;
 		}
-		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
+		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
 		//
 		// data section
 		//
 		switch (section)
 		{
-			case SCENE_SECTION_INFO_OBJECTS: _ParseSection_INFO_OBJECTS(line); break;
-			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
-			case SCENE_SECTION_MAP_URL: {
-				DebugOut(L"SCENE_MAP\n");
-				_ParseSection_MAP_SCENE(line); break;
-			}
+		case SCENE_SECTION_INFO_OBJECTS: _ParseSection_INFO_OBJECTS(line); break;
+		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+		case SCENE_SECTION_MAP_URL: {
+			DebugOut(L"SCENE_MAP\n");
+			_ParseSection_MAP_SCENE(line); break;
+		}
 		}
 	}
 
@@ -431,7 +442,7 @@ void CPlayScene::Update(DWORD dt)
 		objects[0]->Update(dt, &coObjects);
 		return;
 	}
-		
+
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		coObjects.push_back(objects[i]);
@@ -445,7 +456,7 @@ void CPlayScene::Update(DWORD dt)
 	for (int i = 0; i < listItem->ListItem.size(); i++) // update các Item
 	{
 		listItem->ListItem[i]->Update(dt, &coObjects);
-		
+
 	}
 
 
@@ -467,7 +478,7 @@ void CPlayScene::Update(DWORD dt)
 		}
 	}
 
-	
+
 	// Update camera to follow simon
 	player->GetPosition(playerPosition.x, playerPosition.y);
 	if (playerPosition.x < 0) {
@@ -480,9 +491,9 @@ void CPlayScene::Update(DWORD dt)
 
 	//SIMON Collision with portal
 	vector<LPGAMEOBJECT> portalObjects;
-	for (int i = 0;i < objects.size();i++) 
+	for (int i = 0;i < objects.size();i++)
 	{
-		if (objects[i]->GetID() == ID_PORTAL )
+		if (objects[i]->GetID() == ID_PORTAL)
 			portalObjects.push_back(objects[i]);
 	}
 
@@ -490,7 +501,7 @@ void CPlayScene::Update(DWORD dt)
 	for (auto iter : portalObjects) {
 		{
 			float pl, pt, pr, pb;		// portal bbox
-			float sl, st, sr , sb;		// simon bbox
+			float sl, st, sr, sb;		// simon bbox
 			iter->GetBoundingBox(pl, pt, pr, pb);
 			player->GetBoundingBox(sl, st, sr, sb);
 			if (CGame::GetInstance()->IsIntersectAABB({ long(pl),long(pt), long(pr), long(pb) }, { long(sl), long(st), long(sr), long(sb) })) {
@@ -524,8 +535,8 @@ void CPlayScene::Update(DWORD dt)
 void CPlayScene::Render()
 {
 	//Draw Map
-	tileMap->DrawMap({ 0,0 });
-		
+	//tileMap->DrawMap({ 0,0 });
+
 	for (int i = 1; i < objects.size(); i++) {
 		objects[i]->RenderBoundingBox(100);
 		objects[i]->Render();
@@ -536,13 +547,13 @@ void CPlayScene::Render()
 	{
 		listItem->ListItem[i]->Render();
 	}
-	viewport->Render();
+	//viewport->Render();
 	//Render Simon
 	objects[0]->Render();
 }
 
 /*
-	Unload current scene
+Unload current scene
 */
 void CPlayScene::Unload()
 {
@@ -587,14 +598,14 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		mario->SetState(MARIO_STATE_JUMP);
-		break;
+	mario->SetState(MARIO_STATE_JUMP);
+	break;
 	case DIK_A: // reset
-		mario->SetState(MARIO_STATE_IDLE);
-		mario->SetLevel(MARIO_LEVEL_BIG);
-		mario->SetPosition(50.0f, 0.0f);
-		mario->SetSpeed(0, 0);
-		break;
+	mario->SetState(MARIO_STATE_IDLE);
+	mario->SetLevel(MARIO_LEVEL_BIG);
+	mario->SetPosition(50.0f, 0.0f);
+	mario->SetSpeed(0, 0);
+	break;
 	}*/
 	CGame *game = CGame::GetInstance();
 	//SIMON
@@ -612,7 +623,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		if (simon->IsOnStair() && (game->IsKeyDown(DIK_UP) || game->IsKeyDown(DIK_DOWN) || game->IsKeyDown(DIK_LEFT) || game->IsKeyDown(DIK_RIGHT)))
 			return;
 		simon->StartAttack();
-		
+
 		break;
 	case DIK_C:
 		if (simon->IsOnStair() && (game->IsKeyDown(DIK_UP) || game->IsKeyDown(DIK_DOWN) || game->IsKeyDown(DIK_LEFT) || game->IsKeyDown(DIK_RIGHT)))
@@ -624,7 +635,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		simon->Reset(START_X, START_Y);
 		break;
 
-	//Switch scene with key
+		//Switch scene with key
 	case DIK_1:
 		DebugOut(L"SCENE 1\n");
 		OnKeySwitchScene(SCENE_1, 0, 0);
@@ -686,11 +697,11 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 		}
 		else if (simon->GetCollidingStair())
 		{
-			if (simon->GetCollidingStair()->GetNy() < 0 && ((simon->GetCollidingStair()->x-10 <= simon->x) && (simon->x <= simon->GetCollidingStair()->x + 12)) && (simon->GetCollidingStair()->y + 20 >= simon->y))//Top
+			if (simon->GetCollidingStair()->GetNy() < 0 && ((simon->GetCollidingStair()->x - 10 <= simon->x) && (simon->x <= simon->GetCollidingStair()->x + 12)) && (simon->GetCollidingStair()->y + 20 >= simon->y))//Top
 			{
 				float x, y;
 				simon->GetPosition(x, y);
-				simon->SetPosition(simon->GetCollidingStair()->x -(SIMON_BBOX_WIDTH-5)/2, y+5); //Neo điểm Simon để xuống cầu thang 
+				simon->SetPosition(simon->GetCollidingStair()->x - (SIMON_BBOX_WIDTH - 5) / 2, y + 5); //Neo điểm Simon để xuống cầu thang 
 				simon->SetState(SIMON_STATE_GODOWN_STAIR);
 			}
 			else
@@ -707,7 +718,7 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 			simon->SetState(SIMON_STATE_GOUP_STAIR);
 		else if (simon->GetCollidingStair())
 		{
-			if(simon->GetCollidingStair()->GetNy() > 0 && ((simon->GetCollidingStair()->x - 10 <= simon->x) && (simon->x <= simon->GetCollidingStair()->x + 12)) && (simon->GetCollidingStair()->y + 20 >= simon->y))//Bottom
+			if (simon->GetCollidingStair()->GetNy() > 0 && ((simon->GetCollidingStair()->x - 10 <= simon->x) && (simon->x <= simon->GetCollidingStair()->x + 12)) && (simon->GetCollidingStair()->y + 20 >= simon->y))//Bottom
 			{
 				float x, y;
 				simon->GetPosition(x, y);

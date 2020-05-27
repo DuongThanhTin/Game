@@ -23,7 +23,7 @@
 #define ID_TORCH 11
 #define ID_PORTAL 12
 #define ID_CANDLE 13
-
+#define ID_BRIDGE 14
 
 //ITEMS
 #define ID_SMALLHEART 20

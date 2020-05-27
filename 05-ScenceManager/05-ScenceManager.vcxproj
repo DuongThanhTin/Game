@@ -130,6 +130,7 @@
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="BoomerangItem.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Bridge.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="Dagger.cpp" />
     <ClCompile Include="DaggerItem.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Boomerang.h" />
     <ClInclude Include="BoomerangItem.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Bridge.h" />
     <ClInclude Include="Candle.h" />
     <ClInclude Include="Dagger.h" />
     <ClInclude Include="DaggerItem.h" />

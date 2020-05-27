@@ -6,6 +6,7 @@
 30	textures\enemy.png	3	26	110
 40	textures\objects.png	255	0	255
 50	textures\items.png	255	0	255
+60	textures\Objectsub.png	116	116	116
 
 # id	left	top	right	bottom	texture_id	isFlipImage	position(x)	position(y)
 [SPRITES]
@@ -198,6 +199,9 @@
 19003	43	78	49	89	40		0		5		-15
 19004	45	78	64	89	40		0		2		-15
 
+#=============BRIDGE=====================
+19051	63	68	96	77	60		0		0		0
+
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 # ==== SIMON =========
@@ -320,6 +324,9 @@
 # ==== FIRE DESTROY =======
 901	19001	100	19002	100	19003	100	19004	100
 
+# ==== BRIDGE =======
+951	19051	100
+
 # ==== MONEY BAG =======
 704	20011	100
 
@@ -359,3 +366,5 @@
 10	702
 # BAT
 11	420	421	422
+# BRIDGE
+12	951

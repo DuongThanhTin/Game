@@ -21,6 +21,7 @@
 #include "Candle.h"
 #include "Bat.h"
 #include "AreaActive.h"
+#include "Bridge.h"
 
 class CPlayScene: public CScene
 {

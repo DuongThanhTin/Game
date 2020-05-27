@@ -52,7 +52,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	//Collision with wall
 	vector<LPGAMEOBJECT> wallObjects;
 	for (int i = 0;i < coObjects->size();i++) {
-		if (coObjects->at(i)->GetID() == ID_GROUND)
+		if (coObjects->at(i)->GetID() == ID_GROUND||
+			coObjects->at(i)->GetID() == ID_BRIDGE )
 			wallObjects.push_back(coObjects->at(i));
 	}
 
@@ -109,10 +110,12 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							iter2->isActive = true;
 						}
 					}
+
 				default:
 					break;
 				}	
 			}	
+
 		}
 
 		//Collision Item
@@ -221,9 +224,27 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				isOnGround = true;
 			}
 		}
-		else y += dy;
-	}
 
+		else y += dy;
+
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			LPCOLLISIONEVENT e = coEventsResult[i]; 
+			if (dynamic_cast<CBridge*>(e->obj))
+			{
+				CBridge* bridge = dynamic_cast<CBridge *>(e->obj);
+				if (e->ny != 0)
+				{
+					x += bridge->vx*dt*2;
+					vx = vx;
+				}
+
+
+			}
+			
+		}
+	}
+	
 	// clean up collision events
 	for (auto iter : coEvents) delete iter;
 	coEvents.clear();
@@ -473,6 +494,7 @@ void CSimon::SetState(int state)
 		SetSpeed(nx*SIMON_ON_STAIR_SPEED, SIMON_ON_STAIR_SPEED);
 		isOnStair = true;
 		break;
+
 	}
 }
 
