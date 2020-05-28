@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include "Simon.h"
 
-#define BAT_FLYING_SPEED 0.001f
+#define BAT_FLYING_SPEED 0.0015f
 
 #define BAT_BBOX_WIDTH 16
 #define	BAT_BBOX_HEIGHT 16

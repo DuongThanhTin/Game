@@ -1,8 +1,9 @@
 #pragma once
 #include "Brick.h"
 #include "define.h"
+#include "GameObject.h"
 
-class CStair : public CBrick
+class CStair : public CGameObject
 {
 	int width;
 	int height;

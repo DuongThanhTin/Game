@@ -39,6 +39,56 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CEnemy::Update(dt, coObjects);
 
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+
+
+	coEvents.clear();
+	CalcPotentialCollisions(coObjects, coEvents);
+	// No collision occured, proceed normally
+	if (coEvents.size() == 0)
+	{
+		x += dx;
+		y += dy;
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+		float rdx = 0;
+		float rdy = 0;
+
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
+
+		// block 
+		//x += min_tx*dx + nx*0.1f;
+		y += min_ty*dy + ny*0.1f;
+
+		for (UINT i = 0; i < coEventsResult.size(); i++)
+		{
+			LPCOLLISIONEVENT e = coEventsResult[i];
+
+			if (dynamic_cast<CBrick*>(e->obj))
+			{
+				for (size_t i = 0; i < coObjects->size(); i++)
+				{
+					if (coObjects->at(i)->GetID() == ID_GROUND)
+					{
+						if (e->nx != 0)
+						{
+							nx = -nx;
+							vx = nx*vx;
+						}
+					}
+				}
+			}
+		}
+
+
+		// clean up collision events
+		for (auto iter : coEvents) delete iter;
+		coEvents.clear();
+	}
+
 	// Simple fall down
 	if (state == ENEMY_STATE_DESTROY)
 	{

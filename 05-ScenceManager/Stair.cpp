@@ -7,6 +7,7 @@ CStair::CStair()
 
 CStair::CStair(D3DXVECTOR2 position, int width, int height,int longStair, int nx, int ny)
 {
+	id = ID_STAIR;
 	x = position.x;
 	y = position.y;
 	this->width = width;
@@ -14,7 +15,7 @@ CStair::CStair(D3DXVECTOR2 position, int width, int height,int longStair, int nx
 	this->longStair = longStair;
 	this->nx = nx;
 	this->ny = ny;
-	id = ID_STAIR;
+	
 }
 CStair::~CStair()
 {

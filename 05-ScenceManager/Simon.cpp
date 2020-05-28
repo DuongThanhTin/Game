@@ -262,6 +262,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		untouchableStart = 0;
 		untouchable = 0;
+		ResetAnimation();
 	}
 	
 	// transform simon

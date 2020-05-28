@@ -1,8 +1,9 @@
 #pragma once
 #include "define.h"
 #include "Enemy.h"
+#include "Brick.h"
 
-#define SPEARKNIGHT_WALKING_SPEED 0.02f
+#define SPEARKNIGHT_WALKING_SPEED 0.03f
 #define SPEARKNIGHT_GRAVITY 0.002f
 
 #define SPEARKNIGHT_BBOX_WIDTH 16

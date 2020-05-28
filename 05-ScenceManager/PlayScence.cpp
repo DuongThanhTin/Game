@@ -515,12 +515,13 @@ void CPlayScene::Update(DWORD dt)
 						ScenePortal(SCENE_1, 0, 0);
 						break;
 					case SCENE_2:
-						DebugOut(L"TEST SCENE 2!!\n");
+ 						DebugOut(L"TEST SCENE 2!!\n");
 						ScenePortal(SCENE_2, 0, 10);
 						break;
 					case SCENE_3:
 						DebugOut(L"TEST SCENE 3!!\n");
 						ScenePortal(SCENE_3, 0, 0);
+
 						break;
 					default:
 						break;
@@ -535,7 +536,7 @@ void CPlayScene::Update(DWORD dt)
 void CPlayScene::Render()
 {
 	//Draw Map
-	//tileMap->DrawMap({ 0,0 });
+	tileMap->DrawMap({ 0,0 });
 
 	for (int i = 1; i < objects.size(); i++) {
 		objects[i]->RenderBoundingBox(100);
@@ -547,7 +548,9 @@ void CPlayScene::Render()
 	{
 		listItem->ListItem[i]->Render();
 	}
+
 	//viewport->Render();
+
 	//Render Simon
 	objects[0]->Render();
 }
@@ -568,22 +571,9 @@ void CPlayScene::Unload()
 
 void CPlayScene::ScenePortal(int scene_id, float view_x, float view_y)
 {
-	CSimon *simon = new CSimon();
 	CViewPort * viewport = CViewPort::GetInstance();
 	CGame *game = CGame::GetInstance();
 	game->SwitchScene(scene_id);
-	switch (scene_id)
-	{
-	case SCENE_1:
-	case SCENE_2:
-		simon->Reset(START_X, START_Y);
-		break;
-	case SCENE_3:
-		simon->Reset(465, 65);
-		break;
-	default:
-		break;
-	}
 
 	viewport->SetPosition({ view_x,view_y });
 }
@@ -607,10 +597,14 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	mario->SetSpeed(0, 0);
 	break;
 	}*/
+
 	CGame *game = CGame::GetInstance();
 	//SIMON
 	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
-	if (simon->GetLockUpdate() > 0)
+	if (simon->GetLockUpdate() > 0 )
+		return;
+	
+	if (simon->GetState() == SIMON_STATE_EATITEM)
 		return;
 
 	switch (KeyCode)

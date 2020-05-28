@@ -144,7 +144,7 @@ void CGameObject::RenderBoundingBox(int alpha)
 
 	//CGame::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
 	D3DXVECTOR2 viewPortPosition = CViewPort::GetInstance()->ConvertWorldToViewPort({ l, t });
-	CGame::GetInstance()->Draw(viewPortPosition.x, viewPortPosition.y, bbox, rect.left, rect.top, rect.right, rect.bottom, 50);
+	CGame::GetInstance()->Draw(viewPortPosition.x, viewPortPosition.y, bbox, rect.left, rect.top, rect.right, rect.bottom, 0);
 }
 
 void CGameObject::TimeFireDestroy() {
