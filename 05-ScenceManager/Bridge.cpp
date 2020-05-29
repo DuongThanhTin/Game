@@ -27,7 +27,6 @@ CBridge::CBridge(D3DXVECTOR2 position, float limitedLeft, float limitedRight)
 	id = ID_BRIDGE;
 	nx = -1;
 	vx = nx*BRIDGE_SPEED;
-	AddAnimation(951);
 }
 
 void CBridge::GetBoundingBox(float &left, float &top, float &right, float &bottom)
@@ -63,7 +62,6 @@ void CBridge::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 		// block 
 		x += min_tx*dx + nx*0.1f;
-		//y += min_ty*dy + ny*0.1f;
 
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
@@ -73,16 +71,6 @@ void CBridge::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				if (e->nx != 0)   
 				{
 					x += dx;
-				}
-			}
-			
-
-			else if (dynamic_cast<CBrick*>(e->obj))
-			{
-				if (e->nx != 0)
-				{
-					DebugOut(L"nx<0\n");
-					vx = -vx;
 				}
 			}
 		}
@@ -109,7 +97,6 @@ void CBridge::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 void CBridge::Render()
 {
 	animation_set->at(BRIDGE_ANI_MOVE)->Render(x, y);
-	//animations[0]->Render(x, y);
 	RenderBoundingBox();
 }
 

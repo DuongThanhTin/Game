@@ -6,6 +6,8 @@
 #include "ListItem.h"
 #include "WhipUpgrade.h" 
 
+#define WEAPON_STATE_NORMAL 0
+
 class CWeapon : public CGameObject
 {
 	DWORD timeAppearItem;

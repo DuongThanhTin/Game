@@ -9,6 +9,7 @@
 #define STATE_DESTROYED 99
 #define TILESET_WIDTH 16
 #define ENEMY_STATE_DESTROY	0
+#define CAMERA_SWITCH_SCENE2_Y 10
 
 //OBJECTS
 #define ID_SIMON 1
@@ -56,9 +57,15 @@
 #define KEY_4 4
 #define KEY_5 5
 
+#define RESET_SCENE_3_X
 //RESET
 #define START_X 0
 #define START_Y 180
 
 //MATH
 #define PI 3.14
+
+//STAIR
+#define STAIR_SETBBOX_LEFT 10
+#define STAIR_SETBBOX_RIGHT 12
+#define STAIR_ANCHOR_SIMON 5

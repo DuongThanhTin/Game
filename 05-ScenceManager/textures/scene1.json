@@ -169,7 +169,7 @@
                         {
                          "name":"ItemAppearID",
                          "type":"int",
-                         "value":21
+                         "value":22
                         }, 
                         {
                          "name":"ani_sets",
@@ -191,7 +191,7 @@
                         {
                          "name":"ItemAppearID",
                          "type":"int",
-                         "value":22
+                         "value":21
                         }, 
                         {
                          "name":"ani_sets",

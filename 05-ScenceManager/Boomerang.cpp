@@ -14,6 +14,7 @@ CBoomerang::CBoomerang(D3DXVECTOR2 position, int nx)
 	id = ID_BOOMERANG;
 	timefly = GetTickCount();
 	isFlyReturn = false;
+	isDisapear = false;
 }
 
 
@@ -40,6 +41,8 @@ void CBoomerang::Render() {
 
 void CBoomerang::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CWeapon::Update(dt, coObjects);
+
+
 	if (GetTickCount() - timefly > TIME_FLY)
 	{
 		vx = -nx*BOOMERANG_FLY_SPEED;
@@ -59,16 +62,4 @@ void CBoomerang::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	}
 
 
-	if (isFlyReturn)
-	{
-		float sl, st, sr, sb;		// simon object bbox
-		float bl, bt, br, bb;		// bomerang bbox
-		GetBoundingBox(bl, bt, br, bb);
-		CSimon::GetInstance()->GetBoundingBox(sl, st, sr, sb);
-		if (CGame::GetInstance()->IsIntersectAABB({ long(bl),long(bt), long(br), long(bb) }, { long(sl), long(st), long(sr), long(sb) }))
-		{
-			DebugOut(L"SAD12");
-			state = STATE_DESTROYED;
-		}
-	}
 }

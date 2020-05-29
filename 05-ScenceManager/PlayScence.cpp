@@ -516,12 +516,11 @@ void CPlayScene::Update(DWORD dt)
 						break;
 					case SCENE_2:
  						DebugOut(L"TEST SCENE 2!!\n");
-						ScenePortal(SCENE_2, 0, 10);
+						ScenePortal(SCENE_2, 0, CAMERA_SWITCH_SCENE2_Y);
 						break;
 					case SCENE_3:
 						DebugOut(L"TEST SCENE 3!!\n");
 						ScenePortal(SCENE_3, 0, 0);
-
 						break;
 					default:
 						break;
@@ -550,7 +549,6 @@ void CPlayScene::Render()
 	}
 
 	//viewport->Render();
-
 	//Render Simon
 	objects[0]->Render();
 }
@@ -574,30 +572,12 @@ void CPlayScene::ScenePortal(int scene_id, float view_x, float view_y)
 	CViewPort * viewport = CViewPort::GetInstance();
 	CGame *game = CGame::GetInstance();
 	game->SwitchScene(scene_id);
-
 	viewport->SetPosition({ view_x,view_y });
 }
 
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
-	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-
-	//MARIO
-	/*CMario *mario = ((CPlayScene*)scence)->player;
-	switch (KeyCode)
-	{
-	case DIK_SPACE:
-	mario->SetState(MARIO_STATE_JUMP);
-	break;
-	case DIK_A: // reset
-	mario->SetState(MARIO_STATE_IDLE);
-	mario->SetLevel(MARIO_LEVEL_BIG);
-	mario->SetPosition(50.0f, 0.0f);
-	mario->SetSpeed(0, 0);
-	break;
-	}*/
-
 	CGame *game = CGame::GetInstance();
 	//SIMON
 	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
@@ -616,8 +596,8 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_X:
 		if (simon->IsOnStair() && (game->IsKeyDown(DIK_UP) || game->IsKeyDown(DIK_DOWN) || game->IsKeyDown(DIK_LEFT) || game->IsKeyDown(DIK_RIGHT)))
 			return;
-		simon->StartAttack();
 
+		simon->StartAttack();
 		break;
 	case DIK_C:
 		if (simon->IsOnStair() && (game->IsKeyDown(DIK_UP) || game->IsKeyDown(DIK_DOWN) || game->IsKeyDown(DIK_LEFT) || game->IsKeyDown(DIK_RIGHT)))
@@ -637,7 +617,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 
 	case DIK_2:
 		DebugOut(L"SCENE 2\n");
-		OnKeySwitchScene(SCENE_2, 0, 10);
+		OnKeySwitchScene(SCENE_2, 0, CAMERA_SWITCH_SCENE2_Y);
 		break;
 	case DIK_3:
 		DebugOut(L"SCENE 3\n");
@@ -691,11 +671,11 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 		}
 		else if (simon->GetCollidingStair())
 		{
-			if (simon->GetCollidingStair()->GetNy() < 0 && ((simon->GetCollidingStair()->x - 10 <= simon->x) && (simon->x <= simon->GetCollidingStair()->x + 12)) && (simon->GetCollidingStair()->y + 20 >= simon->y))//Top
+			if (simon->GetCollidingStair()->GetNy() < 0 && ((simon->GetCollidingStair()->x - STAIR_SETBBOX_LEFT <= simon->x) && (simon->x <= simon->GetCollidingStair()->x + STAIR_SETBBOX_RIGHT)) && (simon->GetCollidingStair()->y + STAIR_ANCHOR_SIMON >= simon->y))//Top
 			{
 				float x, y;
 				simon->GetPosition(x, y);
-				simon->SetPosition(simon->GetCollidingStair()->x - (SIMON_BBOX_WIDTH - 5) / 2, y + 5); //Neo điểm Simon để xuống cầu thang 
+				simon->SetPosition(simon->GetCollidingStair()->x - (SIMON_BBOX_WIDTH - STAIR_ANCHOR_SIMON) / 2, y + STAIR_ANCHOR_SIMON); //Neo điểm Simon để xuống cầu thang 
 				simon->SetState(SIMON_STATE_GODOWN_STAIR);
 			}
 			else
@@ -712,7 +692,7 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 			simon->SetState(SIMON_STATE_GOUP_STAIR);
 		else if (simon->GetCollidingStair())
 		{
-			if (simon->GetCollidingStair()->GetNy() > 0 && ((simon->GetCollidingStair()->x - 10 <= simon->x) && (simon->x <= simon->GetCollidingStair()->x + 12)) && (simon->GetCollidingStair()->y + 20 >= simon->y))//Bottom
+			if (simon->GetCollidingStair()->GetNy() > 0 && ((simon->GetCollidingStair()->x - STAIR_SETBBOX_LEFT <= simon->x) && (simon->x <= simon->GetCollidingStair()->x + STAIR_SETBBOX_RIGHT)) && (simon->GetCollidingStair()->y + STAIR_ANCHOR_SIMON >= simon->y))//Bottom
 			{
 				float x, y;
 				simon->GetPosition(x, y);
@@ -745,22 +725,8 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 
 void CPlayScenceKeyHandler::OnKeySwitchScene(int scene_id, float view_x, float view_y)
 {
-	CSimon *simon = ((CPlayScene*)scence)->GetPlayer();
 	CViewPort * viewport = CViewPort::GetInstance();
 	CGame *game = CGame::GetInstance();
 	game->SwitchScene(scene_id);
-	switch (scene_id)
-	{
-	case SCENE_1:
-	case SCENE_2:
-		simon->Reset(START_X, START_Y);
-		break;
-	case SCENE_3:
-		//simon->Reset(START_X, START_Y);
-		simon->Reset(460, 65);
-		break;
-	default:
-		break;
-	}
 	viewport->SetPosition({ view_x,view_y });
 }

@@ -9,16 +9,13 @@
 
 CSimon* CSimon::__instance;
 CSimon::CSimon() {
-	//id = ID_SIMON;
-
+	id = ID_SIMON;
 	untouchable = 0;
 	transformtime = 0;
 	jumpStart = 0;
 	attackStart = 0;
 	attackSubStart = 0;
 	untouchableStart = 0;
-	start_x = 0;
-	start_y = 180;
 	subWeaponID = 0;
 	isOnGround = false;
 	isOnStair = false;
@@ -85,12 +82,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	// turn off collision when die 
 	if (state != SIMON_STATE_DIE) {
+
 		//Collision wall
 		if (!isOnStair)
 		{
 			CalcPotentialCollisions(&wallObjects, coEvents);
 		}
 		
+		//Coliision Object no see
 		for (auto iter : Objects)
 		{
 			float sl, st, sr, sb;		// simon object bbox
@@ -110,13 +109,31 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							iter2->isActive = true;
 						}
 					}
-
 				default:
 					break;
 				}	
 			}	
 
 		}
+
+		//Collision SubWeapon
+		for (auto iter : subWeapon)
+		{
+			float sl, st, sr, sb;		// simon object bbox
+			float wl, wt, wr , wb;		// object bbox
+			GetBoundingBox(sl, st, sr, sb);
+			iter->GetBoundingBox(wl, wt, wr , wb);
+			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(wl), long(wt), long(wr ), long(wb) })) {
+				switch (iter->GetID()) {
+				case ID_BOOMERANG:
+					iter->SetState(STATE_DESTROYED);
+					break;
+				default:
+					break;
+				}
+			}
+		}
+
 
 		//Collision Item
 		for (auto iter : itemObjects) {
@@ -173,6 +190,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 
 	CViewPort* viewport = CViewPort::GetInstance();
+	
+	//Enemy Out of Camera
 	for (size_t i = 0; i < enemyObjects.size(); i++)
 	{
 		float ol, ot, or , ob;		// enemy bbox
@@ -190,7 +209,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		{
 			if (y > vr)
 			{
-				Reset(460, 80);
+				//Reset(460, 80);
 			}
 		}
 		
@@ -227,6 +246,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 		else y += dy;
 
+		//On Bridge
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i]; 
@@ -235,11 +255,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				CBridge* bridge = dynamic_cast<CBridge *>(e->obj);
 				if (e->ny != 0)
 				{
-					x += bridge->vx*dt*2;
-					vx = vx;
+					x += bridge->vx*2*dt;
 				}
-
-
 			}
 			
 		}
@@ -262,7 +279,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		untouchableStart = 0;
 		untouchable = 0;
-		ResetAnimation();
+		
 	}
 	
 	// transform simon
@@ -536,6 +553,7 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	}
 	else if (attackStart > 0)
 	{
+		ResetAnimation();
 		attackStart = 0;
 		if (state == SIMON_STATE_SIT_ATTACK)
 		{
@@ -655,6 +673,12 @@ void CSimon::StartAttackSub() {
 	if (subWeaponID == 0)
 		return;
 
+	for (auto iter : subWeapon)
+	{
+		if (iter->state != STATE_DESTROYED)
+			return;
+	}
+
 	//Reset Animation Whip
 	ResetAnimation();
 	whip->ResetAnimation();
@@ -678,7 +702,10 @@ void CSimon::StartAttackSub() {
 			subWeapon.push_back(new CDagger({ x, y+ WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		case ID_BOOMERANG:
-			subWeapon.push_back(new CBoomerang({ x + 7, y+ WEAPON_SIMON_SIT_ATTACK }, nx));
+			if (nx > 0)
+				subWeapon.push_back(new CBoomerang({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
+			else
+				subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		default:
 			break;
@@ -692,7 +719,11 @@ void CSimon::StartAttackSub() {
 			subWeapon.push_back(new CDagger({ x, y }, nx));
 			break;
 		case ID_BOOMERANG:
-			subWeapon.push_back(new CBoomerang({ x + 7, y }, nx));
+			if (nx > 0)
+				subWeapon.push_back(new CBoomerang({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y  }, nx));
+			else
+				subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
+			break;
 			break;
 		default:
 			break;
@@ -732,7 +763,6 @@ void CSimon::StartEatItem()
 	transformtime = 1;
 	eatItemStart = GetTickCount();
 	LockUpdate();
-
 }
 
 void CSimon::Reset(int x,int y)
