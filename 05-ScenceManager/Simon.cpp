@@ -553,7 +553,7 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	}
 	else if (attackStart > 0)
 	{
-		ResetAnimation();
+		
 		attackStart = 0;
 		if (state == SIMON_STATE_SIT_ATTACK)
 		{
