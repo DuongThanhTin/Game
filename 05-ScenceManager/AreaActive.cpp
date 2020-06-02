@@ -7,12 +7,13 @@ CAreaActive::CAreaActive() {
 	id = ID_GROUND;
 }
 
-CAreaActive::CAreaActive(D3DXVECTOR2 position, int width, int height)
+CAreaActive::CAreaActive(D3DXVECTOR2 position, int width, int height, int specEnemyActive)
 {
 	this->width = width;
 	this->height = height;
 	this->x = position.x;
 	this->y = position.y;
+	this->specEnemyActive = specEnemyActive;
 	id = ID_AREAACTIVE;
 }
 

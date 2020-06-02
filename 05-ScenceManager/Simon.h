@@ -8,6 +8,8 @@
 #include "Boomerang.h"
 #include "Stair.h"
 #include "Bridge.h"
+#include "AreaActive.h"
+#include "Bat.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
@@ -88,7 +90,7 @@ class CSimon : public CGameObject
 	int transformtime;
 
 	bool isOnGround;
-	bool isLockUpdate =false;
+
 
 	float start_x, start_y;
 
@@ -108,6 +110,7 @@ class CSimon : public CGameObject
 
 public:
 	bool isOnStair;
+	bool isLockUpdate = false;
 	CSimon();
 	static CSimon* GetInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);

@@ -40,10 +40,16 @@ See scene1.txt, scene2.txt for detail format specification
 #define OBJECT_TYPE_TORCH	6
 #define OBJECT_TYPE_HEART	7
 #define OBJECT_TYPE_BRIDGE	8
+#define OBJECT_TYPE_STAIR	9
+#define OBJECT_TYPE_AREAACTIVE 10
+#define OBJECT_TYPE_CANDLE 11
 #define OBJECT_TYPE_SPEARKNIGHT	40
 #define OBJECT_TYPE_BAT	41
 
 #define OBJECT_TYPE_PORTAL	50
+#define OBJECT_TYPE_WHIP 90
+#define OBJECT_TYPE_DAGGER 91
+#define OBJECT_TYPE_BOOMERANG 92
 
 #define MAX_SCENE_LINE 1024
 
@@ -225,12 +231,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_SIMON:
 		if (player != NULL)
 		{
-			DebugOut(L"[ERROR] MARIO object was created before!\n");
+			DebugOut(L"[ERROR] SIMON object was created before!\n");
 			return;
 		}
+
 		obj = new CSimon();
 		player = (CSimon*)obj;
 		DebugOut(L"[INFO] Player object created!\n");
+		obj->SetPosition(x, y);
 		break;
 	case OBJECT_TYPE_SPEARKNIGHT:
 	{
@@ -244,7 +252,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	{
 		int itemId = atoi(tokens[4].c_str());
 		float falldown = atoi(tokens[5].c_str());
-		obj = new CBat({ x,y }, 1, itemId, falldown);
+		int area_id = atoi(tokens[6].c_str());
+		DebugOut(L"CBAT %d\n", area_id);
+		obj = new CBat({ x,y }, 1, itemId, falldown, area_id);
 		break;
 	}
 	case OBJECT_TYPE_BRIDGE:
@@ -256,6 +266,64 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
+	case OBJECT_TYPE_BRICK:
+	{
+		int width = atoi(tokens[4].c_str());
+		int height = atoi(tokens[5].c_str());
+		obj = new CBrick({ x,y + height + MAP_HUD }, width, height);
+		DebugOut(L"Brick");
+		break;
+	}
+
+	case OBJECT_TYPE_TORCH:
+	{
+		int height = atoi(tokens[5].c_str());
+		int value = atoi(tokens[6].c_str());
+		obj = new CTorch({ x,y + height + MAP_HUD }, value);
+		DebugOut(L"Torch %d\n", value);
+		break;
+	}
+
+	case OBJECT_TYPE_STAIR:
+	{
+		int width = atoi(tokens[4].c_str());
+		int height = atoi(tokens[5].c_str());
+		int nx = atoi(tokens[6].c_str());
+		int ny = atoi(tokens[7].c_str());
+		int longStair = atoi(tokens[8].c_str());
+		obj = new CStair({ x,y + height + MAP_HUD }, width, height, longStair, nx, ny);
+		//DebugOut(L"Torch %d\n", value);
+		break;
+	}
+
+	case OBJECT_TYPE_AREAACTIVE:
+	{
+		int width = atoi(tokens[4].c_str());
+		int height = atoi(tokens[5].c_str());
+		int specEnemyActive = atoi(tokens[6].c_str());
+		obj = new CAreaActive({ x,y + height + MAP_HUD }, width, height, specEnemyActive);
+		break;
+	}
+
+	case OBJECT_TYPE_CANDLE:
+	{
+		int height = atoi(tokens[5].c_str());
+		int value = atoi(tokens[6].c_str());
+		obj = new CCandle({ x,y + height + MAP_HUD }, value);
+		DebugOut(L"Candle %d\n", value);
+		break;
+	}
+
+	case OBJECT_TYPE_DAGGER:
+	{
+
+	}
+	case OBJECT_TYPE_BOOMERANG:
+	{
+
+	}
+
+	//Portal
 	case OBJECT_TYPE_PORTAL:
 	{
 		float r = atof(tokens[4].c_str());
@@ -263,99 +331,22 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int scene_id = atoi(tokens[6].c_str());
 		obj = new CPortal(x, y, r, b, scene_id);
 		DebugOut(L"[NICE PORTAL]!\n");
+		obj->SetPosition(x, y);
+		break;
 	}
 
-	break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
 	}
 
 	// General object setup
-	obj->SetPosition(x, y);
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 	obj->SetAnimationSet(ani_set);
 	objects.push_back(obj);
 }
 
-void CPlayScene::LoadMapSceneObjects(LPCWSTR path)
-{
-	ifstream file(path);
-	json j = json::parse(file);
-	LPANIMATION_SET ani_set;
 
-	for (auto i : j["layers"])
-	{
-		if (i["name"] == "brick") {	// brick objects
-			for (auto iter : i["objects"])
-			{
-				float x = iter["x"].get<float>();
-				float y = iter["y"].get<float>();
-				int width = iter["width"].get<int>();
-				int height = iter["height"].get<int>();
-				obj = new CBrick({ x,y + height + MAP_HUD }, width, height);
-				objects.push_back(obj);
-			}
-		}
-		else if (i["name"] == "torch") {	// torch objects
-			for (auto iter : i["objects"])
-			{
-				float x = float(iter["x"]);
-				float y = float(iter["y"]);
-				int ani = iter["properties"][1]["value"].get<int>();
-				int value = iter["properties"][0]["value"].get<int>();
-				CAnimationSets * animation_sets = CAnimationSets::GetInstance();
-				DebugOut(L"Torch %d %d\n", ani, value);
-				obj = new CTorch({ x, y + iter["height"] + MAP_HUD }, value);
-				ani_set = animation_sets->Get(ani);
-				obj->SetAnimationSet(ani_set);
-				objects.push_back(obj);
-			}
-		}
-		else if (i["name"] == "candle") {	// candle objects
-			for (auto iter : i["objects"])
-			{
-				float x = float(iter["x"]);
-				float y = float(iter["y"]);
-				int ani = iter["properties"][1]["value"].get<int>();
-				int value = iter["properties"][0]["value"].get<int>();
-				CAnimationSets * animation_sets = CAnimationSets::GetInstance();
-				DebugOut(L"Candle %d %d\n", ani, value);
-				obj = new CCandle({ x, y + iter["height"] + MAP_HUD }, value);
-				ani_set = animation_sets->Get(ani);
-				obj->SetAnimationSet(ani_set);
-				objects.push_back(obj);
-			}
-		}
-		else if (i["name"] == "stair") {	// stair objects
-			for (auto iter : i["objects"])
-			{
-				float x = float(iter["x"]);
-				float y = float(iter["y"]);
-				float width = float(iter["width"]);
-				float height = float(iter["height"]);
-				int longStair = iter["properties"][0]["value"].get<int>();
-				int nx = iter["properties"][1]["value"].get<int>();
-				int ny = iter["properties"][2]["value"].get<int>();
-				DebugOut(L"Stair\n");
-				obj = new CStair({ x, y + height + MAP_HUD }, width, height, longStair, nx, ny);
-				objects.push_back(obj);
-			}
-		}
-		else if (i["name"] == "areaactive") {	// areaactive objects
-			for (auto iter : i["objects"])
-			{
-				float x = float(iter["x"]);
-				float y = float(iter["y"]);
-				float width = float(iter["width"]);
-				float height = float(iter["height"]);
-				obj = new CAreaActive({ x, y + height + MAP_HUD }, width, height);
-				objects.push_back(obj);
-
-			}
-		}
-	}
-}
 
 //MAP
 void CPlayScene::_ParseSection_MAP_SCENE(string line)
@@ -369,8 +360,6 @@ void CPlayScene::_ParseSection_MAP_SCENE(string line)
 	DebugOut(L"[DONE1] Done loading tileSet\n");
 	tileMap->LoadFromFile(path.c_str());
 	DebugOut(L"[DONE2] Done loading tileMap\n");
-	LoadMapSceneObjects(path.c_str());
-	DebugOut(L"[DONE3] Done loading Load Object in json\n");
 }
 
 
@@ -383,6 +372,7 @@ void CPlayScene::Load()
 
 	tileMap = new CTileMap();
 	tileSet = new CTileSet();
+
 
 	ifstream f;
 	f.open(sceneFilePath);
@@ -436,7 +426,7 @@ void CPlayScene::Update(DWORD dt)
 	// TO-DO: This is a "dirty" way, need a more organized way
 	D3DXVECTOR2 playerPosition;
 	vector<LPGAMEOBJECT> coObjects;
-
+	if (player == NULL) return;
 	if (player->GetLockUpdate() > 0)
 	{
 		objects[0]->Update(dt, &coObjects);
@@ -559,7 +549,18 @@ Unload current scene
 void CPlayScene::Unload()
 {
 	for (int i = 0; i < objects.size(); i++)
-		delete objects[i];
+	{
+		if (objects[i]->GetID()==ID_SIMON)
+		{
+			//DebugOut(L"ASDASDASDAS\n");
+			//playersub = player;
+			//DebugOut(L"zzz %d", player->GetState());
+			//playersub->SetState(player->GetState());
+	
+		}
+		else
+			delete objects[i];
+	}
 
 	objects.clear();
 	player = NULL;
@@ -662,6 +663,12 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	else
 		simon->SetState(SIMON_STATE_IDLE);
 
+	if ( game->IsKeyDown(DIK_UP) && game->IsKeyDown(DIK_LEFT))
+	{
+		simon->SetSpeed(0, 0);
+		return;
+	}
+
 	// KEY DOWN
 	if (game->IsKeyDown(DIK_DOWN))
 	{
@@ -689,14 +696,16 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	if (game->IsKeyDown(DIK_UP))
 	{
 		if (simon->IsOnStair())
+		{
 			simon->SetState(SIMON_STATE_GOUP_STAIR);
+		}
 		else if (simon->GetCollidingStair())
 		{
 			if (simon->GetCollidingStair()->GetNy() > 0 && ((simon->GetCollidingStair()->x - STAIR_SETBBOX_LEFT <= simon->x) && (simon->x <= simon->GetCollidingStair()->x + STAIR_SETBBOX_RIGHT)) && (simon->GetCollidingStair()->y + STAIR_ANCHOR_SIMON >= simon->y))//Bottom
 			{
 				float x, y;
 				simon->GetPosition(x, y);
-				simon->SetPosition(simon->GetCollidingStair()->x, y); //Neo điểm Simon để lên cầu thang 
+				simon->SetPosition(simon->GetCollidingStair()->x + 2, y); //Neo điểm Simon để lên cầu thang 
 				simon->SetState(SIMON_STATE_GOUP_STAIR);
 			}
 		}

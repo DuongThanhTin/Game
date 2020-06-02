@@ -1,8 +1,24 @@
-﻿  Simon.cpp
-d:\game2020\game\05-scencemanager\simon.cpp(51): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(59): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(71): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(79): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(770): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  PlayScence.cpp
+d:\game2020\game\05-scencemanager\playscence.cpp(50): warning C4005: 'OBJECT_TYPE_WHIP': macro redefinition
+  d:\game2020\game\05-scencemanager\playscence.cpp(38): note: see previous definition of 'OBJECT_TYPE_WHIP'
+d:\game2020\game\05-scencemanager\playscence.cpp(146): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(147): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(174): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(198): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(222): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(223): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(246): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(247): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(254): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(262): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(263): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(329): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(330): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(446): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(453): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(484): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(530): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(536): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(551): warning C4018: '<': signed/unsigned mismatch
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

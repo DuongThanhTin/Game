@@ -1,12 +1,24 @@
 [INFOOBJECTS]
 #path
-info-objects.txt
+info-objects_scene1.txt
 
 [OBJECTS]
 # Objecttype	x	y	ani_set_id	extra_settings per object type
 # Object type in Visual: 0 = Mario , 1 = Brick, 2 = Goomba, 5 = Zombie, 6 = Torch
 # SIMON
 0	50	150	1
+
+#BRICK
+1	0	144	2	768	16
+1	767	-1	2	16	146
+1	-15	0	2	16	144
+
+#Torch
+6	90	114	5	18	30	21
+6	217	114	5	18	30	22
+6	334	114	5	18	30	22
+6	471	114	5	18	30	21
+6	598	114	5	18	30	23
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id

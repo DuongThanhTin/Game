@@ -164,6 +164,11 @@ int CGameObject::GetNextItemID()
 	return this->nextItemID;
 }
 
+int CGameObject::GetAreaActiveEnemy()
+{
+	return this->areaactive_enemy;
+}
+
 
 CGameObject::~CGameObject()
 {

@@ -14,7 +14,7 @@ CBat::~CBat()
 {
 }
 
-CBat::CBat(D3DXVECTOR2 position,int nx, int nextItemID, float falldown)
+CBat::CBat(D3DXVECTOR2 position,int nx, int nextItemID, float falldown , int area_id)
 {
 	x = position.x;
 	y = position.y;
@@ -26,6 +26,7 @@ CBat::CBat(D3DXVECTOR2 position,int nx, int nextItemID, float falldown)
 	AddAnimation(ANI_DESTROY);
 	vx = 0;
 	this->nextItemID = nextItemID;
+	areaactive_enemy = area_id;
 }
 
 void CBat::GetBoundingBox(float &left, float &top, float &right, float &bottom)

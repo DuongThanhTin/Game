@@ -24,7 +24,7 @@ class CBat : public CEnemy
 	virtual void Render();
 public:
 	CBat();
-	CBat(D3DXVECTOR2 position, int nx, int nextItemID, float falldown);
+	CBat(D3DXVECTOR2 position, int nx, int nextItemID, float falldown, int area_id);
 	~CBat();
 	virtual void SetState(int state);
 };

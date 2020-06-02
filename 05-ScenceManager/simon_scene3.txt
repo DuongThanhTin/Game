@@ -1,12 +1,40 @@
 [INFOOBJECTS]
 #path
-info-objects.txt
+info-objects_scene2.txt
 
 [OBJECTS]
 # Objecttype	x	y	ani_set_id	extra_settings per object type
 # Object type in Visual: 0 = Mario , 1 = Brick, 2 = Goomba, 5 = Zombie, 6 = Torch
 # SIMON
-0	460	65	1
+0	400	165	1
+# BRICK
+1	480	0	2	32	160
+1	352	81	2	32	64
+1	352	65	2	96	16
+1	320	129	2	32	16
+1	288	96	2	32	16
+1	192	65	2	96	16
+1	95	65	2	64	15
+1	64	97	2	32	16
+1	0	65	2	32	16
+1	464	97	2	16	16
+1	224	80	2	48	80
+1	0	80	2	16	78
+1	0	0	2	16	16
+
+#CANDLE
+11	457	3	8	12	12	20
+11	330	4	8	12	12	20
+11	201	4	8	12	12	20
+11	42	2	8	12	12	20
+11	395	4	8	12	12	20
+11	137	4	8	12	12	20
+
+#AREACTIVE
+10	390	22	14	9	41	2
+
+#STAIR
+9	455	91	13	18	5	1	-1	63
 
 # SPEAR KNIGHT
 40	98	50	9	20	96	150
@@ -16,7 +44,7 @@ info-objects.txt
 8	55	135	12	35	62
 
 #BAT
-41	296	82	11	20	110
+41	296	82	11	20	110	2
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id

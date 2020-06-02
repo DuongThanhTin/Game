@@ -61,6 +61,7 @@ public:
 	int state;
 	int id;
 	int nextItemID;
+	int areaactive_enemy;
 
 	bool isOnGround;
 	bool isActive;
@@ -106,6 +107,7 @@ public:
 	int GetNx();
 	int GetNy();
 	int GetNextItemID();
+	int GetAreaActiveEnemy();
 
 	~CGameObject();
 };

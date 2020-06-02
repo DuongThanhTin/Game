@@ -88,7 +88,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		{
 			CalcPotentialCollisions(&wallObjects, coEvents);
 		}
-		
+
 		//Coliision Object no see
 		for (auto iter : Objects)
 		{
@@ -104,9 +104,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				case ID_AREAACTIVE:
 					for (auto iter2 : enemyObjects)
 					{
+						CAreaActive *area = dynamic_cast<CAreaActive*>(iter);
+
 						if (iter2->GetID() == ID_BAT)
 						{
-							iter2->isActive = true;
+							if (area->GetspecEnemyActive() == iter2->GetAreaActiveEnemy())
+							{
+								iter2->isActive = true;
+							}
 						}
 					}
 				default:
@@ -481,6 +486,7 @@ void CSimon::SetState(int state)
 		vx = 0;
 		break;
 	case SIMON_STATE_IDLE_STAIR:
+		isOnStair = true;
 		break;
 	case SIMON_STATE_ATTACK:
 		break;
