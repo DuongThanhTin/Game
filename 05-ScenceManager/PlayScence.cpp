@@ -45,6 +45,7 @@ See scene1.txt, scene2.txt for detail format specification
 #define OBJECT_TYPE_CANDLE 11
 #define OBJECT_TYPE_SPEARKNIGHT	40
 #define OBJECT_TYPE_BAT	41
+#define OBJECT_TYPE_AREASWITCHCAM	90
 
 #define OBJECT_TYPE_PORTAL	50
 #define OBJECT_TYPE_WHIP 90
@@ -314,13 +315,16 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	}
 
-	case OBJECT_TYPE_DAGGER:
+	case OBJECT_TYPE_AREASWITCHCAM:
 	{
-
-	}
-	case OBJECT_TYPE_BOOMERANG:
-	{
-
+		int width = atoi(tokens[4].c_str());
+		int height = atoi(tokens[5].c_str());
+		int scene_id = atoi(tokens[6].c_str());
+		int player_x = atoi(tokens[7].c_str());
+		int player_y = atoi(tokens[8].c_str());
+		obj = new CAreaSwitchCam({ x,y + height + MAP_HUD }, width, height, scene_id, player_x, player_y);
+		DebugOut(L"CAreaSwitchCam %d\n", scene_id);
+		break;
 	}
 
 	//Portal
@@ -506,7 +510,7 @@ void CPlayScene::Update(DWORD dt)
 						break;
 					case SCENE_2:
  						DebugOut(L"TEST SCENE 2!!\n");
-						ScenePortal(SCENE_2, 0, CAMERA_SWITCH_SCENE2_Y);
+						ScenePortal(SCENE_2, CAMERA_SWITCHSCENE2_X, CAMERA_SWITCHSCENE2_Y);
 						break;
 					case SCENE_3:
 						DebugOut(L"TEST SCENE 3!!\n");
@@ -517,10 +521,58 @@ void CPlayScene::Update(DWORD dt)
 					}
 				}
 			}
+
+			if (iter->GetID() == ID_PORTAL) {
+				CPortal* portal = dynamic_cast<CPortal *>(iter);
+				float x, y;
+				player->GetPosition(x, y);
+				switch (portal->GetSceneId())
+				{
+				//SCENE 1 have NEXT SCENE 2, case is: "NEXT SCENE"
+				case SCENE_2://NEXT SCENE
+					viewport->Update(playerPosition, 0, tileMap->GetLimitedViewPort());
+					break;
+				case SCENE_3: 
+					DebugOut(L"SCENE 2\n");
+					if (y > SCENE2_SIMON_SWITCH_Y && !player->GetSwitchCam())
+					{
+						ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCHSCENE2_Y }, CAMERA_SCENE2_X);
+					}
+					else if (y < SCENE2_SIMON_SWITCH_Y && player->GetSwitchCam())
+					{
+						ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCH_SCENE2_1_Y }, 0);
+					}
+					else
+						ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCHSCENE2_Y }, CAMERA_SCENE2_X);
+					break;
+				case SCENE_4:
+					if (y > SCENE3_SIMON_SWITCH_Y)
+					{
+						ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCHSCENE2_Y }, 0);
+					}
+					else
+					{
+						ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCH_SCENE2_1_Y }, 0);
+					}
+					
+					break;
+				default:
+				
+					break;
+				}
+			}
 		}
 	}
 
 }
+
+void CPlayScene::ChangeView(D3DXVECTOR2 playerPosition, D3DXVECTOR2 setPlayerPosition, D3DXVECTOR2 cameraPosition, int cameraStart)
+{
+	player->SetPosition(setPlayerPosition.x, setPlayerPosition.y);
+	viewport->SetPosition({ cameraPosition.x, cameraPosition.y });
+	viewport->Update(playerPosition, cameraStart, tileMap->GetLimitedViewPort());
+}
+
 
 void CPlayScene::Render()
 {
@@ -552,11 +604,7 @@ void CPlayScene::Unload()
 	{
 		if (objects[i]->GetID()==ID_SIMON)
 		{
-			//DebugOut(L"ASDASDASDAS\n");
-			//playersub = player;
-			//DebugOut(L"zzz %d", player->GetState());
-			//playersub->SetState(player->GetState());
-	
+			;
 		}
 		else
 			delete objects[i];
@@ -618,7 +666,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 
 	case DIK_2:
 		DebugOut(L"SCENE 2\n");
-		OnKeySwitchScene(SCENE_2, 0, CAMERA_SWITCH_SCENE2_Y);
+		OnKeySwitchScene(SCENE_2, CAMERA_SWITCHSCENE2_X, CAMERA_SWITCHSCENE2_X);
 		break;
 	case DIK_3:
 		DebugOut(L"SCENE 3\n");
@@ -663,11 +711,12 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	else
 		simon->SetState(SIMON_STATE_IDLE);
 
-	if ( game->IsKeyDown(DIK_UP) && game->IsKeyDown(DIK_LEFT))
+	if ( game->IsKeyDown(DIK_UP) && (game->IsKeyDown(DIK_LEFT)|| game->IsKeyDown(DIK_RIGHT)))
 	{
 		simon->SetSpeed(0, 0);
 		return;
 	}
+
 
 	// KEY DOWN
 	if (game->IsKeyDown(DIK_DOWN))

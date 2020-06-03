@@ -73,6 +73,13 @@ void CBridge::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					x += dx;
 				}
 			}
+			else if (dynamic_cast<CBrick*>(e->obj))
+			{
+				if (e->nx != 0)
+				{
+					this->vx *= -1;
+				}
+			}
 		}
 
 

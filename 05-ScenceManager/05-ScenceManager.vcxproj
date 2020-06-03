@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="AreaActive.cpp" />
+    <ClCompile Include="AreaSwitchCam.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="BoomerangItem.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="DaggerItem.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Heart.cpp" />
+    <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="ListItem.cpp" />
@@ -167,6 +169,7 @@
   <ItemGroup>
     <ClInclude Include="Animations.h" />
     <ClInclude Include="AreaActive.h" />
+    <ClInclude Include="AreaSwitchCam.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="Boomerang.h" />
     <ClInclude Include="BoomerangItem.h" />
@@ -178,6 +181,7 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Heart.h" />
+    <ClInclude Include="Hud.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="ListItem.h" />

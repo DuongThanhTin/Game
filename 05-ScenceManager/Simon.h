@@ -10,6 +10,7 @@
 #include "Bridge.h"
 #include "AreaActive.h"
 #include "Bat.h"
+#include "AreaSwitchCam.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
@@ -111,6 +112,7 @@ class CSimon : public CGameObject
 public:
 	bool isOnStair;
 	bool isLockUpdate = false;
+	bool isSwitchCam;
 	CSimon();
 	static CSimon* GetInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -143,6 +145,6 @@ public:
 	int GetLockUpdate() { return isLockUpdate; }
 	void LockUpdate() { isLockUpdate = true; }
 	void UnLockUpdate() { isLockUpdate = false; }
-
+	int GetSwitchCam() { return isSwitchCam; }
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

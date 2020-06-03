@@ -75,8 +75,7 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					{
 						if (e->nx != 0)
 						{
-							nx = -nx;
-							vx = nx*vx;
+							this->vx *= -1;
 						}
 					}
 				}
@@ -97,11 +96,12 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	else
 		vy += SPEARKNIGHT_GRAVITY*dt;
 
+
 	if (x<=limitedLeft) {
 		vx = -vx;
 	}
 
-	if (x >= limitedRight) {
+	else if (x >= limitedRight) {
 		vx = -vx;
 	}
 }

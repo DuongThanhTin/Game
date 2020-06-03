@@ -20,6 +20,7 @@ CSimon::CSimon() {
 	isOnGround = false;
 	isOnStair = false;
 	isLockUpdate = false;
+	isSwitchCam = false;
 	eatItemStart = 0;
 	collidingStair = NULL;
 	whipSwitchSceneLevel = CWhip::GetInstance();
@@ -114,6 +115,26 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							}
 						}
 					}
+					break;
+
+				case ID_AREASWITCHCAM:
+				{
+					CAreaSwitchCam *areaswitchcam = dynamic_cast<CAreaSwitchCam*>(iter);
+					if (dynamic_cast<CAreaSwitchCam*>(iter))
+					{
+						switch (areaswitchcam->GetSceneID())
+						{
+						case SCENE_2:
+							isSwitchCam = true;
+							SetPosition(areaswitchcam->GetPlayerX(), y);
+						case SCENE_3:
+							//isSwitchCam = true;
+							SetPosition(areaswitchcam->GetPlayerX(), y - areaswitchcam->GetPlayerY());
+						default:
+							break;
+						}
+					}
+				}
 				default:
 					break;
 				}	
@@ -263,7 +284,13 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					x += bridge->vx*2*dt;
 				}
 			}
-			
+			else if (dynamic_cast<CBrick*>(e->obj))
+			{
+				if (!(e->ny && e->nx) && vy > 0)
+				{
+					
+				}
+			}
 		}
 	}
 	
@@ -332,7 +359,8 @@ void CSimon::Render()
 	}
 
 	else if (state == SIMON_STATE_JUMP) {
-		if (!isOnGround) {
+		if (vy < 0) //!isOnGround
+		{ 
 			if (nx > 0)
 				ani = SIMON_ANI_SIT_RIGHT;
 			else
@@ -384,7 +412,7 @@ void CSimon::Render()
 	else if (state == SIMON_STATE_GOUP_STAIR) {
 		if (nx > 0)
 			ani = SIMON_ANI_STAIR_GOUP_RIGHT;
-		else
+		else 
 			ani = SIMON_ANI_STAIR_GOUP_LEFT;
 	}
 	else if (state == SIMON_STATE_GODOWN_STAIR) {
@@ -550,6 +578,14 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			{
 				whip_X = x;
 			}
+			else if (nx > 0 && ny < 0)
+			{
+				whip_X = x;
+			}
+			else if (nx < 0 && ny > 0)
+			{
+				whip_X = x+7;
+			}
 		}
 		else
 		{
@@ -651,7 +687,7 @@ void CSimon::StartAttack() {
 
 	if (state != SIMON_STATE_JUMP)
 		vx = 0;
-	
+
 	//Reset Animation Whip
 	ResetAnimation();
 	whip->ResetAnimation();
@@ -665,6 +701,8 @@ void CSimon::StartAttack() {
 	else
 		SetState(SIMON_STATE_ATTACK);
 	attackStart = GetTickCount();
+
+
 }
 
 void CSimon::StartAttackSub() {
@@ -685,9 +723,11 @@ void CSimon::StartAttackSub() {
 			return;
 	}
 
+
 	//Reset Animation Whip
 	ResetAnimation();
 	whip->ResetAnimation();
+
 
 	if (state == SIMON_STATE_SIT)
 		SetState(SIMON_STATE_SIT_ATTACK);
@@ -735,6 +775,8 @@ void CSimon::StartAttackSub() {
 			break;
 		}
 	}
+
+
 }
 
 void CSimon::UpdateOnStair()

@@ -22,6 +22,7 @@
 #include "Bat.h"
 #include "AreaActive.h"
 #include "Bridge.h"
+#include "AreaSwitchCam.h"
 
 class CPlayScene: public CScene
 {
@@ -57,6 +58,7 @@ public:
 	virtual void Render();
 	virtual void Unload();
 	virtual void ScenePortal(int scene_id, float view_x, float view_y);
+	virtual void ChangeView(D3DXVECTOR2 playerPosition, D3DXVECTOR2 setPlayerPosition, D3DXVECTOR2 cameraPosition, int cameraStart);
 	CSimon * GetPlayer() { return player; }
 
 	friend class CPlayScenceKeyHandler;
