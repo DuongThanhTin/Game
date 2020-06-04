@@ -1,4 +1,21 @@
-﻿  Simon.cpp
+﻿  main.cpp
+  Zombie.cpp
+  WhipUpgrade.cpp
+  Whip.cpp
+  Weapon.cpp
+d:\game2020\game\05-scencemanager\weapon.cpp(17): warning C4018: '<': signed/unsigned mismatch
+  ViewPort.cpp
+d:\game2020\game\05-scencemanager\viewport.cpp(51): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
+d:\game2020\game\05-scencemanager\viewport.cpp(53): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
+  Torch.cpp
+  TileMap.cpp
+d:\game2020\game\05-scencemanager\tilemap.cpp(54): warning C4244: 'argument': conversion from 'FLOAT' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\tilemap.cpp(130): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\tilemap.cpp(131): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
+  Stair.cpp
+  SpearKnight.cpp
+  SmallHeart.cpp
+  Simon.cpp
 d:\game2020\game\05-scencemanager\simon.cpp(52): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\simon.cpp(60): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\simon.cpp(72): warning C4018: '<': signed/unsigned mismatch
@@ -6,5 +23,65 @@ d:\game2020\game\05-scencemanager\simon.cpp(80): warning C4018: '<': signed/unsi
 d:\game2020\game\05-scencemanager\simon.cpp(129): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\simon.cpp(132): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\simon.cpp(818): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Portal.cpp
+d:\game2020\game\05-scencemanager\portal.cpp(9): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\portal.cpp(10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  PlayScence.cpp
+d:\game2020\game\05-scencemanager\playscence.cpp(51): warning C4005: 'OBJECT_TYPE_WHIP': macro redefinition
+  d:\game2020\game\05-scencemanager\playscence.cpp(38): note: see previous definition of 'OBJECT_TYPE_WHIP'
+d:\game2020\game\05-scencemanager\playscence.cpp(147): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(148): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(175): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(199): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(223): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(224): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(247): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(248): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(255): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(263): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(264): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(333): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(334): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(450): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(457): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(488): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(582): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(588): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(603): warning C4018: '<': signed/unsigned mismatch
+  ObjectNoMove.cpp
+d:\game2020\game\05-scencemanager\objectnomove.cpp(18): warning C4018: '<': signed/unsigned mismatch
+  MoneyBag.cpp
+  Mario.cpp
+  ListItem.cpp
+  Koopas.cpp
+  Item.cpp
+d:\game2020\game\05-scencemanager\item.cpp(24): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Compiling...
+  Heart.cpp
+  Goomba.cpp
+  GameObject.cpp
+d:\game2020\game\05-scencemanager\gameobject.cpp(147): warning C4244: 'argument': conversion from 'FLOAT' to 'int', possible loss of data
+  Game.cpp
+d:\game2020\game\05-scencemanager\game.cpp(68): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  Enemy.cpp
+d:\game2020\game\05-scencemanager\enemy.cpp(26): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\enemy.cpp(74): warning C4018: '<': signed/unsigned mismatch
+  DaggerItem.cpp
+  Dagger.cpp
+  Candle.cpp
+  Bridge.cpp
+  Brick.cpp
+  BoomerangItem.cpp
+  Boomerang.cpp
+  Bat.cpp
+d:\game2020\game\05-scencemanager\bat.cpp(87): warning C4060: switch statement contains no 'case' or 'default' labels
+  AreaSwitchCam.cpp
+  AreaActive.cpp
+  Animations.cpp
+  Generating Code...
+  Compiling...
+  AxeItem.cpp
+  Generating Code...
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

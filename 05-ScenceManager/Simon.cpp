@@ -63,7 +63,10 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			listItem->ListItem[i]->GetID() == ID_WHIPUPGRADE ||
 			listItem->ListItem[i]->GetID() == ID_DAGGERITEM ||
 			listItem->ListItem[i]->GetID() == ID_MONEYBAG ||
-			listItem->ListItem[i]->GetID() == ID_BOOMERANGITEM)
+			listItem->ListItem[i]->GetID() == ID_BOOMERANGITEM ||
+			listItem->ListItem[i]->GetID() == ID_AXEITEM ||
+			listItem->ListItem[i]->GetID() == ID_MONEYBAGWHITE ||
+			listItem->ListItem[i]->GetID() == ID_MONEYBAGBLUE)
 			itemObjects.push_back(listItem->ListItem[i]);
 	}
 
@@ -191,6 +194,12 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					DebugOut(L"Collsion BOOMERANGITEM\n");
 					break;
 				case ID_SMALLHEART:
+					DebugOut(L"Collsion SmallHeart\n");
+				case ID_AXEITEM:
+					DebugOut(L"Collsion SmallHeart\n");
+				case ID_MONEYBAGWHITE:
+					DebugOut(L"Collsion SmallHeart\n");
+				case ID_MONEYBAGBLUE:
 					DebugOut(L"Collsion SmallHeart\n");
 				default:
 					break;

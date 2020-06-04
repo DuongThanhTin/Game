@@ -138,6 +138,9 @@
     <ClCompile Include="AreaSwitchCam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AxeItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -264,6 +267,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AreaSwitchCam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AxeItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

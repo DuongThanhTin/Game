@@ -42,12 +42,15 @@
 #define ID_BOOMERANGITEM 24
 #define ID_AXEITEM 25
 #define ID_MONEYBAG 26
+#define ID_MONEYBAGWHITE 27
+#define ID_MONEYBAGBLUE 28
 
 
 //WEAPON
 #define ID_WHIP	30
 #define ID_DAGGER 31
 #define ID_BOOMERANG 32
+#define ID_AXE 33
 
 //EFFECT
 #define TIME_FIRE	150
