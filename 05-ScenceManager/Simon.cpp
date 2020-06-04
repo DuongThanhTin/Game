@@ -211,6 +211,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					DebugOut(L"Collsion ID_MONEYBAGBLUE\n");
 					break;
 				case ID_HOLYWATERITEM:
+					SetSubWeapon(ID_HOLYWATER);
 					DebugOut(L"Collsion ID_HOLYWATERITEM\n");
 					break;
 				default:
@@ -655,7 +656,7 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	CViewPort* viewport = CViewPort::GetInstance();
 	if (GetTickCount() - attackSubStart <= SIMON_ATTACK_SUB_TIME)
 	{
-		DebugOut(L"ATTACK SUB WEAPON");
+		;
 	}
 	else if (attackSubStart > 0)
 	{
@@ -682,7 +683,8 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 		viewport->GetBoundingBox(vl, vt, vr, vb);
 		if (!CGame::GetInstance()->IsIntersectAABB({ long(swl), long(swt), long(swr), long(swb) }, { long(vl), long(vt), long(vr), long(vb) }))//Kiểm tra vũ khí ra ngoài camera
 		{
-			if (subWeapon[i]->GetID() == ID_AXE)
+			if (subWeapon[i]->GetID() == ID_AXE ||
+				subWeapon[i]->GetID() == ID_HOLYWATER)
 			{
 				if (swt > vb)
 				{
@@ -812,6 +814,12 @@ void CSimon::StartAttackSub() {
 			else
 				subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
+		case ID_HOLYWATER:
+			if (nx > 0)
+				subWeapon.push_back(new CHolyWater({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
+			else
+				subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
+			break;
 		default:
 			break;
 		}
@@ -834,6 +842,12 @@ void CSimon::StartAttackSub() {
 				subWeapon.push_back(new CAxe({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y  }, nx));
 			else
 				subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y  }, nx));
+			break;
+		case ID_HOLYWATER:
+			if (nx > 0)
+				subWeapon.push_back(new CHolyWater({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
+			else
+				subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
 			break;
 		default:
 			break;

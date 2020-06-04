@@ -5,6 +5,7 @@
 #include "Heart.h"
 #include "ListItem.h"
 #include "WhipUpgrade.h" 
+#include "Brick.h"
 
 #define WEAPON_STATE_NORMAL 0
 

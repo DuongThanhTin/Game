@@ -65,6 +65,7 @@ public:
 
 	bool isOnGround;
 	bool isActive;
+	bool isOnGroundFire;
 
 	DWORD dt;
 

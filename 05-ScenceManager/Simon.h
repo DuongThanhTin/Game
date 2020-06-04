@@ -12,6 +12,7 @@
 #include "Bat.h"
 #include "AreaSwitchCam.h"
 #include "Axe.h"
+#include "HolyWater.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 

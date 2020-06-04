@@ -57,6 +57,4 @@ void CAxe::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 			x -= vx*dt;
 	}
 	
-
-
 }
