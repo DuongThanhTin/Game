@@ -6,6 +6,9 @@
 #include "define.h"
 #include "GameObject.h" 
 
+#define CAMERA_HEIGHT 200
+#define CAMERA_WIDTH 272
+
 class CViewPort : public CGameObject
 {
 private:

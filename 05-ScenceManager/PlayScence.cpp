@@ -533,7 +533,6 @@ void CPlayScene::Update(DWORD dt)
 					viewport->Update(playerPosition, 0, tileMap->GetLimitedViewPort());
 					break;
 				case SCENE_3: 
-					DebugOut(L"SCENE 2\n");
 					if (y > SCENE2_SIMON_SWITCH_Y && !player->GetSwitchCam())
 					{
 						ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCHSCENE2_Y }, CAMERA_SCENE2_X);

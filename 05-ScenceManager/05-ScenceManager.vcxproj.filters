@@ -147,6 +147,9 @@
     <ClCompile Include="MoneyBagBlue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Axe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -282,6 +285,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MoneyBagBlue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Axe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

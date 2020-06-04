@@ -8,8 +8,8 @@ CDagger::CDagger(D3DXVECTOR2 position, int nx)
 	this->y = position.y - 15;
 	this->nx = nx;
 	vx = DAGGER_FLY_SPEED;
-	AddAnimation(703); //Right
-	AddAnimation(1001); //Left
+	AddAnimation(ID_ANI_DAGGER_RIGHT); //Right
+	AddAnimation(ID_ANI_DAGGER_LEFT); //Left
 	id = ID_DAGGER;
 }
 

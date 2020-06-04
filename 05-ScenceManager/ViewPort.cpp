@@ -5,8 +5,8 @@ CViewPort* CViewPort::__instance = NULL;
 CViewPort::CViewPort()
 {
 	position = { 0, 0 };
-	height = 300;
-	width = 272; 
+	height = CAMERA_HEIGHT;
+	width = CAMERA_WIDTH;
 }
 
 CViewPort::CViewPort(D3DXVECTOR2 position, int width, int height)

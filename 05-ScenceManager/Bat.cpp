@@ -77,13 +77,3 @@ void CBat::Render()
 	RenderBoundingBox();
 }
 
-void CBat::SetState(int state)
-{
-	CGameObject::SetState(state);
-	switch (state)
-	{
-	/*case SPEARKNIGHT_STATE_WALKING:
-		vx = SPEARKNIGHT_WALKING_SPEED;*/
-	}
-
-}

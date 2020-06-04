@@ -9,8 +9,8 @@ CBoomerang::CBoomerang(D3DXVECTOR2 position, int nx)
 	this->y = position.y - 15;
 	this->nx = nx;
 	vx = BOOMERANG_FLY_SPEED;
-	AddAnimation(1011); //Right
-	AddAnimation(1012); //Left
+	AddAnimation(ID_ANI_BOOMERANG_LEFT); //Right
+	AddAnimation(ID_ANI_BOOMERANG_RIGHT); //Left
 	id = ID_BOOMERANG;
 	timefly = GetTickCount();
 	isFlyReturn = false;

@@ -11,6 +11,7 @@
 #include "AreaActive.h"
 #include "Bat.h"
 #include "AreaSwitchCam.h"
+#include "Axe.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 

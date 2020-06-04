@@ -157,6 +157,9 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				case ID_BOOMERANG:
 					iter->SetState(STATE_DESTROYED);
 					break;
+				case ID_AXE:
+					iter->SetState(STATE_DESTROYED);
+					break;
 				default:
 					break;
 				}
@@ -195,12 +198,17 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					break;
 				case ID_SMALLHEART:
 					DebugOut(L"Collsion SmallHeart\n");
+					break;
 				case ID_AXEITEM:
-					DebugOut(L"Collsion SmallHeart\n");
+					SetSubWeapon(ID_AXE);
+					DebugOut(L"Collsion AXE\n");
+					break;
 				case ID_MONEYBAGWHITE:
-					DebugOut(L"Collsion SmallHeart\n");
+					DebugOut(L"Collsion ID_MONEYBAGWHITE\n");
+					break;
 				case ID_MONEYBAGBLUE:
-					DebugOut(L"Collsion SmallHeart\n");
+					DebugOut(L"Collsion ID_MONEYBAGBLUE\n");
+					break;
 				default:
 					break;
 				}
@@ -242,9 +250,30 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 		else if (!CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(vl), long(vt), long(vr), long(vb) }))
 		{
-			if (y > vr)
+			//RESET simon khi bị ra khỏi camera
+			if (st > vb)
 			{
-				//Reset(460, 80);
+				for (auto iter : Objects)
+				{
+					DebugOut(L"Y>\n");
+					if (iter->GetID() == ID_PORTAL) {
+						CPortal* portal = dynamic_cast<CPortal *>(iter);
+						switch (portal->GetSceneId())
+						{
+							//SCENE 2 have NEXT SCENE 3, case is: "NEXT SCENE"
+						case SCENE_3:
+							DebugOut(L"3\n");
+							Reset(460, 65);
+							break;
+						case SCENE_4:
+
+							break;
+						default:
+
+							break;
+						}
+					}
+				}
 			}
 		}
 		
@@ -649,8 +678,19 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 		viewport->GetBoundingBox(vl, vt, vr, vb);
 		if (!CGame::GetInstance()->IsIntersectAABB({ long(swl), long(swt), long(swr), long(swb) }, { long(vl), long(vt), long(vr), long(vb) }))//Kiểm tra vũ khí ra ngoài camera
 		{
-			subWeapon.erase(subWeapon.begin() + i);
-			i--;
+			if (subWeapon[i]->GetID() == ID_AXE)
+			{
+				if (swt > vb)
+				{
+					subWeapon.erase(subWeapon.begin() + i);
+					i--;
+				}
+			}
+			else
+			{
+				subWeapon.erase(subWeapon.begin() + i);
+				i--;
+			}
 		}
 		else if (subWeapon[i]->GetState() == STATE_DESTROYED)
 		{
@@ -762,6 +802,12 @@ void CSimon::StartAttackSub() {
 			else
 				subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
+		case ID_AXE:
+			if (nx > 0)
+				subWeapon.push_back(new CAxe({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
+			else
+				subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
+			break;
 		default:
 			break;
 		}
@@ -779,6 +825,11 @@ void CSimon::StartAttackSub() {
 			else
 				subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
 			break;
+		case ID_AXE:
+			if (nx > 0)
+				subWeapon.push_back(new CAxe({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y  }, nx));
+			else
+				subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y  }, nx));
 			break;
 		default:
 			break;

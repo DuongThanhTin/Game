@@ -127,6 +127,7 @@
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="AreaActive.cpp" />
     <ClCompile Include="AreaSwitchCam.cpp" />
+    <ClCompile Include="Axe.cpp" />
     <ClCompile Include="AxeItem.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Boomerang.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="AreaActive.h" />
     <ClInclude Include="AreaSwitchCam.h" />
+    <ClInclude Include="Axe.h" />
     <ClInclude Include="AxeItem.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="Boomerang.h" />
