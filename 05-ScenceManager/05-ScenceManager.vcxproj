@@ -143,6 +143,8 @@
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="ListItem.cpp" />
     <ClCompile Include="MoneyBag.cpp" />
+    <ClCompile Include="MoneyBagBlue.cpp" />
+    <ClCompile Include="MoneyBagWhite.cpp" />
     <ClCompile Include="ObjectNoMove.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Simon.cpp" />
@@ -188,6 +190,8 @@
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="ListItem.h" />
     <ClInclude Include="MoneyBag.h" />
+    <ClInclude Include="MoneyBagBlue.h" />
+    <ClInclude Include="MoneyBagWhite.h" />
     <ClInclude Include="ObjectNoMove.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Simon.h" />
