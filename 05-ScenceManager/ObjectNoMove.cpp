@@ -55,6 +55,9 @@ void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 				case ID_AXEITEM:
 					CListItem::GetInstance()->ListItem.push_back(new CAxeItem({ x,y - 10 }));
 					break;
+				case ID_HOLYWATERITEM:
+					CListItem::GetInstance()->ListItem.push_back(new CHolyWaterItem({ x,y - 10 }));
+					break;
 				default:
 					break;
 				}

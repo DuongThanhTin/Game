@@ -139,6 +139,7 @@
     <ClCompile Include="DaggerItem.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Heart.cpp" />
+    <ClCompile Include="HolyWaterItem.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Koopas.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Heart.h" />
+    <ClInclude Include="HolyWaterItem.h" />
     <ClInclude Include="Hud.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Koopas.h" />

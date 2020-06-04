@@ -44,6 +44,7 @@
 #define ID_MONEYBAG 26
 #define ID_MONEYBAGWHITE 27
 #define ID_MONEYBAGBLUE 28
+#define ID_HOLYWATERITEM 29
 
 
 //WEAPON
@@ -51,6 +52,7 @@
 #define ID_DAGGER 31
 #define ID_BOOMERANG 32
 #define ID_AXE 33
+#define ID_HOLYWATER 34
 
 //EFFECT
 #define TIME_FIRE	150

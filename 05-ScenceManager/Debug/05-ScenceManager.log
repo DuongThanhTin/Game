@@ -1,4 +1,25 @@
-﻿  PlayScence.cpp
+﻿  Simon.cpp
+d:\game2020\game\05-scencemanager\simon.cpp(52): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(60): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(76): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(84): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(133): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\simon.cpp(136): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\simon.cpp(882): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ObjectNoMove.cpp
+d:\game2020\game\05-scencemanager\objectnomove.cpp(18): warning C4018: '<': signed/unsigned mismatch
+  HolyWaterItem.cpp
+  Generating Code...
+  Compiling...
+  Zombie.cpp
+  WhipUpgrade.cpp
+  Whip.cpp
+  Weapon.cpp
+d:\game2020\game\05-scencemanager\weapon.cpp(17): warning C4018: '<': signed/unsigned mismatch
+  ViewPort.cpp
+d:\game2020\game\05-scencemanager\viewport.cpp(51): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
+d:\game2020\game\05-scencemanager\viewport.cpp(53): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
+  PlayScence.cpp
 d:\game2020\game\05-scencemanager\playscence.cpp(51): warning C4005: 'OBJECT_TYPE_WHIP': macro redefinition
   d:\game2020\game\05-scencemanager\playscence.cpp(38): note: see previous definition of 'OBJECT_TYPE_WHIP'
 d:\game2020\game\05-scencemanager\playscence.cpp(147): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
@@ -20,5 +41,55 @@ d:\game2020\game\05-scencemanager\playscence.cpp(488): warning C4018: '<': signe
 d:\game2020\game\05-scencemanager\playscence.cpp(581): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\playscence.cpp(587): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\playscence.cpp(602): warning C4018: '<': signed/unsigned mismatch
+  Mario.cpp
+  main.cpp
+  Goomba.cpp
+  GameObject.cpp
+d:\game2020\game\05-scencemanager\gameobject.cpp(147): warning C4244: 'argument': conversion from 'FLOAT' to 'int', possible loss of data
+  Game.cpp
+d:\game2020\game\05-scencemanager\game.cpp(68): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  Torch.cpp
+  TileMap.cpp
+d:\game2020\game\05-scencemanager\tilemap.cpp(54): warning C4244: 'argument': conversion from 'FLOAT' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\tilemap.cpp(130): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\tilemap.cpp(131): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
+  Stair.cpp
+  SpearKnight.cpp
+  SmallHeart.cpp
+  Portal.cpp
+d:\game2020\game\05-scencemanager\portal.cpp(9): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\portal.cpp(10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  MoneyBagWhite.cpp
+  MoneyBagBlue.cpp
+  MoneyBag.cpp
+  Generating Code...
+  Compiling...
+  ListItem.cpp
+  Koopas.cpp
+  Item.cpp
+d:\game2020\game\05-scencemanager\item.cpp(24): warning C4018: '<': signed/unsigned mismatch
+  Heart.cpp
+  Enemy.cpp
+d:\game2020\game\05-scencemanager\enemy.cpp(26): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\enemy.cpp(74): warning C4018: '<': signed/unsigned mismatch
+  DaggerItem.cpp
+  Dagger.cpp
+  Candle.cpp
+  Bridge.cpp
+  Brick.cpp
+  BoomerangItem.cpp
+  Boomerang.cpp
+  Bat.cpp
+  AxeItem.cpp
+  Axe.cpp
+  AreaSwitchCam.cpp
+  AreaActive.cpp
+  Animations.cpp
+  Generating Code...
+Textures.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Sprites.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Scence.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Utils.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Hud.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)
