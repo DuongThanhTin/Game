@@ -327,6 +327,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					x += bridge->vx*2*dt;
 				}
 			}
+			//Trạng thái rơi tự do
 			else if (dynamic_cast<CBrick*>(e->obj))
 			{
 				if (!(e->ny && e->nx) && vy > 0)
@@ -354,7 +355,11 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		untouchableStart = 0;
 		untouchable = 0;
-		
+	}
+	else if (untouchable > 0)
+	{
+		attackStart = 0;
+		attackSubStart = 0;
 	}
 	
 	// transform simon
@@ -368,6 +373,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		vx = 0;
 		vy = 0;
+		attackStart = 0;
+		attackSubStart = 0;
 	}
 
 	// update attack state and whip
@@ -640,6 +647,8 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	{
 		
 		attackStart = 0;
+		ResetAnimation();
+		whip->ResetAnimation();
 		if (state == SIMON_STATE_SIT_ATTACK)
 		{
 			state = SIMON_STATE_SIT;
@@ -686,7 +695,7 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			if (subWeapon[i]->GetID() == ID_AXE ||
 				subWeapon[i]->GetID() == ID_HOLYWATER)
 			{
-				if (swt > vb)
+				if (swt > vb || swr > vr)
 				{
 					subWeapon.erase(subWeapon.begin() + i);
 					i--;
@@ -744,7 +753,7 @@ void CSimon::StartAttack() {
 		vx = 0;
 
 	//Reset Animation Whip
-	ResetAnimation();
+	//ResetAnimation();
 	whip->ResetAnimation();
 	
 	if (state == SIMON_STATE_SIT)
@@ -780,7 +789,7 @@ void CSimon::StartAttackSub() {
 
 
 	//Reset Animation Whip
-	ResetAnimation();
+	//ResetAnimation();
 	whip->ResetAnimation();
 
 

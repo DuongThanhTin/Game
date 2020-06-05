@@ -5,7 +5,7 @@ info-objects_scene3.txt
 [OBJECTS]
 # Objecttype	x	y	ani_set_id	extra_settings per object type
 # Object type in Visual: 0 = Mario , 1 = Brick, 2 = Goomba, 5 = Zombie, 6 = Torch
-# SIMON x 730 test 230 y 380
+# SIMON x 730 test 230 y 380 up to stair x 150 y 280
 0	730	380	1
 
 #BRICK
@@ -62,19 +62,15 @@ info-objects_scene3.txt
 11	667	116	8	12	12	20
 11	730	68	8	12	12	28
 
-#AREACTIVE
-10	390	22	14	9	41	2
-10	386	210	14	12	45	1
-
 #STAIR
-9	150	266	13	18	5	-1	1	122
-9	55	138	13	18	5	1	1	64
-9	65	138	13	18	5	-1	-1	32
+9	148	266	13	18	5	-1	1	135
+9	53	138	13	5	5	1	1	64
+9	72	140	13	10	2	-1	-1	32
 9	121	74	13	18	5	1	-1	64
 9	376	137	13	18	5	1	1	32
 9	409	106	13	18	5	1	-1	32
-9	567	76	13	18	5	-1	-1	64
-9	632	139	13	18	5	-1	1	64
+9	575	76	13	18	5	-1	-1	64
+9	628	139	13	18	5	-1	1	64
 
 #AREASWITCHCAM
 90	56	182	15	18	5	3	85	20

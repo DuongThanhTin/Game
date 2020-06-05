@@ -29,6 +29,7 @@
 #define ID_STAIR -2
 #define ID_AREAACTIVE -3
 #define ID_AREASWITCHCAM -4
+#define ID_TEX_HUD -60
 #define ID_TORCH 11
 #define ID_PORTAL 12
 #define ID_CANDLE 13

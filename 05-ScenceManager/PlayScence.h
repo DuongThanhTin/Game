@@ -23,6 +23,7 @@
 #include "AreaActive.h"
 #include "Bridge.h"
 #include "AreaSwitchCam.h"
+#include "Hud.h"
 
 class CPlayScene: public CScene
 {
@@ -36,7 +37,8 @@ protected:
 	CTileMap *tileMap;
 	CViewPort *viewport;
 	CListItem *listItem;
-	
+	LPHUD hud;
+
 	int start_x = 0;
 	int start_y = 180;
 

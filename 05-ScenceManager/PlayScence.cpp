@@ -381,6 +381,8 @@ void CPlayScene::Load()
 	ifstream f;
 	f.open(sceneFilePath);
 
+	CTextures::GetInstance()->Add(-60, L"textures\\HUD.png", 0);
+
 	// current resource section flag
 	int section = SCENE_SECTION_UNKNOWN;
 
@@ -416,7 +418,7 @@ void CPlayScene::Load()
 		}
 		}
 	}
-
+	hud = new CHud();
 	f.close();
 	listItem->ListItem.clear();
 	CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
@@ -577,6 +579,7 @@ void CPlayScene::Render()
 {
 	//Draw Map
 	tileMap->DrawMap({ 0,0 });
+	hud->Draw({ 0, 0 });
 
 	for (int i = 1; i < objects.size(); i++) {
 		objects[i]->RenderBoundingBox(100);
@@ -715,6 +718,8 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 		simon->SetSpeed(0, 0);
 		return;
 	}
+	
+	
 
 
 	// KEY DOWN
