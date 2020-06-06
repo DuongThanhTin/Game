@@ -66,6 +66,7 @@
 #define SCENE_2 2
 #define SCENE_3 3
 #define SCENE_4 4
+#define SCENE_5 5
 
 #define KEY_1 1
 #define KEY_2 2

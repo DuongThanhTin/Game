@@ -518,6 +518,10 @@ void CPlayScene::Update(DWORD dt)
 						DebugOut(L"TEST SCENE 3!!\n");
 						ScenePortal(SCENE_3, 0, 0);
 						break;
+					case SCENE_4:
+						DebugOut(L"TEST SCENE 4!!\n");
+						ScenePortal(SCENE_4, 20, 0);
+						break;
 					default:
 						break;
 					}
@@ -556,6 +560,10 @@ void CPlayScene::Update(DWORD dt)
 						ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCH_SCENE2_1_Y }, 0);
 					}
 					
+					break;
+				case SCENE_5://NEXT SCENE
+					//viewport->Update(playerPosition, 0, tileMap->GetLimitedViewPort());
+					ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCH_SCENE2_1_Y }, 0);
 					break;
 				default:
 				
@@ -673,6 +681,10 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_3:
 		DebugOut(L"SCENE 3\n");
 		OnKeySwitchScene(SCENE_3, 0, 0);
+		break;
+	case DIK_4:
+		DebugOut(L"SCENE 4\n");
+		OnKeySwitchScene(SCENE_4, 0, 0);
 		break;
 	}
 }

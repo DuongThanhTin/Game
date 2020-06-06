@@ -314,7 +314,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				isOnGround = true;
 			}
 		}
-		else y += dy;
+		//else y += dy;
 		
 
 		//On Bridge
@@ -331,13 +331,21 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 			}
 			//Trạng thái rơi tự do
-			/*else if (dynamic_cast<CBrick*>(e->obj))
+			else if (dynamic_cast<CBrick*>(e->obj))
 			{
-				if (!(e->ny && e->nx) && vy > 0)
+				if (e->ny<0) //trên xuống
 				{
 					
 				}
-			}*/
+				else if(e->ny>0)
+				{
+					y += dy;
+				}
+			}
+			else if (!dynamic_cast<CBrick*>(e->obj))
+			{
+				DebugOut(L"ASD");
+			}
 		}
 	}
 	
@@ -351,7 +359,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// update jump state
 	if (isOnGround == true) {
 		jumpStart = 0;
-		vy = 0;
 	}
 
 	// reset untouchable timer if untouchable time has passed

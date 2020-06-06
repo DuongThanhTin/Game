@@ -77,7 +77,7 @@ info-objects_scene3.txt
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
-50	0	80	0	15	120	4	
+50	754	132	0	800	170	4	
 
 [MAP]
 #tileset + tilemap + mapobjects

@@ -5,3 +5,4 @@ start	1
 1	simon_scene1.txt
 2	simon_scene2.txt
 3	simon_scene3.txt
+4	simon_scene4.txt

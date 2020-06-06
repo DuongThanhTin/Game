@@ -1,0 +1,50 @@
+[INFOOBJECTS]
+#path
+info-objects_scene4.txt
+
+[OBJECTS]
+# Objecttype	x	y	ani_set_id	extra_settings per object type
+# Object type in Visual: 0 = Mario , 1 = Brick, 2 = Goomba, 5 = Zombie, 6 = Torch
+# SIMON
+0	5	120	1
+
+#BRICK
+1	129	97	2	174	14
+1	721	97	2	47	14
+1	673	129	2	30	13
+1	760	0	2	8	160
+1	0	161	2	766	14
+1	0	65	2	112	14
+1	-8	0	2	8	160
+
+#CANDLE
+11	28	95	8	12	12	20
+11	92	31	8	12	12	20
+11	156	63	8	12	12	20
+11	219	31	8	12	12	20
+11	284	127	8	12	12	20
+11	348	95	8	12	12	20
+11	412	127	8	12	12	20
+11	476	127	8	12	12	20
+11	540	95	8	12	12	20
+11	604	127	8	12	12	20
+11	668	95	8	12	12	20
+11	732	95	8	12	12	20
+#AREACTIVE
+10	390	22	14	9	41	2
+
+#STAIR
+9	136	91	13	18	5	-1	1	32
+9	106	58	13	18	5	-1	-1	32
+9	360	154	13	18	5	-1	1	63
+9	297	90	13	18	5	 -1	-1	63
+9	678	122	13	18	5	1	1	32
+9	712	91	13	18	5	1	1	32
+
+# --- SCENE PORTAL ----
+# type	l	t	ani_set_id	r	b	scene_id
+50	0	0	0	0	0	5	
+
+[MAP]
+#tileset + tilemap + mapobjects
+textures\scene4.json
