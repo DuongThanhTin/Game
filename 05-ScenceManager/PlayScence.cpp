@@ -536,7 +536,7 @@ void CPlayScene::Update(DWORD dt)
 				{
 				//SCENE 1 have NEXT SCENE 2, case is: "NEXT SCENE"
 				case SCENE_2://NEXT SCENE
-					viewport->Update(playerPosition, 0, tileMap->GetLimitedViewPort());
+					ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCH_SCENE2_1_Y }, 0);
 					break;
 				case SCENE_3: 
 					if (y > SCENE2_SIMON_SWITCH_Y && !player->GetSwitchCam())
@@ -671,7 +671,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		//Switch scene with key
 	case DIK_1:
 		DebugOut(L"SCENE 1\n");
-		OnKeySwitchScene(SCENE_1, 0, 0);
+		OnKeySwitchScene(SCENE_1, 0, CAMERA_SWITCH_SCENE2_1_Y);
 		break;
 
 	case DIK_2:
