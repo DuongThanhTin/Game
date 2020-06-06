@@ -15,6 +15,7 @@ CBoomerang::CBoomerang(D3DXVECTOR2 position, int nx)
 	timefly = GetTickCount();
 	isFlyReturn = false;
 	isDisapear = false;
+	isReturn = false;
 }
 
 
@@ -41,7 +42,7 @@ void CBoomerang::Render() {
 
 void CBoomerang::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CWeapon::Update(dt, coObjects);
-
+	CViewPort *viewport = CViewPort::GetInstance();
 
 	if (GetTickCount() - timefly > TIME_FLY)
 	{
@@ -59,6 +60,18 @@ void CBoomerang::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 		{
 			x += -vx*dt;
 		}
+	}
+
+	float bl, bt, br, bb;
+	float vl, vt, vr, vb;
+	GetBoundingBox(bl, bt, br, bb);
+	viewport->GetBoundingBox(vl, vt, vr, vb);
+
+
+	if (bl < vl || br >= vr)
+	{
+		vx = -nx*BOOMERANG_FLY_SPEED;
+		x += vx*dt;	
 	}
 
 

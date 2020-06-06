@@ -16,6 +16,8 @@ CSimon::CSimon() {
 	attackStart = 0;
 	attackSubStart = 0;
 	untouchableStart = 0;
+	aniAttackSubWeaponRender = 0;
+	subWeaponRender = 0;
 	subWeaponID = 0;
 	isOnGround = false;
 	isOnStair = false;
@@ -312,8 +314,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				isOnGround = true;
 			}
 		}
-
 		else y += dy;
+		
 
 		//On Bridge
 		for (UINT i = 0; i < coEventsResult.size(); i++)
@@ -325,16 +327,17 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				if (e->ny != 0)
 				{
 					x += bridge->vx*2*dt;
+					
 				}
 			}
 			//Trạng thái rơi tự do
-			else if (dynamic_cast<CBrick*>(e->obj))
+			/*else if (dynamic_cast<CBrick*>(e->obj))
 			{
 				if (!(e->ny && e->nx) && vy > 0)
 				{
 					
 				}
-			}
+			}*/
 		}
 	}
 	
@@ -348,6 +351,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// update jump state
 	if (isOnGround == true) {
 		jumpStart = 0;
+		vy = 0;
 	}
 
 	// reset untouchable timer if untouchable time has passed
@@ -520,6 +524,7 @@ void CSimon::Render()
 
 	for (auto iter : subWeapon)
 		iter->Render();
+	
 }
 
 void CSimon::RenderBoundingBox(int alpha)
@@ -679,6 +684,9 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 		else
 			state = SIMON_STATE_IDLE;
 	}
+
+
+
 	//Update SubWeapon
 	for (auto iter : subWeapon) {
 		iter->Update(dt, objects);
@@ -835,32 +843,34 @@ void CSimon::StartAttackSub() {
 	}
 	else
 	{
-		switch (subWeaponID)
-		{
-		case ID_DAGGER:
-			subWeapon.push_back(new CDagger({ x, y }, nx));
-			break;
-		case ID_BOOMERANG:
-			if (nx > 0)
-				subWeapon.push_back(new CBoomerang({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y  }, nx));
-			else
-				subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
-			break;
-		case ID_AXE:
-			if (nx > 0)
-				subWeapon.push_back(new CAxe({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y  }, nx));
-			else
-				subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y  }, nx));
-			break;
-		case ID_HOLYWATER:
-			if (nx > 0)
-				subWeapon.push_back(new CHolyWater({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
-			else
-				subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
-			break;
-		default:
-			break;
-		}
+
+			switch (subWeaponID)
+			{
+			case ID_DAGGER:
+				subWeapon.push_back(new CDagger({ x, y }, nx));
+				break;
+			case ID_BOOMERANG:
+				if (nx > 0)
+					subWeapon.push_back(new CBoomerang({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
+				else
+					subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
+				break;
+			case ID_AXE:
+				if (nx > 0)
+					subWeapon.push_back(new CAxe({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
+				else
+					subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
+				break;
+			case ID_HOLYWATER:
+				if (nx > 0)
+					subWeapon.push_back(new CHolyWater({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
+				else
+					subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
+				break;
+			default:
+				break;
+			}
+		
 	}
 
 
@@ -913,6 +923,48 @@ void CSimon::UpgradeWhip()
 	whipSwitchSceneLevel->Upgrade();
 	DebugOut(L"[DONE] Upgrade\n");
 }
+
+int CSimon::GetAnimationSubWeapon()
+{
+	int anisub = 0;
+	if(state == SIMON_STATE_ATTACK) {
+		if (nx > 0)
+			anisub = SIMON_ANI_ATTACK_RIGHT;
+		else
+			anisub = SIMON_ANI_ATTACK_LEFT;
+	}
+	else if (state == SIMON_STATE_SIT) {
+		if (nx > 0)
+			anisub = SIMON_ANI_SIT_RIGHT;
+		else
+			anisub = SIMON_ANI_SIT_LEFT;
+	}
+	else if (state == SIMON_STATE_SIT_ATTACK) {
+		if (nx > 0)
+			anisub = SIMON_ANI_SIT_ATTACK_RIGHT;
+		else
+			anisub = SIMON_ANI_SIT_ATTACK_LEFT;
+	}
+	else if (state == SIMON_STATE_ATTACK_ON_STAIR) { //Attack On Stair
+		if (nx > 0)
+		{
+			if (ny > 0)
+				anisub = SIMON_ANI_STAIR_GOUP_ATTACK_RIGHT;
+			else
+				anisub = SIMON_ANI_STAIR_GODOWN_ATTACK_RIGHT;
+		}
+		else
+		{
+			if (ny > 0)
+				anisub = SIMON_ANI_STAIR_GOUP_ATTACK_LEFT;
+			else
+				anisub = SIMON_ANI_STAIR_GODOWN_ATTACK_LEFT;;
+		}
+	}
+
+	return anisub;
+}
+
 
 CSimon* CSimon::GetInstance()
 {

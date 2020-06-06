@@ -16,10 +16,10 @@
 
 #define SIMON_WALKING_SPEED		0.055f 
 
-#define SIMON_JUMP_SPEED_Y		0.38f
+#define SIMON_JUMP_SPEED_Y		0.18f//0.38f
 #define SIMON_JUMP_DEFLECT_SPEED 0.2f
 #define SIMON_JUMP_DEFLECT_SPEED_X 0.05f
-#define SIMON_GRAVITY			0.0015f
+#define SIMON_GRAVITY			0.0004f//0.0015f
 #define SIMON_DIE_DEFLECT_SPEED	 0.5f
 #define SIMON_ON_STAIR_SPEED			0.02f
 
@@ -79,8 +79,8 @@
 
 #define SIMON_UNTOUCHABLE_TIME 350
 
-#define SIMON_ATTACK_TIME			350
-#define SIMON_ATTACK_SUB_TIME		350
+#define SIMON_ATTACK_TIME			330
+#define SIMON_ATTACK_SUB_TIME		330
 #define SIMON_JUMP_TIME				450
 #define SIMON_EATITEM_TIME			500
 
@@ -102,6 +102,8 @@ class CSimon : public CGameObject
 	DWORD attackSubStart;
 	DWORD jumpStart;
 	DWORD eatItemStart;
+	DWORD aniAttackSubWeaponRender;
+	DWORD subWeaponRender;
 
 	LPWHIP whip;
 	LPWHIP whipSwitchSceneLevel; //Giữ level whip khi chuyển scene
@@ -148,5 +150,6 @@ public:
 	void LockUpdate() { isLockUpdate = true; }
 	void UnLockUpdate() { isLockUpdate = false; }
 	int GetSwitchCam() { return isSwitchCam; }
+	int GetAnimationSubWeapon();
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };
