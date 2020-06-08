@@ -16,12 +16,15 @@
 
 #define SIMON_WALKING_SPEED		0.055f 
 
+#define SIMON_SPEED_Y_FREEFALLING 0.04f
 #define SIMON_JUMP_SPEED_Y		0.18f//0.38f
 #define SIMON_JUMP_DEFLECT_SPEED 0.2f
 #define SIMON_JUMP_DEFLECT_SPEED_X 0.05f
 #define SIMON_GRAVITY			0.0004f//0.0015f
 #define SIMON_DIE_DEFLECT_SPEED	 0.5f
 #define SIMON_ON_STAIR_SPEED			0.02f
+#define SIMON_DAMAGED_DEFLECT_SPEED_Y	0.15f
+#define SIMON_DAMAGED_DEFLECT_SPEED_X	0.06f
 
 #define SIMON_STATE_IDLE			0
 #define SIMON_STATE_WALKING_RIGHT	100
@@ -77,7 +80,8 @@
 #define SIMON_BBOX_HEIGHT 30
 #define SIMON_BBOX_SIT_HEIGHT 23
 
-#define SIMON_UNTOUCHABLE_TIME 350
+#define SIMON_UNTOUCHABLE_TIME 1000
+#define SIMON_INVISIBLE_TIME 5000
 
 #define SIMON_ATTACK_TIME			330
 #define SIMON_ATTACK_SUB_TIME		330
@@ -97,6 +101,7 @@ class CSimon : public CGameObject
 
 	float start_x, start_y;
 
+	DWORD invisibleStart;
 	DWORD untouchableStart;
 	DWORD attackStart;
 	DWORD attackSubStart;
@@ -108,6 +113,7 @@ class CSimon : public CGameObject
 	LPWHIP whip;
 	LPWHIP whipSwitchSceneLevel; //Giữ level whip khi chuyển scene
 	LPSTAIR collidingStair; //Xét điểm đầu và điểm cuối của cầu thang
+	LPGAMEOBJECT brickCollidSimon;
 
 	vector<CWeapon*> subWeapon;
 	int subWeaponID;
@@ -117,6 +123,8 @@ public:
 	bool isOnStair;
 	bool isLockUpdate = false;
 	bool isSwitchCam;
+	bool isFalling;
+	bool isAttackJump = false;
 	CSimon();
 	static CSimon* GetInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -149,6 +157,7 @@ public:
 	int GetLockUpdate() { return isLockUpdate; }
 	void LockUpdate() { isLockUpdate = true; }
 	void UnLockUpdate() { isLockUpdate = false; }
+	virtual void BeHurted();
 	int GetSwitchCam() { return isSwitchCam; }
 	int GetAnimationSubWeapon();
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);

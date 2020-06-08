@@ -1,24 +1,6 @@
-﻿  PlayScence.cpp
-d:\game2020\game\05-scencemanager\playscence.cpp(51): warning C4005: 'OBJECT_TYPE_WHIP': macro redefinition
-  d:\game2020\game\05-scencemanager\playscence.cpp(38): note: see previous definition of 'OBJECT_TYPE_WHIP'
-d:\game2020\game\05-scencemanager\playscence.cpp(147): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(148): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(175): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(199): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(223): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(224): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(247): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(248): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(255): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(263): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(264): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(333): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(334): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(452): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(459): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(490): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(592): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(598): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(613): warning C4018: '<': signed/unsigned mismatch
+﻿Textures.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Sprites.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Scence.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Utils.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

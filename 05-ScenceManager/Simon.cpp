@@ -17,13 +17,15 @@ CSimon::CSimon() {
 	attackSubStart = 0;
 	untouchableStart = 0;
 	aniAttackSubWeaponRender = 0;
+	invisibleStart = 0;
 	subWeaponRender = 0;
 	subWeaponID = 0;
+	eatItemStart = 0;
 	isOnGround = false;
 	isOnStair = false;
 	isLockUpdate = false;
 	isSwitchCam = false;
-	eatItemStart = 0;
+	brickCollidSimon = NULL;
 	collidingStair = NULL;
 	whipSwitchSceneLevel = CWhip::GetInstance();
 	whip = new CWhip();
@@ -95,6 +97,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		{
 			CalcPotentialCollisions(&wallObjects, coEvents);
 		}
+
+
 
 		//Coliision Object no see
 		for (auto iter : Objects)
@@ -232,8 +236,24 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 				if (iter->state != ENEMY_STATE_DESTROY)
 				{
-					StartUntouchable();
-					iter->TimeFireDestroy();
+					if (invisibleStart == 0)
+					{
+						if (iter->GetID() == ID_SPEARKNIGHT)
+						{
+
+							BeHurted();
+						}
+						else
+						{
+							if (untouchableStart > 0)
+							{
+								return;
+							}
+							BeHurted();
+							//StartUntouchable();
+							iter->TimeFireDestroy();
+						}
+					}
 				}
 			}
 		}
@@ -291,6 +311,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		x += dx;
 		y += dy;
+
+	
 	}
 	else
 	{
@@ -308,14 +330,25 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 		if (ny < 0) {
 			vy = 0;
-
 			if (!isOnGround)
 			{
 				isOnGround = true;
 			}
 		}
 		//else y += dy;
-		
+
+		//Xét trạng thái không va chạm với đất Test
+		/*for (auto iter : wallObjects)
+		{
+			float sl, st, sr, sb;		// simon object bbox
+			float ol, ot, or , ob;		// object bbox
+			GetBoundingBox(sl, st, sr, sb);
+			iter->GetBoundingBox(ol, ot, or , ob);
+			if (st <= (ot - 3))
+			{
+
+			}
+		}*/
 
 		//On Bridge
 		for (UINT i = 0; i < coEventsResult.size(); i++)
@@ -335,16 +368,27 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				if (e->ny<0) //trên xuống
 				{
-					
+					isFalling = false;
+					//brickCollidSimon = new CBrick;
+					float sl, st, sr, sb;		// simon object bbox
+					float ol, ot, or , ob;		// object bbox
+					GetBoundingBox(sl, st, sr, sb);
+					//brickCollidSimon->GetBoundingBox(ol, ot, or , ob);
+					//DebugOut(L"%d\n", ot);
+					/*if (sb == (ot) && jumpStart == 0);
+					{
+						attackStart = 0;
+						attackSubStart = 0;
+						state = SIMON_STATE_SIT;
+						vy += SIMON_SPEED_Y_FREEFALLING*dt;
+					}*/
+
 				}
 				else if(e->ny>0)
 				{
+					isFalling = false;
 					y += dy;
 				}
-			}
-			else if (!dynamic_cast<CBrick*>(e->obj))
-			{
-				DebugOut(L"ASD");
 			}
 		}
 	}
@@ -365,7 +409,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (GetTickCount() - untouchableStart > SIMON_UNTOUCHABLE_TIME)
 	{
 		untouchableStart = 0;
-		untouchable = 0;
 	}
 	else if (untouchable > 0)
 	{
@@ -373,6 +416,11 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		attackSubStart = 0;
 	}
 	
+	if (GetTickCount() - invisibleStart > SIMON_INVISIBLE_TIME && invisibleStart > 0 && untouchableStart == 0)
+	{
+		invisibleStart = 0;
+	}
+
 	// transform simon
 	if (GetTickCount() - eatItemStart > SIMON_EATITEM_TIME)
 	{
@@ -387,6 +435,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		attackStart = 0;
 		attackSubStart = 0;
 	}
+
 
 	// update attack state and whip
 	UpdateWhip(dt, coObjects);
@@ -499,6 +548,14 @@ void CSimon::Render()
 		}
 	}
 
+	else if (state == SIMON_STATE_COLLISION_ENEMY)
+	{
+		if (nx > 0)
+			ani = SIMON_ANI_DEFLECT_RIGHT;
+		else
+			ani = SIMON_ANI_DEFLECT_LEFT;
+	}
+
 	else {
 		if (nx > 0)
 			ani = SIMON_ANI_IDLE_RIGHT;
@@ -515,13 +572,14 @@ void CSimon::Render()
 	}
 
 	int alpha = 255;
+	if (invisibleStart > 0)
+	{
+		alpha = 150;
+	}
+
 	if (untouchableStart > 0)
 	{
-		alpha = 128;
-		if (nx > 0)
-			ani = SIMON_ANI_DEFLECT_RIGHT;
-		else
-			ani = SIMON_ANI_DEFLECT_LEFT;
+		alpha = rand() % 255;
 	}
 	animation_set->at(ani)->Render(x, y, alpha);
 
@@ -557,6 +615,7 @@ void CSimon::SetState(int state)
 	if (eatItemStart > 0)
 		return;
 
+
 	CGameObject::SetState(state);
 
 	switch (state)
@@ -588,7 +647,6 @@ void CSimon::SetState(int state)
 	case SIMON_STATE_EATITEM:
 		break;
 	case SIMON_STATE_COLLISION_ENEMY:
-		SetSpeed(-nx*SIMON_JUMP_DEFLECT_SPEED_X,-SIMON_JUMP_DEFLECT_SPEED);
 		break;
 	case SIMON_STATE_SIT:
 		SetSpeed(0, vy);
@@ -612,6 +670,21 @@ void CSimon::SetState(int state)
 	}
 }
 
+void CSimon::BeHurted()
+{
+	if (untouchableStart > 0)
+		return;
+
+	untouchableStart = GetTickCount();
+	invisibleStart = GetTickCount();
+	if (!isOnStair)
+	{
+		SetSpeed(-nx * SIMON_DAMAGED_DEFLECT_SPEED_X, -SIMON_DAMAGED_DEFLECT_SPEED_Y);
+		isOnGround = false;
+		state = SIMON_STATE_COLLISION_ENEMY;
+	}
+}
+
 void CSimon::SetSubWeapon(int subWeaponID)
 {
 	this->subWeaponID = subWeaponID;
@@ -620,7 +693,7 @@ void CSimon::SetSubWeapon(int subWeaponID)
 
 void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 {
-	if (GetTickCount() - attackStart <= SIMON_ATTACK_TIME)
+	if (GetTickCount() - attackStart <= SIMON_ATTACK_TIME && !isAttackJump)
 	{
 		float whip_X, whip_Y;
 		if (state == SIMON_STATE_SIT_ATTACK) 
@@ -656,8 +729,7 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 		whip->Update(dt, objects, { whip_X, whip_Y }, nx);
 	}
 	else if (attackStart > 0)
-	{
-		
+	{	
 		attackStart = 0;
 		ResetAnimation();
 		whip->ResetAnimation();
@@ -666,10 +738,13 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			state = SIMON_STATE_SIT;
 		}
 		else if (isOnStair)
+		{
 			state = SIMON_STATE_IDLE_STAIR;
+		}
 		else
 			state = SIMON_STATE_IDLE;
 	}
+
 }
 
 void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
