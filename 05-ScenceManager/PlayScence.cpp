@@ -22,6 +22,7 @@ See scene1.txt, scene2.txt for detail format specification
 */
 
 #define SCENE_SECTION_UNKNOWN -1
+#define SCENE_SECTION_INFO_OBJECTS_GENERAL 10
 #define SCENE_SECTION_INFO_OBJECTS 1
 #define SCENE_SECTION_TEXTURES 2
 #define SCENE_SECTION_SPRITES 3
@@ -95,6 +96,17 @@ void CPlayScene::Loadinfo_OBJECTS(LPCWSTR path)
 	f.close();
 }
 
+//Info General
+void CPlayScene::_ParseSection_INFO_OBJECTS_GENERAL(string line)
+{
+	DebugOut(L"[INFO_OBJECTS]");
+	vector<string> tokens = split(line);
+	if (tokens.size() < 1) return;
+	wstring path = ToWSTR(tokens[0]);
+
+	DebugOut(L"[INFO] INFO_OBJECT_GENERAL path: %s\n", path.c_str());
+	Loadinfo_OBJECTS(path.c_str());
+}
 void CPlayScene::_ParseSection_INFO_OBJECTS(string line)
 {
 	DebugOut(L"[INFO_OBJECTS]");
@@ -239,6 +251,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new CSimon();
 		player = (CSimon*)obj;
 		DebugOut(L"[INFO] Player object created!\n");
+
+		DebugOut(L"SCORE %d\n", player->GetScoreSubWeapon());
 		obj->SetPosition(x, y);
 		break;
 	case OBJECT_TYPE_SPEARKNIGHT:
@@ -380,8 +394,8 @@ void CPlayScene::Load()
 
 	ifstream f;
 	f.open(sceneFilePath);
-
-	CTextures::GetInstance()->Add(-60, L"textures\\HUD.png", 0);
+	hud = CHud::GetInstance();
+	//CTextures::GetInstance()->Add(-60, L"textures\\HUD.png", 0);
 
 	// current resource section flag
 	int section = SCENE_SECTION_UNKNOWN;
@@ -393,6 +407,10 @@ void CPlayScene::Load()
 
 		if (line[0] == '#') continue;	// skip comment lines	
 
+		if (line == "[INFOOBJECTSGENERAL]")
+		{
+			section = SCENE_SECTION_INFO_OBJECTS_GENERAL; continue;
+		}
 		if (line == "[INFOOBJECTS]")
 		{
 			section = SCENE_SECTION_INFO_OBJECTS; continue;
@@ -410,6 +428,7 @@ void CPlayScene::Load()
 		//
 		switch (section)
 		{
+		case SCENE_SECTION_INFO_OBJECTS_GENERAL: _ParseSection_INFO_OBJECTS_GENERAL(line); break;
 		case SCENE_SECTION_INFO_OBJECTS: _ParseSection_INFO_OBJECTS(line); break;
 		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 		case SCENE_SECTION_MAP_URL: {
@@ -418,7 +437,6 @@ void CPlayScene::Load()
 		}
 		}
 	}
-	hud = new CHud();
 	f.close();
 	listItem->ListItem.clear();
 	CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
@@ -432,6 +450,7 @@ void CPlayScene::Update(DWORD dt)
 	// TO-DO: This is a "dirty" way, need a more organized way
 	D3DXVECTOR2 playerPosition;
 	vector<LPGAMEOBJECT> coObjects;
+
 	if (player == NULL) return;
 	if (player->GetLockUpdate() > 0)
 	{
@@ -562,7 +581,6 @@ void CPlayScene::Update(DWORD dt)
 					
 					break;
 				case SCENE_5://NEXT SCENE
-					//viewport->Update(playerPosition, 0, tileMap->GetLimitedViewPort());
 					ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCH_SCENE2_1_Y }, 0);
 					break;
 				default:
@@ -573,6 +591,7 @@ void CPlayScene::Update(DWORD dt)
 		}
 	}
 
+	hud->Update(dt);
 }
 
 void CPlayScene::ChangeView(D3DXVECTOR2 playerPosition, D3DXVECTOR2 setPlayerPosition, D3DXVECTOR2 cameraPosition, int cameraStart)
@@ -580,6 +599,11 @@ void CPlayScene::ChangeView(D3DXVECTOR2 playerPosition, D3DXVECTOR2 setPlayerPos
 	player->SetPosition(setPlayerPosition.x, setPlayerPosition.y);
 	viewport->SetPosition({ cameraPosition.x, cameraPosition.y });
 	viewport->Update(playerPosition, cameraStart, tileMap->GetLimitedViewPort());
+	/*hud->SetScoreHub(player->GetScore());
+	hud->SetScoreSubWeaponHub(player->GetScoreSubWeapon());
+	player->SetScore(hud->GetScoreHud());
+	player->SetScore(hud->GetScoreSubWeaponHud());*/
+	//DebugOut(L"SCORE %d %d\n", player->GetScore(), player->GetScoreSubWeapon());
 }
 
 
@@ -587,7 +611,7 @@ void CPlayScene::Render()
 {
 	//Draw Map
 	tileMap->DrawMap({ 0,0 });
-	hud->Draw({ 0, 0 });
+	//hud->Draw({ 0, 40 });
 
 	for (int i = 1; i < objects.size(); i++) {
 		objects[i]->RenderBoundingBox(100);
@@ -630,8 +654,13 @@ void CPlayScene::ScenePortal(int scene_id, float view_x, float view_y)
 {
 	CViewPort * viewport = CViewPort::GetInstance();
 	CGame *game = CGame::GetInstance();
+	CSimon *simon = CSimon::GetInstance();
 	game->SwitchScene(scene_id);
 	viewport->SetPosition({ view_x,view_y });
+	/*DebugOut(L"ASD %d", hud->GetScoreSubWeaponHud());
+	simon->SetScore(hud->GetScoreHud());
+	simon->SetScoreSubWeapon(hud->GetScoreSubWeaponHud());
+	simon->SetNumLife(hud->GetNumLifeHud());*/
 }
 
 

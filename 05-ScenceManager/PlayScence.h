@@ -43,6 +43,7 @@ protected:
 	int start_y = 180;
 
 	void Loadinfo_OBJECTS(LPCWSTR path);
+	void _ParseSection_INFO_OBJECTS_GENERAL(string line);
 	void _ParseSection_INFO_OBJECTS(string line);
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);

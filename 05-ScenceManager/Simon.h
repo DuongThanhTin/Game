@@ -13,6 +13,7 @@
 #include "AreaSwitchCam.h"
 #include "Axe.h"
 #include "HolyWater.h"
+#include "Hud.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
@@ -114,11 +115,17 @@ class CSimon : public CGameObject
 	LPWHIP whipSwitchSceneLevel; //Giữ level whip khi chuyển scene
 	LPSTAIR collidingStair; //Xét điểm đầu và điểm cuối của cầu thang
 	LPGAMEOBJECT brickCollidSimon;
+	LPHUD hud;
+	LPHUD hudSwitchScene;
 
 	vector<CWeapon*> subWeapon;
+
 	int subWeaponID;
 	int whiplevel;
-
+	int score; //score
+	int scoreSubWeapon;
+	int heartSimon;
+	int numLife;
 public:
 	bool isOnStair;
 	bool isLockUpdate = false;
@@ -160,5 +167,15 @@ public:
 	virtual void BeHurted();
 	int GetSwitchCam() { return isSwitchCam; }
 	int GetAnimationSubWeapon();
+	//HUD
+	void IncreaseScore(int score) { this->score += score; }
+	void IncreaseScoreSubWeapon(int scoreSubWeaponNum) { this->scoreSubWeapon += scoreSubWeaponNum; }
+	void IncreaseHeart(int heartSimonNum) { this->heartSimon += heartSimonNum; }
+	int GetNumLife() { return numLife; }
+	int GetScore() { return score; }
+	int GetScoreSubWeapon() { return this->scoreSubWeapon; }
+	void SetNumLife(int numLife) { this->numLife = numLife; }
+	void SetScore(int score) { this->score = score; }
+	void SetScoreSubWeapon(int scoreSubWeapon) { this->scoreSubWeapon = scoreSubWeapon; }
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

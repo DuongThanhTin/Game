@@ -21,15 +21,47 @@ CSimon::CSimon() {
 	subWeaponRender = 0;
 	subWeaponID = 0;
 	eatItemStart = 0;
+	score = 0; //Score
+	scoreSubWeapon = 5; //scoreSubWeapon
+	numLife = 3; //Num Life
 	isOnGround = false;
 	isOnStair = false;
 	isLockUpdate = false;
 	isSwitchCam = false;
 	brickCollidSimon = NULL;
 	collidingStair = NULL;
+	//Whip
 	whipSwitchSceneLevel = CWhip::GetInstance();
 	whip = new CWhip();
 	whip->SetLevel(whipSwitchSceneLevel->GetLevel());
+	//Hud
+	hudSwitchScene = CHud::GetInstance();
+	hud = new CHud();
+	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud()); //SET SCORE ON HUD
+	if (hudSwitchScene->GetIdSubWeapon() != 0)
+	{
+		switch (hudSwitchScene->GetIdSubWeapon())
+		{
+		case ID_BOOMERANGITEM:
+			SetSubWeapon(ID_BOOMERANG); //SIMON ATTACK SUBWEAPON
+			hud->SetItem(ID_BOOMERANGITEM); //SUBWEAPON ON HUD
+			break;
+		case ID_AXEITEM:
+			SetSubWeapon(ID_AXE);
+			hud->SetItem(ID_AXEITEM);
+			break;
+		case ID_DAGGERITEM:
+			SetSubWeapon(ID_DAGGER);
+			hud->SetItem(ID_DAGGERITEM);
+			break;
+		case ID_HOLYWATERITEM:
+			SetSubWeapon(ID_HOLYWATER);
+			hud->SetItem(ID_HOLYWATERITEM);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -37,7 +69,9 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 	CListItem * listItem = CListItem::GetInstance();
-	
+	//Hud
+	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud());
+	hud->Update(dt);
 	D3DXVECTOR2 position;
 	// Simple fall down
 	if (!isOnStair)
@@ -97,8 +131,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		{
 			CalcPotentialCollisions(&wallObjects, coEvents);
 		}
-
-
 
 		//Coliision Object no see
 		for (auto iter : Objects)
@@ -183,7 +215,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 				switch (iter->GetID()) {
 				case ID_HEART:
-					DebugOut(L"Collsion Heart\n");
+					//IncreaseScoreSubWeapon(5);
+					hudSwitchScene->IncreaseScoreSubWeaponLargeHeart();
+					DebugOut(L"Collsion LargeHeart %d\n", hudSwitchScene->GetScoreSubWeaponHud());
+					break;
+				case ID_SMALLHEART:
+					//IncreaseScoreSubWeapon(1);
+					hudSwitchScene->IncreaseScoreSubWeaponSmallHeart();
+					DebugOut(L"Collsion SmallHeart %d\n", hudSwitchScene->GetScoreSubWeaponHud());
 					break;
 				case ID_WHIPUPGRADE:
 					StartEatItem();
@@ -193,22 +232,31 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				case ID_DAGGERITEM:
 					StartEatItem();
 					SetSubWeapon(ID_DAGGER);
+					hud->SetItem(ID_DAGGERITEM);
+					hudSwitchScene->SetItem(ID_DAGGERITEM);
 					DebugOut(L"Collsion Dagger\n");
-					break;
-				case ID_MONEYBAG:
-					DebugOut(L"Collsion Moneybag\n");
 					break;
 				case ID_BOOMERANGITEM:
 					StartEatItem();
 					SetSubWeapon(ID_BOOMERANG);
+					hud->SetItem(ID_BOOMERANGITEM);
+					hudSwitchScene->SetItem(ID_BOOMERANGITEM);
 					DebugOut(L"Collsion BOOMERANGITEM\n");
-					break;
-				case ID_SMALLHEART:
-					DebugOut(L"Collsion SmallHeart\n");
 					break;
 				case ID_AXEITEM:
 					SetSubWeapon(ID_AXE);
+					hud->SetItem(ID_AXEITEM);
+					hudSwitchScene->SetItem(ID_AXEITEM);
 					DebugOut(L"Collsion AXE\n");
+					break;
+				case ID_HOLYWATERITEM:
+					SetSubWeapon(ID_HOLYWATER);
+					hud->SetItem(ID_HOLYWATERITEM);
+					hudSwitchScene->SetItem(ID_HOLYWATERITEM);
+					DebugOut(L"Collsion ID_HOLYWATERITEM\n");
+					break;
+				case ID_MONEYBAG:
+					DebugOut(L"Collsion Moneybag\n");
 					break;
 				case ID_MONEYBAGWHITE:
 					DebugOut(L"Collsion ID_MONEYBAGWHITE\n");
@@ -216,10 +264,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				case ID_MONEYBAGBLUE:
 					DebugOut(L"Collsion ID_MONEYBAGBLUE\n");
 					break;
-				case ID_HOLYWATERITEM:
-					SetSubWeapon(ID_HOLYWATER);
-					DebugOut(L"Collsion ID_HOLYWATERITEM\n");
-					break;
+				
 				default:
 					break;
 				}
@@ -589,7 +634,8 @@ void CSimon::Render()
 
 	for (auto iter : subWeapon)
 		iter->Render();
-	
+
+	hud->Draw({ 0, 40 });
 }
 
 void CSimon::RenderBoundingBox(int alpha)

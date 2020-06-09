@@ -1,3 +1,7 @@
+[INFOOBJECTSGENERAL]
+#path
+info-objects_general.txt
+
 [INFOOBJECTS]
 #path
 info-objects_scene4.txt

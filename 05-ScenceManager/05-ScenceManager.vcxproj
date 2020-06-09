@@ -154,6 +154,7 @@
     <ClCompile Include="SmallHeart.cpp" />
     <ClCompile Include="SpearKnight.cpp" />
     <ClCompile Include="Stair.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Torch.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="SmallHeart.h" />
     <ClInclude Include="SpearKnight.h" />
     <ClInclude Include="Stair.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Torch.h" />
     <ClInclude Include="Utils.h" />
