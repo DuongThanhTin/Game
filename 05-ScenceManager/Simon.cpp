@@ -24,6 +24,7 @@ CSimon::CSimon() {
 	score = 0; //Score
 	scoreSubWeapon = 5; //scoreSubWeapon
 	numLife = 3; //Num Life
+	health = 16; //Health Simon
 	isOnGround = false;
 	isOnStair = false;
 	isLockUpdate = false;
@@ -37,7 +38,9 @@ CSimon::CSimon() {
 	//Hud
 	hudSwitchScene = CHud::GetInstance();
 	hud = new CHud();
+	hud->SetTimeHud(hudSwitchScene->GetTimeHud()); //SET TIME ON HUD
 	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud()); //SET SCORE ON HUD
+	hud->SetHealthSimon(hudSwitchScene->GetHealthSimon()); //SET HEALTH SIMON ON HUD
 	if (hudSwitchScene->GetIdSubWeapon() != 0)
 	{
 		switch (hudSwitchScene->GetIdSubWeapon())
@@ -65,14 +68,17 @@ CSimon::CSimon() {
 }
 
 void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
-{
+{	
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 	CListItem * listItem = CListItem::GetInstance();
-	//Hud
-	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud());
-	hud->Update(dt);
 	D3DXVECTOR2 position;
+
+	//Hud
+	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud()); //UPDATE SCORE SUBWEAPON ON HUD
+	hud->SetHealthSimon(hudSwitchScene->GetHealthSimon()); //UPDATE HEALTH ON HUD
+	hud->Update(dt);
+
 	// Simple fall down
 	if (!isOnStair)
 	{
@@ -723,6 +729,8 @@ void CSimon::BeHurted()
 
 	untouchableStart = GetTickCount();
 	invisibleStart = GetTickCount();
+	DecreaseHealth();
+	hudSwitchScene->DecreaseHealth();
 	if (!isOnStair)
 	{
 		SetSpeed(-nx * SIMON_DAMAGED_DEFLECT_SPEED_X, -SIMON_DAMAGED_DEFLECT_SPEED_Y);

@@ -76,7 +76,6 @@
 
 #define SIMON_ANI_DIE				99
 
-
 #define SIMON_BBOX_WIDTH  15
 #define SIMON_BBOX_HEIGHT 30
 #define SIMON_BBOX_SIT_HEIGHT 23
@@ -126,6 +125,7 @@ class CSimon : public CGameObject
 	int scoreSubWeapon;
 	int heartSimon;
 	int numLife;
+	int health;
 public:
 	bool isOnStair;
 	bool isLockUpdate = false;
@@ -167,6 +167,9 @@ public:
 	virtual void BeHurted();
 	int GetSwitchCam() { return isSwitchCam; }
 	int GetAnimationSubWeapon();
+	int GetHealthSimon() { return health; }
+	void SetHealthSimon(int health) { this->health = health; }
+	void DecreaseHealth() { health = health - 2; }
 	//HUD
 	void IncreaseScore(int score) { this->score += score; }
 	void IncreaseScoreSubWeapon(int scoreSubWeaponNum) { this->scoreSubWeapon += scoreSubWeaponNum; }

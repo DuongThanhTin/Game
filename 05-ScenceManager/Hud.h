@@ -14,11 +14,14 @@ class CHud
 	static CHud* __instance;
 	LPDIRECT3DTEXTURE9 texBackground;
 	LPTEXT textHud;
+	DWORD timecount;
 	int scoreHud;
 	int scoreSubWeaponHud;
 	int numLifeHud;
 	int timeHud;
 	int idSubWeapon;
+	int healthSimon;
+	int healthBoss;
 public:
 	CHud();
 	~CHud();
@@ -31,12 +34,18 @@ public:
 	int GetNumLifeHud() { return numLifeHud; }
 	int GetTimeHud() { return timeHud; }
 	int GetIdSubWeapon() { return idSubWeapon; }
+	int GetHealthSimon() { return healthSimon; }
+	int GetHealthBoss() { return healthBoss; }
 	void IncreaseScoreSubWeaponLargeHeart() { scoreSubWeaponHud = scoreSubWeaponHud + 5; }
 	void IncreaseScoreSubWeaponSmallHeart() { scoreSubWeaponHud = scoreSubWeaponHud + 1; }
+	void DecreaseHealth() { healthSimon = healthSimon - 2; }
 	void SetScoreHub(int scoreHud) { this->scoreHud = scoreHud; }
 	void SetScoreSubWeaponHub(int scoreSubWeaponHud) { this->scoreSubWeaponHud = scoreSubWeaponHud; }
 	void SetNumLifeHub(int numLifeHud) { this->numLifeHud = numLifeHud; }
+	void SetTimeHud(int timeHud) { this->timeHud = timeHud; }
 	void SetItem(int idSubWeapon) { this->idSubWeapon = idSubWeapon; }
+	void SetHealthSimon(int healthSimon) { this->healthSimon = healthSimon; }
+	void SetHealthBoss(int healthBoss) { this->healthBoss = healthBoss; }
 };
 
 typedef CHud* LPHUD;

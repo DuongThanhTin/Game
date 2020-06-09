@@ -17,28 +17,21 @@ CText * CText::GetInstance()
 	return __instance;
 }
 
-void CText::DrawStringText(char * s, D3DXVECTOR2 position, int length)
-{
-	for (int i = 0; i < strlen(s); i++)
-	{
-		CSprites::GetInstance()->Get(INFO_TEXT_HUD + ConvertTextToNumber(s[i]))->Draw(position.x, position.y);
-		position.x += 7;
-	}
-}
+
 void CText::DrawStringNumber(int number, D3DXVECTOR2 position, int length)
 {
 	string str = to_string(number);
 	for (int i = 1; i < length ; i++)
 	{
 		CSprites::GetInstance()->Get(INFO_TEXT_HUD)->Draw(position.x, position.y);
-		position.x += 7;
+		position.x += NUM_SPACE_EACH_TEXT;
 	}
 
 	//Đếm có bao nhiêu chữ số
 	for (int i = 0; i < str.size(); i++)
 	{
 		CSprites::GetInstance()->Get(INFO_TEXT_HUD + ConvertTextToNumber(str[i]))->Draw(position.x, position.y);
-		position.x += 7;
+		position.x += NUM_SPACE_EACH_TEXT;
 	}
 }
 
@@ -61,6 +54,35 @@ void CText::DrawSubWeapon(D3DXVECTOR2 position, int info)
 	default:
 		break;
 	}
+}
+
+void CText::DrawHealthBar(D3DXVECTOR2 position,int health, int kind)
+{
+	CSprites* sprites = CSprites::GetInstance();
+	CSprite* spriteHealthMinus = sprites->Get(INFO_HEALTHBAR_MINUS);
+	CSprite* spriteHealth = NULL;
+	int healthGeneral = NUM_HEALTH;
+
+	if (kind == NUM_ID_SIMON)
+		spriteHealth = sprites->Get(INFO_HEALTHBAR_REAL_SIMON); //HEALTH SIMON
+	else
+		spriteHealth = sprites->Get(INFO_HEALTHBAR_REAL_BOSS); //HEALTH BOSS
+
+	for (int i = 0; i < health; i++)
+	{
+		spriteHealth->Draw(position.x, position.y);
+		position.x += NUM_SPACE_EACH_HEALTHBAR;
+	}
+
+
+	for (int i = 0; i < healthGeneral - health; i++)
+	{
+		spriteHealthMinus->Draw(position.x, position.y);
+		position.x += NUM_SPACE_EACH_HEALTHBAR;
+	}
+	sprites = NULL;
+	spriteHealthMinus = NULL;
+	spriteHealth = NULL;
 }
 
 int CText::ConvertTextToNumber(char c)

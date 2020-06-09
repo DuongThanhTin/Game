@@ -19,8 +19,8 @@ public:
 	static CText* GetInstance();
 
 	void DrawStringNumber(int number, D3DXVECTOR2 position, int length);
-	void DrawStringText(char *s, D3DXVECTOR2 position, int length);
 	void DrawSubWeapon(D3DXVECTOR2 position,int info);
+	void DrawHealthBar(D3DXVECTOR2 position, int health, int kind);
 	int ConvertTextToNumber(char c);
 };
 
