@@ -1,4 +1,4 @@
-#include "SmallHeart.h"
+﻿#include "SmallHeart.h"
 
 
 
@@ -6,8 +6,9 @@ CSmallHeart::CSmallHeart(D3DXVECTOR2 position)
 {
 	this->x = position.x;
 	this->y = position.y;
-	AddAnimation(702);
+	AddAnimation(SMALLHEART_ANI);
 	id = ID_SMALLHEART;
+	velocity_x = SMALLHEART_FALLING_SPEED_X_VARIATION;
 }
 
 
@@ -30,6 +31,9 @@ void CSmallHeart::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CItem::Update(dt, coObjects);
 
 	if (!isOnGround) {
-		vy += SMALLHEART_GRAVITY * dt;
+		vy += SMALLHEART_GRAVITY*dt ;
+		vx += velocity_x*dt;
+		if (vx >= SMALLHEART_FALLING_SPEED_X || vx <= -SMALLHEART_FALLING_SPEED_X)
+			velocity_x *= -1; // đổi chiều
 	}
 }

@@ -6,6 +6,7 @@
 class CItem : public CGameObject
 {
 	DWORD timeDisappear;
+
 public:
 	CItem();
 	~CItem();
