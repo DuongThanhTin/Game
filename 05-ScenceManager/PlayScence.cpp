@@ -715,6 +715,20 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		DebugOut(L"SCENE 4\n");
 		OnKeySwitchScene(SCENE_4, 0, 0);
 		break;
+
+	//CHANGE WEAPON
+	case DIK_Q:
+		simon->SetSubWeapon(ID_DAGGER);
+		break;
+	case DIK_W:
+		simon->SetSubWeapon(ID_BOOMERANG);
+		break;
+	case DIK_E:
+		simon->SetSubWeapon(ID_HOLYWATER);
+		break;
+	case DIK_R:
+		simon->SetSubWeapon(ID_AXE);
+		break;
 	}
 }
 

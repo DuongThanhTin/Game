@@ -238,27 +238,23 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				case ID_DAGGERITEM:
 					StartEatItem();
 					SetSubWeapon(ID_DAGGER);
-					hud->SetItem(ID_DAGGERITEM);
-					hudSwitchScene->SetItem(ID_DAGGERITEM);
+					SetItemWeaponHud(ID_DAGGERITEM);
 					DebugOut(L"Collsion Dagger\n");
 					break;
 				case ID_BOOMERANGITEM:
 					StartEatItem();
 					SetSubWeapon(ID_BOOMERANG);
-					hud->SetItem(ID_BOOMERANGITEM);
-					hudSwitchScene->SetItem(ID_BOOMERANGITEM);
+					SetItemWeaponHud(ID_BOOMERANGITEM);
 					DebugOut(L"Collsion BOOMERANGITEM\n");
 					break;
 				case ID_AXEITEM:
 					SetSubWeapon(ID_AXE);
-					hud->SetItem(ID_AXEITEM);
-					hudSwitchScene->SetItem(ID_AXEITEM);
+					SetItemWeaponHud(ID_AXEITEM);
 					DebugOut(L"Collsion AXE\n");
 					break;
 				case ID_HOLYWATERITEM:
 					SetSubWeapon(ID_HOLYWATER);
-					hud->SetItem(ID_HOLYWATERITEM);
-					hudSwitchScene->SetItem(ID_HOLYWATERITEM);
+					SetItemWeaponHud(ID_HOLYWATERITEM);
 					DebugOut(L"Collsion ID_HOLYWATERITEM\n");
 					break;
 				case ID_MONEYBAG:
@@ -743,6 +739,27 @@ void CSimon::SetSubWeapon(int subWeaponID)
 {
 	this->subWeaponID = subWeaponID;
 	DebugOut(L"SUB WEAPON : %d\n", subWeaponID);
+	switch (subWeaponID)
+	{
+	case ID_BOOMERANG:
+		hud->SetItem(ID_BOOMERANGITEM);
+		hudSwitchScene->SetItem(ID_BOOMERANGITEM);
+		break;
+	case ID_DAGGER:
+		hud->SetItem(ID_DAGGERITEM);
+		hudSwitchScene->SetItem(ID_DAGGERITEM);
+		break;
+	case ID_AXE:
+		hud->SetItem(ID_AXEITEM);
+		hudSwitchScene->SetItem(ID_AXEITEM);
+		break;
+	case ID_HOLYWATER:
+		hud->SetItem(ID_HOLYWATERITEM);
+		hudSwitchScene->SetItem(ID_HOLYWATERITEM);
+		break;
+	default:
+		break;
+	}
 }
 
 void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
@@ -1101,6 +1118,11 @@ int CSimon::GetAnimationSubWeapon()
 	return anisub;
 }
 
+void CSimon::SetItemWeaponHud(int itemID)
+{
+	hud->SetItem(itemID);
+	hudSwitchScene->SetItem(itemID);
+}
 
 CSimon* CSimon::GetInstance()
 {

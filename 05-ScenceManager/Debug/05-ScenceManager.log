@@ -1,4 +1,14 @@
-﻿  Hud.cpp
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+﻿  Simon.cpp
+d:\game2020\game\05-scencemanager\simon.cpp(96): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(104): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(120): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(128): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(177): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\simon.cpp(180): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\simon.cpp(421): warning C4101: 'ob': unreferenced local variable
+d:\game2020\game\05-scencemanager\simon.cpp(421): warning C4101: 'ol': unreferenced local variable
+d:\game2020\game\05-scencemanager\simon.cpp(421): warning C4101: 'or': unreferenced local variable
+d:\game2020\game\05-scencemanager\simon.cpp(421): warning C4101: 'ot': unreferenced local variable
+d:\game2020\game\05-scencemanager\simon.cpp(1068): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

@@ -171,6 +171,7 @@ public:
 	void SetHealthSimon(int health) { this->health = health; }
 	void DecreaseHealth() { health = health - 2; }
 	//HUD
+	void SetItemWeaponHud(int itemID);
 	void IncreaseScore(int score) { this->score += score; }
 	void IncreaseScoreSubWeapon(int scoreSubWeaponNum) { this->scoreSubWeapon += scoreSubWeaponNum; }
 	void IncreaseHeart(int heartSimonNum) { this->heartSimon += heartSimonNum; }

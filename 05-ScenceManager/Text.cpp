@@ -46,10 +46,10 @@ void CText::DrawSubWeapon(D3DXVECTOR2 position, int info)
 		CSprites::GetInstance()->Get(INFO_WEAPON_AXE)->Draw(position.x, position.y);
 		break;
 	case ID_DAGGERITEM:
-		CSprites::GetInstance()->Get(INFO_WEAPON_DAGGER)->Draw(position.x, position.y-2);
+		CSprites::GetInstance()->Get(INFO_WEAPON_DAGGER)->Draw(position.x-2, position.y-3);
 		break;
 	case ID_HOLYWATERITEM:
-		CSprites::GetInstance()->Get(INFO_WEAPON_HOLYWATER)->Draw(position.x, position.y);
+		CSprites::GetInstance()->Get(INFO_WEAPON_HOLYWATER)->Draw(position.x, position.y+1);
 		break;
 	default:
 		break;

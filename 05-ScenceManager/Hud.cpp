@@ -47,6 +47,7 @@ void CHud::Draw(D3DXVECTOR2 position)
 
 	//HEALTH SIMON
 	textHud->DrawHealthBar({ 55,24 }, GetHealthSimon(),NUM_ID_SIMON);
+
 	//HEALTH BOSS
 	textHud->DrawHealthBar({ 55,34 }, 16, NUM_ID_BOSS);
 }
