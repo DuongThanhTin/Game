@@ -19,6 +19,17 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		float ol, ot, or , ob;		// object bbox
 		GetBoundingBox(wl, wt, wr, wb);
 		coObjects->at(i)->GetBoundingBox(ol, ot, or , ob);
+		if (coObjects->at(i)->GetID() == ID_HIDEBRICK)
+		{
+			if (GetID() == ID_WHIP)
+			{
+				if (CGame::GetInstance()->IsIntersectAABB({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+					coObjects->at(i)->SetState(OBJECTS_STATE_DESTROY);
+				}
+			}
+
+		}
+
 		//OBJECT NO MOVE
 		if (coObjects->at(i)->GetState() != OBJECTS_STATE_DESTROY) {
 			if (CGame::GetInstance()->IsIntersectAABB({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {

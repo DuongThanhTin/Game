@@ -24,6 +24,8 @@
 #include "Bridge.h"
 #include "AreaSwitchCam.h"
 #include "Hud.h"
+#include "HideBrick.h"
+#include "CrownItem.h"
 
 class CPlayScene: public CScene
 {

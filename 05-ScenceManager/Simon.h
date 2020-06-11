@@ -13,6 +13,7 @@
 #include "Axe.h"
 #include "HolyWater.h"
 #include "Hud.h"
+#include "CrownItem.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 

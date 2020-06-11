@@ -92,12 +92,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	vector<LPGAMEOBJECT> wallObjects;
 	for (int i = 0;i < coObjects->size();i++) {
 		if (coObjects->at(i)->GetID() == ID_GROUND ||
-			coObjects->at(i)->GetID() == ID_BRIDGE)
+			coObjects->at(i)->GetID() == ID_BRIDGE ||
+			coObjects->at(i)->GetID() == ID_HIDEBRICK )
 			wallObjects.push_back(coObjects->at(i));
 	}
 
 	//Collision with items
 	vector<LPGAMEOBJECT> itemObjects;
+
 	for (int i = 0;i < listItem->ListItem.size();i++) {
 		if (listItem->ListItem[i]->GetID() == ID_HEART ||
 			listItem->ListItem[i]->GetID() == ID_SMALLHEART ||
@@ -186,6 +188,31 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 
 		}
+		
+		//Crown
+		for (size_t i = 0; i < Objects.size(); i++)
+		{
+			float sl, st, sr, sb;		// simon object bbox
+			float ol, ot, or , ob;		// object bbox
+			GetBoundingBox(sl, st, sr, sb);
+			Objects[i]->GetBoundingBox(ol, ot, or , ob);
+			if (Objects[i]->GetID() == ID_CROWN)
+			{
+				if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+					Objects[i]->SetState(STATE_DESTROYED);
+					Objects.erase(Objects.begin() + i);
+					i--;
+				}
+				
+				
+				if (sl > ol + DISTANCE_CROWN_APPEAR)
+				{
+					Objects[i]->isActive = true;
+				}
+			
+			}
+		}
+			
 
 		//Collision SubWeapon
 		for (auto iter : subWeapon)
@@ -626,11 +653,19 @@ void CSimon::Render()
 
 	RenderBoundingBox();
 	if (attackStart)
+	{
 		whip->Render();
+	}
 	
 	for (auto iter : subWeapon)
 		iter->Render();
+	/*if (isattacksub)
+	{
+		for (auto iter : subWeapon)
+			iter->Render();
+	}*/
 
+	
 	hud->Draw({ 0, 40 });
 }
 
@@ -851,6 +886,18 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	for (auto iter : subWeapon) {
 		iter->Update(dt, objects);
 	}
+	//Update SubWeapon
+	/*if (animation_set->at(GetAnimationSubWeapon())->GetCurrentFrame() == 2)
+	{
+		isattacksub = true;
+	}
+
+
+	if (isattacksub)
+	{
+		for (auto iter : subWeapon)
+			iter->Update(dt, objects);
+	}*/
 
 	for (size_t i = 0; i < subWeapon.size(); i++)
 	{
@@ -865,18 +912,21 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			{
 				if (swt > vb || swr > vr)
 				{
+					isattacksub = false;
 					subWeapon.erase(subWeapon.begin() + i);
 					i--;
 				}
 			}
 			else
 			{
+				isattacksub = false;
 				subWeapon.erase(subWeapon.begin() + i);
 				i--;
 			}
 		}
 		else if (subWeapon[i]->GetState() == STATE_DESTROYED)
 		{
+			isattacksub = false;
 			subWeapon.erase(subWeapon.begin() + i);
 			i--;
 		}
@@ -1003,7 +1053,6 @@ void CSimon::StartAttackSub() {
 	}
 	else
 	{
-
 		switch (subWeaponID)
 		{
 		case ID_DAGGER:
@@ -1030,7 +1079,6 @@ void CSimon::StartAttackSub() {
 		default:
 			break;
 		}
-
 	}
 
 

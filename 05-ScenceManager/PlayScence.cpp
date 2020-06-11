@@ -44,6 +44,8 @@ See scene1.txt, scene2.txt for detail format specification
 #define OBJECT_TYPE_STAIR	9
 #define OBJECT_TYPE_AREAACTIVE 10
 #define OBJECT_TYPE_CANDLE 11
+#define OBJECT_TYPE_HIDEBRICK 12
+#define OBJECT_TYPE_CROWN	13
 #define OBJECT_TYPE_SPEARKNIGHT	40
 #define OBJECT_TYPE_BAT	41
 #define OBJECT_TYPE_AREASWITCHCAM	90
@@ -339,7 +341,23 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"CAreaSwitchCam %d\n", scene_id);
 		break;
 	}
-
+	case OBJECT_TYPE_HIDEBRICK:
+	{
+		int width = atoi(tokens[4].c_str());
+		int height = atoi(tokens[5].c_str());
+		obj = new CHideBrick({ x,y + BRICK_BBOX_HEIGHT + MAP_HUD }, width, height);
+		DebugOut(L"CHideBrick\n");
+		break;
+	}
+	case OBJECT_TYPE_CROWN:
+	{
+		int width = atoi(tokens[4].c_str());
+		int height = atoi(tokens[5].c_str());
+		int crownUp = atoi(tokens[6].c_str());
+		obj = new CCrownItem({ x,y + height + MAP_HUD}, crownUp);
+		DebugOut(L"CrownItem\n");
+		break;
+	}
 	//Portal
 	case OBJECT_TYPE_PORTAL:
 	{

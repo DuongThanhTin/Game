@@ -13,18 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{6acb34a9-2b51-4d6f-ab62-d465693e8c59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="General">
+      <UniqueIdentifier>{c09e01e0-d9c0-4160-918b-3cf18bd6d294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemies">
+      <UniqueIdentifier>{457bcf3d-ac63-4c7a-81ec-9f8c135c732f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Weapons">
+      <UniqueIdentifier>{00b9f7b7-69cc-4b28-92e4-d68a36c2447a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectNoMove">
+      <UniqueIdentifier>{d17563e7-d13a-4e39-ba81-a6db54c1125f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Brick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Goomba.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -51,126 +60,132 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Koopas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Simon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Whip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Zombie.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Torch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Heart.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ViewPort.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectNoMove.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ListItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WhipUpgrade.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dagger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MoneyBag.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Candle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoomerangItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpearKnight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SmallHeart.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DaggerItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Boomerang.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Stair.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bat.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AreaActive.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bridge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hud.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="AreaSwitchCam.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AxeItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MoneyBagWhite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MoneyBagBlue.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="Axe.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Weapons</Filter>
     </ClCompile>
-    <ClCompile Include="HolyWaterItem.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="AxeItem.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Boomerang.cpp">
+      <Filter>Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomerangItem.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>ObjectNoMove</Filter>
+    </ClCompile>
+    <ClCompile Include="Bridge.cpp">
+      <Filter>ObjectNoMove</Filter>
+    </ClCompile>
+    <ClCompile Include="Candle.cpp">
+      <Filter>ObjectNoMove</Filter>
+    </ClCompile>
+    <ClCompile Include="Dagger.cpp">
+      <Filter>Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="DaggerItem.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Goomba.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Heart.cpp">
+      <Filter>Items</Filter>
     </ClCompile>
     <ClCompile Include="HolyWater.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="HolyWaterItem.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Hud.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Koopas.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="ListItem.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="MoneyBag.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="MoneyBagBlue.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="MoneyBagWhite.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectNoMove.cpp">
+      <Filter>ObjectNoMove</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallHeart.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearKnight.cpp">
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>General</Filter>
+    </ClCompile>
+    <ClCompile Include="Torch.cpp">
+      <Filter>ObjectNoMove</Filter>
+    </ClCompile>
+    <ClCompile Include="Whip.cpp">
+      <Filter>Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="WhipUpgrade.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewPort.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
+    <ClCompile Include="Stair.cpp">
+      <Filter>ObjectNoMove</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
+    <ClCompile Include="HideBrick.cpp">
+      <Filter>ObjectNoMove</Filter>
+    </ClCompile>
+    <ClCompile Include="CrownItem.cpp">
+      <Filter>Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Brick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Goomba.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Mario.h">
@@ -197,9 +212,6 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Koopas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -209,104 +221,119 @@
     <ClInclude Include="define.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Whip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Zombie.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Torch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Heart.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewPort.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectNoMove.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ListItem.h">
-      <Filter>Header Files</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="WhipUpgrade.h">
-      <Filter>Header Files</Filter>
+      <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="Dagger.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Whip.h">
+      <Filter>Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="MoneyBag.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Candle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoomerangItem.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Weapon.h">
+      <Filter>Weapons</Filter>
     </ClInclude>
     <ClInclude Include="SpearKnight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="SmallHeart.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DaggerItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Boomerang.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Stair.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AreaActive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bridge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hud.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AreaSwitchCam.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AxeItem.h">
-      <Filter>Header Files</Filter>
+      <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="MoneyBagWhite.h">
-      <Filter>Header Files</Filter>
+      <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="MoneyBagBlue.h">
-      <Filter>Header Files</Filter>
+      <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="Axe.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MoneyBag.h">
+      <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="HolyWaterItem.h">
-      <Filter>Header Files</Filter>
+      <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="HolyWater.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ListItem.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Goomba.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Koopas.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectNoMove.h">
+      <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="BoomerangItem.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="AxeItem.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewPort.h">
+      <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="Torch.h">
+      <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="Stair.h">
+      <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>General</Filter>
     </ClInclude>
     <ClInclude Include="Text.h">
-      <Filter>Header Files</Filter>
+      <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="HolyWater.h">
+      <Filter>Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Heart.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Hud.h">
+      <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Boomerang.h">
+      <Filter>Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="DaggerItem.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaSwitchCam.h">
+      <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaActive.h">
+      <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Axe.h">
+      <Filter>Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Bridge.h">
+      <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="Candle.h">
+      <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="Dagger.h">
+      <Filter>Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="HideBrick.h">
+      <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="CrownItem.h">
+      <Filter>Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

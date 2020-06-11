@@ -12,6 +12,7 @@ CListItem* CListItem::GetInstance()
 CListItem::CListItem()
 {
 	ListItem.clear();
+
 }
 
 

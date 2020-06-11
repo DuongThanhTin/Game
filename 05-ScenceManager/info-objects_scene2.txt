@@ -5,9 +5,14 @@
 40	textures\objects.png	255	0	255
 50	textures\items.png	255	0	255
 60	textures\Objectsub.png	116	116	116
+70	textures\scene3.png	116	116	116
 
 # id	left	top	right	bottom	texture_id	isFlipImage	position(x)	position(y)
 [SPRITES]
+#================HIDEBRICK===============
+40000	0	0	16	16	70		0		0		0
+40001	120	0	136	16	70		0		0		0		
+
 #================ZOMBIE===============
 #Zombie Right
 14001	11	6	28	39	30		0		0		0
@@ -61,8 +66,21 @@
 #=============BRIDGE=====================
 19051	63	68	96	77	60		0		0		0
 
+#============= CrownItem ===============
+40010	69	35	84	51	60		0		0		0
+40011	86	35	101	51	60		0		0		0
+40012	103	35	118	51	60		0		0		0
+40013	120	35	135	51	60		0		0		0
+
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
+# ==== HIDE BRICK =======
+790	40000	100
+791	40001	100
+
+#============ Crown_Item ===============
+795	40010	100	40011	100	40012	100	40013	100
+
 # ==== ZOMBIE =======
 #ZOMBIE RIGHT
 401	14001	100	14002	100
