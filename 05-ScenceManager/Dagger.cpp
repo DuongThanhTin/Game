@@ -11,6 +11,7 @@ CDagger::CDagger(D3DXVECTOR2 position, int nx)
 	AddAnimation(ID_ANI_DAGGER_RIGHT); //Right
 	AddAnimation(ID_ANI_DAGGER_LEFT); //Left
 	id = ID_DAGGER;
+	this->damagedWeapon = 1;
 }
 
 

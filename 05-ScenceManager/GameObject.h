@@ -63,6 +63,8 @@ public:
 	int nextItemID;
 	int areaactive_enemy;
 	int scoreEnemy;
+	int healthEnemy;
+	int damagedWeapon;
 
 	bool isOnGround;
 	bool isActive;
@@ -114,6 +116,10 @@ public:
 	int GetNextItemID();
 	int GetAreaActiveEnemy();
 	virtual int GetScore() { return scoreEnemy; }
+	virtual int GetHealthEnemy() { return healthEnemy; }
+	virtual void SetHealthEnemy(int healthEnemy) {  this->healthEnemy = healthEnemy; }
+	virtual int GetDamagedWeapon() { return damagedWeapon; }
+	virtual void SetDamagedWeapon(int damaged) { this->damagedWeapon = damaged; }
 
 	~CGameObject();
 };

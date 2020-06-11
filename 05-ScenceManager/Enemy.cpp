@@ -117,11 +117,7 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CEnemy::BeDamagedEnemy(int scoreEnemy)
 {
-	DebugOut(L"qwe %d\n", scoreEnemy);
-	DebugOut(L"ASD %d\n", CSimon::GetInstance()->GetScore());
 	CSimon::GetInstance()->IncreaseScore(scoreEnemy);
-	
-	
 }
 
 void CEnemy::TimeFireDestroy()

@@ -16,6 +16,7 @@ CBoomerang::CBoomerang(D3DXVECTOR2 position, int nx)
 	isFlyReturn = false;
 	isDisapear = false;
 	isReturn = false;
+	this->damagedWeapon = 2;
 }
 
 

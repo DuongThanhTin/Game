@@ -1,16 +1,5 @@
-﻿  Simon.cpp
-d:\game2020\game\05-scencemanager\simon.cpp(93): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(101): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(117): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(125): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(174): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\simon.cpp(177): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\simon.cpp(412): warning C4101: 'ob': unreferenced local variable
-d:\game2020\game\05-scencemanager\simon.cpp(412): warning C4101: 'ol': unreferenced local variable
-d:\game2020\game\05-scencemanager\simon.cpp(412): warning C4101: 'or': unreferenced local variable
-d:\game2020\game\05-scencemanager\simon.cpp(412): warning C4101: 'ot': unreferenced local variable
-d:\game2020\game\05-scencemanager\simon.cpp(1075): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Hud.cpp
-  Generating Code...
+﻿  Enemy.cpp
+d:\game2020\game\05-scencemanager\enemy.cpp(26): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\enemy.cpp(74): warning C4018: '<': signed/unsigned mismatch
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

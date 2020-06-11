@@ -13,6 +13,7 @@ CAxe::CAxe(D3DXVECTOR2 position, int nx)
 	AddAnimation(ID_ANI_AXE_LEFT); //Left
 	id = ID_AXE;
 	timefly = GetTickCount();
+	this->damagedWeapon = 2;
 }
 
 

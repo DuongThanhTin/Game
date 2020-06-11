@@ -16,6 +16,7 @@ CHolyWater::CHolyWater(D3DXVECTOR2 position, int nx)
 	isOnGroundFire = false;
 	timeHolyWaterFire = 0;
 	timefly = GetTickCount();
+	this->damagedWeapon = 1;
 }
 
 
@@ -58,14 +59,10 @@ void CHolyWater::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 		if (GetTickCount() - timefly > TIME_HOLYWATER_FLY)
 		{
 			y += HOLYWATER_GRAVITY*dt;
-			//vy += HOLYWATER_GRAVITY*dt;
 			if (nx > 0)
 				x += vx*dt;
 			else
 				x -= vx*dt;
-
-			//timefly = 0;
-
 		}
 		else if (timefly >0)
 		{

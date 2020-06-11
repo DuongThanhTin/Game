@@ -26,6 +26,7 @@ CSpearKnight::CSpearKnight(D3DXVECTOR2 position, int nextItemID, float limitedLe
 	nx = -1;
 	scoreEnemy = NUM_SCORE_ENEMY_SPEARKNIGHT;
 	this->nextItemID = nextItemID;
+	this->healthEnemy = 3;
 }
 
 void CSpearKnight::GetBoundingBox(float &left, float &top, float &right, float &bottom)

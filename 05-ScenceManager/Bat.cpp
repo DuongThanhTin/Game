@@ -28,6 +28,7 @@ CBat::CBat(D3DXVECTOR2 position,int nx, int nextItemID, float falldown , int are
 	this->nextItemID = nextItemID;
 	areaactive_enemy = area_id;
 	scoreEnemy = 200;
+	this->healthEnemy = 1;
 }
 
 void CBat::GetBoundingBox(float &left, float &top, float &right, float &bottom)

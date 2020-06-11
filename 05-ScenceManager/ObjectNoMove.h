@@ -15,8 +15,7 @@
 #include "MoneyBagBlue.h"
 #include "HolyWaterItem.h"
 
-#define OBJECTS_STATE_NORMAL 0
-#define OBJECTS_STATE_DESTROY 1
+
 
 class CObjectNoMove : public CGameObject
 {
