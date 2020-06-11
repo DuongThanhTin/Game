@@ -29,6 +29,7 @@ public:
 	void Render();
 	void Update(DWORD dt);
 	static CHud* GetInstance();
+	//GET
 	int GetScoreHud() { return scoreHud; }
 	int GetScoreSubWeaponHud() { return scoreSubWeaponHud; }
 	int GetNumLifeHud() { return numLifeHud; }
@@ -36,9 +37,8 @@ public:
 	int GetIdSubWeapon() { return idSubWeapon; }
 	int GetHealthSimon() { return healthSimon; }
 	int GetHealthBoss() { return healthBoss; }
-	void IncreaseScoreSubWeaponLargeHeart() { scoreSubWeaponHud = scoreSubWeaponHud + 5; }
-	void IncreaseScoreSubWeaponSmallHeart() { scoreSubWeaponHud = scoreSubWeaponHud + 1; }
-	void DecreaseHealth() { healthSimon = healthSimon - 2; }
+
+	//SET
 	void SetScoreHub(int scoreHud) { this->scoreHud = scoreHud; }
 	void SetScoreSubWeaponHub(int scoreSubWeaponHud) { this->scoreSubWeaponHud = scoreSubWeaponHud; }
 	void SetNumLifeHub(int numLifeHud) { this->numLifeHud = numLifeHud; }
@@ -46,6 +46,11 @@ public:
 	void SetItem(int idSubWeapon) { this->idSubWeapon = idSubWeapon; }
 	void SetHealthSimon(int healthSimon) { this->healthSimon = healthSimon; }
 	void SetHealthBoss(int healthBoss) { this->healthBoss = healthBoss; }
+	
+	//function
+	void IncreaseScoreSubWeaponLargeHeart() { scoreSubWeaponHud = scoreSubWeaponHud + 5; }
+	void IncreaseScoreSubWeaponSmallHeart() { scoreSubWeaponHud = scoreSubWeaponHud + 1; }
+	void DecreaseHealth() { healthSimon = healthSimon - 2; }
 };
 
 typedef CHud* LPHUD;

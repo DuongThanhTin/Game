@@ -1,7 +1,7 @@
 #pragma once
 #include "define.h"
 #include "Enemy.h"
-#include "Simon.h"
+
 
 #define BAT_FLYING_SPEED 0.0015f
 

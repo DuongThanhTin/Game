@@ -77,11 +77,13 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		GetBoundingBox(wl, wt, wr, wb);
 		coObjects->at(i)->GetBoundingBox(ol, ot, or , ob);
 		if (CGame::GetInstance()->IsIntersectAABB({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+		
 			if (GetTickCount() - timeFire > TIME_FIRE_ENEMY && timeFire > 0)
 			{
 				timeFire = 0;
 				float x, y;
 				coObjects->at(i)->GetPosition(x, y);
+				this->state = STATE_DESTROYED;
 				switch (GetNextItemID())
 				{
 				case ID_SMALLHEART:
@@ -109,18 +111,23 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 		}
 	}
+
+	
+}
+
+void CEnemy::BeDamagedEnemy(int scoreEnemy)
+{
+	DebugOut(L"qwe %d\n", scoreEnemy);
+	DebugOut(L"ASD %d\n", CSimon::GetInstance()->GetScore());
+	CSimon::GetInstance()->IncreaseScore(scoreEnemy);
+	
+	
 }
 
 void CEnemy::TimeFireDestroy()
 {
 	timeFire = GetTickCount();
-	state = ENEMY_STATE_DESTROY;
+	this->state = ENEMY_STATE_DESTROY;
 	vx = 0;
 }
 
-void CEnemy::GetBoundingBox(float &l, float &t, float &r, float &b) {
-	if (state == ENEMY_STATE_DESTROY)
-	{
-		l = t = r = b = 0.0f;
-	}
-}

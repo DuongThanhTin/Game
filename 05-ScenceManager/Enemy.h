@@ -13,6 +13,7 @@
 #include "DaggerItem.h"
 #include "SmallHeart.h"
 #include "define.h"
+#include "Simon.h"
 
 
 #define ENEMY_STATE_IDLE	1
@@ -25,6 +26,6 @@ public:
 	~CEnemy();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
 	virtual void TimeFireDestroy();
-	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
+	virtual void BeDamagedEnemy(int scoreEnemy);
 };
 

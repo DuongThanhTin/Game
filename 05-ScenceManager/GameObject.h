@@ -62,6 +62,7 @@ public:
 	int id;
 	int nextItemID;
 	int areaactive_enemy;
+	int scoreEnemy;
 
 	bool isOnGround;
 	bool isActive;
@@ -104,12 +105,15 @@ public:
 	virtual void Render() = 0;
 	virtual void SetState(int state) { this->state = state; }
 	virtual void BeHurted() {};
+	virtual void BeDamaged() {};
+	virtual void BeDamagedEnemy(int score) {};
 	virtual void ResetAnimation();
 	virtual void TimeFireDestroy();
 	int GetNx();
 	int GetNy();
 	int GetNextItemID();
 	int GetAreaActiveEnemy();
+	virtual int GetScore() { return scoreEnemy; }
 
 	~CGameObject();
 };

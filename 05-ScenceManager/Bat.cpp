@@ -7,7 +7,7 @@ CBat::CBat()
 	SetState(BAT_STATE_SLEEP);
 	AddAnimation(ANI_DESTROY);
 	nx = -1;
-	
+	scoreEnemy = NUM_SCORE_ENEMY_BAT;
 }
 
 CBat::~CBat()
@@ -27,10 +27,13 @@ CBat::CBat(D3DXVECTOR2 position,int nx, int nextItemID, float falldown , int are
 	vx = 0;
 	this->nextItemID = nextItemID;
 	areaactive_enemy = area_id;
+	scoreEnemy = 200;
 }
 
 void CBat::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
+
+	//left = top = right = bottom = 0.0f;
 	left = x;
 	top = y - BAT_BBOX_HEIGHT;
 	right = x + BAT_BBOX_WIDTH;
@@ -58,9 +61,10 @@ void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void CBat::Render()
 {
+	int ani;
 	if (state != ENEMY_STATE_DESTROY)
 	{
-		int ani = 0;
+		ani = 0;
 		if (isActive)
 		{
 			ani = BAT_ANI_FLYING_RIGHT;
@@ -70,9 +74,9 @@ void CBat::Render()
 	}
 	else
 	{
-		animations[0]->Render(x, y);
+		ani = 3;
+		animation_set->at(ani)->Render(x, y);
 	}
-
 
 	RenderBoundingBox();
 }

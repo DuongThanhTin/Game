@@ -11,6 +11,7 @@ CHud::CHud()
 {
 	textHud = CText::GetInstance();
 	scoreSubWeaponHud = NUM_SCORE_SUBWEAPON;
+	numLifeHud = NUM_LIFE;
 	healthSimon = NUM_HEALTH;
 	timeHud = NUM_TIME;
 	timecount = GetTickCount();
@@ -40,7 +41,7 @@ void CHud::Draw(D3DXVECTOR2 position)
 	textHud->DrawStringNumber(GetNumLifeHud(), { 200, 32 }, 2);
 
 	//Time
-	textHud->DrawStringNumber(GetTimeHud(), { 150, 12 }, 2);
+	textHud->DrawStringNumber(GetTimeHud(), { 150, 12 }, 4);
 
 	//ITEM SUBWEAPON
 	textHud->DrawSubWeapon({ 157,29 }, GetIdSubWeapon());

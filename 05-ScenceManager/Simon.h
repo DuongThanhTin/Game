@@ -9,7 +9,6 @@
 #include "Stair.h"
 #include "Bridge.h"
 #include "AreaActive.h"
-#include "Bat.h"
 #include "AreaSwitchCam.h"
 #include "Axe.h"
 #include "HolyWater.h"
@@ -97,7 +96,7 @@ class CSimon : public CGameObject
 	int transformtime;
 
 	bool isOnGround;
-
+	bool isattacksub;
 
 	float start_x, start_y;
 
@@ -105,6 +104,7 @@ class CSimon : public CGameObject
 	DWORD untouchableStart;
 	DWORD attackStart;
 	DWORD attackSubStart;
+	DWORD attackSubWeaponRender;
 	DWORD jumpStart;
 	DWORD eatItemStart;
 	DWORD aniAttackSubWeaponRender;
@@ -142,10 +142,13 @@ public:
 	void SetSubWeapon(int subWeaponID);
 	int GetSubWeapon() { return subWeaponID; }
 
+	// Update
 	void UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects);
 	void UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects);
 	void UpdateOnStair();
+	void UpdateOnHud(DWORD dt);
 
+	//Start Time
 	void StartUntouchable();
 	void StartAttack();
 	void StartAttackSub();
@@ -172,9 +175,10 @@ public:
 	void DecreaseHealth() { health = health - 2; }
 	//HUD
 	void SetItemWeaponHud(int itemID);
-	void IncreaseScore(int score) { this->score += score; }
+	void IncreaseScore(int score);
 	void IncreaseScoreSubWeapon(int scoreSubWeaponNum) { this->scoreSubWeapon += scoreSubWeaponNum; }
 	void IncreaseHeart(int heartSimonNum) { this->heartSimon += heartSimonNum; }
+
 	int GetNumLife() { return numLife; }
 	int GetScore() { return score; }
 	int GetScoreSubWeapon() { return this->scoreSubWeapon; }

@@ -21,13 +21,15 @@ CText * CText::GetInstance()
 void CText::DrawStringNumber(int number, D3DXVECTOR2 position, int length)
 {
 	string str = to_string(number);
-	for (int i = 1; i < length ; i++)
+	
+	//Dùng khi tăng điểm thì sẽ trừ bớt số 0 thay thế là điểm ở hàm dưới(Nếu không có thì sẽ thêm điểm ở phía sau vầ giữ nguyên length
+	for (int i = 0; i < length - str.size() ; i++) 
 	{
 		CSprites::GetInstance()->Get(INFO_TEXT_HUD)->Draw(position.x, position.y);
 		position.x += NUM_SPACE_EACH_TEXT;
 	}
 
-	//Đếm có bao nhiêu chữ số
+	//Đếm có bao nhiêu chữ số và ghi điểm
 	for (int i = 0; i < str.size(); i++)
 	{
 		CSprites::GetInstance()->Get(INFO_TEXT_HUD + ConvertTextToNumber(str[i]))->Draw(position.x, position.y);

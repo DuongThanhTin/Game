@@ -24,6 +24,7 @@ CSpearKnight::CSpearKnight(D3DXVECTOR2 position, int nextItemID, float limitedLe
 	SetState(SPEARKNIGHT_STATE_WALKING);
 	AddAnimation(ANI_DESTROY);
 	nx = -1;
+	scoreEnemy = NUM_SCORE_ENEMY_SPEARKNIGHT;
 	this->nextItemID = nextItemID;
 }
 
@@ -97,7 +98,7 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		vy += SPEARKNIGHT_GRAVITY*dt;
 
 
-	if (x<=limitedLeft) {
+	if (x <= limitedLeft) {
 		vx = -vx;
 	}
 
@@ -108,7 +109,7 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void CSpearKnight::Render()
 {
-	if(state != ENEMY_STATE_DESTROY)
+	if (state != ENEMY_STATE_DESTROY)
 	{
 		int ani = SPEARKNIGHT_ANI_WALKING_LEFT;
 		if (vx > 0)
@@ -120,9 +121,9 @@ void CSpearKnight::Render()
 	}
 	else
 	{
-		animations[0]->Render(x,y);
+		animations[0]->Render(x, y);
 	}
-	
+
 
 	RenderBoundingBox();
 }

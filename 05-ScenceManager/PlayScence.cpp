@@ -49,7 +49,6 @@ See scene1.txt, scene2.txt for detail format specification
 #define OBJECT_TYPE_AREASWITCHCAM	90
 
 #define OBJECT_TYPE_PORTAL	50
-#define OBJECT_TYPE_WHIP 90
 #define OBJECT_TYPE_DAGGER 91
 #define OBJECT_TYPE_BOOMERANG 92
 
@@ -599,11 +598,6 @@ void CPlayScene::ChangeView(D3DXVECTOR2 playerPosition, D3DXVECTOR2 setPlayerPos
 	player->SetPosition(setPlayerPosition.x, setPlayerPosition.y);
 	viewport->SetPosition({ cameraPosition.x, cameraPosition.y });
 	viewport->Update(playerPosition, cameraStart, tileMap->GetLimitedViewPort());
-	/*hud->SetScoreHub(player->GetScore());
-	hud->SetScoreSubWeaponHub(player->GetScoreSubWeapon());
-	player->SetScore(hud->GetScoreHud());
-	player->SetScore(hud->GetScoreSubWeaponHud());*/
-	//DebugOut(L"SCORE %d %d\n", player->GetScore(), player->GetScoreSubWeapon());
 }
 
 
@@ -611,7 +605,7 @@ void CPlayScene::Render()
 {
 	//Draw Map
 	tileMap->DrawMap({ 0,0 });
-	//hud->Draw({ 0, 40 });
+
 
 	for (int i = 1; i < objects.size(); i++) {
 		objects[i]->RenderBoundingBox(100);
@@ -623,7 +617,7 @@ void CPlayScene::Render()
 	{
 		listItem->ListItem[i]->Render();
 	}
-
+	//hud->Draw({ 0, 40 });
 	//viewport->Render();
 	//Render Simon
 	objects[0]->Render();

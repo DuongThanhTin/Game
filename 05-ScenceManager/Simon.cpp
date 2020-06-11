@@ -36,12 +36,14 @@ CSimon::CSimon() {
 	whip = new CWhip();
 	whip->SetLevel(whipSwitchSceneLevel->GetLevel());
 	//Hud
-	hudSwitchScene = CHud::GetInstance();
+	hudSwitchScene = CHud::GetInstance(); //Hud này để lưu các giá trị của hud chính sau đó set lại các giả trị cho Hud chính khi load lại map
 	hud = new CHud();
+	hud->SetScoreHub(hudSwitchScene->GetScoreHud()); // SET SCORE ON HUD
 	hud->SetTimeHud(hudSwitchScene->GetTimeHud()); //SET TIME ON HUD
-	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud()); //SET SCORE ON HUD
+	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud()); //SET SCORESUBWEAPON ON HUD
+	hud->SetNumLifeHub(hudSwitchScene->GetNumLifeHud()); // SET NUM LIFE ON HUD
 	hud->SetHealthSimon(hudSwitchScene->GetHealthSimon()); //SET HEALTH SIMON ON HUD
-	if (hudSwitchScene->GetIdSubWeapon() != 0)
+	if (hudSwitchScene->GetIdSubWeapon() != 0) //SET SUBWEAPON WHEN LOAD NEW SCENE
 	{
 		switch (hudSwitchScene->GetIdSubWeapon())
 		{
@@ -68,23 +70,18 @@ CSimon::CSimon() {
 }
 
 void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
-{	
+{
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 	CListItem * listItem = CListItem::GetInstance();
 	D3DXVECTOR2 position;
-
-	//Hud
-	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud()); //UPDATE SCORE SUBWEAPON ON HUD
-	hud->SetHealthSimon(hudSwitchScene->GetHealthSimon()); //UPDATE HEALTH ON HUD
-	hud->Update(dt);
 
 	// Simple fall down
 	if (!isOnStair)
 	{
 		vy += SIMON_GRAVITY*dt;
 	}
-	
+
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -94,8 +91,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	//Collision with wall
 	vector<LPGAMEOBJECT> wallObjects;
 	for (int i = 0;i < coObjects->size();i++) {
-		if (coObjects->at(i)->GetID() == ID_GROUND||
-			coObjects->at(i)->GetID() == ID_BRIDGE )
+		if (coObjects->at(i)->GetID() == ID_GROUND ||
+			coObjects->at(i)->GetID() == ID_BRIDGE)
 			wallObjects.push_back(coObjects->at(i));
 	}
 
@@ -118,7 +115,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	//Collision with Enemy
 	vector<LPGAMEOBJECT> enemyObjects;
 	for (int i = 0;i < coObjects->size();i++) {
-		if (coObjects->at(i)->GetID() == ID_SPEARKNIGHT||
+		if (coObjects->at(i)->GetID() == ID_SPEARKNIGHT ||
 			coObjects->at(i)->GetID() == ID_BAT)
 			enemyObjects.push_back(coObjects->at(i));
 	}
@@ -185,8 +182,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				default:
 					break;
-				}	
-			}	
+				}
+			}
 
 		}
 
@@ -194,10 +191,10 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		for (auto iter : subWeapon)
 		{
 			float sl, st, sr, sb;		// simon object bbox
-			float wl, wt, wr , wb;		// object bbox
+			float wl, wt, wr, wb;		// object bbox
 			GetBoundingBox(sl, st, sr, sb);
-			iter->GetBoundingBox(wl, wt, wr , wb);
-			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(wl), long(wt), long(wr ), long(wb) })) {
+			iter->GetBoundingBox(wl, wt, wr, wb);
+			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(wl), long(wt), long(wr), long(wb) })) {
 				switch (iter->GetID()) {
 				case ID_BOOMERANG:
 					iter->SetState(STATE_DESTROYED);
@@ -266,7 +263,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				case ID_MONEYBAGBLUE:
 					DebugOut(L"Collsion ID_MONEYBAGBLUE\n");
 					break;
-				
+
 				default:
 					break;
 				}
@@ -287,17 +284,12 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					{
 						if (iter->GetID() == ID_SPEARKNIGHT)
 						{
-
 							BeHurted();
 						}
 						else
-						{
-							if (untouchableStart > 0)
-							{
-								return;
-							}
+						{			
+							IncreaseScore(200);
 							BeHurted();
-							//StartUntouchable();
 							iter->TimeFireDestroy();
 						}
 					}
@@ -307,7 +299,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 
 	CViewPort* viewport = CViewPort::GetInstance();
-	
+
 	//Enemy Out of Camera
 	for (size_t i = 0; i < enemyObjects.size(); i++)
 	{
@@ -350,7 +342,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 			}
 		}
-		
+
 	}
 
 	// No collision occured, proceed normally
@@ -359,7 +351,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		x += dx;
 		y += dy;
 
-	
+
 	}
 	else
 	{
@@ -370,7 +362,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 
 		// block 
-		x += min_tx*dx + nx*0.1f;	
+		x += min_tx*dx + nx*0.1f;
 		y += min_ty*dy + ny*0.1f;
 
 		if (nx != 0) vx = 0;
@@ -387,27 +379,26 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		//Xét trạng thái không va chạm với đất Test
 		/*for (auto iter : wallObjects)
 		{
-			float sl, st, sr, sb;		// simon object bbox
-			float ol, ot, or , ob;		// object bbox
-			GetBoundingBox(sl, st, sr, sb);
-			iter->GetBoundingBox(ol, ot, or , ob);
-			if (st <= (ot - 3))
-			{
-
-			}
+		float sl, st, sr, sb;		// simon object bbox
+		float ol, ot, or , ob;		// object bbox
+		GetBoundingBox(sl, st, sr, sb);
+		iter->GetBoundingBox(ol, ot, or , ob);
+		if (st <= (ot - 3))
+		{
+		}
 		}*/
 
 		//On Bridge
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
-			LPCOLLISIONEVENT e = coEventsResult[i]; 
+			LPCOLLISIONEVENT e = coEventsResult[i];
 			if (dynamic_cast<CBridge*>(e->obj))
 			{
 				CBridge* bridge = dynamic_cast<CBridge *>(e->obj);
 				if (e->ny != 0)
 				{
-					x += bridge->vx*2*dt;
-					
+					x += bridge->vx * 2 * dt;
+
 				}
 			}
 			//Trạng thái rơi tự do
@@ -424,14 +415,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					//DebugOut(L"%d\n", ot);
 					/*if (sb == (ot) && jumpStart == 0);
 					{
-						attackStart = 0;
-						attackSubStart = 0;
-						state = SIMON_STATE_SIT;
-						vy += SIMON_SPEED_Y_FREEFALLING*dt;
+					attackStart = 0;
+					attackSubStart = 0;
+					state = SIMON_STATE_SIT;
+					vy += SIMON_SPEED_Y_FREEFALLING*dt;
 					}*/
 
 				}
-				else if(e->ny>0)
+				else if (e->ny>0)
 				{
 					isFalling = false;
 					y += dy;
@@ -439,7 +430,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 		}
 	}
-	
+
 	// clean up collision events
 	for (auto iter : coEvents) delete iter;
 	coEvents.clear();
@@ -462,7 +453,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		attackStart = 0;
 		attackSubStart = 0;
 	}
-	
+
 	if (GetTickCount() - invisibleStart > SIMON_INVISIBLE_TIME && invisibleStart > 0 && untouchableStart == 0)
 	{
 		invisibleStart = 0;
@@ -492,6 +483,9 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	//Update on Stair
 	UpdateOnStair();
+	
+	//Update on Hud
+	UpdateOnHud(dt);
 }
 
 void CSimon::Render()
@@ -517,7 +511,7 @@ void CSimon::Render()
 
 	else if (state == SIMON_STATE_JUMP) {
 		if (vy < 0) //!isOnGround
-		{ 
+		{
 			if (nx > 0)
 				ani = SIMON_ANI_SIT_RIGHT;
 			else
@@ -542,7 +536,7 @@ void CSimon::Render()
 		else
 			ani = SIMON_ANI_SIT_ATTACK_LEFT;
 	}
-	else if(state== SIMON_STATE_WALKING_RIGHT){
+	else if (state == SIMON_STATE_WALKING_RIGHT) {
 		ani = SIMON_ANI_WALKING_RIGHT;
 	}
 	else if (state == SIMON_STATE_WALKING_LEFT) {
@@ -569,7 +563,7 @@ void CSimon::Render()
 	else if (state == SIMON_STATE_GOUP_STAIR) {
 		if (nx > 0)
 			ani = SIMON_ANI_STAIR_GOUP_RIGHT;
-		else 
+		else
 			ani = SIMON_ANI_STAIR_GOUP_LEFT;
 	}
 	else if (state == SIMON_STATE_GODOWN_STAIR) {
@@ -633,7 +627,7 @@ void CSimon::Render()
 	RenderBoundingBox();
 	if (attackStart)
 		whip->Render();
-
+	
 	for (auto iter : subWeapon)
 		iter->Render();
 
@@ -656,7 +650,7 @@ void CSimon::SetState(int state)
 
 	if (attackSubStart > 0)
 		return;
-	
+
 	if (jumpStart > 0 && state != SIMON_STATE_ATTACK && state != SIMON_STATE_ATTACK_SUBWEAPON)
 		return;
 
@@ -762,18 +756,31 @@ void CSimon::SetSubWeapon(int subWeaponID)
 	}
 }
 
+void CSimon::UpdateOnHud(DWORD dt)
+{
+	//Hud
+	SetScore(hudSwitchScene->GetScoreHud());
+	SetNumLife(hudSwitchScene->GetNumLifeHud());
+	hud->SetNumLifeHub(GetNumLife());
+	hud->SetScoreHub(hudSwitchScene->GetScoreHud()); // UPDATE SCORE ON HUD
+	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud()); // UPDATE SCORE SUBWEAPON ON HUD
+	hud->SetHealthSimon(hudSwitchScene->GetHealthSimon()); // UPDATE HEALTH ON HUD
+	hud->SetNumLifeHub(hudSwitchScene->GetNumLifeHud()); // UPDATE NUM LIFE ON HUD 
+	hud->Update(dt);
+}
+
 void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 {
 	if (GetTickCount() - attackStart <= SIMON_ATTACK_TIME && !isAttackJump)
 	{
 		float whip_X, whip_Y;
-		if (state == SIMON_STATE_SIT_ATTACK) 
+		if (state == SIMON_STATE_SIT_ATTACK)
 		{
 			whip_Y = y + WEAPON_SIMON_SIT_ATTACK;
 		}
 		else
 			whip_Y = y;
-		
+
 		if (state == SIMON_STATE_ATTACK_ON_STAIR)
 		{
 			if (nx < 0 && ny < 0)
@@ -790,7 +797,7 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			}
 			else if (nx < 0 && ny > 0)
 			{
-				whip_X = x+7;
+				whip_X = x + 7;
 			}
 		}
 		else
@@ -800,7 +807,7 @@ void CSimon::UpdateWhip(DWORD dt, vector<LPGAMEOBJECT>* objects)
 		whip->Update(dt, objects, { whip_X, whip_Y }, nx);
 	}
 	else if (attackStart > 0)
-	{	
+	{
 		attackStart = 0;
 		ResetAnimation();
 		whip->ResetAnimation();
@@ -844,7 +851,7 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	for (auto iter : subWeapon) {
 		iter->Update(dt, objects);
 	}
-	
+
 	for (size_t i = 0; i < subWeapon.size(); i++)
 	{
 		float swl, swt, swr, swb;
@@ -886,7 +893,7 @@ void CSimon::GetBoundingBox(float &left, float &top, float &right, float &bottom
 		right = x + SIMON_BBOX_WIDTH;
 		bottom = y;
 	}
-	else 
+	else
 	{
 		left = x;
 		top = y - SIMON_BBOX_HEIGHT;
@@ -916,7 +923,7 @@ void CSimon::StartAttack() {
 	//Reset Animation Whip
 	//ResetAnimation();
 	whip->ResetAnimation();
-	
+
 	if (state == SIMON_STATE_SIT)
 		SetState(SIMON_STATE_SIT_ATTACK);
 	else if (isOnStair)
@@ -964,13 +971,13 @@ void CSimon::StartAttackSub() {
 		SetState(SIMON_STATE_ATTACK);
 
 	attackSubStart = GetTickCount();
-	
+
 	if (state == SIMON_STATE_SIT_ATTACK)
 	{
 		switch (subWeaponID)
 		{
 		case ID_DAGGER:
-			subWeapon.push_back(new CDagger({ x, y+ WEAPON_SIMON_SIT_ATTACK }, nx));
+			subWeapon.push_back(new CDagger({ x, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		case ID_BOOMERANG:
 			if (nx > 0)
@@ -997,33 +1004,33 @@ void CSimon::StartAttackSub() {
 	else
 	{
 
-			switch (subWeaponID)
-			{
-			case ID_DAGGER:
-				subWeapon.push_back(new CDagger({ x, y }, nx));
-				break;
-			case ID_BOOMERANG:
-				if (nx > 0)
-					subWeapon.push_back(new CBoomerang({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
-				else
-					subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
-				break;
-			case ID_AXE:
-				if (nx > 0)
-					subWeapon.push_back(new CAxe({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
-				else
-					subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
-				break;
-			case ID_HOLYWATER:
-				if (nx > 0)
-					subWeapon.push_back(new CHolyWater({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
-				else
-					subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
-				break;
-			default:
-				break;
-			}
-		
+		switch (subWeaponID)
+		{
+		case ID_DAGGER:
+			subWeapon.push_back(new CDagger({ x, y }, nx));
+			break;
+		case ID_BOOMERANG:
+			if (nx > 0)
+				subWeapon.push_back(new CBoomerang({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
+			else
+				subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
+			break;
+		case ID_AXE:
+			if (nx > 0)
+				subWeapon.push_back(new CAxe({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
+			else
+				subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
+			break;
+		case ID_HOLYWATER:
+			if (nx > 0)
+				subWeapon.push_back(new CHolyWater({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
+			else
+				subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
+			break;
+		default:
+			break;
+		}
+
 	}
 
 
@@ -1063,9 +1070,9 @@ void CSimon::StartEatItem()
 	LockUpdate();
 }
 
-void CSimon::Reset(int x,int y)
+void CSimon::Reset(int x, int y)
 {
-	SetPosition(x , y);
+	SetPosition(x, y);
 	SetSpeed(0, 0);
 	DebugOut(L"[DONE] RESET\n");
 }
@@ -1080,7 +1087,7 @@ void CSimon::UpgradeWhip()
 int CSimon::GetAnimationSubWeapon()
 {
 	int anisub = 0;
-	if(state == SIMON_STATE_ATTACK) {
+	if (state == SIMON_STATE_ATTACK) {
 		if (nx > 0)
 			anisub = SIMON_ANI_ATTACK_RIGHT;
 		else
@@ -1122,6 +1129,15 @@ void CSimon::SetItemWeaponHud(int itemID)
 {
 	hud->SetItem(itemID);
 	hudSwitchScene->SetItem(itemID);
+}
+
+void CSimon::IncreaseScore(int scoreEnemy)
+{
+	DebugOut(L"Increase %d\n", scoreEnemy);
+	this->score += scoreEnemy;
+	hud->SetScoreHub(score);
+	hudSwitchScene->SetScoreHub(score);
+
 }
 
 CSimon* CSimon::GetInstance()
