@@ -25,6 +25,7 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			{
 				if (CGame::GetInstance()->IsIntersectAABB({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 					coObjects->at(i)->SetState(OBJECTS_STATE_DESTROY);
+					coObjects->at(i)->BeDamaged();
 				}
 			}
 

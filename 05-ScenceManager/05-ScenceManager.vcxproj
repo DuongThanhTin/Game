@@ -152,6 +152,7 @@
     <ClCompile Include="MoneyBagWhite.cpp" />
     <ClCompile Include="ObjectNoMove.cpp" />
     <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="SmallHeart.cpp" />
     <ClCompile Include="SpearKnight.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="MoneyBagWhite.h" />
     <ClInclude Include="ObjectNoMove.h" />
     <ClInclude Include="Portal.h" />
+    <ClInclude Include="Rock.h" />
     <ClInclude Include="Simon.h" />
     <ClInclude Include="SmallHeart.h" />
     <ClInclude Include="SpearKnight.h" />

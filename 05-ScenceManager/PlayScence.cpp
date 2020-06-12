@@ -46,6 +46,7 @@ See scene1.txt, scene2.txt for detail format specification
 #define OBJECT_TYPE_CANDLE 11
 #define OBJECT_TYPE_HIDEBRICK 12
 #define OBJECT_TYPE_CROWN	13
+#define OBJECT_TYPE_ROCK	14
 #define OBJECT_TYPE_SPEARKNIGHT	40
 #define OBJECT_TYPE_BAT	41
 #define OBJECT_TYPE_AREASWITCHCAM	90
@@ -345,7 +346,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	{
 		int width = atoi(tokens[4].c_str());
 		int height = atoi(tokens[5].c_str());
-		obj = new CHideBrick({ x,y + BRICK_BBOX_HEIGHT + MAP_HUD }, width, height);
+		int rock_id = atoi(tokens[6].c_str());
+		obj = new CHideBrick({ x,y + BRICK_BBOX_HEIGHT + MAP_HUD }, width, height, rock_id);
 		DebugOut(L"CHideBrick\n");
 		break;
 	}
@@ -356,6 +358,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int crownUp = atoi(tokens[6].c_str());
 		obj = new CCrownItem({ x,y + height + MAP_HUD}, crownUp);
 		DebugOut(L"CrownItem\n");
+		break;
+	}
+	case OBJECT_TYPE_ROCK:
+	{
+		int width = atoi(tokens[4].c_str());
+		int height = atoi(tokens[5].c_str());
+		int hidebrick_id = atoi(tokens[6].c_str());
+		obj = new CRock({ x,y + height + MAP_HUD }, hidebrick_id);
 		break;
 	}
 	//Portal
@@ -404,7 +414,7 @@ void CPlayScene::Load()
 	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
 	viewport = CViewPort::GetInstance();
 	listItem = CListItem::GetInstance();
-
+	hidebrick = CHideBrick::GetInstance();
 	tileMap = new CTileMap();
 	tileSet = new CTileSet();
 
@@ -482,7 +492,10 @@ void CPlayScene::Update(DWORD dt)
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{
-		objects[i]->Update(dt, &coObjects);
+		if (objects[i]->GetID() != ID_ROCK)
+		{
+			objects[i]->Update(dt, &coObjects);
+		}
 	}
 
 	for (int i = 0; i < listItem->ListItem.size(); i++) // update các Item
@@ -490,7 +503,6 @@ void CPlayScene::Update(DWORD dt)
 		listItem->ListItem[i]->Update(dt, &coObjects);
 
 	}
-
 
 	for (int i = 1; i < objects.size(); i++)
 	{
@@ -623,8 +635,6 @@ void CPlayScene::Render()
 {
 	//Draw Map
 	tileMap->DrawMap({ 0,0 });
-
-
 	for (int i = 1; i < objects.size(); i++) {
 		objects[i]->RenderBoundingBox(100);
 		objects[i]->Render();

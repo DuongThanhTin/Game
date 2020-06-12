@@ -26,6 +26,7 @@
 #include "Hud.h"
 #include "HideBrick.h"
 #include "CrownItem.h"
+#include "Rock.h"
 
 class CPlayScene: public CScene
 {
@@ -39,6 +40,7 @@ protected:
 	CTileMap *tileMap;
 	CViewPort *viewport;
 	CListItem *listItem;
+	CHideBrick *hidebrick;
 	LPHUD hud;
 
 	int start_x = 0;

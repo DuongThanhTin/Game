@@ -177,7 +177,7 @@ public:
 	//HUD
 	void SetItemWeaponHud(int itemID);
 	void IncreaseScore(int score);
-	void IncreaseScoreSubWeapon(int scoreSubWeaponNum) { this->scoreSubWeapon += scoreSubWeaponNum; }
+	void IncreaseScoreSubWeapon(int scoreSubWeaponNum);
 	void IncreaseHeart(int heartSimonNum) { this->heartSimon += heartSimonNum; }
 
 	int GetNumLife() { return numLife; }

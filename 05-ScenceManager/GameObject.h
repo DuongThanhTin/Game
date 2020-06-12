@@ -62,6 +62,7 @@ public:
 	int id;
 	int nextItemID;
 	int areaactive_enemy;
+	int hidebrick_id;
 	int scoreEnemy;
 	int healthEnemy;
 	int damagedWeapon;
@@ -115,6 +116,7 @@ public:
 	int GetNy();
 	int GetNextItemID();
 	int GetAreaActiveEnemy();
+	int GetHideBrickId() { return hidebrick_id; }
 	virtual int GetScore() { return scoreEnemy; }
 	virtual int GetHealthEnemy() { return healthEnemy; }
 	virtual void SetHealthEnemy(int healthEnemy) {  this->healthEnemy = healthEnemy; }

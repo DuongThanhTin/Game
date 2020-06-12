@@ -7,15 +7,17 @@ CHideBrick::CHideBrick() {
 	id = ID_HIDEBRICK;
 }
 
-CHideBrick::CHideBrick(D3DXVECTOR2 position, int width, int height)
+CHideBrick::CHideBrick(D3DXVECTOR2 position, int width, int height, int hidebrick_id)
 {
 	this->width = width;
 	this->height = height;
+	this->hidebrick_id = hidebrick_id;
 	this->x = position.x;
 	this->y = position.y;
 	id = ID_HIDEBRICK;
-	AddAnimation(790);
-	AddAnimation(791);
+	AddAnimation(HIDEBRICK_APPEAR);
+	AddAnimation(HIDEBRICK_BLACK);
+	isShowEffectRock = false;
 }
 
 CHideBrick::~CHideBrick() {
@@ -23,6 +25,7 @@ CHideBrick::~CHideBrick() {
 }
 void CHideBrick::Render()
 {
+
 	if (state == OBJECTS_STATE_DESTROY)
 	{
 		animations[1]->Render(x, y);
@@ -50,13 +53,32 @@ void CHideBrick::GetBoundingBox(float &l, float &t, float &r, float &b)
 		b = y;
 	}
 }
+void CHideBrick::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
+{
+	CGameObject::Update(dt, coObjects);
+	
+	if (isShowEffectRock)
+	{
+		for (size_t i = 0; i < coObjects->size(); i++)
+		{
+			if (coObjects->at(i)->GetID() == ID_ROCK && hidebrick_id == coObjects->at(i)->GetHideBrickId())
+			{
+				coObjects->at(i)->Update(dt, coObjects);
+				//break;
+			}
+		}
+	}
+}
 
 void CHideBrick::BeDamaged()
 {
-	int ani = 0;
-	if (state == OBJECTS_STATE_DESTROY)
-	{
-		ani = 1;
-	}
+	isShowEffectRock = true;
 	
+}
+
+CHideBrick* CHideBrick::__instance = NULL;
+CHideBrick* CHideBrick::GetInstance()
+{
+	if (__instance == NULL) __instance = new CHideBrick();
+	return __instance;
 }

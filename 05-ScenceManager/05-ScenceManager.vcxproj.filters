@@ -180,6 +180,9 @@
     <ClCompile Include="CrownItem.cpp">
       <Filter>Items</Filter>
     </ClCompile>
+    <ClCompile Include="Rock.cpp">
+      <Filter>ObjectNoMove</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -334,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="CrownItem.h">
       <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Rock.h">
+      <Filter>ObjectNoMove</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

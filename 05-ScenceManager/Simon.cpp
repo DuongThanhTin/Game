@@ -199,6 +199,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (Objects[i]->GetID() == ID_CROWN)
 			{
 				if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+					IncreaseScore(SCORE_CROWN);
 					Objects[i]->SetState(STATE_DESTROYED);
 					Objects.erase(Objects.begin() + i);
 					i--;
@@ -245,13 +246,11 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 				switch (iter->GetID()) {
 				case ID_HEART:
-					//IncreaseScoreSubWeapon(5);
-					hudSwitchScene->IncreaseScoreSubWeaponLargeHeart();
+					IncreaseScoreSubWeapon(SCORESUB_LARGEHEART);
 					DebugOut(L"Collsion LargeHeart %d\n", hudSwitchScene->GetScoreSubWeaponHud());
 					break;
 				case ID_SMALLHEART:
-					//IncreaseScoreSubWeapon(1);
-					hudSwitchScene->IncreaseScoreSubWeaponSmallHeart();
+					IncreaseScoreSubWeapon(SCORESUB_SMALLHEART);
 					DebugOut(L"Collsion SmallHeart %d\n", hudSwitchScene->GetScoreSubWeaponHud());
 					break;
 				case ID_WHIPUPGRADE:
@@ -282,12 +281,15 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					DebugOut(L"Collsion ID_HOLYWATERITEM\n");
 					break;
 				case ID_MONEYBAG:
+					IncreaseScore(SCORE_MONEYBAGRED);
 					DebugOut(L"Collsion Moneybag\n");
 					break;
 				case ID_MONEYBAGWHITE:
+					IncreaseScore(SCORE_MONEYBAGWHITE);
 					DebugOut(L"Collsion ID_MONEYBAGWHITE\n");
 					break;
 				case ID_MONEYBAGBLUE:
+					IncreaseScore(SCORE_MONEYBAGBLUE);
 					DebugOut(L"Collsion ID_MONEYBAGBLUE\n");
 					break;
 
@@ -315,7 +317,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						}
 						else
 						{			
-							IncreaseScore(200);
+							IncreaseScore(SCORE_BAT);
 							BeHurted();
 							iter->TimeFireDestroy();
 						}
@@ -1181,11 +1183,12 @@ void CSimon::SetItemWeaponHud(int itemID)
 
 void CSimon::IncreaseScore(int scoreEnemy)
 {
-	DebugOut(L"Increase %d\n", scoreEnemy);
-	this->score += scoreEnemy;
-	hud->SetScoreHub(score);
-	hudSwitchScene->SetScoreHub(score);
+	hudSwitchScene->IncreaseScoreHud(scoreEnemy);
+}
 
+void CSimon::IncreaseScoreSubWeapon(int score)
+{
+	hudSwitchScene->IncreaseScoreSubWeapon(score);
 }
 
 CSimon* CSimon::GetInstance()

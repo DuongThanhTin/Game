@@ -48,8 +48,9 @@ public:
 	void SetHealthBoss(int healthBoss) { this->healthBoss = healthBoss; }
 	
 	//function
-	void IncreaseScoreSubWeaponLargeHeart() { scoreSubWeaponHud = scoreSubWeaponHud + 5; }
-	void IncreaseScoreSubWeaponSmallHeart() { scoreSubWeaponHud = scoreSubWeaponHud + 1; }
+	void IncreaseScoreSubWeapon(int score) { scoreSubWeaponHud = scoreSubWeaponHud + score; }
+	void IncreaseScoreHud(int score) { scoreHud = scoreHud + score; }
+	void IncreaseHealthSimon(int health) { healthSimon = healthSimon + health; }
 	void DecreaseHealth() { healthSimon = healthSimon - 2; }
 };
 
