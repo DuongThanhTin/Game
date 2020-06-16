@@ -18,6 +18,7 @@
 
 class CSkeleton : public CEnemy
 {
+	float limitedRight, limitedLeft;
 public:
 	CSkeleton();
 	CSkeleton(D3DXVECTOR2 position, int nextItemID, float limitedLeft, float limitedRight, int nx);

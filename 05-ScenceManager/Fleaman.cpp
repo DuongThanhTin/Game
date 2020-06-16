@@ -18,7 +18,7 @@ CFleaman::CFleaman(D3DXVECTOR2 position, int nextItemID, float limitedLeft, floa
 	this->limitedRight = limitedRight;
 	id = ID_FLEAMAN;
 	AddAnimation(ANI_DESTROY);
-	nx = -1;
+	nx = 1;
 	scoreEnemy = NUM_SCORE_ENEMY_SPEARKNIGHT;
 	this->nextItemID = nextItemID;
 	//this->healthEnemy = 3;
@@ -61,6 +61,17 @@ void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		// block 
 		y += min_ty*dy + ny*0.1f;
 
+		if (isActive)
+		{
+			vx = 0.05f;
+			//vy = -0.05f;
+		}
+
+		if (vx != 0)
+		{
+			isActive = false;
+		}
+
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
@@ -71,6 +82,11 @@ void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				{
 					if (coObjects->at(i)->GetID() == ID_GROUND)
 					{
+						if (e->nx != 0)
+						{
+							nx = -nx;
+							vx -= vx;
+						}
 					}
 				}
 			}
@@ -97,15 +113,10 @@ void CFleaman::Render()
 	if (state != ENEMY_STATE_DESTROY)
 	{
 		int ani = FLEAMAN_ANI_WALKING_RIGHT;
-		if (state == FLEAMAN_STATE_IDLE)
-		{
-			ani = FLEAMAN_ANI_WALKING_RIGHT;
-			/*int ani = FLEAMAN_ANI_WALKING_LEFT;
-			if (vx > 0)
+			if (nx > 0)
 				ani = FLEAMAN_ANI_WALKING_RIGHT;
 			else
-				ani = FLEAMAN_ANI_WALKING_LEFT;*/
-		}
+				ani = FLEAMAN_ANI_WALKING_LEFT;
 
 		animation_set->at(ani)->Render(x, y);
 	}

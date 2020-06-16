@@ -46,11 +46,14 @@ void CRaven::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	else if (isActive)
 	{
-		vx += nx*RAVEN_FLYING_SPEED;
-		y += 0.5;
-		if (y >= falldown)
+		vx = -RAVEN_FLYING_SPEED_X;
+		vy = 0.075;
+		y += vy;
+		float xs, ys;
+		CSimon::GetInstance()->GetPosition(xs, ys);
+		if (y == ys)
 		{
-			y = falldown;
+			
 		}
 	}
 
@@ -64,15 +67,13 @@ void CRaven::Render()
 		ani = 0;
 		if (isActive)
 		{
-			ani = RAVEN_ANI_FLYING_RIGHT;
+			ani = RAVEN_ANI_FLYING_LEFT;
 		}
 
 		animation_set->at(ani)->Render(x, y);
 	}
 	else
 	{
-		//ani = 3;
-		//animation_set->at(ani)->Render(x, y);
 		animations[0]->Render(x, y);
 	}
 	RenderBoundingBox();

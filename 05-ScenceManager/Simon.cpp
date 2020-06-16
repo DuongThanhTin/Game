@@ -315,8 +315,33 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				if (sl - or <= 60)
 				{
+					
 					iter->isActive = true;
 					//DebugOut(L"ASD");
+				}
+			}
+
+			if (iter->GetID() == ID_RAVEN)
+			{
+				if (ol - sr <= 60 && st - ot <= 120 )
+				{
+					float x, y;
+					GetPosition(x, y);
+					iter->isActive = true;
+				}
+			}
+
+			if (iter->GetID() == ID_SKELETON)
+			{
+				if (or -sl <= 60 && st - ot <= 120)
+				{
+					float x, y;
+					GetPosition(x, y);
+					iter->isActive = true;
+				}
+				else if (ol - sr <= 60 && ob-sb <= 30);
+				{
+					iter->isActive = true;
 				}
 			}
 				
@@ -739,8 +764,10 @@ void CSimon::SetState(int state)
 		SetSpeed(0, 0);
 		break;
 	case SIMON_STATE_EATITEM:
+		attackStart = 0;
 		break;
 	case SIMON_STATE_COLLISION_ENEMY:
+		attackStart = 0;
 		break;
 	case SIMON_STATE_SIT:
 		SetSpeed(0, vy);

@@ -17,7 +17,10 @@ CSkeleton::CSkeleton(D3DXVECTOR2 position, int nextItemID, float limitedLeft, fl
 	y = position.y;
 	id = ID_SKELETON;
 	AddAnimation(ANI_DESTROY);
+	this->limitedLeft = limitedLeft;
+	this->limitedRight = limitedRight;
 	nx = nxSkeleton;
+	vx = SKELETON_WALKING_SPEED;
 	scoreEnemy = NUM_SCORE_ENEMY_SPEARKNIGHT;
 	this->nextItemID = nextItemID;
 //	this->healthEnemy = 3;
@@ -67,16 +70,6 @@ void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		// block 
 		y += min_ty*dy + ny*0.1f;
 
-		/*if (isActive)
-		{
-		vy -= 0.3f;
-		vx += 0.001f;
-		}
-
-		if (y < 300)
-		{
-		vy += 0.0006f*dt;
-		}*/
 
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
@@ -88,17 +81,21 @@ void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				{
 					if (coObjects->at(i)->GetID() == ID_GROUND)
 					{
-						if (e->ny != 0 && isActive && isOnGround)
-						{
-							//this->vx *= -1;
-							isActive = false;
-						//	state = FLEAMAN_STATE_WALKING;
-						}
 					}
 				}
 			}
 		}
 
+		if (isActive)
+		{
+			if (x <= limitedLeft) {
+				vx = -vx;
+			}
+
+			else if (x >= limitedRight) {
+				vx = -vx;
+			}
+		}
 
 		// clean up collision events
 		for (auto iter : coEvents) delete iter;

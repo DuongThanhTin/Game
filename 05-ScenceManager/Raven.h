@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include "Brick.h"
 
-#define RAVEN_FLYING_SPEED 0.0015f
+#define RAVEN_FLYING_SPEED_X 0.075f
 
 #define RAVEN_BBOX_WIDTH 16
 #define	RAVEN_BBOX_HEIGHT 16
@@ -11,9 +11,12 @@
 #define RAVEN_STATE_SLEEP 100
 #define RAVEN_STATE_FLYING 200
 
+#define RAVEN_FLYING_FALLDOWN 0.075
 
 #define RAVEN_ANI_IDLE_ 0
 #define RAVEN_ANI_FLYING_RIGHT 1
+#define RAVEN_ANI_FLYING_LEFT 2
+
 
 class CRaven : public CEnemy
 {
