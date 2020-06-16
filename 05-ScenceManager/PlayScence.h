@@ -27,6 +27,10 @@
 #include "HideBrick.h"
 #include "CrownItem.h"
 #include "Rock.h"
+#include "Fleaman.h"
+#include "Skeleton.h"
+#include "Fleaman.h"
+#include "Ghost.h"
 
 class CPlayScene: public CScene
 {

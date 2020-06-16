@@ -1,4 +1,6 @@
-﻿  Rock.cpp
-d:\game2020\game\05-scencemanager\rock.cpp(30): warning C4018: '<': signed/unsigned mismatch
+﻿cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+  Bridge.cpp
+Scence.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Utils.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

@@ -2,7 +2,7 @@
 #include"Item.h"
 #include"define.h"
 
-#define SMALLHEART_GRAVITY			0.0002f
+#define SMALLHEART_GRAVITY			0.00005f
 #define SMALLHEART_BBOX_WIDTH		10
 #define SMALLHEART_BBOX_HEIGHT		7
 #define SMALLHEART_FALLING_SPEED_X  0.1f

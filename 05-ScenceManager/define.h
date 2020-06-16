@@ -23,6 +23,10 @@
 #define ID_ZOMBIE 2
 #define ID_SPEARKNIGHT 3
 #define ID_BAT 4
+#define ID_FLEAMAN 5
+#define ID_GHOST 6
+#define ID_RAVEN 7
+#define ID_SKELETON 8
 
 //OBJECTS NO MOVE
 #define ID_GROUND -1

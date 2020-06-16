@@ -21,7 +21,7 @@ CRock::CRock(D3DXVECTOR2 position, int hidebrick1_id)
 	float num_vy[4] = { ROCK_VY_1, ROCK_VY_2, ROCK_VY_3, ROCK_VY_4 };
 	
 
-	for (int i = 0; i < number; i++)
+	for (size_t i = 0; i < number; i++)
 	{
 		rock_x[i] = position.x;
 		rock_y[i] = position.y;

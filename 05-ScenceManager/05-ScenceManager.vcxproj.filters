@@ -13,20 +13,20 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Items">
-      <UniqueIdentifier>{6acb34a9-2b51-4d6f-ab62-d465693e8c59}</UniqueIdentifier>
-    </Filter>
     <Filter Include="General">
       <UniqueIdentifier>{c09e01e0-d9c0-4160-918b-3cf18bd6d294}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Enemies">
-      <UniqueIdentifier>{457bcf3d-ac63-4c7a-81ec-9f8c135c732f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Weapons">
       <UniqueIdentifier>{00b9f7b7-69cc-4b28-92e4-d68a36c2447a}</UniqueIdentifier>
     </Filter>
     <Filter Include="ObjectNoMove">
       <UniqueIdentifier>{d17563e7-d13a-4e39-ba81-a6db54c1125f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game_Enemies">
+      <UniqueIdentifier>{457bcf3d-ac63-4c7a-81ec-9f8c135c732f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game_Items">
+      <UniqueIdentifier>{6acb34a9-2b51-4d6f-ab62-d465693e8c59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,16 +76,16 @@
       <Filter>Weapons</Filter>
     </ClCompile>
     <ClCompile Include="AxeItem.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="Bat.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Boomerang.cpp">
       <Filter>Weapons</Filter>
     </ClCompile>
     <ClCompile Include="BoomerangItem.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="Brick.cpp">
       <Filter>ObjectNoMove</Filter>
@@ -100,52 +100,52 @@
       <Filter>Weapons</Filter>
     </ClCompile>
     <ClCompile Include="DaggerItem.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Goomba.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Heart.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="HolyWater.cpp">
       <Filter>Weapons</Filter>
     </ClCompile>
     <ClCompile Include="HolyWaterItem.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="Hud.cpp">
       <Filter>General</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="Koopas.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClCompile>
     <ClCompile Include="ListItem.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="MoneyBag.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="MoneyBagBlue.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="MoneyBagWhite.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="ObjectNoMove.cpp">
       <Filter>ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="SmallHeart.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="SpearKnight.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>General</Filter>
@@ -157,13 +157,13 @@
       <Filter>Weapons</Filter>
     </ClCompile>
     <ClCompile Include="Zombie.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Weapons</Filter>
     </ClCompile>
     <ClCompile Include="WhipUpgrade.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="ViewPort.cpp">
       <Filter>General</Filter>
@@ -178,10 +178,22 @@
       <Filter>ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="CrownItem.cpp">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="Rock.cpp">
       <Filter>ObjectNoMove</Filter>
+    </ClCompile>
+    <ClCompile Include="Fleaman.cpp">
+      <Filter>Game_Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Game_Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Raven.cpp">
+      <Filter>Game_Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Game_Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -225,10 +237,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Zombie.h">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClInclude>
     <ClInclude Include="WhipUpgrade.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="Whip.h">
       <Filter>Weapons</Filter>
@@ -237,43 +249,43 @@
       <Filter>Weapons</Filter>
     </ClInclude>
     <ClInclude Include="SpearKnight.h">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClInclude>
     <ClInclude Include="SmallHeart.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="MoneyBagWhite.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="MoneyBagBlue.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="MoneyBag.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="HolyWaterItem.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="ListItem.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="Goomba.h">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Koopas.h">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClInclude>
     <ClInclude Include="ObjectNoMove.h">
       <Filter>ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="BoomerangItem.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="AxeItem.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="ViewPort.h">
       <Filter>General</Filter>
@@ -294,19 +306,19 @@
       <Filter>Weapons</Filter>
     </ClInclude>
     <ClInclude Include="Heart.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="Hud.h">
       <Filter>General</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Boomerang.h">
       <Filter>Weapons</Filter>
     </ClInclude>
     <ClInclude Include="DaggerItem.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="AreaSwitchCam.h">
       <Filter>ObjectNoMove</Filter>
@@ -318,7 +330,7 @@
       <Filter>ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="Bat.h">
-      <Filter>Enemies</Filter>
+      <Filter>Game_Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Axe.h">
       <Filter>Weapons</Filter>
@@ -336,10 +348,22 @@
       <Filter>ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="CrownItem.h">
-      <Filter>Items</Filter>
+      <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="Rock.h">
       <Filter>ObjectNoMove</Filter>
+    </ClInclude>
+    <ClInclude Include="Fleaman.h">
+      <Filter>Game_Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Raven.h">
+      <Filter>Game_Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Game_Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Game_Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

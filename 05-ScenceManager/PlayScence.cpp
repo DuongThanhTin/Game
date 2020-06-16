@@ -47,9 +47,14 @@ See scene1.txt, scene2.txt for detail format specification
 #define OBJECT_TYPE_HIDEBRICK 12
 #define OBJECT_TYPE_CROWN	13
 #define OBJECT_TYPE_ROCK	14
+#define OBJECT_TYPE_FLEAMAN 20
+#define OBJECT_TYPE_SKELETON 21
+#define OBJECT_TYPE_GHOST 22
+#define OBJECT_TYPE_RAVEN 23
 #define OBJECT_TYPE_SPEARKNIGHT	40
 #define OBJECT_TYPE_BAT	41
 #define OBJECT_TYPE_AREASWITCHCAM	90
+ 
 
 #define OBJECT_TYPE_PORTAL	50
 #define OBJECT_TYPE_DAGGER 91
@@ -274,6 +279,41 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new CBat({ x,y }, 1, itemId, falldown, area_id);
 		break;
 	}
+	case OBJECT_TYPE_FLEAMAN:
+	{
+		int itemId = atoi(tokens[4].c_str());
+		float limitedLeft = atoi(tokens[5].c_str());
+		float limitedRight = atoi(tokens[6].c_str());
+		obj = new CFleaman({ x,y }, itemId, limitedLeft, limitedRight);
+		DebugOut(L"CFleaman %d\n", itemId);
+		break;
+	}
+	case OBJECT_TYPE_SKELETON:
+	{
+		int itemId = atoi(tokens[4].c_str());
+		float limitedLeft = atoi(tokens[5].c_str());
+		float limitedRight = atoi(tokens[6].c_str());
+		int nxSkeleton = atoi(tokens[4].c_str());
+		obj = new CSkeleton({ x,y }, itemId, limitedLeft, limitedRight, nxSkeleton);
+		DebugOut(L"CSkeleton %d\n", itemId);
+		break;
+	}
+	case OBJECT_TYPE_GHOST:
+	{
+		int itemId = atoi(tokens[4].c_str());
+		float limitedLeft = atoi(tokens[5].c_str());
+		float limitedRight = atoi(tokens[6].c_str());
+		obj = new CSpearKnight({ x,y }, itemId, limitedLeft, limitedRight);
+		break;
+	}
+	case OBJECT_TYPE_RAVEN:
+	{
+		int itemId = atoi(tokens[4].c_str());
+		float limitedLeft = atoi(tokens[5].c_str());
+		float limitedRight = atoi(tokens[6].c_str());
+		obj = new CSpearKnight({ x,y }, itemId, limitedLeft, limitedRight);
+		break;
+	}
 	case OBJECT_TYPE_BRIDGE:
 	{
 		float limitedLeft1 = atof(tokens[4].c_str());
@@ -368,6 +408,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new CRock({ x,y + height + MAP_HUD }, hidebrick_id);
 		break;
 	}
+	
 	//Portal
 	case OBJECT_TYPE_PORTAL:
 	{
@@ -706,7 +747,10 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_X:
 		if (simon->IsOnStair() && (game->IsKeyDown(DIK_UP) || game->IsKeyDown(DIK_DOWN) || game->IsKeyDown(DIK_LEFT) || game->IsKeyDown(DIK_RIGHT)))
 			return;
-
+		if (game->IsKeyDown(DIK_UP))
+		{
+			simon->StartAttackSub();
+		}
 		simon->StartAttack();
 		break;
 	case DIK_C:

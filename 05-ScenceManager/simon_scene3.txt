@@ -79,6 +79,15 @@ info-objects_scene3.txt
 #AREASWITCHCAM
 90	56	182	15	18	5	3	85	20
 
+#FLEAMAN
+20	430 	353	20	20	10	10
+20	300 	353	20	20	10	10
+20	175 	273	20	20	10	10
+
+#SKELETON
+21	50 	353	21	20	10	10	1
+21	640 	53	21	20	10	10	-1
+
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
 50	754	132	0	800	170	4	

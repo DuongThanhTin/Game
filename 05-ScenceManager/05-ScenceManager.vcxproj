@@ -139,6 +139,8 @@
     <ClCompile Include="Dagger.cpp" />
     <ClCompile Include="DaggerItem.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Fleaman.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Heart.cpp" />
     <ClCompile Include="HideBrick.cpp" />
     <ClCompile Include="HolyWater.cpp" />
@@ -152,8 +154,10 @@
     <ClCompile Include="MoneyBagWhite.cpp" />
     <ClCompile Include="ObjectNoMove.cpp" />
     <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="Raven.cpp" />
     <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SmallHeart.cpp" />
     <ClCompile Include="SpearKnight.cpp" />
     <ClCompile Include="Stair.cpp" />
@@ -193,6 +197,8 @@
     <ClInclude Include="DaggerItem.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Fleaman.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="Heart.h" />
     <ClInclude Include="HideBrick.h" />
     <ClInclude Include="HolyWater.h" />
@@ -206,8 +212,10 @@
     <ClInclude Include="MoneyBagWhite.h" />
     <ClInclude Include="ObjectNoMove.h" />
     <ClInclude Include="Portal.h" />
+    <ClInclude Include="Raven.h" />
     <ClInclude Include="Rock.h" />
     <ClInclude Include="Simon.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="SmallHeart.h" />
     <ClInclude Include="SpearKnight.h" />
     <ClInclude Include="Stair.h" />

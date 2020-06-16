@@ -77,7 +77,8 @@ void CBridge::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				if (e->nx != 0)
 				{
-					this->vx *= -1;
+					nx = -nx;
+					vx = nx*vx;
 				}
 			}
 		}

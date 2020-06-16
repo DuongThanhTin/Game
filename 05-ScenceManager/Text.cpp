@@ -82,6 +82,7 @@ void CText::DrawHealthBar(D3DXVECTOR2 position,int health, int kind)
 		spriteHealthMinus->Draw(position.x, position.y);
 		position.x += NUM_SPACE_EACH_HEALTHBAR;
 	}
+
 	sprites = NULL;
 	spriteHealthMinus = NULL;
 	spriteHealth = NULL;

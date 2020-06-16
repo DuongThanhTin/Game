@@ -118,7 +118,11 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	vector<LPGAMEOBJECT> enemyObjects;
 	for (int i = 0;i < coObjects->size();i++) {
 		if (coObjects->at(i)->GetID() == ID_SPEARKNIGHT ||
-			coObjects->at(i)->GetID() == ID_BAT)
+			coObjects->at(i)->GetID() == ID_BAT||
+			coObjects->at(i)->GetID() == ID_FLEAMAN || 
+			coObjects->at(i)->GetID() == ID_SKELETON || 
+			coObjects->at(i)->GetID() == ID_GHOST ||
+			coObjects->at(i)->GetID() == ID_RAVEN)
 			enemyObjects.push_back(coObjects->at(i));
 	}
 
@@ -306,6 +310,17 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			float ol, ot, or , ob;		// enemy bbox
 			GetBoundingBox(sl, st, sr, sb);
 			iter->GetBoundingBox(ol, ot, or , ob);
+
+			if (iter->GetID() == ID_FLEAMAN)
+			{
+				if (sl - or <= 60)
+				{
+					iter->isActive = true;
+					//DebugOut(L"ASD");
+				}
+			}
+				
+
 			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 				if (iter->state != ENEMY_STATE_DESTROY)
 				{
@@ -350,7 +365,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				for (auto iter : Objects)
 				{
-					DebugOut(L"Y>\n");
+					
 					if (iter->GetID() == ID_PORTAL) {
 						CPortal* portal = dynamic_cast<CPortal *>(iter);
 						switch (portal->GetSceneId())

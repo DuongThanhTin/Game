@@ -9,6 +9,7 @@ CSmallHeart::CSmallHeart(D3DXVECTOR2 position)
 	AddAnimation(SMALLHEART_ANI);
 	id = ID_SMALLHEART;
 	velocity_x = SMALLHEART_FALLING_SPEED_X_VARIATION;
+	nx = 1;
 }
 
 
@@ -32,8 +33,15 @@ void CSmallHeart::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 
 	if (!isOnGround) {
 		vy += SMALLHEART_GRAVITY*dt ;
-		vx += velocity_x*dt;
+		vx += nx*velocity_x*dt;
+
 		if (vx >= SMALLHEART_FALLING_SPEED_X || vx <= -SMALLHEART_FALLING_SPEED_X)
-			velocity_x *= -1; // đổi chiều
+		{
+			nx = -nx;
+			vx += nx*velocity_x;
+		}
+
+		else
+			vx += nx*velocity_x;
 	}
 }

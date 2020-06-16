@@ -61,30 +61,36 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				case ID_SPEARKNIGHT:
 				case ID_ZOMBIE:
 				case ID_BAT:
+				case ID_SKELETON:
+				case ID_FLEAMAN:
+			
 					if (coObjects->at(i)->GetState() != ENEMY_STATE_DESTROY)
 					{
 						coObjects->at(i)->BeDamagedEnemy(coObjects->at(i)->scoreEnemy);
 					}
 					coObjects->at(i)->TimeFireDestroy();
 					
-					/*if (coObjects->at(i)->GetHealthEnemy() <= 0)
-					{
-						if (coObjects->at(i)->GetState() != ENEMY_STATE_DESTROY)
-						{
-							coObjects->at(i)->BeDamagedEnemy(coObjects->at(i)->scoreEnemy);
-						}
-						coObjects->at(i)->TimeFireDestroy();
-					}
-					else
-					{
-						DebugOut(L" Dame %d\n", GetDamagedWeapon());
-						coObjects->at(i)->SetHealthEnemy(GetDamagedWeapon() - coObjects->at(i)->GetHealthEnemy());
-						DebugOut(L"Enemy Health %d\n", coObjects->at(i)->GetHealthEnemy());
-					}*/
-
+			
 					if (GetID() == ID_DAGGER) {
 						this->SetState(STATE_DESTROYED);
 					}
+
+
+					/*if (coObjects->at(i)->GetHealthEnemy() <= 0)
+					{
+					if (coObjects->at(i)->GetState() != ENEMY_STATE_DESTROY)
+					{
+					coObjects->at(i)->BeDamagedEnemy(coObjects->at(i)->scoreEnemy);
+					}
+					coObjects->at(i)->TimeFireDestroy();
+					}
+					else
+					{
+					DebugOut(L" Dame %d\n", GetDamagedWeapon());
+					coObjects->at(i)->SetHealthEnemy(GetDamagedWeapon() - coObjects->at(i)->GetHealthEnemy());
+					DebugOut(L"Enemy Health %d\n", coObjects->at(i)->GetHealthEnemy());
+					}*/
+
 					break;
 				default:
 					break;

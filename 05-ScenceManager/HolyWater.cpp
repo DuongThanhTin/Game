@@ -54,11 +54,10 @@ void CHolyWater::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 
 	if (!isOnGround)
 	{
-		//vx = nx * HOLYWATER_FLY_SPEED;
-		//vy += HOLYWATER_GRAVITY * dt;
 		if (GetTickCount() - timefly > TIME_HOLYWATER_FLY)
 		{
-			y += HOLYWATER_GRAVITY*dt;
+			vy += HOLYWATER_GRAVITY*dt;
+			y += vy*dt;
 			if (nx > 0)
 				x += vx*dt;
 			else
