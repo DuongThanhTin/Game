@@ -63,7 +63,8 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				case ID_BAT:
 				case ID_SKELETON:
 				case ID_FLEAMAN:
-			
+				case ID_RAVEN:
+				case ID_GHOST:
 					if (coObjects->at(i)->GetState() != ENEMY_STATE_DESTROY)
 					{
 						coObjects->at(i)->BeDamagedEnemy(coObjects->at(i)->scoreEnemy);

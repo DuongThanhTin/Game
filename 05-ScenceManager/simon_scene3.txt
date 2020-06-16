@@ -9,7 +9,7 @@ info-objects_scene3.txt
 [OBJECTS]
 # Objecttype	x	y	ani_set_id	extra_settings per object type
 # Object type in Visual: 0 = Mario , 1 = Brick, 2 = Goomba, 5 = Zombie, 6 = Torch
-# SIMON x 730 test 230 y 380 up to stair x 150 y 280
+# SIMON defaul 730 380.Test up 150 53.  x 730 test 230 y 380 up to stair x 150 y 280. 
 0	730	380	1
 
 #BRICK
@@ -87,6 +87,17 @@ info-objects_scene3.txt
 #SKELETON
 21	50 	353	21	20	10	10	1
 21	640 	53	21	20	10	10	-1
+21	370 	53	21	20	10	10	-1
+
+#GHOST
+22	170 	90	22	20	-1
+22	180	140	22	20	1
+
+#RAVEN
+23	273 	90	23	20	10	10
+23	418	140	23	20	10	10
+23	480 	108	23	20	10	10
+23	520 	220	23	20	10	10
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id

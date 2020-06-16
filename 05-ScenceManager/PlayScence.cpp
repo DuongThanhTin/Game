@@ -293,7 +293,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int itemId = atoi(tokens[4].c_str());
 		float limitedLeft = atoi(tokens[5].c_str());
 		float limitedRight = atoi(tokens[6].c_str());
-		int nxSkeleton = atoi(tokens[4].c_str());
+		int nxSkeleton = atoi(tokens[7].c_str());
 		obj = new CSkeleton({ x,y }, itemId, limitedLeft, limitedRight, nxSkeleton);
 		DebugOut(L"CSkeleton %d\n", itemId);
 		break;
@@ -301,17 +301,18 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GHOST:
 	{
 		int itemId = atoi(tokens[4].c_str());
-		float limitedLeft = atoi(tokens[5].c_str());
-		float limitedRight = atoi(tokens[6].c_str());
-		obj = new CSpearKnight({ x,y }, itemId, limitedLeft, limitedRight);
+		int nxGhost = atoi(tokens[5].c_str());
+		obj = new CGhost({ x,y }, itemId, nxGhost);
+		DebugOut(L"CGHOsst %d\n", itemId);
 		break;
 	}
 	case OBJECT_TYPE_RAVEN:
 	{
 		int itemId = atoi(tokens[4].c_str());
-		float limitedLeft = atoi(tokens[5].c_str());
-		float limitedRight = atoi(tokens[6].c_str());
-		obj = new CSpearKnight({ x,y }, itemId, limitedLeft, limitedRight);
+		int fall = atoi(tokens[5].c_str());
+		int area = atoi(tokens[6].c_str());
+		obj = new CRaven({ x,y }, itemId, fall, area);
+		DebugOut(L"Raven\n");
 		break;
 	}
 	case OBJECT_TYPE_BRIDGE:

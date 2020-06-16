@@ -20,7 +20,7 @@ class CRaven : public CEnemy
 	int falldown;
 public:
 	CRaven();
-	CRaven(D3DXVECTOR2 position, int nx, int nextItemID, float falldown, int area_id);
+	CRaven(D3DXVECTOR2 position,int nextItemID, float falldown, int area_id);
 	~CRaven();
 	//virtual void SetState(int state);
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);

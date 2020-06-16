@@ -31,6 +31,7 @@
 #include "Skeleton.h"
 #include "Fleaman.h"
 #include "Ghost.h"
+#include "Raven.h"
 
 class CPlayScene: public CScene
 {

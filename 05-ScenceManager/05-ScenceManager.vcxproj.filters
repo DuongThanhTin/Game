@@ -16,17 +16,17 @@
     <Filter Include="General">
       <UniqueIdentifier>{c09e01e0-d9c0-4160-918b-3cf18bd6d294}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Weapons">
-      <UniqueIdentifier>{00b9f7b7-69cc-4b28-92e4-d68a36c2447a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ObjectNoMove">
-      <UniqueIdentifier>{d17563e7-d13a-4e39-ba81-a6db54c1125f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game_Enemies">
       <UniqueIdentifier>{457bcf3d-ac63-4c7a-81ec-9f8c135c732f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game_Items">
       <UniqueIdentifier>{6acb34a9-2b51-4d6f-ab62-d465693e8c59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game_ObjectNoMove">
+      <UniqueIdentifier>{d17563e7-d13a-4e39-ba81-a6db54c1125f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game_Weapons">
+      <UniqueIdentifier>{00b9f7b7-69cc-4b28-92e4-d68a36c2447a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,13 +67,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AreaActive.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="AreaSwitchCam.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="Axe.cpp">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClCompile>
     <ClCompile Include="AxeItem.cpp">
       <Filter>Game_Items</Filter>
@@ -82,22 +82,22 @@
       <Filter>Game_Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Boomerang.cpp">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClCompile>
     <ClCompile Include="BoomerangItem.cpp">
       <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="Brick.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="Bridge.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="Candle.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="Dagger.cpp">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClCompile>
     <ClCompile Include="DaggerItem.cpp">
       <Filter>Game_Items</Filter>
@@ -112,7 +112,7 @@
       <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="HolyWater.cpp">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClCompile>
     <ClCompile Include="HolyWaterItem.cpp">
       <Filter>Game_Items</Filter>
@@ -139,7 +139,7 @@
       <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="ObjectNoMove.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="SmallHeart.cpp">
       <Filter>Game_Items</Filter>
@@ -151,16 +151,16 @@
       <Filter>General</Filter>
     </ClCompile>
     <ClCompile Include="Torch.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="Whip.cpp">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClCompile>
     <ClCompile Include="Zombie.cpp">
       <Filter>Game_Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClCompile>
     <ClCompile Include="WhipUpgrade.cpp">
       <Filter>Game_Items</Filter>
@@ -169,19 +169,19 @@
       <Filter>General</Filter>
     </ClCompile>
     <ClCompile Include="Stair.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>General</Filter>
     </ClCompile>
     <ClCompile Include="HideBrick.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="CrownItem.cpp">
       <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="Rock.cpp">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClCompile>
     <ClCompile Include="Fleaman.cpp">
       <Filter>Game_Enemies</Filter>
@@ -243,10 +243,10 @@
       <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="Whip.h">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClInclude>
     <ClInclude Include="SpearKnight.h">
       <Filter>Game_Enemies</Filter>
@@ -279,7 +279,7 @@
       <Filter>Game_Enemies</Filter>
     </ClInclude>
     <ClInclude Include="ObjectNoMove.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="BoomerangItem.h">
       <Filter>Game_Items</Filter>
@@ -291,10 +291,10 @@
       <Filter>General</Filter>
     </ClInclude>
     <ClInclude Include="Torch.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="Stair.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>General</Filter>
@@ -303,7 +303,7 @@
       <Filter>General</Filter>
     </ClInclude>
     <ClInclude Include="HolyWater.h">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClInclude>
     <ClInclude Include="Heart.h">
       <Filter>Game_Items</Filter>
@@ -315,43 +315,43 @@
       <Filter>Game_Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Boomerang.h">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClInclude>
     <ClInclude Include="DaggerItem.h">
       <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="AreaSwitchCam.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="AreaActive.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="Brick.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="Bat.h">
       <Filter>Game_Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Axe.h">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClInclude>
     <ClInclude Include="Bridge.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="Candle.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="Dagger.h">
-      <Filter>Weapons</Filter>
+      <Filter>Game_Weapons</Filter>
     </ClInclude>
     <ClInclude Include="HideBrick.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="CrownItem.h">
       <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="Rock.h">
-      <Filter>ObjectNoMove</Filter>
+      <Filter>Game_ObjectNoMove</Filter>
     </ClInclude>
     <ClInclude Include="Fleaman.h">
       <Filter>Game_Enemies</Filter>
