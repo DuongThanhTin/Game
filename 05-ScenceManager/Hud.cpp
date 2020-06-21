@@ -61,4 +61,9 @@ void CHud::Update(DWORD dt)
 		timeHud--;
 		timecount = GetTickCount();
 	}
+
+	if (timeHud == 0)
+	{
+		timeHud = NUM_TIME;
+	}
 }

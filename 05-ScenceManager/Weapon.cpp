@@ -1,15 +1,22 @@
-#include "Weapon.h"
+﻿#include "Weapon.h"
 
 
 
 CWeapon::CWeapon()
 {
 	timeAppearItem = 0;
+	timeCollisionEnemy = 0;
+	//AddAnimation(902);
 }
 
 
 CWeapon::~CWeapon()
 {
+}
+
+void CWeapon::AppearHitEffect()
+{
+
 }
  
 void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
@@ -65,34 +72,38 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				case ID_FLEAMAN:
 				case ID_RAVEN:
 				case ID_GHOST:
-					if (coObjects->at(i)->GetState() != ENEMY_STATE_DESTROY)
+				{
+					if (GetID() == ID_WHIP)
 					{
-						coObjects->at(i)->BeDamagedEnemy(coObjects->at(i)->scoreEnemy);
+						coObjects->at(i)->TakeDamagedEnemy(GetDamageWhip());
+						DebugOut(L"Health %d\n", coObjects->at(i)->healthEnemy);
 					}
-					coObjects->at(i)->TimeFireDestroy();
-					
+
+					else if (GetID() == ID_DAGGER)
+					{
 			
-					if (GetID() == ID_DAGGER) {
+						coObjects->at(i)->TakeDamagedEnemy(GetDamageWhip());
+						DebugOut(L"Health %d\n", coObjects->at(i)->healthEnemy);
 						this->SetState(STATE_DESTROYED);
 					}
 
-
-					/*if (coObjects->at(i)->GetHealthEnemy() <= 0)
+					else if (GetID() == ID_BOOMERANG || GetID() == ID_AXE || GetID() == ID_HOLYWATER)
 					{
-					if (coObjects->at(i)->GetState() != ENEMY_STATE_DESTROY)
-					{
-					coObjects->at(i)->BeDamagedEnemy(coObjects->at(i)->scoreEnemy);
+						coObjects->at(i)->TakeDamagedEnemy(GetDamageWhip());
+						DebugOut(L"Health %d\n", coObjects->at(i)->healthEnemy);
 					}
-					coObjects->at(i)->TimeFireDestroy();
-					}
-					else
-					{
-					DebugOut(L" Dame %d\n", GetDamagedWeapon());
-					coObjects->at(i)->SetHealthEnemy(GetDamagedWeapon() - coObjects->at(i)->GetHealthEnemy());
-					DebugOut(L"Enemy Health %d\n", coObjects->at(i)->GetHealthEnemy());
-					}*/
 
+
+					if (coObjects->at(i)->healthEnemy <= 0)
+					{
+						coObjects->at(i)->BeDamagedEnemy(coObjects->at(i)->scoreEnemy);
+					}
+
+				}
+	
 					break;
+				//BeDamagedEnemy: Tăng điểm
+					
 				default:
 					break;
 				}

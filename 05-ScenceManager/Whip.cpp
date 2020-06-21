@@ -89,6 +89,20 @@ void CWhip::Upgrade()
 	DebugOut(L"LEVEL %d\n", GetLevel());
 }
 
+int CWhip::GetDamageWhip()
+{
+	if (level == 0)
+	{
+		damagedWeapon = 1;
+	}
+	else
+	{
+		damagedWeapon = 2;
+	}
+
+	return damagedWeapon;
+}
+
 CWhip* CWhip::__instance;
 CWhip* CWhip::GetInstance()
 {

@@ -12,6 +12,8 @@
 class CWeapon : public CGameObject
 {
 	DWORD timeAppearItem;
+	DWORD timeCollisionEnemy;
+	DWORD timeHitEffect;
 public:
 	vector<LPGAMEOBJECT> objectsItem;
 	CWeapon();
@@ -21,6 +23,7 @@ public:
 	virtual void Render();
 	virtual void DamagedWeapon();
 	void DestroyObject();
+	void AppearHitEffect();
 };
 
 typedef CWeapon *LPWEAPON;

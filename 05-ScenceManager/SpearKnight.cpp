@@ -47,6 +47,32 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	coEvents.clear();
 	CalcPotentialCollisions(coObjects, coEvents);
+
+	if (start_untouchable != 0)
+	{
+		vx = 0.01;
+		Untouchable();
+	}
+	else
+	{
+		if (vx > 0)
+		{
+			vx = SPEARKNIGHT_WALKING_SPEED;
+		}
+		else
+		{
+			vx = -SPEARKNIGHT_WALKING_SPEED;
+		}
+	}
+
+	if (x <= limitedLeft) {
+		vx = -vx;
+	}
+
+	else if (x >= limitedRight) {
+		vx = -vx;
+	}
+
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
@@ -64,6 +90,8 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		// block 
 		//x += min_tx*dx + nx*0.1f;
 		y += min_ty*dy + ny*0.1f;
+
+
 
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
@@ -99,13 +127,6 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		vy += SPEARKNIGHT_GRAVITY*dt;
 
 
-	if (x <= limitedLeft) {
-		vx = -vx;
-	}
-
-	else if (x >= limitedRight) {
-		vx = -vx;
-	}
 }
 
 void CSpearKnight::Render()

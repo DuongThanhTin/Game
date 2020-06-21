@@ -13,7 +13,7 @@
 using namespace std;
 
 #define ID_TEX_BBOX -100		// special texture to draw object bounding box
-
+#define  UNTOUCHABLE_TIME	200
 class CGameObject; 
 typedef CGameObject * LPGAMEOBJECT;
 
@@ -72,6 +72,7 @@ public:
 	bool isOnGroundFire;
 
 	DWORD dt;
+	DWORD start_untouchable = 0;
 
 	CAnimationSet animations;
 	LPANIMATION_SET animation_set;
@@ -110,8 +111,11 @@ public:
 	virtual void BeHurted() {};
 	virtual void BeDamaged() {};
 	virtual void BeDamagedEnemy(int score) {};
+	virtual int GetDamageWhip() { return damagedWeapon; }
+	virtual void TakeDamagedEnemy(int damage);
 	virtual void ResetAnimation();
 	virtual void TimeFireDestroy();
+	virtual void Untouchable();
 	int GetNx();
 	int GetNy();
 	int GetNextItemID();

@@ -119,6 +119,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	for (int i = 0;i < coObjects->size();i++) {
 		if (coObjects->at(i)->GetID() == ID_SPEARKNIGHT ||
 			coObjects->at(i)->GetID() == ID_BAT||
+			coObjects->at(i)->GetID() == ID_ZOMBIE ||
 			coObjects->at(i)->GetID() == ID_FLEAMAN || 
 			coObjects->at(i)->GetID() == ID_SKELETON || 
 			coObjects->at(i)->GetID() == ID_GHOST ||
@@ -313,7 +314,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 			if (iter->GetID() == ID_FLEAMAN)
 			{
-				if (sl - or <= 60)
+				if (sl - or <= 80)
 				{
 					
 					iter->isActive = true;

@@ -141,6 +141,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Fleaman.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Heart.cpp" />
     <ClCompile Include="HideBrick.cpp" />
     <ClCompile Include="HolyWater.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Fleaman.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="Heart.h" />
     <ClInclude Include="HideBrick.h" />
     <ClInclude Include="HolyWater.h" />

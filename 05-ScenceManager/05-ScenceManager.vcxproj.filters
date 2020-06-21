@@ -195,6 +195,9 @@
     <ClCompile Include="Ghost.cpp">
       <Filter>Game_Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="Ghost.h">
       <Filter>Game_Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>General</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

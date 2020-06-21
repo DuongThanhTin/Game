@@ -37,6 +37,7 @@ public:
 	void SetLevel(int level) { this->level = level; }
 	void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects, D3DXVECTOR2 position, int playerNx);
 	void Upgrade();
+	int GetDamageWhip();
 };
 
 typedef CWhip *LPWHIP;

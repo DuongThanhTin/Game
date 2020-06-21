@@ -1,0 +1,29 @@
+#pragma once
+#include <set> 
+#include "Game.h"
+#include "GameObject.h"
+#include "ViewPort.h"
+#include "define.h"
+#include "Textures.h"
+
+#define GRID_WIDTH 112 //8*16
+#define GRID_HEIGHT 80 //5*16+8
+
+class CGrid
+{
+	set<LPGAMEOBJECT>** groundObjects;
+	set<LPGAMEOBJECT> moveObjects;
+	int column;
+	int row;
+	int width;
+	int height;
+public:
+	CGrid(int column, int row,int witdh, int height);
+	~CGrid();
+
+	void InsertObject(LPGAMEOBJECT object);
+	void LoadObjects(vector<LPGAMEOBJECT>* objects);
+	void GetObjects(vector<LPGAMEOBJECT>* objects);
+	void Update(DWORD dt, vector<LPGAMEOBJECT>* objects);
+};
+

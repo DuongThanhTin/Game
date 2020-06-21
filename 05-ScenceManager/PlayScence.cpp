@@ -262,6 +262,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"SCORE %d\n", player->GetScoreSubWeapon());
 		obj->SetPosition(x, y);
 		break;
+	case OBJECT_TYPE_ZOMBIE:
+	{
+		int itemId = atoi(tokens[4].c_str());
+		float limitedLeft2 = atoi(tokens[5].c_str());
+		float limitedRight2 = atoi(tokens[6].c_str());
+		obj = new CZombie({ x,y }, itemId, limitedLeft2, limitedRight2);
+		break;
+	}
 	case OBJECT_TYPE_SPEARKNIGHT:
 	{
 		int itemId = atoi(tokens[4].c_str());
@@ -428,6 +436,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 
 	// General object setup
+	grid->LoadObjects(&objects);
+
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 	obj->SetAnimationSet(ani_set);
 	objects.push_back(obj);
@@ -460,11 +470,33 @@ void CPlayScene::Load()
 	tileMap = new CTileMap();
 	tileSet = new CTileSet();
 
-
+	//grid = new CGrid(22, 6);
 	ifstream f;
 	f.open(sceneFilePath);
 	hud = CHud::GetInstance();
-	//CTextures::GetInstance()->Add(-60, L"textures\\HUD.png", 0);
+	//DebugOut(L"CGame Scene: %d", CGame::GetInstance()->GetCurrtentSceneID());
+	switch (CGame::GetInstance()->GetCurrtentSceneID())
+	{
+		//SCENE 1, 4: width 112, height 44 
+		//ScENE 2: width 100, height 64
+		//SCENE 3: width 112, height 64
+
+		//CGrid(col, row, width, height);
+	case SCENE_1: //WIDTH 49*16 = 784  Height 11*16= 176 (col 49:, row:11) 
+		grid = new CGrid(6, 5, 112, 44);
+		break;
+	case SCENE_2: //WIDTH 33*16 = 528  Height 23*16= 368 (col 33:, row:23)
+		grid = new CGrid(5, 7, 100,64);
+		break;
+	case SCENE_3: //WIDTH 49*16 = 784  Height 23*16= 368 (col 49:, row:23)
+		grid = new CGrid(7, 7,112,64);
+		break;
+	case SCENE_4: //WIDTH 49*16 = 784  Height 11*16= 176 (col 49:, row:11)
+		grid = new CGrid(7, 6, 112, 44);
+		break;
+	default:
+		break;
+	}
 
 	// current resource section flag
 	int section = SCENE_SECTION_UNKNOWN;
@@ -532,6 +564,10 @@ void CPlayScene::Update(DWORD dt)
 		coObjects.push_back(objects[i]);
 	}
 
+
+	grid->Update(dt, &coObjects);
+	//objects[0]->Update(dt, &coObjects);
+	
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		if (objects[i]->GetID() != ID_ROCK)
@@ -540,6 +576,7 @@ void CPlayScene::Update(DWORD dt)
 		}
 	}
 
+	//DebugOut(L"PLAYSCENE %d\n", objects.size());
 	for (int i = 0; i < listItem->ListItem.size(); i++) // update các Item
 	{
 		listItem->ListItem[i]->Update(dt, &coObjects);
@@ -687,7 +724,6 @@ void CPlayScene::Render()
 	{
 		listItem->ListItem[i]->Render();
 	}
-	//hud->Draw({ 0, 40 });
 	//viewport->Render();
 	//Render Simon
 	objects[0]->Render();
@@ -721,10 +757,6 @@ void CPlayScene::ScenePortal(int scene_id, float view_x, float view_y)
 	CSimon *simon = CSimon::GetInstance();
 	game->SwitchScene(scene_id);
 	viewport->SetPosition({ view_x,view_y });
-	/*DebugOut(L"ASD %d", hud->GetScoreSubWeaponHud());
-	simon->SetScore(hud->GetScoreHud());
-	simon->SetScoreSubWeapon(hud->GetScoreSubWeaponHud());
-	simon->SetNumLife(hud->GetNumLifeHud());*/
 }
 
 

@@ -32,6 +32,7 @@
 #include "Fleaman.h"
 #include "Ghost.h"
 #include "Raven.h"
+#include "Grid.h"
 
 class CPlayScene: public CScene
 {
@@ -46,6 +47,7 @@ protected:
 	CViewPort *viewport;
 	CListItem *listItem;
 	CHideBrick *hidebrick;
+	CGrid *grid;
 	LPHUD hud;
 
 	int start_x = 0;

@@ -12,6 +12,21 @@ CZombie::~CZombie()
 {
 }
 
+CZombie::CZombie(D3DXVECTOR2 position, int nextItemID, float limitedLeft, float limitedRight)
+{
+	x = position.x;
+	y = position.y;
+	this->limitedLeft = limitedLeft;
+	this->limitedRight = limitedRight;
+	id = ID_ZOMBIE;
+	SetState(ZOMBIE_STATE_WALKING);
+	AddAnimation(ANI_DESTROY);
+	nx = -1;
+	scoreEnemy = NUM_SCORE_ENEMY_SPEARKNIGHT;
+	this->nextItemID = nextItemID;
+	this->healthEnemy = 3;
+}
+
 void CZombie::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
 	left = x;
@@ -36,24 +51,33 @@ void CZombie::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 	}
 
-	if (vx < 0 && x < 0) {
+	if (vx < 0 && x < limitedLeft) {
 		x = 0; vx = -vx;
 	}
 
-	if (vx > 0 && x > 200) {
-		x = 200; vx = -vx;
+	if (vx > 0 && x > limitedRight) {
+		vx = -vx;
 	}
 }
 
 void CZombie::Render()
 {
-	int ani = ZOMBIE_ANI_WALKING_LEFT;
-	if (vx > 0) 
-		ani = ZOMBIE_ANI_WALKING_RIGHT;
-	else 
-		ani = ZOMBIE_ANI_WALKING_LEFT;
+	if (state != ENEMY_STATE_DESTROY)
+	{
+		int ani = ZOMBIE_ANI_WALKING_LEFT;
+		if (vx > 0)
+			ani = ZOMBIE_ANI_WALKING_RIGHT;
+		else
+			ani = ZOMBIE_ANI_WALKING_LEFT;
 
-	animation_set->at(ani)->Render(x, y);
+		animation_set->at(ani)->Render(x, y);
+	}
+	else
+	{
+		animations[0]->Render(x, y);
+	}
+
+	
 
 	RenderBoundingBox();
 }

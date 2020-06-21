@@ -33,6 +33,8 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		CalcPotentialCollisions(&wallObjects, coEvents);
 	}
 
+
+
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{

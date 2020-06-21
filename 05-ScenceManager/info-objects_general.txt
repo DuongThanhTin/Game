@@ -5,6 +5,7 @@
 40	textures\objects.png	255	0	255
 50	textures\items.png	255	0	255
 80	textures\testHud.png	5	5	5
+90	textures\hiteffect.png	116	116	116
 
 # id	left	top	right	bottom	texture_id	isFlipImage	position(x)	position(y)
 [SPRITES]
@@ -184,6 +185,9 @@
 19003	43	78	49	89	40		0		5		-15
 19004	45	78	64	89	40		0		2		-15
 
+#=================HIT EFFECT===============
+19010	437	124	445	134	90		0		0		0
+
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 # ==== SIMON =========
@@ -264,6 +268,9 @@
 # ==== FIRE DESTROY =======
 901	19001	100	19002	100	19003	100	19004	100
 
+# ==== HIT EFFECT =======
+902	19010	100
+
 # ==== DAGGER =======
 703	13001	100
 
@@ -303,3 +310,5 @@
 2	601
 # WHIP
 3	111	112	121	122	131	132
+
+90	902 	100

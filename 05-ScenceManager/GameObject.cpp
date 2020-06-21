@@ -169,6 +169,32 @@ int CGameObject::GetAreaActiveEnemy()
 	return this->areaactive_enemy;
 }
 
+void CGameObject::Untouchable()
+{
+	if (GetTickCount() - start_untouchable > UNTOUCHABLE_TIME)
+	{
+		start_untouchable = 0;
+	}
+
+}
+
+void CGameObject::TakeDamagedEnemy(int damage)
+{
+	if (start_untouchable == 0)
+	{
+		if (healthEnemy > 0)
+		{
+			healthEnemy -= damage;
+		}
+
+		if(healthEnemy <= 0)
+			TimeFireDestroy();
+		else
+			start_untouchable = GetTickCount();
+	}
+	
+}
+
 
 CGameObject::~CGameObject()
 {
