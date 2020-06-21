@@ -23,7 +23,7 @@ CSkeleton::CSkeleton(D3DXVECTOR2 position, int nextItemID, float limitedLeft, fl
 	vx = SKELETON_WALKING_SPEED;
 	scoreEnemy = NUM_SCORE_ENEMY_SPEARKNIGHT;
 	this->nextItemID = nextItemID;
-//	this->healthEnemy = 3;
+	this->healthEnemy = 3;
 	isOnGround = true;
 }
 
@@ -88,6 +88,23 @@ void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 		if (isActive)
 		{
+			if (start_untouchable != 0)
+			{
+				vx = 0.01;
+				Untouchable();
+			}
+			else
+			{
+				if (vx > 0)
+				{
+					vx = SKELETON_WALKING_SPEED;
+				}
+				else
+				{
+					vx = -SKELETON_WALKING_SPEED;
+				}
+			}
+
 			if (x <= limitedLeft) {
 				vx = -vx;
 			}

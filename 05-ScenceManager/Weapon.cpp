@@ -16,11 +16,30 @@ CWeapon::~CWeapon()
 
 void CWeapon::AppearHitEffect()
 {
+	if (hitEffects.size() > 0)
+	{
 
+		if (timeHitEffect == 0)
+		{
+			timeHitEffect = GetTickCount();
+		}
+
+		else if (GetTickCount() - timeHitEffect > TIME_HITEFFECT)
+		{
+			
+			timeHitEffect = 0;
+			hitEffects.clear();
+		}
+
+		// rendering hit effect based on the coordinate vector
+		for (auto iter : hitEffects)
+			hitEffect->Render(iter[0], iter[1]);
+	}
 }
  
 void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	CGameObject::Update(dt);
+	//DebugOut(L"ASD %d \n", timeHitEffect);
 	for (int i = 0;i < coObjects->size();i++) {
 		float wl, wt, wr, wb;		// weapon object bbox
 		float ol, ot, or , ob;		// object bbox
@@ -64,15 +83,14 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		{
 			if (CGame::GetInstance()->IsIntersectAABB({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 				switch (coObjects->at(i)->GetID())
-				{
+				{//BeDamagedEnemy: Tăng điểm
 				case ID_SPEARKNIGHT:
-				case ID_ZOMBIE:
-				case ID_BAT:
 				case ID_SKELETON:
 				case ID_FLEAMAN:
 				case ID_RAVEN:
 				case ID_GHOST:
 				{
+					hitEffects.push_back({ (ol + or ) / 2, (ot + ob) / 2 });
 					if (GetID() == ID_WHIP)
 					{
 						coObjects->at(i)->TakeDamagedEnemy(GetDamageWhip());
@@ -81,14 +99,17 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 					else if (GetID() == ID_DAGGER)
 					{
-			
-						coObjects->at(i)->TakeDamagedEnemy(GetDamageWhip());
+						AppearHitEffect();
+						coObjects->at(i)->TakeDamagedEnemy(1);
 						DebugOut(L"Health %d\n", coObjects->at(i)->healthEnemy);
-						this->SetState(STATE_DESTROYED);
+						if (timeHitEffect == 0)
+						{
+							this->SetState(STATE_DESTROYED);
+						}
 					}
 
 					else if (GetID() == ID_BOOMERANG || GetID() == ID_AXE || GetID() == ID_HOLYWATER)
-					{
+					{					
 						coObjects->at(i)->TakeDamagedEnemy(GetDamageWhip());
 						DebugOut(L"Health %d\n", coObjects->at(i)->healthEnemy);
 					}
@@ -98,12 +119,38 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 					{
 						coObjects->at(i)->BeDamagedEnemy(coObjects->at(i)->scoreEnemy);
 					}
-
-				}
-	
-					break;
-				//BeDamagedEnemy: Tăng điểm
 					
+					break; 
+				}
+				
+				case ID_ZOMBIE:
+				case ID_BAT:
+				{
+					if (GetID() == ID_WHIP)
+					{
+						coObjects->at(i)->TakeDamagedEnemy(GetDamageWhip());
+					}
+
+					else if (GetID() == ID_DAGGER)
+					{
+						DebugOut(L"Health %d\n", coObjects->at(i)->healthEnemy);
+						coObjects->at(i)->TakeDamagedEnemy(GetDamageWhip());
+						this->SetState(STATE_DESTROYED);
+
+					}
+
+					else if (GetID() == ID_BOOMERANG || GetID() == ID_AXE || GetID() == ID_HOLYWATER)
+					{
+						coObjects->at(i)->TakeDamagedEnemy(GetDamageWhip());
+					}
+
+					if (coObjects->at(i)->healthEnemy <= 0)
+					{
+						coObjects->at(i)->BeDamagedEnemy(coObjects->at(i)->scoreEnemy);
+					}
+				
+				}
+				break;
 				default:
 					break;
 				}
@@ -111,6 +158,7 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			}
 		}
 	}
+
 }
 void CWeapon::DamagedWeapon()
 {
@@ -119,7 +167,6 @@ void CWeapon::DamagedWeapon()
 
 void CWeapon::Render()
 {
-	RenderBoundingBox();
 }
 
 void CWeapon::DestroyObject()

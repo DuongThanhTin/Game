@@ -22,6 +22,7 @@ class CHud
 	int idSubWeapon;
 	int healthSimon;
 	int healthBoss;
+
 public:
 	CHud();
 	~CHud();

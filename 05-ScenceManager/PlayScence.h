@@ -33,6 +33,7 @@
 #include "Ghost.h"
 #include "Raven.h"
 #include "Grid.h"
+#include "Weapon.h"
 
 class CPlayScene: public CScene
 {
@@ -49,6 +50,7 @@ protected:
 	CHideBrick *hidebrick;
 	CGrid *grid;
 	LPHUD hud;
+	CWeapon *weapon;
 
 	int start_x = 0;
 	int start_y = 180;

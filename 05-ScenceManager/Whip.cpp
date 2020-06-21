@@ -70,7 +70,9 @@ void CWhip::GetBoundingBox(float &l, float &t, float &r, float &b) {
 
 void CWhip::Render()
 {
+	AppearHitEffect();
 	animations[GetAnimation()]->Render(x, y);
+	
 }
 
 void CWhip::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects, D3DXVECTOR2 playerPosition, int playerNx) {

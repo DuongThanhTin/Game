@@ -565,7 +565,7 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 
-	grid->Update(dt, &coObjects);
+	//grid->Update(dt, &coObjects);
 	//objects[0]->Update(dt, &coObjects);
 	
 	for (size_t i = 0; i < objects.size(); i++)
@@ -727,6 +727,7 @@ void CPlayScene::Render()
 	//viewport->Render();
 	//Render Simon
 	objects[0]->Render();
+	
 }
 
 /*

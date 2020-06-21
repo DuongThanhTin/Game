@@ -14,6 +14,8 @@
 #include "HolyWater.h"
 #include "Hud.h"
 #include "CrownItem.h"
+#include "Textures.h"
+#include "Sprites.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
@@ -119,6 +121,7 @@ class CSimon : public CGameObject
 	LPHUD hudSwitchScene;
 
 	vector<CWeapon*> subWeapon;
+	vector<LPGAMEOBJECT> texScore;
 
 	int subWeaponID;
 	int whiplevel;
@@ -127,7 +130,12 @@ class CSimon : public CGameObject
 	int heartSimon;
 	int numLife;
 	int health;
+	int scoreItem;
+	int timeAppearScore = 0;
 public:
+	vector<vector<float>> scoreItems;
+	CAnimation* scoreItem_1;
+	CAnimation* scoreItem_2;
 	bool isOnStair;
 	bool isLockUpdate = false;
 	bool isSwitchCam;
@@ -183,8 +191,17 @@ public:
 	int GetNumLife() { return numLife; }
 	int GetScore() { return score; }
 	int GetScoreSubWeapon() { return this->scoreSubWeapon; }
+	
 	void SetNumLife(int numLife) { this->numLife = numLife; }
 	void SetScore(int score) { this->score = score; }
 	void SetScoreSubWeapon(int scoreSubWeapon) { this->scoreSubWeapon = scoreSubWeapon; }
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
+
+	void UpdateAppearScore();
+	void AppearScore(int score, float x, float y);
+	//void DrawScoreItem();
+	int GetScoreItem() { return scoreItem; }
+	void SetScoreItem(int score) { this->scoreItem = score; }
+	float GetX() { return x; }
+	float GetY() { return y; }
 };

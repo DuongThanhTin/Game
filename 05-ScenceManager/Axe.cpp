@@ -29,6 +29,7 @@ void CAxe::GetBoundingBox(float &l, float&t, float &r, float &b) {
 }
 
 void CAxe::Render() {
+	AppearHitEffect();
 	if (nx > 0)
 		animations[0]->Render(x, y);
 	else

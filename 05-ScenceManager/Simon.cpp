@@ -205,6 +205,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 					IncreaseScore(SCORE_CROWN);
+					SetScoreItem(SCORE_CROWN);
+					AppearScore(SCORE_CROWN, (ol + or ) / 2, (ot + ob) / 2);
 					Objects[i]->SetState(STATE_DESTROYED);
 					Objects.erase(Objects.begin() + i);
 					i--;
@@ -287,14 +289,20 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					break;
 				case ID_MONEYBAG:
 					IncreaseScore(SCORE_MONEYBAGRED);
+					AppearScore(SCORE_MONEYBAGRED, (ol + or ) / 2, (ot + ob) / 2);
+					SetScoreItem(SCORE_MONEYBAGRED);
 					DebugOut(L"Collsion Moneybag\n");
 					break;
 				case ID_MONEYBAGWHITE:
 					IncreaseScore(SCORE_MONEYBAGWHITE);
+					AppearScore(SCORE_MONEYBAGWHITE, (ol + or ) / 2, (ot + ob) / 2);
+					SetScoreItem(SCORE_MONEYBAGWHITE);
 					DebugOut(L"Collsion ID_MONEYBAGWHITE\n");
 					break;
 				case ID_MONEYBAGBLUE:
 					IncreaseScore(SCORE_MONEYBAGBLUE);
+					SetScoreItem(SCORE_MONEYBAGBLUE);
+					AppearScore(SCORE_MONEYBAGBLUE, (ol + or ) / 2, (ot + ob) / 2 );
 					DebugOut(L"Collsion ID_MONEYBAGBLUE\n");
 					break;
 
@@ -314,11 +322,9 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 			if (iter->GetID() == ID_FLEAMAN)
 			{
-				if (sl - or <= 80)
+				if (sl - or <= 100)
 				{
-					
 					iter->isActive = true;
-					//DebugOut(L"ASD");
 				}
 			}
 
@@ -561,6 +567,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 void CSimon::Render()
 {
 	//State http://gameprogrammingpatterns.com/state.html
+	
 	int ani;
 
 	if (state == SIMON_STATE_DIE)
@@ -693,7 +700,7 @@ void CSimon::Render()
 		alpha = rand() % 255;
 	}
 	animation_set->at(ani)->Render(x, y, alpha);
-
+	
 	RenderBoundingBox();
 	if (attackStart)
 	{
@@ -708,8 +715,10 @@ void CSimon::Render()
 			iter->Render();
 	}*/
 
-	
+
 	hud->Draw({ 0, 40 });
+
+	UpdateAppearScore();
 }
 
 void CSimon::RenderBoundingBox(int alpha)
@@ -1233,6 +1242,80 @@ void CSimon::IncreaseScoreSubWeapon(int score)
 {
 	hudSwitchScene->IncreaseScoreSubWeapon(score);
 }
+
+void CSimon::UpdateAppearScore()
+{
+	if (scoreItems.size() > 0)
+	{
+
+		if (timeAppearScore == 0)
+		{
+			timeAppearScore = GetTickCount();
+		}
+
+		else if (GetTickCount() - timeAppearScore > TIME_APPAEAR_SCORE)
+		{
+
+			timeAppearScore = 0;
+			scoreItems.clear();
+		}
+
+		for (auto iter : scoreItems)
+		{
+			scoreItem_1->Render(iter[0], iter[1]);
+			scoreItem_2->Render(iter[0] + 4, iter[1]);
+			switch (GetScoreItem())
+			{
+			case SCORE_MONEYBAGBLUE:
+				scoreItem_1->Render(iter[0], iter[1]);
+				scoreItem_2->Render(iter[0] + 4, iter[1]);
+				break;
+			case SCORE_MONEYBAGRED:
+				scoreItem_1->Render(iter[0], iter[1]);
+				scoreItem_2->Render(iter[0] + 8, iter[1]);
+				break;
+			case SCORE_MONEYBAGWHITE:
+				scoreItem_1->Render(iter[0], iter[1]);
+				scoreItem_2->Render(iter[0] + 4, iter[1]);
+				break;
+			case SCORE_CROWN:
+				scoreItem_1->Render(iter[0], iter[1]);
+				scoreItem_2->Render(iter[0] + 8, iter[1]);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+}
+
+void CSimon::AppearScore(int appearscore, float x, float y)
+{
+	scoreItems.push_back({x+5,y });
+	switch (appearscore)
+	{
+	case SCORE_MONEYBAGBLUE:
+		scoreItem_1 = CAnimations::GetInstance()->Get(ID_ANI_SCORE_40);
+		scoreItem_2 = CAnimations::GetInstance()->Get(ID_ANI_SCORE_00);
+		break;
+	case SCORE_MONEYBAGRED:
+		scoreItem_1 = CAnimations::GetInstance()->Get(ID_ANI_SCORE_10);
+		scoreItem_2 = CAnimations::GetInstance()->Get(ID_ANI_SCORE_00);
+		break;
+	case SCORE_MONEYBAGWHITE:
+		scoreItem_1 = CAnimations::GetInstance()->Get(ID_ANI_SCORE_70);
+		scoreItem_2 = CAnimations::GetInstance()->Get(ID_ANI_SCORE_00);
+		break;
+	case SCORE_CROWN:
+		scoreItem_1 = CAnimations::GetInstance()->Get(ID_ANI_SCORE_20);
+		scoreItem_2 = CAnimations::GetInstance()->Get(ID_ANI_SCORE_00);
+		break;
+	default:
+		break;
+	}
+}
+
+
 
 CSimon* CSimon::GetInstance()
 {

@@ -21,7 +21,7 @@ CFleaman::CFleaman(D3DXVECTOR2 position, int nextItemID, float limitedLeft, floa
 	nx = 1;
 	scoreEnemy = NUM_SCORE_ENEMY_SPEARKNIGHT;
 	this->nextItemID = nextItemID;
-	//this->healthEnemy = 3;
+	this->healthEnemy = 2;
 	isOnGround = true;
 }
 
@@ -61,16 +61,42 @@ void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		// block 
 		y += min_ty*dy + ny*0.1f;
 
-		if (isActive)
-		{
-			vx = 0.05f;
-			//vy = -0.05f;
-		}
-
 		if (vx != 0)
 		{
 			isActive = false;
 		}
+
+		if (isActive)
+		{
+			if (start_untouchable != 0)
+			{
+				vx = 0.01;
+				Untouchable();
+			}
+			else
+			{
+				if (vx > 0)
+				{
+					nx = 1;
+					vx = FLEAMAN_WALKING_SPEED;
+				}
+				else
+				{
+					nx = -1;
+					vx = -FLEAMAN_WALKING_SPEED;
+				}
+			}
+
+			if (x <= limitedLeft) {
+				vx = -vx;
+			}
+
+			else if (x >= limitedRight) {
+				vx = -vx;
+			}
+		}
+
+	
 
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{

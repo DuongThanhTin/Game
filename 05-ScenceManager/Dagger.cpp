@@ -27,11 +27,15 @@ void CDagger::GetBoundingBox(float &l, float&t, float &r, float &b) {
 }
 
 void CDagger::Render() {
+
+	AppearHitEffect();
 	if (nx > 0) {
 		animations[0]->Render(x, y);
 	}
 	else
 		animations[1]->Render(x, y);
+
+
 }
 
 void CDagger::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
@@ -40,4 +44,6 @@ void CDagger::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 		x += vx*dt;
 	else
 		x -= vx*dt;
+
+	AppearHitEffect();
 }

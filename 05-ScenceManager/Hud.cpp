@@ -53,8 +53,12 @@ void CHud::Draw(D3DXVECTOR2 position)
 	textHud->DrawHealthBar({ 55,34 }, 16, NUM_ID_BOSS);
 }
 
+
+
 void CHud::Update(DWORD dt)
 {
+	//this->x = playerPosition.x;
+	//this->y = playerPosition.y;
 	//SET TIME
 	if (GetTickCount() - timecount > NUM_COUNT_TIME && timecount > 0)
 	{

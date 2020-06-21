@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include "Brick.h"
 
-#define FLEAMAN_WALKING_SPEED 0.03f
+#define FLEAMAN_WALKING_SPEED 0.05f
 #define FLEAMAN_GRAVITY 0.002f
 
 #define FLEAMAN_BBOX_WIDTH 16

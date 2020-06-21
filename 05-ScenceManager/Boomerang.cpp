@@ -38,7 +38,8 @@ void CBoomerang::Render() {
 	else
 		animations[1]->Render(x, y);
 
-	RenderBoundingBox();
+	AppearHitEffect();
+	//RenderBoundingBox();
 }
 
 void CBoomerang::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
