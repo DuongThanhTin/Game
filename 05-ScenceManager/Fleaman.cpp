@@ -75,15 +75,22 @@ void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 			else
 			{
-				if (vx > 0)
+				if (timeStopWatch == 0)
 				{
-					nx = 1;
-					vx = FLEAMAN_WALKING_SPEED;
+					if (vx > 0)
+					{
+						nx = 1;
+						vx = FLEAMAN_WALKING_SPEED;
+					}
+					else
+					{
+						nx = -1;
+						vx = -FLEAMAN_WALKING_SPEED;
+					}
 				}
 				else
 				{
-					nx = -1;
-					vx = -FLEAMAN_WALKING_SPEED;
+					vx = vy = 0;
 				}
 			}
 

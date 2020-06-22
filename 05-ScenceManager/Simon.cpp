@@ -63,6 +63,10 @@ CSimon::CSimon() {
 			SetSubWeapon(ID_HOLYWATER);
 			hud->SetItem(ID_HOLYWATERITEM);
 			break;
+		case ID_STOPWATCHITEM:
+			SetSubWeapon(ID_STOPWATCH);
+			hud->SetItem(ID_STOPWATCHITEM);
+			break;
 		default:
 			break;
 		}
@@ -110,7 +114,8 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			listItem->ListItem[i]->GetID() == ID_AXEITEM ||
 			listItem->ListItem[i]->GetID() == ID_MONEYBAGWHITE ||
 			listItem->ListItem[i]->GetID() == ID_MONEYBAGBLUE ||
-			listItem->ListItem[i]->GetID() == ID_HOLYWATERITEM)
+			listItem->ListItem[i]->GetID() == ID_HOLYWATERITEM||
+			listItem->ListItem[i]->GetID() == ID_STOPWATCHITEM)
 			itemObjects.push_back(listItem->ListItem[i]);
 	}
 
@@ -286,6 +291,11 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					SetSubWeapon(ID_HOLYWATER);
 					SetItemWeaponHud(ID_HOLYWATERITEM);
 					DebugOut(L"Collsion ID_HOLYWATERITEM\n");
+					break;
+				case ID_STOPWATCHITEM:
+					SetSubWeapon(ID_STOPWATCH);
+					SetItemWeaponHud(ID_STOPWATCHITEM);
+					DebugOut(L"Collsion ID_STOPWATCH\n");
 					break;
 				case ID_MONEYBAG:
 					IncreaseScore(SCORE_MONEYBAGRED);
@@ -840,6 +850,10 @@ void CSimon::SetSubWeapon(int subWeaponID)
 		hud->SetItem(ID_HOLYWATERITEM);
 		hudSwitchScene->SetItem(ID_HOLYWATERITEM);
 		break;
+	case ID_STOPWATCH:
+		hud->SetItem(ID_STOPWATCHITEM);
+		hudSwitchScene->SetItem(ID_STOPWATCHITEM);
+		break;
 	default:
 		break;
 	}
@@ -934,24 +948,38 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			state = SIMON_STATE_IDLE;
 	}
 
-
-
 	//Update SubWeapon
 	for (auto iter : subWeapon) {
 		iter->Update(dt, objects);
 	}
-	//Update SubWeapon
-	/*if (animation_set->at(GetAnimationSubWeapon())->GetCurrentFrame() == 2)
+
+	
+	if (isAttackStopWatch)
 	{
-		isattacksub = true;
+		for (auto iter : *objects)
+		{
+			switch (iter->GetID())
+			{
+			case ID_SPEARKNIGHT:
+			case ID_SKELETON:
+			case ID_FLEAMAN:
+			case ID_RAVEN:
+			case ID_GHOST:
+			case ID_ZOMBIE:
+			case ID_BAT:
+				iter->StartStopWatch();
+				break;
+			default:
+				break;
+			}
+		}
+
+		if (timeStopWatch == 0)
+		{
+			isAttackStopWatch = false;
+		}
+		
 	}
-
-
-	if (isattacksub)
-	{
-		for (auto iter : subWeapon)
-			iter->Update(dt, objects);
-	}*/
 
 	for (size_t i = 0; i < subWeapon.size(); i++)
 	{
@@ -1053,6 +1081,11 @@ void CSimon::StartAttackSub() {
 	if (subWeaponID == 0)
 		return;
 
+	if (isAttackStopWatch)
+		return;
+
+
+
 	for (auto iter : subWeapon)
 	{
 		if (iter->state != STATE_DESTROYED)
@@ -1101,6 +1134,9 @@ void CSimon::StartAttackSub() {
 			else
 				subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
+		case ID_STOPWATCH:
+			isAttackStopWatch = true;
+			break;
 		default:
 			break;
 		}
@@ -1129,6 +1165,9 @@ void CSimon::StartAttackSub() {
 				subWeapon.push_back(new CHolyWater({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
 			else
 				subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
+			break;
+		case ID_STOPWATCH:
+			isAttackStopWatch = true;
 			break;
 		default:
 			break;

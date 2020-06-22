@@ -50,11 +50,20 @@ void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	else if (isActive)
 	{
-		vx += nx*BAT_FLYING_SPEED;
-		y += 0.5;
-		if (y >= falldown)
+		if (timeStopWatch == 0)
 		{
-			y = falldown;
+			vx += nx*BAT_FLYING_SPEED;
+			y += 0.5;
+			if (y >= falldown)
+			{
+				y = falldown;
+			}
+		}
+		else
+		{
+			DebugOut(L"AA");
+			vx = 0;
+			vy = 0;
 		}
 	}
 

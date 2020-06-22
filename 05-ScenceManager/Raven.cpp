@@ -46,14 +46,15 @@ void CRaven::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	else if (isActive)
 	{
-		vx = -RAVEN_FLYING_SPEED_X;
-		vy = 0.075;
-		y += vy;
-		float xs, ys;
-		CSimon::GetInstance()->GetPosition(xs, ys);
-		if (y == ys)
+		if (timeStopWatch == 0)
 		{
-			
+			vx = -RAVEN_FLYING_SPEED_X;
+			vy = 0.075;
+			y += vy;
+		}
+		else
+		{
+			vx = vy = 0;
 		}
 	}
 

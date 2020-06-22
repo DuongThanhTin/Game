@@ -70,9 +70,9 @@ public:
 	bool isOnGround;
 	bool isActive;
 	bool isOnGroundFire;
-
 	DWORD dt;
 	DWORD start_untouchable = 0;
+	int timeStopWatch = 0;
 
 	CAnimationSet animations;
 	LPANIMATION_SET animation_set;
@@ -126,7 +126,7 @@ public:
 	virtual void SetHealthEnemy(int healthEnemy) {  this->healthEnemy = healthEnemy; }
 	virtual int GetDamagedWeapon() { return damagedWeapon; }
 	virtual void SetDamagedWeapon(int damaged) { this->damagedWeapon = damaged; }
-
+	void StartStopWatch();
 	~CGameObject();
 };
 

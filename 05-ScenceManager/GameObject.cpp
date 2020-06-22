@@ -21,6 +21,16 @@ void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	this->dt = dt;
 	dx = vx*dt;
 	dy = vy*dt;
+
+	if (GetTickCount() - timeStopWatch > STOPWATCH_TIME && timeStopWatch > 0)
+	{
+		vx = 0;
+		vy = 0;
+		timeStopWatch = 0;
+	}
+
+	if (timeStopWatch != 0)
+		dx = dy = 0;
 }
 
 /*
@@ -149,6 +159,9 @@ void CGameObject::RenderBoundingBox(int alpha)
 
 void CGameObject::TimeFireDestroy() {
 
+}
+void CGameObject::StartStopWatch() {
+	timeStopWatch = GetTickCount();
 }
 
 int CGameObject::GetNx() {

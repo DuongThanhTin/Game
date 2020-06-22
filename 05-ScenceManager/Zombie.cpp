@@ -51,6 +51,22 @@ void CZombie::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 	}
 
+	if (timeStopWatch == 0)
+	{
+		if (vx > 0)
+		{
+			vx = ZOMBIE_WALKING_SPEED;
+		}
+		else
+		{
+			vx = -ZOMBIE_WALKING_SPEED;
+		}
+	}
+	else
+	{
+		vx = vy = 0;
+	}
+
 	if (vx < 0 && x < limitedLeft) {
 		x = 0; vx = -vx;
 	}

@@ -38,8 +38,11 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
-		x += dx;
-		y += dy;
+		if (timeStopWatch == 0)
+		{
+			x += dx;
+			y += dy;
+		}
 	}
 	else
 	{
@@ -62,7 +65,10 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 		}
 		else {
-			y += dy;
+			if (timeStopWatch == 0)
+			{
+				y += dy;
+			}
 		}
 		
 	

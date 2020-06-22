@@ -65,6 +65,7 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 	}
 
+
 	if (x <= limitedLeft) {
 		vx = -vx;
 	}
@@ -139,7 +140,14 @@ void CSpearKnight::Render()
 		else
 			ani = SPEARKNIGHT_ANI_WALKING_LEFT;
 
-		animation_set->at(ani)->Render(x, y);
+		if (timeStopWatch > 0)
+		{
+			animation_set->at(ani)->Render(x,y);
+		}
+		else
+		{
+			animation_set->at(ani)->Render(x, y);
+		}
 	}
 	else
 	{

@@ -95,13 +95,20 @@ void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 			else
 			{
-				if (vx > 0)
+				if (timeStopWatch == 0)
 				{
-					vx = SKELETON_WALKING_SPEED;
+					if (vx > 0)
+					{
+						vx = SKELETON_WALKING_SPEED;
+					}
+					else
+					{
+						vx = -SKELETON_WALKING_SPEED;
+					}
 				}
 				else
 				{
-					vx = -SKELETON_WALKING_SPEED;
+					vx = vy = 0;
 				}
 			}
 

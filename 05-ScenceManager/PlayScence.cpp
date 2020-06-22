@@ -829,6 +829,9 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_R:
 		simon->SetSubWeapon(ID_AXE);
 		break;
+	case DIK_T:
+		simon->SetSubWeapon(ID_STOPWATCH);
+		break;
 	}
 }
 

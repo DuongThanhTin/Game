@@ -40,6 +40,7 @@ public:
 	D3DXVECTOR2 GetFramePosition() { return frames[currentFrame]->GetPosition(); }
 	void Render(float x, float y, int alpha = 255);
 	void Render(float x, float y, int frame, int alpha);
+	void RenderFrame(float x, float y, int alpha = 255);
 	void Reset() { lastFrameTime = -1; currentFrame = -1; }
 };
 

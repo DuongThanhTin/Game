@@ -14,7 +14,7 @@
 #include "MoneyBagWhite.h"
 #include "MoneyBagBlue.h"
 #include "HolyWaterItem.h"
-
+#include "StopWatchItem.h"
 
 
 class CObjectNoMove : public CGameObject

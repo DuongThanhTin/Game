@@ -53,6 +53,9 @@ void CText::DrawSubWeapon(D3DXVECTOR2 position, int info)
 	case ID_HOLYWATERITEM:
 		CSprites::GetInstance()->Get(INFO_WEAPON_HOLYWATER)->Draw(position.x, position.y+1);
 		break;
+	case ID_STOPWATCHITEM:
+		CSprites::GetInstance()->Get(INFO_WEAPON_STOPWATCH)->Draw(position.x, position.y + 1);
+		break;
 	default:
 		break;
 	}

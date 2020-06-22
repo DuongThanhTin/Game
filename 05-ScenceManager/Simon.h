@@ -16,6 +16,7 @@
 #include "CrownItem.h"
 #include "Textures.h"
 #include "Sprites.h"
+#include "StopWatch.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
@@ -132,6 +133,7 @@ class CSimon : public CGameObject
 	int health;
 	int scoreItem;
 	int timeAppearScore = 0;
+
 public:
 	vector<vector<float>> scoreItems;
 	CAnimation* scoreItem_1;
@@ -141,6 +143,7 @@ public:
 	bool isSwitchCam;
 	bool isFalling;
 	bool isAttackJump = false;
+	bool isAttackStopWatch = false;
 	CSimon();
 	static CSimon* GetInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
