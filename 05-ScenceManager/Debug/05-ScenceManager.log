@@ -1,5 +1,14 @@
-﻿  Raven.cpp
-d:\game2020\game\05-scencemanager\raven.cpp(51): warning C4305: '=': truncation from 'double' to 'float'
-d:\game2020\game\05-scencemanager\raven.cpp(59): warning C4305: '=': truncation from 'double' to 'float'
+﻿  Simon.cpp
+d:\game2020\game\05-scencemanager\simon.cpp(97): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(107): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(124): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(137): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\simon.cpp(186): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\simon.cpp(189): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\simon.cpp(369): warning C4390: ';': empty controlled statement found; is this the intent?
+d:\game2020\game\05-scencemanager\simon.cpp(1226): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  GameObject.cpp
+d:\game2020\game\05-scencemanager\gameobject.cpp(157): warning C4244: 'argument': conversion from 'FLOAT' to 'int', possible loss of data
+  Generating Code...
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

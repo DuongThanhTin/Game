@@ -452,8 +452,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		x += dx;
 		y += dy;
-
-
 	}
 	else
 	{
@@ -467,7 +465,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		x += min_tx*dx + nx*0.1f;
 		y += min_ty*dy + ny*0.1f;
 
-		if (nx != 0) vx = 0;
+		//if (nx != 0) vx = 0;
 
 		if (ny < 0) {
 			vy = 0;
@@ -503,33 +501,29 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 				}
 			}
+			else if (dynamic_cast<CHideBrick*>(e->obj))
+			{
+				if (e->ny != 0 || e->nx != 0)
+				{
+					vx = 0;
+				}
+			}
 			//Trạng thái rơi tự do
 			else if (dynamic_cast<CBrick*>(e->obj))
 			{
-				if (e->ny<0) //trên xuống
+				if (e->ny<0 && e->nx !=0) //trên xuống
 				{
-					isFalling = false;
-					//brickCollidSimon = new CBrick;
-					float sl, st, sr, sb;		// simon object bbox
-					float ol, ot, or , ob;		// object bbox
-					GetBoundingBox(sl, st, sr, sb);
-					//brickCollidSimon->GetBoundingBox(ol, ot, or , ob);
-					//DebugOut(L"%d\n", ot);
-					/*if (sb == (ot) && jumpStart == 0);
-					{
-					attackStart = 0;
-					attackSubStart = 0;
-					state = SIMON_STATE_SIT;
-					vy += SIMON_SPEED_Y_FREEFALLING*dt;
-					}*/
-
+					vy = 0;
 				}
-				else if (e->ny>0)
+				else if (e->ny>0) //dưới lên
 				{
 					isFalling = false;
 					y += dy;
+					x += 0;
 				}
+		
 			}
+			
 		}
 	}
 
