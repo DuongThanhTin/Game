@@ -378,15 +378,21 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				{
 					if (invisibleStart == 0)
 					{
-						if (iter->GetID() == ID_SPEARKNIGHT)
-						{
-							BeHurted();
-						}
-						else
+						if(iter->GetID() == ID_BAT)
 						{			
 							IncreaseScore(SCORE_BAT);
 							BeHurted();
 							iter->TimeFireDestroy();
+						}
+						else if (iter->GetID() == ID_ZOMBIE)
+						{
+							IncreaseScore(SCORE_BAT);
+							BeHurted();
+							iter->TimeFireDestroy();
+						}
+						else
+						{
+							BeHurted();
 						}
 					}
 				}

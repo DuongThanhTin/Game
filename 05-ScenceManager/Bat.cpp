@@ -63,7 +63,6 @@ void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 		else
 		{
-
 			vx = 0;
 			vy = 0;
 		}

@@ -46,16 +46,25 @@ void CRaven::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	else if (isActive)
 	{
-		if (timeStopWatch == 0)
+		if (start_untouchable != 0)
 		{
-			vx = -RAVEN_FLYING_SPEED_X;
-			vy = 0.075;
-			y += vy;
+			vx = 0.01;
+			Untouchable();
 		}
 		else
 		{
-			vx = vy = 0;
+			if (timeStopWatch == 0)
+			{
+				vx = -RAVEN_FLYING_SPEED_X;
+				vy = 0.075;
+				y += vy;
+			}
+			else
+			{
+				vx = vy = 0;
+			}
 		}
+		
 	}
 
 }

@@ -43,7 +43,7 @@ void CHolyWater::Render() {
 		else
 			animations[1]->Render(x, y);
 	}
-
+	AppearHitEffect();
 	RenderBoundingBox();
 }
 
