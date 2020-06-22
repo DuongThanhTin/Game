@@ -10,7 +10,7 @@ info-objects_scene1.txt
 # Objecttype	x	y	ani_set_id	extra_settings per object type
 # Object type in Visual: 0 = Mario , 1 = Brick, 2 = Goomba, 5 = Zombie, 6 = Torch
 # SIMON
-0	50	150	1
+0	50	100	1
 
 #BRICK
 1	0	144	2	768	16

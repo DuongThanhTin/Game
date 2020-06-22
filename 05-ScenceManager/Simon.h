@@ -142,7 +142,7 @@ public:
 	bool isOnStair;
 	bool isLockUpdate = false;
 	bool isSwitchCam;
-	bool isFalling;
+	bool isFalling = false;
 	bool isAttackJump = false;
 	bool isAttackStopWatch = false;
 	CSimon();

@@ -83,8 +83,27 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// Simple fall down
 	if (!isOnStair)
 	{
-		vy += SIMON_GRAVITY*dt;
+		if (jumpStart > 0)
+		{
+			vy += SIMON_GRAVITY*dt;
+			isFalling = false;
+		}
+		else
+		{
+			if (vy > 0)
+			{
+				isFalling = true;
+				vy = 0.5f;
+			}
+			else
+			{
+				vy += SIMON_GRAVITY*dt;
+				isFalling = false;
+			}
+		}
 	}
+
+
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -472,8 +491,10 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (!isOnGround)
 			{
 				isOnGround = true;
+				
 			}
 		}
+
 		//else y += dy;
 
 		//Xét trạng thái không va chạm với đất Test
@@ -508,7 +529,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					vx = 0;
 				}
 			}
-			//Trạng thái rơi tự do
+			
 			else if (dynamic_cast<CBrick*>(e->obj))
 			{
 				if (e->ny<0 && e->nx !=0) //trên xuống
@@ -517,11 +538,10 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				else if (e->ny>0) //dưới lên
 				{
-					isFalling = false;
+				
 					y += dy;
 					x += 0;
 				}
-		
 			}
 			
 		}
@@ -537,6 +557,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// update jump state
 	if (isOnGround == true) {
 		jumpStart = 0;
+		isFalling = false;
 	}
 
 	// reset untouchable timer if untouchable time has passed
@@ -1062,6 +1083,9 @@ void CSimon::StartAttack() {
 	if (state != SIMON_STATE_JUMP)
 		vx = 0;
 
+	//if (isFalling)
+		//return;
+
 	//Reset Animation Whip
 	//ResetAnimation();
 	whip->ResetAnimation();
@@ -1208,6 +1232,7 @@ void CSimon::UpdateOnStair()
 
 void CSimon::StartJump()
 {
+	
 	SetState(SIMON_STATE_JUMP);
 	isOnGround = false;
 	jumpStart = GetTickCount();
