@@ -30,6 +30,7 @@
 #define SIMON_ON_STAIR_SPEED			0.02f
 #define SIMON_DAMAGED_DEFLECT_SPEED_Y	0.15f
 #define SIMON_DAMAGED_DEFLECT_SPEED_X	0.06f
+#define SIMON_FALLING_SPEED 0.5f
 
 #define SIMON_STATE_IDLE			0
 #define SIMON_STATE_WALKING_RIGHT	100
@@ -76,9 +77,7 @@
 #define SIMON_ANI_STAIR_GODOWN_IDLE_RIGHT	23
 #define SIMON_ANI_DEFLECT_LEFT	24
 #define SIMON_ANI_DEFLECT_RIGHT	25
-
-
-#define SIMON_ANI_DIE				99
+#define SIMON_ANI_DIE	26
 
 #define SIMON_BBOX_WIDTH  15
 #define SIMON_BBOX_HEIGHT 30
@@ -201,7 +200,7 @@ public:
 	void SetScoreSubWeapon(int scoreSubWeapon) { this->scoreSubWeapon = scoreSubWeapon; }
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 
-	void UpdateAppearScore();
+	void DrawAppearScore();
 	void AppearScore(int score, float x, float y);
 	//void DrawScoreItem();
 	int GetScoreItem() { return scoreItem; }

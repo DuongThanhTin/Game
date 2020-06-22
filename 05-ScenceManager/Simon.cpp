@@ -93,7 +93,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (vy > 0)
 			{
 				isFalling = true;
-				vy = 0.5f;
+				vy = SIMON_FALLING_SPEED;
 			}
 			else
 			{
@@ -155,6 +155,11 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	vector<LPGAMEOBJECT> Objects;
 	for (int i = 0;i < coObjects->size();i++) {
 		Objects.push_back(coObjects->at(i));
+	}
+
+	if (GetHealthSimon() <= 0)
+	{
+		state = SIMON_STATE_DIE;
 	}
 
 	// turn off collision when die 
@@ -435,34 +440,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			enemyObjects.erase(enemyObjects.begin() + i);
 			i--;
 		}
-		else if (!CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(vl), long(vt), long(vr), long(vb) }))
-		{
-			//RESET simon khi bị ra khỏi camera
-			if (st > vb)
-			{
-				for (auto iter : Objects)
-				{
-					
-					if (iter->GetID() == ID_PORTAL) {
-						CPortal* portal = dynamic_cast<CPortal *>(iter);
-						switch (portal->GetSceneId())
-						{
-							//SCENE 2 have NEXT SCENE 3, case is: "NEXT SCENE"
-						case SCENE_3:
-							DebugOut(L"3\n");
-							Reset(460, 65);
-							break;
-						case SCENE_4:
 
-							break;
-						default:
-
-							break;
-						}
-					}
-				}
-			}
-		}
 
 	}
 
@@ -495,20 +473,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 		}
 
-		//else y += dy;
-
-		//Xét trạng thái không va chạm với đất Test
-		/*for (auto iter : wallObjects)
-		{
-		float sl, st, sr, sb;		// simon object bbox
-		float ol, ot, or , ob;		// object bbox
-		GetBoundingBox(sl, st, sr, sb);
-		iter->GetBoundingBox(ol, ot, or , ob);
-		if (st <= (ot - 3))
-		{
-		}
-		}*/
-
 		//On Bridge
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
@@ -538,7 +502,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				else if (e->ny>0) //dưới lên
 				{
-				
 					y += dy;
 					x += 0;
 				}
@@ -759,7 +722,7 @@ void CSimon::Render()
 
 	hud->Draw({ 0, 40 });
 
-	UpdateAppearScore();
+	DrawAppearScore();
 }
 
 void CSimon::RenderBoundingBox(int alpha)
@@ -824,6 +787,7 @@ void CSimon::SetState(int state)
 		SetSpeed(0, vy);
 		break;
 	case SIMON_STATE_DIE:
+
 		vy = -SIMON_DIE_DEFLECT_SPEED;
 		break;
 	case SIMON_STATE_GOUP_STAIR:
@@ -898,7 +862,17 @@ void CSimon::UpdateOnHud(DWORD dt)
 	hud->SetNumLifeHub(GetNumLife());
 	hud->SetScoreHub(hudSwitchScene->GetScoreHud()); // UPDATE SCORE ON HUD
 	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud()); // UPDATE SCORE SUBWEAPON ON HUD
-	hud->SetHealthSimon(hudSwitchScene->GetHealthSimon()); // UPDATE HEALTH ON HUD
+	
+	if (GetState() == SIMON_STATE_DIE)
+	{
+		SetHealthSimon(16);
+		hud->SetHealthSimon(16);
+		hudSwitchScene->SetHealthSimon(16);
+	}
+	else
+	{
+		hud->SetHealthSimon(hudSwitchScene->GetHealthSimon()); // UPDATE HEALTH ON HUD
+	}
 	hud->SetNumLifeHub(hudSwitchScene->GetNumLifeHud()); // UPDATE NUM LIFE ON HUD 
 	hud->Update(dt);
 }
@@ -1317,7 +1291,7 @@ void CSimon::IncreaseScoreSubWeapon(int score)
 	hudSwitchScene->IncreaseScoreSubWeapon(score);
 }
 
-void CSimon::UpdateAppearScore()
+void CSimon::DrawAppearScore()
 {
 	if (scoreItems.size() > 0)
 	{

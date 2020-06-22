@@ -620,6 +620,29 @@ void CPlayScene::Update(DWORD dt)
 			portalObjects.push_back(objects[i]);
 	}
 
+
+
+	//Reset
+	float sl, st, sr, sb;		// simon bbox
+	float vl, vt, vr, vb;		// viewport bbox
+	CViewPort::GetInstance()->GetBoundingBox(vl, vt, vr, vb);
+	player->GetBoundingBox(sl, st, sr, sb);
+
+	switch (CGame::GetInstance()->GetCurrtentSceneID())
+	{
+	case SCENE_2:
+		if (sb > (vt + 180))
+		{
+			ScenePortal(SCENE_2, CAMERA_SWITCHSCENE2_X, CAMERA_SWITCHSCENE2_Y);
+		}
+		break;
+	default:
+		break;
+	}
+
+
+	
+
 	//Collisions Portal
 	for (auto iter : portalObjects) {
 		{
@@ -724,7 +747,7 @@ void CPlayScene::Render()
 	{
 		listItem->ListItem[i]->Render();
 	}
-	//viewport->Render();
+	viewport->Render();
 	//Render Simon
 	objects[0]->Render();
 	

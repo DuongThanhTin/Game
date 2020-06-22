@@ -3,9 +3,65 @@ d:\game2020\game\05-scencemanager\simon.cpp(116): warning C4018: '<': signed/uns
 d:\game2020\game\05-scencemanager\simon.cpp(126): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\simon.cpp(143): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\simon.cpp(156): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(205): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\simon.cpp(208): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\simon.cpp(388): warning C4390: ';': empty controlled statement found; is this the intent?
-d:\game2020\game\05-scencemanager\simon.cpp(1251): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\simon.cpp(210): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\simon.cpp(213): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\simon.cpp(393): warning C4390: ';': empty controlled statement found; is this the intent?
+d:\game2020\game\05-scencemanager\simon.cpp(1225): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Torch.cpp
+  StopWatch.cpp
+  ObjectNoMove.cpp
+  Hud.cpp
+  main.cpp
+  Zombie.cpp
+  SpearKnight.cpp
+  Skeleton.cpp
+  Raven.cpp
+  PlayScence.cpp
+  Ghost.cpp
+  Game.cpp
+  Fleaman.cpp
+  Enemy.cpp
+  Bridge.cpp
+  Boomerang.cpp
+  Bat.cpp
+  Axe.cpp
+WhipUpgrade.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Whip.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Weapon.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Textures.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Sprites.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Scence.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Mario.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Goomba.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Utils.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+TileMap.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Text.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+StopWatchItem.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Stair.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+SmallHeart.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Rock.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Portal.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+MoneyBagWhite.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+MoneyBagBlue.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+MoneyBag.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+ListItem.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Koopas.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Item.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+HolyWaterItem.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+HideBrick.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Heart.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Grid.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+DaggerItem.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Dagger.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+CrownItem.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Candle.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Brick.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BoomerangItem.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+AxeItem.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+AreaSwitchCam.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+AreaActive.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Animations.obj : warning LNK4204: 'D:\Game2020\Game\05-ScenceManager\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

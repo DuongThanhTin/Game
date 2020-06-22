@@ -19,7 +19,7 @@
 class CFleaman : public CEnemy
 {
 	float limitedRight, limitedLeft;
-
+	bool isOnGroundEnemy = false;
 public:
 	CFleaman();
 	CFleaman(D3DXVECTOR2 position, int nextItemID, float limitedLeft, float limitedRight);
