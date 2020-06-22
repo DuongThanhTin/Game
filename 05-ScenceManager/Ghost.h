@@ -4,7 +4,7 @@
 #include "Brick.h"
 
 
-#define GHOST_WALKING_SPEED 0.03f
+#define GHOST_WALKING_SPEED 0.00025f
 //#define SKELETON_GRAVITY 0.002f
 
 #define GHOST_BBOX_WIDTH 16
@@ -19,6 +19,8 @@
 
 class CGhost : public CEnemy
 {
+	int originY;
+	int delta;
 public:
 	CGhost();
 	CGhost(D3DXVECTOR2 position, int nextItemID,int nxGhost);

@@ -1,3 +1,39 @@
-﻿  Zombie.cpp
+﻿  main.cpp
+  PlayScence.cpp
+d:\game2020\game\05-scencemanager\playscence.cpp(166): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(167): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(194): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(218): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(242): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(243): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(268): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(269): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(276): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(277): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(284): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(293): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(294): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(302): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(303): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(322): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(328): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(329): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(424): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(425): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\playscence.cpp(580): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(586): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(617): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(717): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(723): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(738): warning C4018: '<': signed/unsigned mismatch
+  Game.cpp
+d:\game2020\game\05-scencemanager\game.cpp(68): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  Generating Code...
+  Compiling...
+  Ghost.cpp
+d:\game2020\game\05-scencemanager\ghost.cpp(21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\ghost.cpp(120): warning C4305: '=': truncation from 'double' to 'float'
+d:\game2020\game\05-scencemanager\ghost.cpp(127): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

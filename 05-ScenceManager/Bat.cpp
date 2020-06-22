@@ -18,6 +18,7 @@ CBat::CBat(D3DXVECTOR2 position,int nx, int nextItemID, float falldown , int are
 {
 	x = position.x;
 	y = position.y;
+
 	this->nx = nx;
 	this->falldown = falldown;
 	isActive = false;
@@ -58,10 +59,11 @@ void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				y = falldown;
 			}
+
 		}
 		else
 		{
-			DebugOut(L"AA");
+
 			vx = 0;
 			vy = 0;
 		}

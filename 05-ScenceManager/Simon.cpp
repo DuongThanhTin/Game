@@ -338,6 +338,16 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 			}
 
+			if (iter->GetID() == ID_GHOST)
+			{
+				float x, y;
+				GetPosition(x, y);
+				if (x < 600)
+				{
+					iter->isActive = true;
+				}
+			}
+
 			if (iter->GetID() == ID_RAVEN)
 			{
 				if (ol - sr <= 60 && st - ot <= 120 )

@@ -17,19 +17,28 @@ CGhost::CGhost(D3DXVECTOR2 position, int nextItemID,int nxGhost)
 	y = position.y;
 	id = ID_GHOST;
 	AddAnimation(ANI_DESTROY);
-	nx = nxGhost;
-	//scoreEnemy = NUM_SCORE_ENEMY_SPEARKNIGHT;
+	nx = -1;
+	this->originY = y;
+	delta = 0;
+	scoreEnemy = NUM_SCORE_ENEMY_SPEARKNIGHT;
 	this->nextItemID = nextItemID;
-	//	this->healthEnemy = 3;
+	this->healthEnemy = 3;
 	isOnGround = true;
 }
 
 void CGhost::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
-	left = x;
-	top = y - GHOST_BBOX_HEIGHT;
-	right = x + GHOST_BBOX_WIDTH;
-	bottom = y;
+	if (isActive)
+	{
+		left = x;
+		top = y - GHOST_BBOX_HEIGHT;
+		right = x + GHOST_BBOX_WIDTH;
+		bottom = y;
+	}
+	else
+	{
+		left = top = right = bottom = 0;
+	}
 
 }
 void CGhost::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -101,8 +110,29 @@ void CGhost::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		vy = 0;
 	}
-	//else
-		//vy += 0.0006f*dt;
+	else if (isActive)
+	{
+		if (timeStopWatch == 0)
+		{
+			
+			if (start_untouchable != 0)
+			{
+				vx = 0.00001;
+				Untouchable();
+			}
+			else
+			{
+				vx += nx*GHOST_WALKING_SPEED;
+				delta += 3;
+				y = sin(delta * 3.14 / 180) * 12 + originY;
+			}
+		}
+		else
+		{
+			vx = 0;
+			vy = 0;
+		}
+	}
 
 
 }
@@ -120,7 +150,11 @@ void CGhost::Render()
 		{
 			ani = GHOST_ANI_WALKING_LEFT;
 		}
-		animation_set->at(ani)->Render(x, y);
+		
+		if (isActive)
+		{
+			animation_set->at(ani)->Render(x, y);
+		}
 	}
 	else
 	{
