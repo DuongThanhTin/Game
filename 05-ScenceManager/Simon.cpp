@@ -147,6 +147,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			coObjects->at(i)->GetID() == ID_FLEAMAN || 
 			coObjects->at(i)->GetID() == ID_SKELETON || 
 			coObjects->at(i)->GetID() == ID_GHOST ||
+			coObjects->at(i)->GetID() == ID_BONE ||
 			coObjects->at(i)->GetID() == ID_RAVEN)
 			enemyObjects.push_back(coObjects->at(i));
 	}
@@ -347,55 +348,13 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 		}
 
+		
 		//Collision Enemy
 		for (auto iter : enemyObjects) {
 			float sl, st, sr, sb;		// simon object bbox
 			float ol, ot, or , ob;		// enemy bbox
 			GetBoundingBox(sl, st, sr, sb);
 			iter->GetBoundingBox(ol, ot, or , ob);
-
-			if (iter->GetID() == ID_FLEAMAN)
-			{
-				if (sl - or <= 100)
-				{
-					iter->isActive = true;
-				}
-			}
-
-			if (iter->GetID() == ID_GHOST)
-			{
-				float x, y;
-				GetPosition(x, y);
-				if (x < 600)
-				{
-					iter->isActive = true;
-				}
-			}
-
-			if (iter->GetID() == ID_RAVEN)
-			{
-				if (ol - sr <= 60 && st - ot <= 120 )
-				{
-					float x, y;
-					GetPosition(x, y);
-					iter->isActive = true;
-				}
-			}
-
-			if (iter->GetID() == ID_SKELETON)
-			{
-				if (or -sl <= 60 && st - ot <= 120)
-				{
-					float x, y;
-					GetPosition(x, y);
-					iter->isActive = true;
-				}
-				else if (ol - sr <= 60 && ob-sb <= 30);
-				{
-					iter->isActive = true;
-				}
-			}
-				
 
 			if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 				if (iter->state != ENEMY_STATE_DESTROY)
@@ -424,6 +383,60 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 	}
 
+	//Active ENemy
+	for (auto iter : enemyObjects) {
+		float sl, st, sr, sb;		// simon object bbox
+		float ol, ot, or , ob;		// enemy bbox
+		GetBoundingBox(sl, st, sr, sb);
+		if (iter->GetID() == ID_FLEAMAN)
+		{
+			iter->GetBoundingBox(ol, ot, or , ob);
+			if (sl - or <= 100)
+			{
+				iter->isActive = true;
+			}
+		}
+
+		else if (iter->GetID() == ID_GHOST)
+		{
+			iter->GetBoundingBox(ol, ot, or , ob);
+			float x, y;
+			GetPosition(x, y);
+			if (x < 600)
+			{
+				iter->isActive = true;
+			}
+		}
+
+		else if (iter->GetID() == ID_RAVEN)
+		{
+			iter->GetBoundingBox(ol, ot, or , ob);
+			if (ol - sr <= 60 && st - ot <= 120)
+			{
+				float x, y;
+				GetPosition(x, y);
+				iter->isActive = true;
+			}
+		}
+
+		else if (iter->GetID() == ID_SKELETON)
+		{
+			iter->GetBoundingBox(ol, ot, or , ob);
+			if (sl - or <= 60 && st - ot <= 120) 
+			{
+				float x, y;
+				GetPosition(x, y);
+				iter->isActive = true;
+			}
+			else if (ol - sr <= 60 && ob - sb <= 30)
+			{
+				iter->isActive = true;
+			}
+		
+		}
+
+	}
+
 	CViewPort* viewport = CViewPort::GetInstance();
 
 	//Enemy Out of Camera
@@ -440,7 +453,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			enemyObjects.erase(enemyObjects.begin() + i);
 			i--;
 		}
-
 
 	}
 
@@ -969,6 +981,7 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			case ID_SKELETON:
 			case ID_FLEAMAN:
 			case ID_RAVEN:
+			case ID_BONE:
 			case ID_GHOST:
 			case ID_ZOMBIE:
 			case ID_BAT:

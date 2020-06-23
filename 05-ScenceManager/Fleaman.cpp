@@ -78,7 +78,7 @@ void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					{
 						vy -= 0.12f;
 						isOnGroundEnemy = true;
-						DebugOut(L"AAA \n");
+						
 					}
 					else
 					{

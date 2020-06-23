@@ -204,6 +204,9 @@
     <ClCompile Include="StopWatch.cpp">
       <Filter>Game_Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="Bone.cpp">
+      <Filter>Game_Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -382,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="StopWatch.h">
       <Filter>Game_Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Bone.h">
+      <Filter>Game_Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

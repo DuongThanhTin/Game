@@ -11,7 +11,7 @@ CSkeleton::~CSkeleton()
 {
 }
 
-CSkeleton::CSkeleton(D3DXVECTOR2 position, int nextItemID, float limitedLeft, float limitedRight, int nxSkeleton)
+CSkeleton::CSkeleton(D3DXVECTOR2 position, int nextItemID, float limitedLeft, float limitedRight, int nxSkeleton , int idSkeleton)
 {
 	x = position.x;
 	y = position.y;
@@ -25,6 +25,8 @@ CSkeleton::CSkeleton(D3DXVECTOR2 position, int nextItemID, float limitedLeft, fl
 	this->nextItemID = nextItemID;
 	this->healthEnemy = 3;
 	isOnGround = true;
+	timeAttackBone = 0;
+	this->id_AISkeleton = idSkeleton;
 }
 
 void CSkeleton::GetBoundingBox(float &left, float &top, float &right, float &bottom)
@@ -37,8 +39,8 @@ void CSkeleton::GetBoundingBox(float &left, float &top, float &right, float &bot
 }
 void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
-	CEnemy::Update(dt, coObjects);
 
+	CEnemy::Update(dt, coObjects);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -97,6 +99,35 @@ void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				if (timeStopWatch == 0)
 				{
+					if (timeAttackBone == 0)
+					{
+						timeAttackBone = GetTickCount();
+					}
+
+					else if (GetTickCount() - timeAttackBone > TIME_ATTACK_BONE)
+					{
+						if(bonesOb.size()<2)
+						{
+							if (id_AISkeleton == 1)
+							{
+								bonesOb.push_back(new CBone({ x,y }, 1));
+								bonesOb.push_back(new CBone({ x-10,y+10 }, 1));
+							}
+							else
+							{
+								bonesOb.push_back(new CBone({ x,y }, -1));
+								bonesOb.push_back(new CBone({ x + 10,y - 10 }, -1));
+							}
+							
+							
+						}
+						
+					
+						timeAttackBone = 0;
+						vx = 0;
+					}
+
+
 					if (vx > 0)
 					{
 						vx = SKELETON_WALKING_SPEED;
@@ -121,6 +152,31 @@ void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 		}
 
+		if (timeStopWatch == 0)
+		{
+			//Update Bone
+			for (size_t i = 0; i < bonesOb.size(); i++)
+			{
+				
+				bonesOb[i]->Update(dt, coObjects);
+				coObjects->push_back(bonesOb[i]);
+			}
+		}
+
+		for (size_t i = 0; i < bonesOb.size(); i++)
+		{
+			float ol, ot, or , ob;		// enemy bbox
+			float vl, vt, vr, vb;		// viewport bbox
+			CViewPort::GetInstance()->GetBoundingBox(vl, vt, vr, vb);
+			bonesOb[i]->GetBoundingBox(ol, ot, or , ob);
+			if (!CGame::GetInstance()->IsIntersectAABB({ long(ol),long(ot), long(or ), long(ob) }, { long(vl), long(vt), long(vr), long(vb) }))
+			{
+				bonesOb.erase(bonesOb.begin() + i);
+				i--;
+			}
+		}
+	
+
 		// clean up collision events
 		for (auto iter : coEvents) delete iter;
 		coEvents.clear();
@@ -134,7 +190,7 @@ void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	else
 		vy += 0.0006f*dt;
 
-
+	
 }
 
 void CSkeleton::Render()
@@ -158,6 +214,10 @@ void CSkeleton::Render()
 	}
 
 
+	for (size_t i = 0; i < bonesOb.size(); i++)
+	{
+		bonesOb[i]->Render();
+	}
 	RenderBoundingBox();
 }
 

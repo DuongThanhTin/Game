@@ -302,7 +302,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		float limitedLeft = atoi(tokens[5].c_str());
 		float limitedRight = atoi(tokens[6].c_str());
 		int nxSkeleton = atoi(tokens[7].c_str());
-		obj = new CSkeleton({ x,y }, itemId, limitedLeft, limitedRight, nxSkeleton);
+		int idSkeleton = atoi(tokens[8].c_str());
+		obj = new CSkeleton({ x,y }, itemId, limitedLeft, limitedRight, nxSkeleton, idSkeleton);
 		DebugOut(L"CSkeleton %d\n", itemId);
 		break;
 	}
