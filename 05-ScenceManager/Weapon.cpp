@@ -89,6 +89,7 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				case ID_FLEAMAN:
 				case ID_RAVEN:
 				case ID_GHOST:
+				case ID_BOSS:
 				{
 					hitEffects.push_back({ (ol + or ) / 2, (ot + ob) / 2 });
 					if (GetID() == ID_WHIP)

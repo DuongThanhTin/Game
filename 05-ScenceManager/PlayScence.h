@@ -34,6 +34,7 @@
 #include "Raven.h"
 #include "Grid.h"
 #include "Weapon.h"
+#include "Boss.h"
 
 class CPlayScene: public CScene
 {

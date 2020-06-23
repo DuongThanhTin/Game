@@ -154,7 +154,7 @@ void CGameObject::RenderBoundingBox(int alpha)
 
 	//CGame::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
 	D3DXVECTOR2 viewPortPosition = CViewPort::GetInstance()->ConvertWorldToViewPort({ l, t });
-	CGame::GetInstance()->Draw(viewPortPosition.x, viewPortPosition.y, bbox, rect.left, rect.top, rect.right, rect.bottom, 0);
+	CGame::GetInstance()->Draw(viewPortPosition.x, viewPortPosition.y, bbox, rect.left, rect.top, rect.right, rect.bottom, 50);
 }
 
 void CGameObject::TimeFireDestroy() {
@@ -184,9 +184,19 @@ int CGameObject::GetAreaActiveEnemy()
 
 void CGameObject::Untouchable()
 {
-	if (GetTickCount() - start_untouchable > UNTOUCHABLE_TIME)
+	if (GetID() == ID_BOSS)
 	{
-		start_untouchable = 0;
+		if (GetTickCount() - start_untouchable > 500)
+		{
+			start_untouchable = 0;
+		}
+	}
+	else
+	{
+		if (GetTickCount() - start_untouchable > UNTOUCHABLE_TIME)
+		{
+			start_untouchable = 0;
+		}
 	}
 
 }

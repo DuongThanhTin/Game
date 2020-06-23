@@ -198,14 +198,17 @@
     <ClCompile Include="Grid.cpp">
       <Filter>General</Filter>
     </ClCompile>
-    <ClCompile Include="StopWatchItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StopWatch.cpp">
       <Filter>Game_Weapons</Filter>
     </ClCompile>
     <ClCompile Include="Bone.cpp">
       <Filter>Game_Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StopWatchItem.cpp">
+      <Filter>Game_Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -380,14 +383,17 @@
     <ClInclude Include="Grid.h">
       <Filter>General</Filter>
     </ClInclude>
-    <ClInclude Include="StopWatchItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StopWatch.h">
       <Filter>Game_Weapons</Filter>
     </ClInclude>
     <ClInclude Include="Bone.h">
       <Filter>Game_Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatchItem.h">
+      <Filter>Game_Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

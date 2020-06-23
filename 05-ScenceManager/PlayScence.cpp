@@ -54,11 +54,13 @@ See scene1.txt, scene2.txt for detail format specification
 #define OBJECT_TYPE_SPEARKNIGHT	40
 #define OBJECT_TYPE_BAT	41
 #define OBJECT_TYPE_AREASWITCHCAM	90
- 
 
 #define OBJECT_TYPE_PORTAL	50
 #define OBJECT_TYPE_DAGGER 91
 #define OBJECT_TYPE_BOOMERANG 92
+
+#define OBJECT_TYPE_BOSS 100
+
 
 #define MAX_SCENE_LINE 1024
 
@@ -262,6 +264,15 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"SCORE %d\n", player->GetScoreSubWeapon());
 		obj->SetPosition(x, y);
 		break;
+	case OBJECT_TYPE_BOSS:
+	{
+		//int itemId = atoi(tokens[4].c_str());
+		//float limitedLeft2 = atoi(tokens[5].c_str());
+		//float limitedRight2 = atoi(tokens[6].c_str());
+		obj = new CBoss({ x,y }, 0, 0);
+		DebugOut(L"CBOss %d", int(x), int(y));
+		break;
+	}
 	case OBJECT_TYPE_ZOMBIE:
 	{
 		int itemId = atoi(tokens[4].c_str());
@@ -609,9 +620,6 @@ void CPlayScene::Update(DWORD dt)
 		player->SetPosition(0.0f, playerPosition.y);
 	}
 
-	//Giới hạn Camera
-	viewport->Update(playerPosition, 0, tileMap->GetLimitedViewPort());
-
 
 	//SIMON Collision with portal
 	vector<LPGAMEOBJECT> portalObjects;
@@ -713,7 +721,19 @@ void CPlayScene::Update(DWORD dt)
 					
 					break;
 				case SCENE_5://NEXT SCENE
-					ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCH_SCENE2_1_Y }, 0);
+					if (int(viewport->GetPosition().x) >= CAMERA_ATTACK_BOSS_X_LEFT) //LOCK CAM, SIMON ATTACK BOSS
+					{
+						CViewPort::GetInstance()->SetPosition({ CAMERA_ATTACK_BOSS_X_LEFT,CAMERA_SWITCH_SCENE2_1_Y });
+						if (int(x) < CAMERA_ATTACK_BOSS_X_LEFT)
+						{
+							player->x = CAMERA_ATTACK_BOSS_X_LEFT;
+						}
+					}
+					else
+					{
+						ChangeView(playerPosition, { x,y }, { x,CAMERA_SWITCH_SCENE2_1_Y }, 0);
+					}
+					
 					break;
 				default:
 				
@@ -722,6 +742,7 @@ void CPlayScene::Update(DWORD dt)
 			}
 		}
 	}
+
 
 	hud->Update(dt);
 }

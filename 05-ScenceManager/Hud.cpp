@@ -15,6 +15,7 @@ CHud::CHud()
 	healthSimon = NUM_HEALTH;
 	timeHud = NUM_TIME;
 	timecount = GetTickCount();
+	healthBoss = NUM_HEALTH;
 }
 
 
@@ -50,7 +51,7 @@ void CHud::Draw(D3DXVECTOR2 position)
 	textHud->DrawHealthBar({ 55,24 }, GetHealthSimon(),NUM_ID_SIMON);
 
 	//HEALTH BOSS
-	textHud->DrawHealthBar({ 55,34 }, 16, NUM_ID_BOSS);
+	textHud->DrawHealthBar({ 55,34 }, GetHealthBoss(), NUM_ID_BOSS);
 }
 
 

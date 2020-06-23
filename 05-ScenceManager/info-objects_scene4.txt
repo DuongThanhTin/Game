@@ -5,9 +5,22 @@
 40	textures\objects.png	255	0	255
 50	textures\items.png	255	0	255
 60	textures\Objectsub.png	116	116	116
+100	textures\boss.png	3	26	110	
 
 # id	left	top	right	bottom	texture_id	isFlipImage	position(x)	position(y)
 [SPRITES]
+#================BOSS===============
+#Boss Sleep
+90001	1	21	35	39	100		0		0		0
+#Boss Active
+90002	36	19	84	42	100		0		0		0
+90003	84	19	132	42	100		0		0		0
+
+#============EFFECT BOSS DESTROYED========
+90011	191	367	215	398	100		0		0		0
+90012	222	367	246	398	100		0		0		0
+90013	252	367	276	398	100		0		0		0
+
 #================ZOMBIE===============
 #Zombie Right
 14001	11	6	28	39	30		0		0		0
@@ -34,6 +47,13 @@
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
+# ==== BOSS =====
+#BOSS SLEEP
+981	90001	100
+982	90002	100	90003	100
+#EFFECT BOSS DIE
+991	90011	100	90012	100	90013	100
+
 # ==== ZOMBIE =======
 #ZOMBIE RIGHT
 401	14001	100	14002	100
@@ -59,6 +79,9 @@
 
 
 [ANIMATION_SETS]
+#BOSS
+90	981	982
+
 # ZOMBIE
 4	401	402
 

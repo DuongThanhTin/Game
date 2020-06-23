@@ -43,6 +43,8 @@ CSimon::CSimon() {
 	hud->SetScoreSubWeaponHub(hudSwitchScene->GetScoreSubWeaponHud()); //SET SCORESUBWEAPON ON HUD
 	hud->SetNumLifeHub(hudSwitchScene->GetNumLifeHud()); // SET NUM LIFE ON HUD
 	hud->SetHealthSimon(hudSwitchScene->GetHealthSimon()); //SET HEALTH SIMON ON HUD
+	//hud->SetHealthBoss(hudSwitchScene->GetHealthBoss()); //SET HEALTH BOSS ON HUD
+
 	if (hudSwitchScene->GetIdSubWeapon() != 0) //SET SUBWEAPON WHEN LOAD NEW SCENE
 	{
 		switch (hudSwitchScene->GetIdSubWeapon())
@@ -148,6 +150,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			coObjects->at(i)->GetID() == ID_SKELETON || 
 			coObjects->at(i)->GetID() == ID_GHOST ||
 			coObjects->at(i)->GetID() == ID_BONE ||
+			coObjects->at(i)->GetID() == ID_BOSS ||
 			coObjects->at(i)->GetID() == ID_RAVEN)
 			enemyObjects.push_back(coObjects->at(i));
 	}
@@ -195,6 +198,10 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							{
 								iter2->isActive = true;
 							}
+						}
+						else if (iter2->GetID() == ID_BOSS)
+						{
+							iter2->isActive = true;
 						}
 					}
 					break;
@@ -385,9 +392,15 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	//Active ENemy
 	for (auto iter : enemyObjects) {
+		if (iter->GetID() == ID_BOSS)
+		{
+			hud->SetHealthBoss(iter->healthEnemy); // UPDATE HEALTH ON HUD
+		}
+
 		float sl, st, sr, sb;		// simon object bbox
 		float ol, ot, or , ob;		// enemy bbox
 		GetBoundingBox(sl, st, sr, sb);
+
 		if (iter->GetID() == ID_FLEAMAN)
 		{
 			iter->GetBoundingBox(ol, ot, or , ob);
@@ -877,13 +890,16 @@ void CSimon::UpdateOnHud(DWORD dt)
 	
 	if (GetState() == SIMON_STATE_DIE)
 	{
-		SetHealthSimon(16);
-		hud->SetHealthSimon(16);
-		hudSwitchScene->SetHealthSimon(16);
+		SetHealthSimon(NUM_HEALTH);
+		hud->SetHealthSimon(NUM_HEALTH);
+		hudSwitchScene->SetHealthSimon(NUM_HEALTH);
+		//Boss
+		hud->SetHealthBoss(NUM_HEALTH);
 	}
 	else
 	{
 		hud->SetHealthSimon(hudSwitchScene->GetHealthSimon()); // UPDATE HEALTH ON HUD
+		
 	}
 	hud->SetNumLifeHub(hudSwitchScene->GetNumLifeHud()); // UPDATE NUM LIFE ON HUD 
 	hud->Update(dt);

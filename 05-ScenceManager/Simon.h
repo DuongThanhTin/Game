@@ -18,6 +18,7 @@
 #include "Sprites.h"
 #include "StopWatch.h"
 #include "HideBrick.h"
+#include "Boss.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
