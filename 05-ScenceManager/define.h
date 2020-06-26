@@ -62,6 +62,7 @@
 #define ID_MONEYBAGBLUE 28
 #define ID_HOLYWATERITEM 29
 #define ID_CROWN 40
+#define ID_CRYSTALBALL 41
 
 
 //WEAPON
@@ -97,6 +98,12 @@
 //RESET
 #define START_X 0
 #define START_Y 180
+#define START_X_SCENE_2	285
+#define START_Y_SCENE_2	382
+#define START_X_SCENE_3	730
+#define START_Y_SCENE_3	380
+#define START_X_SCENE_4	5
+#define START_Y_SCENE_4	120
 
 //MATH
 #define PI 3.14

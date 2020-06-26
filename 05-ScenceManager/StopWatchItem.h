@@ -1,3 +1,4 @@
+#pragma once
 #include "Item.h"
 
 #define STOPWATCH_ITEM_GRAVITY				0.0005f

@@ -26,10 +26,10 @@ class CSkeleton : public CEnemy
 	int id_AISkeleton;
 	int timeAttackBone;
 	vector<CBone *> bonesOb;
-	vector<vector<float>> bones;
+	//vector<vector<float>> bones;
 	
-	CAnimation* bone_ani_left = CAnimations::GetInstance()->Get(ID_ANI_BONE_LEFT);
-	CAnimation* bone_ani_right = CAnimations::GetInstance()->Get(ID_ANI_BONE_RIGHT);
+	//CAnimation* bone_ani_left = CAnimations::GetInstance()->Get(ID_ANI_BONE_LEFT);
+	//CAnimation* bone_ani_right = CAnimations::GetInstance()->Get(ID_ANI_BONE_RIGHT);
 public:
 	CSkeleton();
 	CSkeleton(D3DXVECTOR2 position, int nextItemID, float limitedLeft, float limitedRight, int nx, int idSkeleton);

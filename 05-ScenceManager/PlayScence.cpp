@@ -266,10 +266,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	case OBJECT_TYPE_BOSS:
 	{
-		//int itemId = atoi(tokens[4].c_str());
-		//float limitedLeft2 = atoi(tokens[5].c_str());
-		//float limitedRight2 = atoi(tokens[6].c_str());
-		obj = new CBoss({ x,y }, 0, 0);
+		float limitedLeft2 = atoi(tokens[4].c_str());
+		float limitedRight2 = atoi(tokens[5].c_str());
+		obj = new CBoss({ x,y },1,limitedLeft2, limitedRight2);
 		DebugOut(L"CBOss %d", int(x), int(y));
 		break;
 	}
@@ -482,33 +481,35 @@ void CPlayScene::Load()
 	tileMap = new CTileMap();
 	tileSet = new CTileSet();
 
-	//grid = new CGrid(22, 6);
+	//grid = new CGrid(7, 7,128,88);
 	ifstream f;
 	f.open(sceneFilePath);
 	hud = CHud::GetInstance();
 	//DebugOut(L"CGame Scene: %d", CGame::GetInstance()->GetCurrtentSceneID());
 	switch (CGame::GetInstance()->GetCurrtentSceneID())
 	{
-		//SCENE 1, 4: width 112, height 44 
+		//SCENE 1, 4: width 112, height 44								
 		//ScENE 2: width 100, height 64
 		//SCENE 3: width 112, height 64
 
 		//CGrid(col, row, width, height);
 	case SCENE_1: //WIDTH 49*16 = 784  Height 11*16= 176 (col 49:, row:11) 
-		grid = new CGrid(6, 5, 112, 44);
+		grid = new CGrid(6, 6, 128, 88);
 		break;
 	case SCENE_2: //WIDTH 33*16 = 528  Height 23*16= 368 (col 33:, row:23)
-		grid = new CGrid(5, 7, 100,64);
+		grid = new CGrid(5, 7, 128, 88);
 		break;
 	case SCENE_3: //WIDTH 49*16 = 784  Height 23*16= 368 (col 49:, row:23)
-		grid = new CGrid(7, 7,112,64);
+		grid = new CGrid(7, 7, 128, 88);
 		break;
 	case SCENE_4: //WIDTH 49*16 = 784  Height 11*16= 176 (col 49:, row:11)
-		grid = new CGrid(7, 6, 112, 44);
+		grid = new CGrid(7, 6, 128, 88);
 		break;
 	default:
 		break;
 	}
+
+
 
 	// current resource section flag
 	int section = SCENE_SECTION_UNKNOWN;
@@ -565,6 +566,7 @@ void CPlayScene::Update(DWORD dt)
 	vector<LPGAMEOBJECT> coObjects;
 
 	if (player == NULL) return;
+
 	if (player->GetLockUpdate() > 0)
 	{
 		objects[0]->Update(dt, &coObjects);
@@ -577,7 +579,7 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 
-	//grid->Update(dt, &coObjects);
+	grid->Update(dt, &coObjects);
 	//objects[0]->Update(dt, &coObjects);
 	
 	for (size_t i = 0; i < objects.size(); i++)
@@ -639,18 +641,28 @@ void CPlayScene::Update(DWORD dt)
 
 	switch (CGame::GetInstance()->GetCurrtentSceneID())
 	{
+
 	case SCENE_2:
 		if (sb > (vt + 180))
 		{
 			ScenePortal(SCENE_2, CAMERA_SWITCHSCENE2_X, CAMERA_SWITCHSCENE2_Y);
 		}
 		break;
+	case SCENE_3:
+		if (sb > (vt + 320))
+		{
+			ScenePortal(SCENE_3, 0, 0);
+		}
+		break;
+	case SCENE_4:
+		if (sb > (vt + 180) && player->GetHealthSimon()<=0)
+		{
+			ScenePortal(SCENE_4, 20, 0);
+		}
+		break;
 	default:
 		break;
-	}
-
-
-	
+	}	
 
 	//Collisions Portal
 	for (auto iter : portalObjects) {
@@ -773,6 +785,8 @@ void CPlayScene::Render()
 	//Render Simon
 	objects[0]->Render();
 	
+	
+	
 }
 
 /*
@@ -839,7 +853,23 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		break;
 
 	case DIK_A: // reset
-		simon->Reset(START_X, START_Y);
+		switch (game->GetCurrtentSceneID())
+		{
+		case SCENE_1:
+			simon->Reset(START_X, START_Y);
+			break;
+		case SCENE_2:
+			simon->Reset(START_X_SCENE_2, START_Y_SCENE_2);
+			break;
+		case SCENE_3:
+			simon->Reset(START_X_SCENE_3, START_Y_SCENE_3);
+			break;
+		case SCENE_4:
+			simon->Reset(START_X_SCENE_4, START_Y_SCENE_4);
+			break;
+		default:
+			break;
+		}
 		break;
 
 		//Switch scene with key

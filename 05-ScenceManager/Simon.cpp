@@ -96,6 +96,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				isFalling = true;
 				vy = SIMON_FALLING_SPEED;
+				
 			}
 			else
 			{
@@ -104,7 +105,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 		}
 	}
-
 
 
 	vector<LPCOLLISIONEVENT> coEvents;
@@ -159,11 +159,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	vector<LPGAMEOBJECT> Objects;
 	for (int i = 0;i < coObjects->size();i++) {
 		Objects.push_back(coObjects->at(i));
-	}
-
-	if (GetHealthSimon() <= 0)
-	{
-		state = SIMON_STATE_DIE;
 	}
 
 	// turn off collision when die 
@@ -718,7 +713,7 @@ void CSimon::Render()
 			ani = SIMON_ANI_EATITEM_LEFT;
 	}
 
-	int alpha = 255;
+	int alpha= 255;
 	if (invisibleStart > 0)
 	{
 		alpha = 150;
@@ -728,6 +723,7 @@ void CSimon::Render()
 	{
 		alpha = rand() % 255;
 	}
+	//DebugOut(L"ALPHA %d \n", alpha);
 	animation_set->at(ani)->Render(x, y, alpha);
 	
 	RenderBoundingBox();
@@ -1000,6 +996,7 @@ void CSimon::UpdateSubWeapon(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			case ID_BONE:
 			case ID_GHOST:
 			case ID_ZOMBIE:
+			case ID_BOSS:
 			case ID_BAT:
 				iter->StartStopWatch();
 				break;
@@ -1392,7 +1389,13 @@ void CSimon::AppearScore(int appearscore, float x, float y)
 	}
 }
 
-
+void CSimon::ResetGame(int scene_id, float view_x, float view_y)
+{
+	CViewPort * viewport = CViewPort::GetInstance();
+	CGame *game = CGame::GetInstance();
+	game->SwitchScene(scene_id);
+	viewport->SetPosition({ view_x,view_y });
+}
 
 CSimon* CSimon::GetInstance()
 {

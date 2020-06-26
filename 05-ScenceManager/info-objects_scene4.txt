@@ -5,10 +5,13 @@
 40	textures\objects.png	255	0	255
 50	textures\items.png	255	0	255
 60	textures\Objectsub.png	116	116	116
-100	textures\boss.png	3	26	110	
+100	textures\boss.png	3	26	110
+110	textures\GameOver.png	255	255	255
 
 # id	left	top	right	bottom	texture_id	isFlipImage	position(x)	position(y)
 [SPRITES]
+#================GameOver===============
+90090	0	0	275	179	110		0		0		0
 #================BOSS===============
 #Boss Sleep
 90001	1	21	35	39	100		0		0		0
@@ -20,6 +23,9 @@
 90011	191	367	215	398	100		0		0		0
 90012	222	367	246	398	100		0		0		0
 90013	252	367	276	398	100		0		0		0
+#================CRYSTAL BALL===============
+90021	114	375	130	393	100		0		0		0
+90022	135	377	148	392	100		0		0		0
 
 #================ZOMBIE===============
 #Zombie Right
@@ -53,6 +59,8 @@
 982	90002	100	90003	100
 #EFFECT BOSS DIE
 991	90011	100	90012	100	90013	100
+#CRYSTAL BALL
+995	90021	100	90022	100
 
 # ==== ZOMBIE =======
 #ZOMBIE RIGHT

@@ -31,7 +31,7 @@
 #define SIMON_ON_STAIR_SPEED			0.02f
 #define SIMON_DAMAGED_DEFLECT_SPEED_Y	0.15f
 #define SIMON_DAMAGED_DEFLECT_SPEED_X	0.06f
-#define SIMON_FALLING_SPEED 0.5f
+#define SIMON_FALLING_SPEED 0.8f
 
 #define SIMON_STATE_IDLE			0
 #define SIMON_STATE_WALKING_RIGHT	100
@@ -208,4 +208,6 @@ public:
 	void SetScoreItem(int score) { this->scoreItem = score; }
 	float GetX() { return x; }
 	float GetY() { return y; }
+	int GetTimeStopWatch() { return timeStopWatch; }
+	void ResetGame(int scene_id, float view_x, float view_y);
 };

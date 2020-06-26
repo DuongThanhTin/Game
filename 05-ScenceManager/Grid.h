@@ -6,8 +6,8 @@
 #include "define.h"
 #include "Textures.h"
 
-#define GRID_WIDTH 112 //8*16
-#define GRID_HEIGHT 80 //5*16+8
+#define GRID_WIDTH 112 //8*16 = 128
+#define GRID_HEIGHT 80 //5*16+8 = 88
 
 class CGrid
 {

@@ -204,10 +204,13 @@
     <ClCompile Include="Bone.cpp">
       <Filter>Game_Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StopWatchItem.cpp">
+      <Filter>Game_Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Game_Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalBall.cpp">
       <Filter>Game_Items</Filter>
     </ClCompile>
   </ItemGroup>
@@ -389,10 +392,13 @@
     <ClInclude Include="Bone.h">
       <Filter>Game_Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StopWatchItem.h">
+      <Filter>Game_Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Game_Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalBall.h">
       <Filter>Game_Items</Filter>
     </ClInclude>
   </ItemGroup>

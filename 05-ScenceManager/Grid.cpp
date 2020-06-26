@@ -55,7 +55,7 @@ void CGrid::GetObjects(vector<LPGAMEOBJECT>* objects)
 	CViewPort::GetInstance()->GetBoundingBox(vl, vt, vr, vb);
 	
 	// Để Tìm các Objects va chạm với Viewport trong Grid
-	int wMin = vl / width ;
+	int wMin = vl / width -1;
 	int wMax = vr / width + 1;
 	int hMin = vt / height;
 	int hMax = vb / height;
@@ -87,12 +87,11 @@ void CGrid::GetObjects(vector<LPGAMEOBJECT>* objects)
 		objects->push_back(iter);
 	}
 
-	//DebugOut(L"Â %d\n", tmpObjects.size());
 }
 
 void CGrid::Update(DWORD dt, vector<LPGAMEOBJECT>* objects)
 {
-	// Store move objects
+	// move objects
 	moveObjects.clear();
 
 	// Add move objects
@@ -100,7 +99,7 @@ void CGrid::Update(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	{
 		switch (iter->GetID())
 		{
-		case ID_GROUND:
+		//case ID_GROUND:
 		case ID_CANDLE:
 		case ID_TORCH:
 		case ID_STAIR:
@@ -113,11 +112,12 @@ void CGrid::Update(DWORD dt, vector<LPGAMEOBJECT>* objects)
 			break;
 		}
 	}
-	//objects->clear();
-	// Add ground objects
-	GetObjects(objects);
+	objects->clear();
+	
 	for (auto iter : moveObjects)
 		objects->push_back(iter);
-		//DebugOut(L"Â %d\n", objects->size());
+
+	// Add ground objects
+	GetObjects(objects);
 }
 
