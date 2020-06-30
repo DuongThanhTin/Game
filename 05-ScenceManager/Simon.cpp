@@ -240,8 +240,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					SetScoreItem(SCORE_CROWN);
 					AppearScore(SCORE_CROWN, (ol + or ) / 2, (ot + ob) / 2);
 					Objects[i]->SetState(STATE_DESTROYED);
-					Objects.erase(Objects.begin() + i);
-					i--;
 				}
 				
 				
@@ -250,6 +248,15 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					Objects[i]->isActive = true;
 				}
 			
+			}
+		}
+
+		for (int i = 0; i < Objects.size(); i++)
+		{
+			if (Objects[i]->GetState() == STATE_DESTROYED)
+			{
+				Objects.erase(Objects.begin() + i);
+				i--;
 			}
 		}
 			

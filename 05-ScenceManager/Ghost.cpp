@@ -30,10 +30,17 @@ void CGhost::GetBoundingBox(float &left, float &top, float &right, float &bottom
 {
 	if (isActive)
 	{
-		left = x;
-		top = y - GHOST_BBOX_HEIGHT;
-		right = x + GHOST_BBOX_WIDTH;
-		bottom = y;
+		if (!isDestroy)
+		{
+			left = x;
+			top = y - GHOST_BBOX_HEIGHT;
+			right = x + GHOST_BBOX_WIDTH;
+			bottom = y;
+		}
+		else
+		{
+			left = top = right = bottom = 0;
+		}
 	}
 	else
 	{
@@ -44,7 +51,8 @@ void CGhost::GetBoundingBox(float &left, float &top, float &right, float &bottom
 void CGhost::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CEnemy::Update(dt, coObjects);
-
+	//if (isInGrid != true)
+		//return;
 
 	// Simple fall down
 	if (state == ENEMY_STATE_DESTROY)

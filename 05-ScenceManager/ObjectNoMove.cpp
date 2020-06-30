@@ -23,6 +23,7 @@ void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 		if (CGame::GetInstance()->IsIntersectAABB({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
 			if (GetTickCount() - timeFire > TIME_FIRE && timeFire > 0)
 			{
+				isDestroy = true;
 				timeFire = 0;
 				float x, y;
 				coObjects->at(i)->GetPosition(x, y);

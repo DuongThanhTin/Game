@@ -50,7 +50,6 @@ void CBoss::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 void CBoss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CGameObject::Update(dt, coObjects);
-	
 
 	if (state == ENEMY_STATE_DESTROY)
 	{

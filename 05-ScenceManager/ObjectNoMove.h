@@ -23,6 +23,7 @@ class CObjectNoMove : public CGameObject
 	DWORD timeFire;
 
 public:
+	bool isDestroy = false;
 	CObjectNoMove();
 	~CObjectNoMove();
 	

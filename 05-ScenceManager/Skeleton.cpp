@@ -31,16 +31,27 @@ CSkeleton::CSkeleton(D3DXVECTOR2 position, int nextItemID, float limitedLeft, fl
 
 void CSkeleton::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
-	left = x;
-	top = y - SKELETON_BBOX_HEIGHT;
-	right = x + SKELETON_BBOX_WIDTH;
-	bottom = y;
+
+	if (!isDestroy)
+	{
+		left = x;
+		top = y - SKELETON_BBOX_HEIGHT;
+		right = x + SKELETON_BBOX_WIDTH;
+		bottom = y;
+	}
+	else
+	{
+		left = top = right = bottom = 0;
+	}
 
 }
 void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 
 	CEnemy::Update(dt, coObjects);
+	//if (isInGrid != true)
+		//return;
+
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 

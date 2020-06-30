@@ -17,10 +17,17 @@ CCrownItem::~CCrownItem()
 }
 
 void CCrownItem::GetBoundingBox(float &l, float&t, float &r, float &b) {
-	l = x;
-	t = y - CROWN_BBOX_HEIGHT;
-	r = x + CROWN_BBOX_WIDTH;
-	b = y;
+	if (state != STATE_DESTROYED)
+	{
+		l = x;
+		t = y - CROWN_BBOX_HEIGHT;
+		r = x + CROWN_BBOX_WIDTH;
+		b = y;
+	}
+	else
+	{
+		l = b = r = t = 0;
+	}
 }
 
 void CCrownItem::Render() {

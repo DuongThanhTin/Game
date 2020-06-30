@@ -447,11 +447,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 
 	// General object setup
-	grid->LoadObjects(&objects);
+	
 
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 	obj->SetAnimationSet(ani_set);
 	objects.push_back(obj);
+	grid->LoadObjects(&objects);
 }
 
 
@@ -500,10 +501,10 @@ void CPlayScene::Load()
 		grid = new CGrid(5, 7, 128, 88);
 		break;
 	case SCENE_3: //WIDTH 49*16 = 784  Height 23*16= 368 (col 49:, row:23)
-		grid = new CGrid(7, 7, 128, 88);
+		grid = new CGrid(6, 7, 128, 88);
 		break;
 	case SCENE_4: //WIDTH 49*16 = 784  Height 11*16= 176 (col 49:, row:11)
-		grid = new CGrid(7, 6, 128, 88);
+		grid = new CGrid(1, 6, 128, 88);
 		break;
 	default:
 		break;
@@ -566,6 +567,7 @@ void CPlayScene::Update(DWORD dt)
 	vector<LPGAMEOBJECT> coObjects;
 
 	if (player == NULL) return;
+	
 
 	if (player->GetLockUpdate() > 0)
 	{
@@ -573,13 +575,14 @@ void CPlayScene::Update(DWORD dt)
 		return;
 	}
 
+	grid->Update(dt, &coObjects);
+
 	for (size_t i = 0; i < objects.size(); i++)
 	{
 		coObjects.push_back(objects[i]);
 	}
 
-
-	grid->Update(dt, &coObjects);
+	
 	//objects[0]->Update(dt, &coObjects);
 	
 	for (size_t i = 0; i < objects.size(); i++)
@@ -784,8 +787,6 @@ void CPlayScene::Render()
 	viewport->Render();
 	//Render Simon
 	objects[0]->Render();
-	
-	
 	
 }
 

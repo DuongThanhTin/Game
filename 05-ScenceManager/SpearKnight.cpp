@@ -31,19 +31,30 @@ CSpearKnight::CSpearKnight(D3DXVECTOR2 position, int nextItemID, float limitedLe
 
 void CSpearKnight::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
-	left = x;
-	top = y - SPEARKNIGHT_BBOX_HEIGHT;
-	right = x + SPEARKNIGHT_BBOX_WIDTH;
-	bottom = y;
+	if (!isDestroy)
+	{
+		left = x;
+		top = y - SPEARKNIGHT_BBOX_HEIGHT;
+		right = x + SPEARKNIGHT_BBOX_WIDTH;
+		bottom = y;
+	}
+	else
+	{
+		left = top = right = bottom = 0;
+	}
+
+
 
 }
 void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
+	
 	CEnemy::Update(dt, coObjects);
-
+	//if (isInGrid != true)
+		//return;
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
-
+	
 
 	coEvents.clear();
 	CalcPotentialCollisions(coObjects, coEvents);

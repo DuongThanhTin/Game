@@ -1,21 +1,4 @@
-﻿  main.cpp
-  Zombie.cpp
-  SpearKnight.cpp
-d:\game2020\game\05-scencemanager\spearknight.cpp(53): warning C4305: '=': truncation from 'double' to 'float'
-  Skeleton.cpp
-d:\game2020\game\05-scencemanager\skeleton.cpp(95): warning C4305: '=': truncation from 'double' to 'float'
-  Simon.cpp
-d:\game2020\game\05-scencemanager\simon.cpp(118): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(128): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(145): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(160): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\simon.cpp(213): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\simon.cpp(216): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\simon.cpp(1251): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Raven.cpp
-d:\game2020\game\05-scencemanager\raven.cpp(51): warning C4305: '=': truncation from 'double' to 'float'
-d:\game2020\game\05-scencemanager\raven.cpp(59): warning C4305: '=': truncation from 'double' to 'float'
-  PlayScence.cpp
+﻿  PlayScence.cpp
 d:\game2020\game\05-scencemanager\playscence.cpp(168): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(169): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(196): warning C4018: '<': signed/unsigned mismatch
@@ -39,36 +22,24 @@ d:\game2020\game\05-scencemanager\playscence.cpp(339): warning C4244: 'initializ
 d:\game2020\game\05-scencemanager\playscence.cpp(340): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(435): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 d:\game2020\game\05-scencemanager\playscence.cpp(436): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\playscence.cpp(594): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(600): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(628): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(774): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(780): warning C4018: '<': signed/unsigned mismatch
-d:\game2020\game\05-scencemanager\playscence.cpp(797): warning C4018: '<': signed/unsigned mismatch
-  Ghost.cpp
-d:\game2020\game\05-scencemanager\ghost.cpp(21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\ghost.cpp(61): warning C4305: '=': truncation from 'double' to 'float'
-d:\game2020\game\05-scencemanager\ghost.cpp(68): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Game.cpp
-d:\game2020\game\05-scencemanager\game.cpp(68): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
-  Fleaman.cpp
-d:\game2020\game\05-scencemanager\fleaman.cpp(70): warning C4305: '=': truncation from 'double' to 'float'
+d:\game2020\game\05-scencemanager\playscence.cpp(597): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(603): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(631): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(777): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(783): warning C4018: '<': signed/unsigned mismatch
+d:\game2020\game\05-scencemanager\playscence.cpp(798): warning C4018: '<': signed/unsigned mismatch
+  Grid.cpp
+d:\game2020\game\05-scencemanager\grid.cpp(34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(35): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(36): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(56): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(57): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(58): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(59): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Enemy.cpp
 d:\game2020\game\05-scencemanager\enemy.cpp(26): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\enemy.cpp(80): warning C4018: '<': signed/unsigned mismatch
-  Bridge.cpp
-  Boss.cpp
-d:\game2020\game\05-scencemanager\boss.cpp(63): warning C4305: '=': truncation from 'double' to 'float'
-d:\game2020\game\05-scencemanager\boss.cpp(76): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\boss.cpp(79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\boss.cpp(83): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\boss.cpp(86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\boss.cpp(123): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\boss.cpp(129): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  Boomerang.cpp
-  Bone.cpp
-  Bat.cpp
-  Axe.cpp
   Generating Code...
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

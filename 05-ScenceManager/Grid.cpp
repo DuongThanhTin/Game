@@ -35,8 +35,6 @@ void CGrid::InsertObject(LPGAMEOBJECT object)
 			gr = (i + 1) * width;
 			gt = j * height ;
 			gb = (j + 1) * height;
-			//DebugOut(L"Right %d %d\n",int(gl), int(gr));
-			//DebugOut(L"Top Bot %d %d\n", int(gt), int(gb));
 			if (CGame::IsIntersectAABB({ (long)ol, (long)ot, (long) or , (long)ob },
 			{ (long)gl, (long)gt, (long)gr, (long)gb }))
 				groundObjects[j][i].insert(object);
@@ -72,20 +70,21 @@ void CGrid::GetObjects(vector<LPGAMEOBJECT>* objects)
 	if (hMax > row)
 		hMax = row;
 
-
+	//DebugOut(L"AA %d\n", objects->size());
 	// Add to set to avoid duplication
 	set<LPGAMEOBJECT> tmpObjects;
 	for (int i = wMin; i < wMax; i++)
 		for (int j = hMin; j < hMax; j++)
 			for (auto iter : groundObjects[j][i])
-				if (iter->GetState() != STATE_DESTROYED)
+				if(iter->GetState()!=STATE_DESTROYED)
 					tmpObjects.insert(iter);
+					
 
 	for (auto iter : tmpObjects)
-	{
-		//DebugOut(L"ID %d \n", iter->GetID());
+	{	
 		objects->push_back(iter);
-	}
+	}		
+	//DebugOut(L"ID %d \n", tmpObjects.size());
 
 }
 
@@ -99,7 +98,6 @@ void CGrid::Update(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	{
 		switch (iter->GetID())
 		{
-		//case ID_GROUND:
 		case ID_CANDLE:
 		case ID_TORCH:
 		case ID_STAIR:
@@ -115,9 +113,18 @@ void CGrid::Update(DWORD dt, vector<LPGAMEOBJECT>* objects)
 	objects->clear();
 	
 	for (auto iter : moveObjects)
+	{
+		//DebugOut(L"moveObject %d\n", iter->GetID());
 		objects->push_back(iter);
+	}
 
+	
 	// Add ground objects
 	GetObjects(objects);
+}
+
+void CGrid::Clear()
+{
+
 }
 

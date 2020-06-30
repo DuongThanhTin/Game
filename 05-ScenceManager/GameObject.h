@@ -70,6 +70,7 @@ public:
 	bool isOnGround;
 	bool isActive;
 	bool isOnGroundFire;
+	bool isInGrid = true;
 	DWORD dt;
 	DWORD start_untouchable = 0;
 	int timeStopWatch = 0;

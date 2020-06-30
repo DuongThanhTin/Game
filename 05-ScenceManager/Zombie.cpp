@@ -29,15 +29,25 @@ CZombie::CZombie(D3DXVECTOR2 position, int nextItemID, float limitedLeft, float 
 
 void CZombie::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
-	left = x;
-	top = y - ZOMBIE_BBOX_HEIGHT;
-	right = x + ZOMBIE_BBOX_WIDTH;
-	bottom = y ;
+
+	if (!isDestroy)
+	{
+		left = x;
+		top = y - ZOMBIE_BBOX_HEIGHT;
+		right = x + ZOMBIE_BBOX_WIDTH;
+		bottom = y;
+	}
+	else
+	{
+		left = top = right = bottom = 0;
+	}
 }
 
 void CZombie::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CEnemy::Update(dt, coObjects);
+	//if (isInGrid != true)
+		//return;
 
 	// Simple fall down
 	vy += ZOMBIE_GRAVITY*dt;

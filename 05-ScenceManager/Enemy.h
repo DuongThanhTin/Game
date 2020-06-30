@@ -14,14 +14,17 @@
 #include "SmallHeart.h"
 #include "define.h"
 #include "Simon.h"
+#include "ViewPort.h"
 
 
-#define ENEMY_STATE_IDLE	1
 
 class CEnemy : public CGameObject
 {
 	DWORD timeFire;
+
 public:
+	bool isDestroy = false;
+
 	CEnemy();
 	~CEnemy();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);

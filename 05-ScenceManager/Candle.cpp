@@ -21,10 +21,18 @@ CCandle::CCandle(D3DXVECTOR2 position, int nextItemID)
 
 void CCandle::GetBoundingBox(float &l, float &t, float &r, float &b)
 {
-	l = x;
-	t = y - CANDLE_BBOX_HEIGHT;
-	r = x + CANDLE_BBOX_WIDTH;
-	b = y;
+
+	if (!isDestroy)
+	{
+		l = x;
+		t = y - CANDLE_BBOX_HEIGHT;
+		r = x + CANDLE_BBOX_WIDTH;
+		b = y;
+	}
+	else
+	{
+		l = t = r = b = 0;
+	}
 }
 
 

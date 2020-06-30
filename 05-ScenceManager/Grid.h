@@ -25,5 +25,6 @@ public:
 	void LoadObjects(vector<LPGAMEOBJECT>* objects);
 	void GetObjects(vector<LPGAMEOBJECT>* objects);
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* objects);
+	void Clear();
 };
 

@@ -31,15 +31,26 @@ void CRaven::GetBoundingBox(float &left, float &top, float &right, float &bottom
 {
 
 	//left = top = right = bottom = 0.0f;
-	left = x;
-	top = y - RAVEN_BBOX_HEIGHT;
-	right = x + RAVEN_BBOX_WIDTH;
-	bottom = y;
+	if (!isDestroy)
+	{
+		left = x;
+		top = y - RAVEN_BBOX_HEIGHT;
+		right = x + RAVEN_BBOX_WIDTH;
+		bottom = y;
+	}
+	else
+	{
+		left = top = right = bottom = 0;
+	}
+
 }
 
 void CRaven::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CEnemy::Update(dt, coObjects);
+	//if (isInGrid != true)
+		//return;
+
 	if (state == ENEMY_STATE_DESTROY)
 	{
 		vy = 0;

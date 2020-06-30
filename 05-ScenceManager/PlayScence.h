@@ -56,6 +56,8 @@ protected:
 	int start_x = 0;
 	int start_y = 180;
 
+	//vector<LPGAMEOBJECT> updateObject;
+
 	void Loadinfo_OBJECTS(LPCWSTR path);
 	void _ParseSection_INFO_OBJECTS_GENERAL(string line);
 	void _ParseSection_INFO_OBJECTS(string line);

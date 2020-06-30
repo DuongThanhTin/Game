@@ -28,15 +28,25 @@ CFleaman::CFleaman(D3DXVECTOR2 position, int nextItemID, float limitedLeft, floa
 
 void CFleaman::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
-	left = x;
-	top = y - FLEAMAN_BBOX_HEIGHT;
-	right = x + FLEAMAN_BBOX_WIDTH;
-	bottom = y;
+
+	if (!isDestroy)
+	{
+		left = x;
+		top = y - FLEAMAN_BBOX_HEIGHT;
+		right = x + FLEAMAN_BBOX_WIDTH;
+		bottom = y;
+	}
+	else
+	{
+		left = top = right = bottom = 0;
+	}
 
 }
 void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CEnemy::Update(dt, coObjects);
+	//if (isInGrid != true)
+		//return;
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;

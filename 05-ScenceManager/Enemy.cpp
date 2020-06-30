@@ -86,6 +86,7 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		
 			if (GetTickCount() - timeFire > TIME_FIRE_ENEMY && timeFire > 0)
 			{
+				isDestroy = true;
 				timeFire = 0;
 				float x, y;
 				coObjects->at(i)->GetPosition(x, y);
@@ -118,6 +119,16 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
+
+	// delete when out of screen
+	float vl, vt, vr, vb, l, t, r, b;
+	CViewPort::GetInstance()->GetBoundingBox(vl, vt, vr, vb);
+	GetBoundingBox(l, t, r, b);
+	if (!(CGame::IsIntersectAABB({ (long)vl, (long)vt, (long)vr, (long)vb },
+	{ (long)l, (long)t, (long)r, (long)b })))
+	{
+		//state = STATE_DESTROYED;
+	}
 	
 }
 
