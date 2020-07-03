@@ -1,5 +1,5 @@
 ﻿#include "Boss.h"
-
+#include "Simon.h"
 
 
 CBoss::~CBoss()
@@ -108,7 +108,10 @@ void CBoss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					for (size_t i = 0; i < crystalBalls.size(); i++)
 					{
 						crystalBalls[i]->Update(dt, coObjects);
+						coObjects->push_back(crystalBalls[i]);
 					}
+
+					//DebugOut(L" crystalBalls.size() %d\n", crystalBalls.size());
 				}
 			}
 			else
@@ -129,26 +132,18 @@ void CBoss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 
 	//Collision Crystal Ball
-	for (auto iter : *coObjects)
+	for (size_t i = 0; i < crystalBalls.size(); i++)
 	{
-		if (iter->GetID()== ID_SIMON)
+		if (crystalBalls[i]->IsVisible() == false)
 		{
-			float sl, st, sr, sb;		// simon object bbox
-			float ol, ot, or , ob;		// object bbox
-			iter->GetBoundingBox(sl, st, sr, sb);
-			//GAME OVER
-			for (size_t i = 0; i < crystalBalls.size(); i++)
-			{
-				crystalBalls[i]->GetBoundingBox(ol, ot, or , ob);
-				if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
-					isGameOver = true;
-					crystalBalls.erase(crystalBalls.begin() + i);
-					i--;
-					iter->SetPosition(CAMERA_ATTACK_BOSS_X_LEFT, POSITION_SIMON_GAMEOVER_Y);
-				}
-			}
+			isGameOver = true;
+			crystalBalls.erase(crystalBalls.begin() + i);
+			i--;
 		}
 	}
+
+
+	
 	
 }
 

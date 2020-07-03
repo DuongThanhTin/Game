@@ -60,3 +60,12 @@ void CRock::Render()
 		animations[0]->Render(rock_x[i], rock_y[i]);
 	}
 }
+
+
+void CRock::GetBoundingBox(float &l, float &t, float &r, float &b)
+{
+	l = x;
+	t = y - 2;
+	r = x + 2;
+	b = y;
+}

@@ -56,11 +56,12 @@ void CHideBrick::GetBoundingBox(float &l, float &t, float &r, float &b)
 void CHideBrick::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CGameObject::Update(dt, coObjects);
-	
+
 	if (isShowEffectRock)
 	{
 		for (size_t i = 0; i < coObjects->size(); i++)
 		{
+
 			if (coObjects->at(i)->GetID() == ID_ROCK && hidebrick_id == coObjects->at(i)->GetHideBrickId())
 			{
 				coObjects->at(i)->Update(dt, coObjects);

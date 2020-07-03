@@ -6,6 +6,7 @@ CEnemy::CEnemy()
 {
 	timeFire = 0;
 	state = ENEMY_STATE_IDLE;
+	isEnemy = true;
 }
 
 
@@ -124,10 +125,16 @@ void CEnemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	float vl, vt, vr, vb, l, t, r, b;
 	CViewPort::GetInstance()->GetBoundingBox(vl, vt, vr, vb);
 	GetBoundingBox(l, t, r, b);
-	if (!(CGame::IsIntersectAABB({ (long)vl, (long)vt, (long)vr, (long)vb },
+	if ((CGame::IsIntersectAABB({ (long)vl, (long)vt, (long)vr, (long)vb },
 	{ (long)l, (long)t, (long)r, (long)b })))
 	{
+		isInGrid == true;
 		//state = STATE_DESTROYED;
+	}
+	else if (!(CGame::IsIntersectAABB({ (long)vl, (long)vt, (long)vr, (long)vb },
+	{ (long)l, (long)t, (long)r, (long)b })))
+	{
+	//	isInGrid = false;
 	}
 	
 }

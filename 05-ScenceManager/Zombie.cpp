@@ -46,8 +46,8 @@ void CZombie::GetBoundingBox(float &left, float &top, float &right, float &botto
 void CZombie::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	CEnemy::Update(dt, coObjects);
-	//if (isInGrid != true)
-		//return;
+	if (!isInGrid)
+		return;
 
 	// Simple fall down
 	vy += ZOMBIE_GRAVITY*dt;
@@ -84,6 +84,7 @@ void CZombie::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (vx > 0 && x > limitedRight) {
 		vx = -vx;
 	}
+
 }
 
 void CZombie::Render()

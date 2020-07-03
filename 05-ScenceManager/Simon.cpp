@@ -247,7 +247,14 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				{
 					Objects[i]->isActive = true;
 				}
-			
+			}
+			//Crystal ball
+			if (Objects[i]->GetID() == ID_CRYSTALBALL)
+			{
+				if (CGame::GetInstance()->IsIntersectAABB({ long(sl),long(st), long(sr), long(sb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+					Objects[i]->SetVisible(false);
+					SetPosition(CAMERA_ATTACK_BOSS_X_LEFT, POSITION_SIMON_GAMEOVER_Y);
+				}
 			}
 		}
 
@@ -409,6 +416,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (sl - or <= 100)
 			{
 				iter->isActive = true;
+				
 			}
 		}
 
@@ -420,7 +428,10 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (x < 600)
 			{
 				iter->isActive = true;
+				DebugOut(L"tre");
+
 			}
+			
 		}
 
 		else if (iter->GetID() == ID_RAVEN)

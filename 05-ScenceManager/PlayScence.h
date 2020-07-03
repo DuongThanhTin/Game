@@ -44,6 +44,8 @@ protected:
 	CSimon *playersub;
 
 	CGameObject *obj = NULL;
+
+	CGameObject *obj_simon = NULL;
 	CTileSet *tileSet;
 	CTileMap *tileMap;
 	CViewPort *viewport;
@@ -56,7 +58,7 @@ protected:
 	int start_x = 0;
 	int start_y = 180;
 
-	//vector<LPGAMEOBJECT> updateObject;
+	vector<LPGAMEOBJECT> updateObject;
 
 	void Loadinfo_OBJECTS(LPCWSTR path);
 	void _ParseSection_INFO_OBJECTS_GENERAL(string line);

@@ -6,13 +6,15 @@
 #include "define.h"
 #include "Textures.h"
 
-#define GRID_WIDTH 112 //8*16 = 128
-#define GRID_HEIGHT 80 //5*16+8 = 88
+//#define GRID_WIDTH 112 //8*16 = 128
+//#define GRID_HEIGHT 80 //5*16+8 = 88
 
 class CGrid
 {
 	set<LPGAMEOBJECT>** groundObjects;
 	set<LPGAMEOBJECT> moveObjects;
+	vector<LPGAMEOBJECT> updateObjects;
+	vector<LPGAMEOBJECT> cells[10][10];
 	int column;
 	int row;
 	int width;
@@ -21,10 +23,8 @@ public:
 	CGrid(int column, int row,int witdh, int height);
 	~CGrid();
 
-	void InsertObject(LPGAMEOBJECT object);
-	void LoadObjects(vector<LPGAMEOBJECT>* objects);
-	void GetObjects(vector<LPGAMEOBJECT>* objects);
-	void Update(DWORD dt, vector<LPGAMEOBJECT>* objects);
-	void Clear();
+	void GetObjects(vector<LPGAMEOBJECT> &objects);
+	void LoadObj(LPGAMEOBJECT obj);
+
 };
 

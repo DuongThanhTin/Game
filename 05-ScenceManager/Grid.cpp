@@ -13,47 +13,21 @@ CGrid::CGrid(int column, int row, int width, int height)
 	this->width = width;
 	this->height = height;
 
-	groundObjects = new set<LPGAMEOBJECT>*[row];
-	for (int i = 0; i < row; i++)
-		groundObjects[i] = new set<LPGAMEOBJECT>[column];
 }
 
 CGrid::~CGrid()
 {
 }
 
-void CGrid::InsertObject(LPGAMEOBJECT object)
-{
-	float ol, ot, or , ob, gl, gt, gr, gb;
 
-	object->GetBoundingBox(ol, ot, or , ob);
-	
-	for (int i = 0; i < column; i++)
-		for (int j = 0; j < row; j++)
-		{
-			gl = i * width;
-			gr = (i + 1) * width;
-			gt = j * height ;
-			gb = (j + 1) * height;
-			if (CGame::IsIntersectAABB({ (long)ol, (long)ot, (long) or , (long)ob },
-			{ (long)gl, (long)gt, (long)gr, (long)gb }))
-				groundObjects[j][i].insert(object);
-		}
-}
 
-void CGrid::LoadObjects(vector<LPGAMEOBJECT>* objects)
-{
-	for (auto iter : *objects)
-		InsertObject(iter);
-}
-
-void CGrid::GetObjects(vector<LPGAMEOBJECT>* objects)
-{
+void CGrid::GetObjects(vector<LPGAMEOBJECT> &objects)
+{	
 	float vl, vt, vr, vb;
 	CViewPort::GetInstance()->GetBoundingBox(vl, vt, vr, vb);
-	
+
 	// Để Tìm các Objects va chạm với Viewport trong Grid
-	int wMin = vl / width -1;
+	int wMin = vl / width - 1;
 	int wMax = vr / width + 1;
 	int hMin = vt / height;
 	int hMax = vb / height;
@@ -70,61 +44,78 @@ void CGrid::GetObjects(vector<LPGAMEOBJECT>* objects)
 	if (hMax > row)
 		hMax = row;
 
-	//DebugOut(L"AA %d\n", objects->size());
+	//DebugOut(L"AA %d\n", wMin);
 	// Add to set to avoid duplication
-	set<LPGAMEOBJECT> tmpObjects;
 	for (int i = wMin; i < wMax; i++)
 		for (int j = hMin; j < hMax; j++)
-			for (auto iter : groundObjects[j][i])
-				if(iter->GetState()!=STATE_DESTROYED)
-					tmpObjects.insert(iter);
-					
-
-	for (auto iter : tmpObjects)
-	{	
-		objects->push_back(iter);
-	}		
-	//DebugOut(L"ID %d \n", tmpObjects.size());
-
-}
-
-void CGrid::Update(DWORD dt, vector<LPGAMEOBJECT>* objects)
-{
-	// move objects
-	moveObjects.clear();
-
-	// Add move objects
-	for (auto iter : *objects)
-	{
-		switch (iter->GetID())
 		{
-		case ID_CANDLE:
-		case ID_TORCH:
-		case ID_STAIR:
-		case ID_HIDEBRICK:
-		case ID_AREAACTIVE:
-		case ID_AREASWITCHCAM:
-			break;
-		default:
-			moveObjects.insert(iter);
-			break;
+			for (size_t k = 0; k < cells[j][i].size(); k++)
+			{
+				if ((find(objects.begin(), objects.end(), cells[j][i].at(k)) != objects.end() == false))
+				{
+					if (cells[j][i].at(k)->IsVisible())
+					{
+						objects.push_back(cells[j][i].at(k));
+					}
+				}
+			}
 		}
-	}
-	objects->clear();
-	
-	for (auto iter : moveObjects)
+
+	//Debug Grid
+	for (auto iter : objects)
 	{
-		//DebugOut(L"moveObject %d\n", iter->GetID());
-		objects->push_back(iter);
+		if (iter->GetID() == ID_ROCK)
+		{
+			DebugOut(L"AAA %d\n", iter->GetID());
+		}
+		//DebugOut(L"AAA %d\n", iter->GetID());
+	}
+}
+
+void CGrid::LoadObj(LPGAMEOBJECT obj)
+{
+	float ol, ot, or , ob, gl, gt, gr, gb;
+	float x, y;
+	obj->GetPosition(x, y);
+	int grid_row, grid_column;
+
+	//Objects chua Active thì bounding = 0
+	if (obj->GetID() == ID_GHOST )
+	{
+		grid_row = int(y / height);
+		grid_column = int(x / width);
+		cells[grid_row][grid_column].push_back(obj);
+	}
+	else if(obj->GetID() == ID_BOSS)
+	{
+		grid_row = int(y / height);
+		grid_column = int(x / width);
+		cells[grid_row][grid_column].push_back(obj);
+	}
+	else
+	{
+		obj->GetBoundingBox(ol, ot, or , ob);
+		for (int j = 0; j < row; j++)
+			for (int i = 0; i < column; i++)
+			{
+				gl = i * width;
+				gr = (i + 1) * width;
+				gt = j * height;
+				gb = (j + 1) * height;
+				if (CGame::IsIntersectAABB({ (long)ol, (long)ot, (long) or , (long)ob },
+				{ (long)gl, (long)gt, (long)gr, (long)gb }))
+				{
+					cells[j][i].push_back(obj);
+				}
+			}
 	}
 
+
+
 	
-	// Add ground objects
-	GetObjects(objects);
-}
 
-void CGrid::Clear()
-{
 
 }
+
+
 

@@ -28,6 +28,7 @@ CGhost::CGhost(D3DXVECTOR2 position, int nextItemID,int nxGhost)
 
 void CGhost::GetBoundingBox(float &left, float &top, float &right, float &bottom)
 {
+
 	if (isActive)
 	{
 		if (!isDestroy)
@@ -36,10 +37,6 @@ void CGhost::GetBoundingBox(float &left, float &top, float &right, float &bottom
 			top = y - GHOST_BBOX_HEIGHT;
 			right = x + GHOST_BBOX_WIDTH;
 			bottom = y;
-		}
-		else
-		{
-			left = top = right = bottom = 0;
 		}
 	}
 	else

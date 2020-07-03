@@ -71,6 +71,9 @@ public:
 	bool isActive;
 	bool isOnGroundFire;
 	bool isInGrid = true;
+	bool isEnemy = false;
+
+	bool isVisible;
 	DWORD dt;
 	DWORD start_untouchable = 0;
 	int timeStopWatch = 0;
@@ -117,6 +120,10 @@ public:
 	virtual void ResetAnimation();
 	virtual void TimeFireDestroy();
 	virtual void Untouchable();
+
+	// Visibility
+	void SetVisible(bool isVisible) { this->isVisible = isVisible; }
+	bool IsVisible() { return this->isVisible; }
 	int GetNx();
 	int GetNy();
 	int GetNextItemID();

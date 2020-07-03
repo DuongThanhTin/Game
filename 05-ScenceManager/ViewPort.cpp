@@ -55,7 +55,7 @@ void CViewPort::Update(D3DXVECTOR2 playerPosition, int startPosition, int endPos
 
 void CViewPort::Render()
 {
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 CViewPort::~CViewPort()

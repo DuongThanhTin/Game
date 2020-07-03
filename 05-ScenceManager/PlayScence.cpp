@@ -426,6 +426,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int height = atoi(tokens[5].c_str());
 		int hidebrick_id = atoi(tokens[6].c_str());
 		obj = new CRock({ x,y + height + MAP_HUD }, hidebrick_id);
+		DebugOut(L"Rock\n");
 		break;
 	}
 	
@@ -447,15 +448,20 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 
 	// General object setup
-	
+	//grid->LoadObjects(&objects);
+
+
 
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 	obj->SetAnimationSet(ani_set);
 	objects.push_back(obj);
-	grid->LoadObjects(&objects);
+
+	if (obj->GetID() != ID_SIMON)
+	{
+		grid->LoadObj(obj);
+		
+	}
 }
-
-
 
 //MAP
 void CPlayScene::_ParseSection_MAP_SCENE(string line)
@@ -494,18 +500,17 @@ void CPlayScene::Load()
 		//SCENE 3: width 112, height 64
 
 		//CGrid(col, row, width, height);
-	case SCENE_1: //WIDTH 49*16 = 784  Height 11*16= 176 (col 49:, row:11) 
-		grid = new CGrid(6, 6, 128, 88);
+	case SCENE_1: //WIDTH 49*16 = 784  Height 11*16= 176 
+		grid = new CGrid(7, 3, GRID_WIDTH, GRID_HEIGHT);
 		break;
-	case SCENE_2: //WIDTH 33*16 = 528  Height 23*16= 368 (col 33:, row:23)
-		grid = new CGrid(5, 7, 128, 88);
+	case SCENE_2: //WIDTH 33*16 = 528  Height 23*16= 368 
+		grid = new CGrid(5, 5, GRID_WIDTH, GRID_HEIGHT);
 		break;
-	case SCENE_3: //WIDTH 49*16 = 784  Height 23*16= 368 (col 49:, row:23)
-		grid = new CGrid(6, 7, 128, 88);
+	case SCENE_3: //WIDTH 49*16 = 784  Height 23*16= 368 
+		grid = new CGrid(7, 5, GRID_WIDTH, GRID_HEIGHT);
 		break;
-	case SCENE_4: //WIDTH 49*16 = 784  Height 11*16= 176 (col 49:, row:11)
-		grid = new CGrid(1, 6, 128, 88);
-		break;
+	case SCENE_4: //WIDTH 49*16 = 784  Height 11*16= 176 
+		grid = new CGrid(7, 3, GRID_WIDTH, GRID_HEIGHT);
 	default:
 		break;
 	}
@@ -574,22 +579,51 @@ void CPlayScene::Update(DWORD dt)
 		objects[0]->Update(dt, &coObjects);
 		return;
 	}
+	
 
-	grid->Update(dt, &coObjects);
+	updateObject.clear();
+	grid->GetObjects(updateObject);
 
-	for (size_t i = 0; i < objects.size(); i++)
+	for (size_t i = 0; i < updateObject.size(); i++)
+	{
+		coObjects.push_back(updateObject[i]);
+	}
+
+
+	//Update từng objects
+	for (size_t i = 0; i < updateObject.size(); i++)
+	{
+		if (updateObject[i]->GetID() != ID_ROCK)
+		{
+			updateObject[i]->Update(dt, &coObjects);
+		}
+	}
+	
+	
+	/*for (size_t i = 0; i < objects.size(); i++)
 	{
 		coObjects.push_back(objects[i]);
 	}
 
-	
+
 	//objects[0]->Update(dt, &coObjects);
-	
-	for (size_t i = 0; i < objects.size(); i++)
+
+	for (size_t i = 1; i < objects.size(); i++)
 	{
 		if (objects[i]->GetID() != ID_ROCK)
 		{
 			objects[i]->Update(dt, &coObjects);
+		}
+	}*/
+	
+	player->Update(dt, &coObjects);
+
+	for (int i = 1; i < objects.size(); i++)
+	{
+		if (objects[i]->GetState() == STATE_DESTROYED)
+		{
+			objects.erase(objects.begin() + i);
+			i--;
 		}
 	}
 
@@ -600,14 +634,6 @@ void CPlayScene::Update(DWORD dt)
 
 	}
 
-	for (int i = 1; i < objects.size(); i++)
-	{
-		if (objects[i]->GetState() == STATE_DESTROYED)
-		{
-			objects.erase(objects.begin() + i);
-			i--;
-		}
-	}
 
 	for (size_t i = 0; i < listItem->ListItem.size(); i++)
 	{
@@ -779,14 +805,15 @@ void CPlayScene::Render()
 		objects[i]->Render();
 	}
 
+
 	//Draw Items
 	for (int i = 0; i < listItem->ListItem.size(); i++)
 	{
 		listItem->ListItem[i]->Render();
 	}
-	viewport->Render();
+//	viewport->Render();
 	//Render Simon
-	objects[0]->Render();
+	player->Render();
 	
 }
 
@@ -806,8 +833,9 @@ void CPlayScene::Unload()
 	}
 
 	objects.clear();
+	updateObject.clear();
+	grid = NULL;
 	player = NULL;
-
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
 }
 

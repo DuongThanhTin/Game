@@ -26,5 +26,5 @@ public:
 	~CRock();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObject);
 	virtual void Render();
-	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {}
+	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 };
