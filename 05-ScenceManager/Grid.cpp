@@ -66,9 +66,8 @@ void CGrid::GetObjects(vector<LPGAMEOBJECT> &objects)
 	{
 		if (iter->GetID() == ID_ROCK)
 		{
-			DebugOut(L"AAA %d\n", iter->GetID());
+			//DebugOut(L"Test Grid %d\n", iter->GetID());
 		}
-		//DebugOut(L"AAA %d\n", iter->GetID());
 	}
 }
 

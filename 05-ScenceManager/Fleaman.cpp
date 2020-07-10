@@ -86,14 +86,14 @@ void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				{
 					if (!isOnGroundEnemy)
 					{
-						vy -= 0.12f;
+						vy -= FLEAMAN_JUMP_ACTIVE;
 						isOnGroundEnemy = true;
 						
 					}
 					else
 					{
 						
-						vy += FLEAMAN_GRAVITY*dt;
+						vy -= FLEAMAN_JUMP;
 					
 					}
 					
@@ -157,7 +157,7 @@ void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		vy = 0;
 	}
 	else
-		vy += 0.0006f*dt;
+		vy += FLEAMAN_GRAVITY*dt;
 		
 
 }

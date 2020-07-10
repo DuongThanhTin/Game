@@ -15,6 +15,7 @@ CGameObject::CGameObject()
 	vx = vy = 0;
 	nx = 1;	
 	isVisible = true;
+	timeStopWatch = 0;
 }
 
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -23,15 +24,36 @@ void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	dx = vx*dt;
 	dy = vy*dt;
 
-	if (GetTickCount() - timeStopWatch > STOPWATCH_TIME && timeStopWatch > 0)
+	if (timeStopWatch == 0)
+	{
+		dx = vx*dt;
+		dy = vy*dt;
+	}
+	else
+	{
+		if (GetTickCount() - timeStopWatch > STOPWATCH_TIME)
+		{
+			vx = 0;
+			vy = 0;
+			timeStopWatch = 0;
+			DebugOut(L"Stop\n");
+		}
+	}
+
+	/*if (GetTickCount() - timeStopWatch > STOPWATCH_TIME )
 	{
 		vx = 0;
 		vy = 0;
 		timeStopWatch = 0;
-	}
-
-	if (timeStopWatch != 0)
+		DebugOut(L"Stop\n");
+	}*/
+	//DebugOut(L"Stop %d\n", timeStopWatch);
+	/*if (timeStopWatch != 0)
+	{
+		timeStopWatch = 0;
 		dx = dy = 0;
+	}*/
+	
 }
 
 /*

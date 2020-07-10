@@ -1,5 +1,5 @@
-﻿  Game.cpp
-d:\game2020\game\05-scencemanager\game.cpp(68): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+﻿  Fleaman.cpp
+d:\game2020\game\05-scencemanager\fleaman.cpp(80): warning C4305: '=': truncation from 'double' to 'float'
   Generating Code...
   Compiling...
   main.cpp
@@ -33,15 +33,20 @@ d:\game2020\game\05-scencemanager\playscence.cpp(657): warning C4018: '<': signe
 d:\game2020\game\05-scencemanager\playscence.cpp(803): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\playscence.cpp(810): warning C4018: '<': signed/unsigned mismatch
 d:\game2020\game\05-scencemanager\playscence.cpp(825): warning C4018: '<': signed/unsigned mismatch
-  Grid.cpp
-d:\game2020\game\05-scencemanager\grid.cpp(30): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\grid.cpp(31): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\grid.cpp(32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\grid.cpp(33): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\grid.cpp(101): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\grid.cpp(102): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\grid.cpp(103): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\grid.cpp(104): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
+d:\game2020\game\05-scencemanager\game.cpp(68): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
   Generating Code...
+  Skipping... (no relevant changes detected)
+  Zombie.cpp
+  SpearKnight.cpp
+  Skeleton.cpp
+  Simon.cpp
+  Raven.cpp
+  Ghost.cpp
+  Enemy.cpp
+  Bridge.cpp
+  Boomerang.cpp
+  Bat.cpp
+  Axe.cpp
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

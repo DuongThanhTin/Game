@@ -55,6 +55,7 @@ void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	CEnemy::Update(dt, coObjects);
 	//if (isInGrid != true)
 		//return;
+	//DebugOut(L"Bat %d\n", int(timeStopWatch));
 
 	if (state == ENEMY_STATE_DESTROY)
 	{
@@ -70,6 +71,7 @@ void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				y = falldown;
 			}
+			//DebugOut(L"Bat\n");
 
 		}
 		else

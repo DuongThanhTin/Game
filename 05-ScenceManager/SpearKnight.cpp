@@ -59,22 +59,34 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	coEvents.clear();
 	CalcPotentialCollisions(coObjects, coEvents);
 
-	if (start_untouchable != 0)
+	if (timeStopWatch == 0)
 	{
-		vx = 0.01;
-		Untouchable();
-	}
-	else
-	{
-		if (vx > 0)
+
+		if (start_untouchable != 0)
 		{
-			vx = SPEARKNIGHT_WALKING_SPEED;
+			vx = 0.01;
+			Untouchable();
 		}
 		else
 		{
-			vx = -SPEARKNIGHT_WALKING_SPEED;
+			if (vx > 0)
+			{
+				vx = SPEARKNIGHT_WALKING_SPEED;
+			}
+			else
+			{
+				vx = -SPEARKNIGHT_WALKING_SPEED;
+			}
 		}
 	}
+	else
+	{
+
+		vx = 0;
+		vy = 0;
+	}
+
+	
 
 
 	if (x <= limitedLeft) {
