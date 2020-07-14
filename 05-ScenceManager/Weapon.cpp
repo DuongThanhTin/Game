@@ -6,7 +6,7 @@ CWeapon::CWeapon()
 {
 	timeAppearItem = 0;
 	timeCollisionEnemy = 0;
-	//AddAnimation(902);
+
 }
 
 
@@ -50,6 +50,7 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			if (GetID() == ID_WHIP)
 			{
 				if (CGame::GetInstance()->IsIntersectAABB({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+					CSound::getInstance()->play("hidebrick", false, 1);
 					coObjects->at(i)->SetState(OBJECTS_STATE_DESTROY);
 					coObjects->at(i)->BeDamaged();
 				}
@@ -66,6 +67,7 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				case ID_CANDLE:
 					coObjects->at(i)->TimeFireDestroy();
 					if (GetID() == ID_DAGGER) {
+						CSound::getInstance()->play("hit", false, 1);
 						this->SetState(STATE_DESTROYED);
 					}
 					break;			
@@ -82,6 +84,7 @@ void CWeapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		else
 		{
 			if (CGame::GetInstance()->IsIntersectAABB({ long(wl),long(wt), long(wr), long(wb) }, { long(ol), long(ot), long(or ), long(ob) })) {
+				CSound::getInstance()->play("hit", false, 1);
 				switch (coObjects->at(i)->GetID())
 				{//BeDamagedEnemy: Tăng điểm
 				case ID_SPEARKNIGHT:

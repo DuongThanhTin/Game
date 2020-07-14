@@ -45,15 +45,17 @@ void CBoomerang::Render() {
 void CBoomerang::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CWeapon::Update(dt, coObjects);
 	CViewPort *viewport = CViewPort::GetInstance();
-
+	CSound::getInstance()->play("boomerang", false, 1);
 	if (GetTickCount() - timefly > TIME_FLY)
 	{
+		
 		vx = -nx*BOOMERANG_FLY_SPEED;
 		x += vx*dt;
 		isFlyReturn = true;
 	}
 	else if (timefly > 0)
 	{
+		
 		if (nx > 0)
 		{
 			x += vx*dt;

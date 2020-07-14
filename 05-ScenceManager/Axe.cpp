@@ -40,7 +40,7 @@ void CAxe::Render() {
 
 void CAxe::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CWeapon::Update(dt, coObjects);
-	
+	CSound::getInstance()->play("axe", false, 1);
 	if (GetTickCount() - timefly > TIME_AXE_FLY)
 	{
 		vy += AXE_GRAVITY;

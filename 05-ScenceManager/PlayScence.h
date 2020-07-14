@@ -35,6 +35,7 @@
 #include "Grid.h"
 #include "Weapon.h"
 #include "Boss.h"
+#include "Sound.h"
 
 class CPlayScene: public CScene
 {

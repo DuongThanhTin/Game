@@ -84,6 +84,7 @@ public:
 
 	void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
 	static bool IsIntersectAABB(RECT rectA, RECT rectB);
+	HWND getHWND() { return this->hWnd; }
 
 	static CGame * GetInstance();
 

@@ -239,6 +239,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					IncreaseScore(SCORE_CROWN);
 					SetScoreItem(SCORE_CROWN);
 					AppearScore(SCORE_CROWN, (ol + or ) / 2, (ot + ob) / 2);
+					CSound::getInstance()->play("collectitem", false, 1);
 					Objects[i]->SetState(STATE_DESTROYED);
 				}
 				
@@ -360,6 +361,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				default:
 					break;
 				}
+				CSound::getInstance()->play("collectitem", false, 1);
 				iter->SetState(STATE_DESTROYED);
 			}
 		}
@@ -1166,6 +1168,7 @@ void CSimon::StartAttackSub() {
 		switch (subWeaponID)
 		{
 		case ID_DAGGER:
+			CSound::getInstance()->play("dagger", false, 1);
 			subWeapon.push_back(new CDagger({ x, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		case ID_BOOMERANG:
@@ -1175,18 +1178,21 @@ void CSimon::StartAttackSub() {
 				subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		case ID_AXE:
+	
 			if (nx > 0)
 				subWeapon.push_back(new CAxe({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			else
 				subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		case ID_HOLYWATER:
+			CSound::getInstance()->play("holywater", false, 1);
 			if (nx > 0)
 				subWeapon.push_back(new CHolyWater({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			else
 				subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y + WEAPON_SIMON_SIT_ATTACK }, nx));
 			break;
 		case ID_STOPWATCH:
+			CSound::getInstance()->play("stopwatch", false, 1);
 			isAttackStopWatch = true;
 			break;
 		default:
@@ -1198,6 +1204,7 @@ void CSimon::StartAttackSub() {
 		switch (subWeaponID)
 		{
 		case ID_DAGGER:
+			CSound::getInstance()->play("dagger", false, 1);
 			subWeapon.push_back(new CDagger({ x, y }, nx));
 			break;
 		case ID_BOOMERANG:
@@ -1207,18 +1214,21 @@ void CSimon::StartAttackSub() {
 				subWeapon.push_back(new CBoomerang({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
 			break;
 		case ID_AXE:
+			
 			if (nx > 0)
 				subWeapon.push_back(new CAxe({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
 			else
 				subWeapon.push_back(new CAxe({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
 			break;
 		case ID_HOLYWATER:
+			CSound::getInstance()->play("holywater", false, 1);
 			if (nx > 0)
 				subWeapon.push_back(new CHolyWater({ x + BOOMERANG_SIMON_RANGE_X_RIGHT, y }, nx));
 			else
 				subWeapon.push_back(new CHolyWater({ x - BOOMERANG_SIMON_RANGE_X_LEFT, y }, nx));
 			break;
 		case ID_STOPWATCH:
+			CSound::getInstance()->play("stopwatch", false, 1);
 			isAttackStopWatch = true;
 			break;
 		default:

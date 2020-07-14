@@ -23,7 +23,8 @@ void CStopWatch::GetBoundingBox(float & l, float & t, float & r, float & b)
 void CStopWatch::Update(DWORD dt, vector<LPGAMEOBJECT>* objects)
 {
 	CWeapon::Update(dt, objects);
-	DebugOut(L"%d\n", timeLock);
+	
+	//DebugOut(L"%d\n", timeLock);
 	timeLock = GetTickCount();
 }
 

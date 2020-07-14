@@ -49,6 +49,7 @@ void CHolyWater::Render() {
 
 void CHolyWater::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 	CWeapon::Update(dt, coObjects);
+
 	if (GetTickCount() - timeHolyWaterFire >= TIME_HOLYWATER_FIRE && timeHolyWaterFire > 0)
 		SetState(STATE_DESTROYED);
 

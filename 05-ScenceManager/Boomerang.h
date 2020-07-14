@@ -3,6 +3,7 @@
 #include"define.h"
 #include"Simon.h"
 #include"ViewPort.h"
+#include "Sound.h"
 
 #define BOOMERANG_FLY_SPEED		0.13f
 #define BOOMERANG_BBOX_WIDTH		20

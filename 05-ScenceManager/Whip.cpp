@@ -43,6 +43,8 @@ int CWhip::GetAnimation() {
 
 void CWhip::GetBoundingBox(float &l, float &t, float &r, float &b) {
 	if (animations[GetAnimation()]->GetCurrentFrame() == 2) {
+		CSound::getInstance()->play("usingwhip", false, 1);
+
 		int width, height;
 		switch (level)
 		{

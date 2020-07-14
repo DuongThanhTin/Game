@@ -4,6 +4,7 @@
 #include"Game.h"
 #include"Textures.h"
 #include"Weapon.h"
+#include"Sound.h"
 
 #define WHIP_BBOX_WIDTH_00		25
 #define WHIP_BBOX_HEIGHT_00		8

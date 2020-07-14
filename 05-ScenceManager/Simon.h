@@ -19,6 +19,7 @@
 #include "StopWatch.h"
 #include "HideBrick.h"
 #include "Boss.h"
+#include "Sound.h"
 
 #define SIMON_WALKING_SPEED		0.055f 
 
@@ -31,7 +32,7 @@
 #define SIMON_ON_STAIR_SPEED			0.02f
 #define SIMON_DAMAGED_DEFLECT_SPEED_Y	0.15f
 #define SIMON_DAMAGED_DEFLECT_SPEED_X	0.06f
-#define SIMON_FALLING_SPEED 0.8f
+#define SIMON_FALLING_SPEED 1
 
 #define SIMON_STATE_IDLE			0
 #define SIMON_STATE_WALKING_RIGHT	100

@@ -6,6 +6,7 @@
 #include "ListItem.h"
 #include "WhipUpgrade.h" 
 #include "Brick.h"
+#include "Sound.h"
 
 #define WEAPON_STATE_NORMAL 0
 

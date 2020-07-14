@@ -784,7 +784,7 @@ void CPlayScene::Update(DWORD dt)
 		}
 	}
 
-
+	CSound::getInstance()->play("Stage_01", false, 1);
 	hud->Update(dt);
 }
 

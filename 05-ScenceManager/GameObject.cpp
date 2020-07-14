@@ -31,7 +31,7 @@ void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	else
 	{
-		if (GetTickCount() - timeStopWatch > STOPWATCH_TIME)
+		if (GetTickCount() - timeStopWatch > 3000) //STOPWATCH_TIME
 		{
 			vx = 0;
 			vy = 0;
