@@ -51,6 +51,9 @@
 #=================MONEY BAG===============
 20011	376	44	392	56	50		0		0		0
 
+#=================POTION===============
+20021	19	34	32	51	60		0		0		0
+
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 # ==== BOSS =====
@@ -85,6 +88,8 @@
 # ==== MONEY BAG =======
 704	20011	100
 
+# ==== INVI POTION =======
+705	20021	100
 
 [ANIMATION_SETS]
 #BOSS

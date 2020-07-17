@@ -216,6 +216,9 @@
     <ClCompile Include="Sound.cpp">
       <Filter>General</Filter>
     </ClCompile>
+    <ClCompile Include="InvisibilityPotionItem.cpp">
+      <Filter>Game_Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="InvisibilityPotionItem.h">
+      <Filter>Game_Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

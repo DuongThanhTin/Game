@@ -136,6 +136,7 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			listItem->ListItem[i]->GetID() == ID_MONEYBAGWHITE ||
 			listItem->ListItem[i]->GetID() == ID_MONEYBAGBLUE ||
 			listItem->ListItem[i]->GetID() == ID_HOLYWATERITEM||
+			listItem->ListItem[i]->GetID() == ID_INVIPOTION ||
 			listItem->ListItem[i]->GetID() == ID_STOPWATCHITEM)
 			itemObjects.push_back(listItem->ListItem[i]);
 	}
@@ -357,7 +358,10 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					AppearScore(SCORE_MONEYBAGBLUE, (ol + or ) / 2, (ot + ob) / 2 );
 					DebugOut(L"Collsion ID_MONEYBAGBLUE\n");
 					break;
-
+				case ID_INVIPOTION:
+					invisibleStart = GetTickCount();
+					DebugOut(L"Collsion ID_INVIPOTION\n");
+					break;
 				default:
 					break;
 				}

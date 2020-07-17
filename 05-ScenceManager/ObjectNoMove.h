@@ -15,7 +15,7 @@
 #include "MoneyBagBlue.h"
 #include "HolyWaterItem.h"
 #include "StopWatchItem.h"
-
+#include "InvisibilityPotionItem.h"
 
 class CObjectNoMove : public CGameObject
 {

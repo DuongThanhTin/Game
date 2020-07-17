@@ -62,6 +62,10 @@ void CObjectNoMove::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 				case ID_STOPWATCHITEM:
 					CListItem::GetInstance()->ListItem.push_back(new CStopWatchItem({ x,y - 10 }));
 					break;
+				case ID_INVIPOTION:
+					CListItem::GetInstance()->ListItem.push_back(new CInvisibilityPotionItem({ x,y - 10 }));
+					break;
+					
 				default:
 					break;
 				}

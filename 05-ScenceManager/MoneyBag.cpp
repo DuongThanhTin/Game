@@ -6,7 +6,7 @@ CMoneyBag::CMoneyBag(D3DXVECTOR2 position)
 {
 	this->x = position.x;
 	this->y = position.y;
-	AddAnimation(704);
+	AddAnimation(ANI_MONEYBAG);
 	id = ID_MONEYBAG;
 }
 
