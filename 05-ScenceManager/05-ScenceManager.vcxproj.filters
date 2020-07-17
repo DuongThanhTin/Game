@@ -214,7 +214,7 @@
       <Filter>Game_Items</Filter>
     </ClCompile>
     <ClCompile Include="Sound.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>General</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -405,7 +405,7 @@
       <Filter>Game_Items</Filter>
     </ClInclude>
     <ClInclude Include="Sound.h">
-      <Filter>Header Files</Filter>
+      <Filter>General</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

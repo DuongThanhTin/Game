@@ -58,26 +58,31 @@ void CGhost::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	else if (isActive)
 	{
-		if (timeStopWatch == 0)
+
+		if (start_untouchable != 0)
 		{
-			
-			if (start_untouchable != 0)
+			vx = 0.00001;
+			Untouchable();
+		}
+		else
+		{
+			if (timeStopWatch == 0)
 			{
-				vx = 0.00001;
-				Untouchable();
-			}
-			else
-			{
+				isStopFrame = false;
 				vx += nx*GHOST_WALKING_SPEED;
 				delta += 3;
 				y = sin(delta * 3.14 / 180) * 12 + originY;
 			}
+			else
+			{
+				isStopFrame = true;
+				vx = 0;
+				vy = 0;
+			}
+
+			
 		}
-		else
-		{
-			vx = 0;
-			vy = 0;
-		}
+		
 	}
 
 
@@ -99,7 +104,14 @@ void CGhost::Render()
 		
 		if (isActive)
 		{
-			animation_set->at(ani)->Render(x, y);
+			if (isStopFrame)
+			{
+				animation_set->at(ani)->RenderFrame(x, y);
+			}
+			else
+			{
+				animation_set->at(ani)->Render(x, y);
+			}
 		}
 	}
 	else

@@ -66,12 +66,14 @@ void CRaven::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		{
 			if (timeStopWatch == 0)
 			{
+				isStopFrame = false;
 				vx = -RAVEN_FLYING_SPEED_X;
 				vy = 0.075;
 				y += vy;
 			}
 			else
 			{
+				isStopFrame = true;
 				vx = vy = 0;
 			}
 		}
@@ -91,7 +93,14 @@ void CRaven::Render()
 			ani = RAVEN_ANI_FLYING_LEFT;
 		}
 
-		animation_set->at(ani)->Render(x, y);
+		if (isStopFrame)
+		{
+			animation_set->at(ani)->RenderFrame(x, y);
+		}
+		else
+		{
+			animation_set->at(ani)->Render(x, y);
+		}
 	}
 	else
 	{

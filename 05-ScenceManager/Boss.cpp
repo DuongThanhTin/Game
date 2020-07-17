@@ -68,6 +68,7 @@ void CBoss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				if (healthEnemy > 0)
 				{
+					isStopFrame = false;
 					if (vx > 0)
 					{
 						//delta là mật độ lên xuống
@@ -116,6 +117,7 @@ void CBoss::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 			else
 			{
+				isStopFrame = true;
 				vx = vy = 0;
 			}
 		}
@@ -158,7 +160,14 @@ void CBoss::Render()
 			ani = BOSS_ANI_FLYING_RIGHT;
 		}
 
-		animation_set->at(ani)->Render(x, y);
+		if (isStopFrame)
+		{
+			animation_set->at(ani)->RenderFrame(x, y);
+		}
+		else
+		{
+			animation_set->at(ani)->Render(x, y);
+		}
 	}
 	else if(healthEnemy <=0)
 	{

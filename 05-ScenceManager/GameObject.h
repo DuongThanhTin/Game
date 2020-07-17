@@ -72,6 +72,7 @@ public:
 	bool isOnGroundFire;
 	bool isInGrid = true;
 	bool isEnemy = false;
+	bool isStopFrame = false;
 
 	bool isVisible;
 	DWORD dt;

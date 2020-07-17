@@ -59,16 +59,16 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	coEvents.clear();
 	CalcPotentialCollisions(coObjects, coEvents);
 
-	if (timeStopWatch == 0)
+	if (start_untouchable != 0)
 	{
-
-		if (start_untouchable != 0)
+		vx = 0.01;
+		Untouchable();
+	}
+	else
+	{
+		if (timeStopWatch == 0)
 		{
-			vx = 0.01;
-			Untouchable();
-		}
-		else
-		{
+			isStopFrame = false;
 			if (vx > 0)
 			{
 				vx = SPEARKNIGHT_WALKING_SPEED;
@@ -78,14 +78,17 @@ void CSpearKnight::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				vx = -SPEARKNIGHT_WALKING_SPEED;
 			}
 		}
-	}
-	else
-	{
+		else
+		{
+			isStopFrame = true;
+			vx = 0;
+			vy = 0;
+		}
 
-		vx = 0;
-		vy = 0;
+		
 	}
 
+	
 	
 
 
@@ -163,9 +166,9 @@ void CSpearKnight::Render()
 		else
 			ani = SPEARKNIGHT_ANI_WALKING_LEFT;
 
-		if (timeStopWatch > 0)
+		if (isStopFrame)
 		{
-			animation_set->at(ani)->Render(x,y);
+			animation_set->at(ani)->RenderFrame(x, y);
 		}
 		else
 		{
@@ -177,6 +180,7 @@ void CSpearKnight::Render()
 		animations[0]->Render(x, y);
 	}
 
+	
 
 	RenderBoundingBox();
 }

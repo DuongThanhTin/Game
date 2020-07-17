@@ -1,21 +1,11 @@
-﻿  Sound.cpp
-d:\game2020\game\05-scencemanager\sound.cpp(37): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(38): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(63): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(79): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(199): warning C4244: 'initializing': conversion from 'float' to 'long', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(275): warning C4244: 'initializing': conversion from 'float' to 'long', possible loss of data
-d:\game2020\game\05-scencemanager\sound.cpp(287): warning C4244: 'initializing': conversion from 'float' to 'long', possible loss of data
+﻿  Grid.cpp
+d:\game2020\game\05-scencemanager\grid.cpp(30): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(31): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(33): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(97): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(98): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(99): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\game2020\game\05-scencemanager\grid.cpp(100): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.exe
   05-ScenceManager.vcxproj -> D:\Game2020\Game\05-ScenceManager\Debug\05-ScenceManager.pdb (Partial PDB)

@@ -63,6 +63,7 @@ void CZombie::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	if (timeStopWatch == 0)
 	{
+		isStopFrame = false;
 		if (vx > 0)
 		{
 			vx = ZOMBIE_WALKING_SPEED;
@@ -74,6 +75,7 @@ void CZombie::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	else
 	{
+		isStopFrame = true;
 		vx = vy = 0;
 	}
 
@@ -97,7 +99,14 @@ void CZombie::Render()
 		else
 			ani = ZOMBIE_ANI_WALKING_LEFT;
 
-		animation_set->at(ani)->Render(x, y);
+		if (isStopFrame)
+		{
+			animation_set->at(ani)->RenderFrame(x, y);
+		}
+		else
+		{
+			animation_set->at(ani)->Render(x, y);
+		}
 	}
 	else
 	{

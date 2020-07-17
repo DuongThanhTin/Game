@@ -55,6 +55,10 @@ void CAnimation::Render(float x, float y, int frame, int alpha)
 
 void CAnimation::RenderFrame(float x, float y, int alpha)
 {
+	CViewPort* viewport = CViewPort::GetInstance();
+	x = viewport->ConvertWorldToViewPort({ x,y }).x;
+	y = viewport->ConvertWorldToViewPort({ x,y }).y;
+
 	if (currentFrame == -1)
 		currentFrame = 0;
 	else if (currentFrame == frames.size())

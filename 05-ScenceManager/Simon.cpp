@@ -430,8 +430,6 @@ void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (x < 600)
 			{
 				iter->isActive = true;
-				DebugOut(L"tre");
-
 			}
 			
 		}

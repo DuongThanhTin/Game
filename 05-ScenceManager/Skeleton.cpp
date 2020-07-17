@@ -110,6 +110,7 @@ void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				if (timeStopWatch == 0)
 				{
+					isStopFrame = false;
 					if (timeAttackBone == 0)
 					{
 						timeAttackBone = GetTickCount();
@@ -150,6 +151,7 @@ void CSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				else
 				{
+					isStopFrame = true;
 					vx = vy = 0;
 				}
 			}
@@ -217,7 +219,14 @@ void CSkeleton::Render()
 		{
 			ani = SKELETON_ANI_WALKING_LEFT;
 		}
-		animation_set->at(ani)->Render(x, y);
+		if (isStopFrame)
+		{
+			animation_set->at(ani)->RenderFrame(x, y);
+		}
+		else
+		{
+			animation_set->at(ani)->Render(x, y);
+		}
 	}
 	else
 	{

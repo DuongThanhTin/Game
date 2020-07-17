@@ -44,7 +44,6 @@ void CGrid::GetObjects(vector<LPGAMEOBJECT> &objects)
 	if (hMax > row)
 		hMax = row;
 
-	//DebugOut(L"AA %d\n", wMin);
 	// Add to set to avoid duplication
 	for (int i = wMin; i < wMax; i++)
 		for (int j = hMin; j < hMax; j++)
@@ -53,22 +52,19 @@ void CGrid::GetObjects(vector<LPGAMEOBJECT> &objects)
 			{
 				if ((find(objects.begin(), objects.end(), cells[j][i].at(k)) != objects.end() == false))
 				{
-					if (cells[j][i].at(k)->IsVisible())
-					{
-						objects.push_back(cells[j][i].at(k));
-					}
+					objects.push_back(cells[j][i].at(k));
 				}
 			}
 		}
 
 	//Debug Grid
-	for (auto iter : objects)
+	/*for (auto iter : objects)
 	{
 		if (iter->GetID() == ID_ROCK)
 		{
 			//DebugOut(L"Test Grid %d\n", iter->GetID());
 		}
-	}
+	}*/
 }
 
 void CGrid::LoadObj(LPGAMEOBJECT obj)
@@ -76,9 +72,10 @@ void CGrid::LoadObj(LPGAMEOBJECT obj)
 	float ol, ot, or , ob, gl, gt, gr, gb;
 	float x, y;
 	obj->GetPosition(x, y);
-	int grid_row, grid_column;
+
 
 	//Objects chua Active thì bounding = 0
+	int grid_row, grid_column;
 	if (obj->GetID() == ID_GHOST )
 	{
 		grid_row = int(y / height);
@@ -108,11 +105,7 @@ void CGrid::LoadObj(LPGAMEOBJECT obj)
 				}
 			}
 	}
-
-
-
 	
-
 
 }
 

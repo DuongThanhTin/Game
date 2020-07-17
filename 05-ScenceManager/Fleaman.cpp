@@ -72,7 +72,7 @@ void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		// block 
 		y += min_ty*dy + ny*0.1f;
 
-		
+		isStopFrame = true;
 		if (isActive)
 		{
 			if (start_untouchable != 0)
@@ -84,47 +84,38 @@ void CFleaman::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				if (timeStopWatch == 0)
 				{
+					isStopFrame = false;
+					//Jump when Active
 					if (!isOnGroundEnemy)
 					{
 						vy -= FLEAMAN_JUMP_ACTIVE;
-						isOnGroundEnemy = true;
-						
+						isOnGroundEnemy = true;						                   
 					}
 					else
-					{
-						
+					{				
 						vy -= FLEAMAN_JUMP;
+					}	
 					
-					}
-					
+					//Move
 					if (nx > 0)
 					{
 						vx = -FLEAMAN_WALKING_SPEED;
 					}
 					else
 					{
-					
 						vx = FLEAMAN_WALKING_SPEED;
 					}
-
-					
+	
 				}
 				else
 				{
+					isStopFrame = true;
 					vx = vy = 0;
 				}
-			}
-
-			if (x <= limitedLeft) {
-				vx = -vx;
-			}
-
-			else if (x >= limitedRight) {
-				vx = -vx;
-			}
+			}	
 		}
 
-	
+
 
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
@@ -167,12 +158,20 @@ void CFleaman::Render()
 	if (state != ENEMY_STATE_DESTROY)
 	{
 		int ani = FLEAMAN_ANI_WALKING_RIGHT;
-			if (nx > 0)
-				ani = FLEAMAN_ANI_WALKING_RIGHT;
-			else
-				ani = FLEAMAN_ANI_WALKING_LEFT;
+		if (nx > 0)
+			ani = FLEAMAN_ANI_WALKING_RIGHT;
+		else
+			ani = FLEAMAN_ANI_WALKING_LEFT;
 
-		animation_set->at(ani)->Render(x, y);
+
+		if (isStopFrame)
+		{
+			animation_set->at(ani)->RenderFrame(x, y);
+		}
+		else
+		{
+			animation_set->at(ani)->Render(x, y);
+		}
 	}
 	else
 	{

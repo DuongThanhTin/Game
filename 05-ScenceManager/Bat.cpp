@@ -63,8 +63,10 @@ void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	else if (isActive)
 	{
+
 		if (timeStopWatch == 0)
 		{
+			isStopFrame = false;
 			vx += nx*BAT_FLYING_SPEED;
 			y += 0.5;
 			if (y >= falldown)
@@ -76,6 +78,7 @@ void CBat::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 		else
 		{
+			isStopFrame = true;
 			vx = 0;
 			vy = 0;
 		}
@@ -94,7 +97,14 @@ void CBat::Render()
 			ani = BAT_ANI_FLYING_RIGHT;
 		}
 		
-		animation_set->at(ani)->Render(x, y);
+		if (isStopFrame)
+		{
+			animation_set->at(ani)->RenderFrame(x, y);
+		}
+		else
+		{
+			animation_set->at(ani)->Render(x, y);
+		}
 	}
 	else
 	{
